@@ -9,6 +9,7 @@ class Navigator {
     /// Some global constants
     struct Config {
         struct Url {
+            static let google         = URL(string: "https://www.google.com")!
             static let googleStadia   = URL(string: "https://stadia.google.com")!
             static let googleAccounts = URL(string: "https://accounts.google.com")!
             static let geforceNowOld  = URL(string: "https://play.geforcenow.com")!

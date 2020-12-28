@@ -107,7 +107,11 @@ class RootViewController: UIViewController, MenuActionsHandler {
         if let lastVisitedUrl = UserDefaults.standard.lastVisitedUrl {
             webView.navigateTo(url: lastVisitedUrl)
         } else {
-            webView.navigateTo(url: Navigator.Config.Url.googleStadia)
+            #if NON_APPSTORE
+                webView.navigateTo(url: Navigator.Config.Url.googleStadia)
+            #else
+                webView.navigateTo(url: Navigator.Config.Url.google)
+            #endif
         }
         // menu view controller
         let menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
@@ -191,15 +195,15 @@ class RootViewController: UIViewController, MenuActionsHandler {
         }
     }
 
-extension RootViewController: InputPresenceDelegate {
-    open func gamepadPresenceChanged() {
-        Log.d("gamepadPresenceChanged")
-    }
+    extension RootViewController: InputPresenceDelegate {
+        open func gamepadPresenceChanged() {
+            Log.d("gamepadPresenceChanged")
+        }
 
-    open func mousePresenceChanged() {
-        Log.d("gamepadPresenceChanged")
+        open func mousePresenceChanged() {
+            Log.d("gamepadPresenceChanged")
+        }
     }
-}
 #endif
 
 /// Show an web overlay
