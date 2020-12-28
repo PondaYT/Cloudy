@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Moonlight Stream. All rights reserved.
 //
 
+#ifdef NON_APPSTORE
+
 #import "ControllerSupport.h"
 #import "Controller.h"
 #import "Log.h"
@@ -892,3 +894,5 @@ static const double MOUSE_SPEED_DIVISOR = 2.5;
     }
 
 @end
+
+#endif

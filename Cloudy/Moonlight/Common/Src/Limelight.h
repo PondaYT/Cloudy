@@ -2,6 +2,8 @@
 // This header exposes the public streaming API for client usage
 //
 
+#ifdef NON_APPSTORE
+
 #pragma once
 
 #include <stdint.h>
@@ -594,4 +596,6 @@ unsigned int LiTestClientConnectivity(const char *testServer, unsigned short ref
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif

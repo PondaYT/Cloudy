@@ -142,19 +142,19 @@ class RootViewController: UIViewController, MenuActionsHandler {
             self.streamView = streamView
             updateOnScreenController(with: UserDefaults.standard.onScreenControlsLevel)
         #else
-            updateOnScreenController(with: .off)
+            containerOnScreenController.removeFromSuperview()
         #endif
         updateScalingFactor(with: UserDefaults.standard.webViewScale)
     }
 
     /// Update visibility of onscreen controller
-    func updateOnScreenController(with value: OnScreenControlsLevel) {
-        containerOnScreenController.alpha = value == .off ? 0 : 1
-        #if NON_APPSTORE
+    #if NON_APPSTORE
+        func updateOnScreenController(with value: OnScreenControlsLevel) {
+            containerOnScreenController.alpha = value == .off ? 0 : 1
             webViewControllerBridge.controlsSource = value == .off ? .external : .onScreen
             streamView?.updateOnScreenControls()
-        #endif
-    }
+        }
+    #endif
 
     /// Update touch feedback change
     #if NON_APPSTORE
@@ -180,15 +180,16 @@ class RootViewController: UIViewController, MenuActionsHandler {
     }
 }
 
-extension RootViewController: UserInteractionDelegate {
-    open func userInteractionBegan() {
-        Log.d("userInteractionBegan")
-    }
+#if NON_APPSTORE
+    extension RootViewController: UserInteractionDelegate {
+        open func userInteractionBegan() {
+            Log.d("userInteractionBegan")
+        }
 
-    open func userInteractionEnded() {
-        Log.d("userInteractionEnded")
+        open func userInteractionEnded() {
+            Log.d("userInteractionEnded")
+        }
     }
-}
 
 extension RootViewController: InputPresenceDelegate {
     open func gamepadPresenceChanged() {
@@ -199,6 +200,7 @@ extension RootViewController: InputPresenceDelegate {
         Log.d("gamepadPresenceChanged")
     }
 }
+#endif
 
 /// Show an web overlay
 extension RootViewController: OverlayController {

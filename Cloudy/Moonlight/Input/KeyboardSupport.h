@@ -6,6 +6,8 @@
 //  Copyright © 2018 Moonlight Game Streaming Project. All rights reserved.
 //
 
+#ifdef NON_APPSTORE
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -23,3 +25,5 @@
     + (struct KeyEvent)translateKeyEvent:(unichar)inputChar withModifierFlags:(UIKeyModifierFlags)modifierFlags;
 
 @end
+
+#endif
