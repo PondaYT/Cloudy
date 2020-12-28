@@ -1,14 +1,16 @@
 // Copyright (c) 2020 Nomad5. All rights reserved.
 
-import Foundation
-import WebKit
-import GameController
+#if NON_APPSTORE
 
-@objc enum ControlsSource: Int {
-    case none
-    case onScreen
-    case external
-}
+    import Foundation
+    import WebKit
+    import GameController
+
+    @objc enum ControlsSource: Int {
+        case none
+        case onScreen
+        case external
+    }
 
 /// Protocol to handle incoming cloudy controller sources
 @objc protocol ControllerDataReceiver {
@@ -95,3 +97,5 @@ class WebViewControllerBridge: NSObject, WKScriptMessageHandlerWithReply, Contro
         self.controllerData[type] = controllerData
     }
 }
+
+#endif

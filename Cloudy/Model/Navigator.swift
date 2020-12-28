@@ -8,12 +8,6 @@ class Navigator {
 
     /// Some global constants
     struct Config {
-        /// Mapping from a alias to a full url
-        static let aliasMapping: [String: String] = [
-            "stadia": Url.googleStadia.absoluteString,
-            "gfn": Url.geforceNowOld.absoluteString,
-        ]
-
         struct Url {
             static let googleStadia   = URL(string: "https://stadia.google.com")!
             static let googleAccounts = URL(string: "https://accounts.google.com")!
@@ -37,28 +31,24 @@ class Navigator {
 
     /// The navigation that shall be executed
     struct Navigation {
-        let userAgent:    String?
-        let forwardToUrl: URL?
-        let bridgeType:   CloudyController.JsonType
+        let userAgent: String?
     }
 
     /// Map navigation address
     func getNavigation(for address: String?) -> Navigation {
         // early exit
         guard let requestedUrl = address else {
-            return Navigation(userAgent: nil, forwardToUrl: nil, bridgeType: .regular)
+            return Navigation(userAgent: nil)
         }
         // no automatic navigation
         if UserDefaults.standard.useManualUserAgent {
-            return Navigation(userAgent: UserDefaults.standard.manualUserAgent, forwardToUrl: nil, bridgeType: .regular)
+            return Navigation(userAgent: UserDefaults.standard.manualUserAgent)
         }
-        // map alias
-        let navigationUrl = Config.aliasMapping[requestedUrl] ?? requestedUrl
         // old regular geforce now
-        if navigationUrl.starts(with: Config.Url.geforceNowOld.absoluteString) {
-            return Navigation(userAgent: Config.UserAgent.chromeOS, forwardToUrl: nil, bridgeType: .regular)
+        if requestedUrl.starts(with: Config.Url.geforceNowOld.absoluteString) {
+            return Navigation(userAgent: Config.UserAgent.chromeOS)
         }
-        return Navigation(userAgent: nil, forwardToUrl: nil, bridgeType: .regular)
+        return Navigation(userAgent: nil)
     }
 
     /// Handle popup
