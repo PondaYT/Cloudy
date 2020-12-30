@@ -278,14 +278,6 @@ extension RootViewController: WKNavigationDelegate, WKUIDelegate {
         let navigation = navigator.getNavigation(for: navigationAction.request.url?.absoluteString)
         Log.i("navigation -> \(navigationAction.request.url?.absoluteString ?? "nil") -> \(navigation)")
         webView.customUserAgent = navigation.userAgent
-        #if NON_APPSTORE
-            webViewControllerBridge.exportType = navigation.bridgeType
-            if let forwardUrl = navigation.forwardToUrl {
-                decisionHandler(.cancel)
-                webView.navigateTo(url: forwardUrl)
-                return
-            }
-        #endif
         decisionHandler(.allow)
     }
 

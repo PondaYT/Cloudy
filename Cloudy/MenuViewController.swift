@@ -26,8 +26,8 @@ protocol OverlayController {
 class MenuViewController: UIViewController {
 
     /// View references
-    @IBOutlet var shadowViews:   [UIView]!
-    @IBOutlet var viewsToRemove: [UIView]!
+    @IBOutlet var shadowViews:           [UIView]!
+    @IBOutlet var viewsToRemove:         [UIView]!
     @IBOutlet weak var userAgentTextField:         UITextField!
     @IBOutlet weak var manualUserAgent:            UISwitch!
     @IBOutlet weak var addressBar:                 UITextField!

@@ -835,7 +835,9 @@
                         <outletCollection property="shadowViews" destination="Ao9-3G-MXT" collectionClass="NSMutableArray" id="nE1-7I-uxA"/>
                         <outletCollection property="shadowViews" destination="bFl-9U-Su7" collectionClass="NSMutableArray" id="IsP-XF-vbr"/>
                         <outletCollection property="viewsToRemove" destination="fbJ-HA-LhZ" collectionClass="NSMutableArray" id="qNv-qR-qzj"/>
-                        <outletCollection property="viewsToRemove" destination="h4m-dB-ad9" collectionClass="NSMutableArray" id="KzG-Sz-Q94"/>
+                        <outletCollection property="viewsToRemove" destination="Kdq-FP-3hb" collectionClass="NSMutableArray" id="VKP-Y3-dGL"/>
+                        <outletCollection property="viewsToRemove" destination="Ao9-3G-MXT" collectionClass="NSMutableArray" id="KpH-iz-V3R"/>
+                        <outletCollection property="viewsToRemove" destination="wz2-wP-jxe" collectionClass="NSMutableArray" id="Oqw-zn-9J5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9R8-x7-9FR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

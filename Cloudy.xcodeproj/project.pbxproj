@@ -73,6 +73,7 @@
 		44A4DF345C0AE58872E1CC3A /* TemporarySettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporarySettings.swift; sourceTree = "<group>"; };
 		44A4DF4DEEC15EF8DE2B1C18 /* Cloudy-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cloudy-Bridging-Header.h"; sourceTree = "<group>"; };
 		79B35440DA7901C4949EFDC7 /* Pods-Cloudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.release.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.release.xcconfig"; sourceTree = "<group>"; };
+		8C777E5DB6AA0540BAAEE53E /* Pods-Cloudy.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.appstore.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.appstore.xcconfig"; sourceTree = "<group>"; };
 		B42B0FEC073AD10E0FCA6CF1 /* Pods-Cloudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.debug.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.debug.xcconfig"; sourceTree = "<group>"; };
 		B68A92C425596BFB00A22D82 /* Cloudy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cloudy.entitlements; sourceTree = "<group>"; };
 		E712FF9725520978003CF78C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -255,6 +256,7 @@
 			children = (
 				B42B0FEC073AD10E0FCA6CF1 /* Pods-Cloudy.debug.xcconfig */,
 				79B35440DA7901C4949EFDC7 /* Pods-Cloudy.release.xcconfig */,
+				8C777E5DB6AA0540BAAEE53E /* Pods-Cloudy.appstore.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -546,6 +548,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					NON_APPSTORE,
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -602,6 +605,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = NON_APPSTORE;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -641,7 +645,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.3;
 				OTHER_SWIFT_FLAGS = "-DNON_APPSTORE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nomad5.Cloudy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -677,7 +681,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.3;
 				OTHER_SWIFT_FLAGS = "-DNON_APPSTORE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nomad5.Cloudy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -728,6 +732,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = APPSTORE;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -746,9 +751,9 @@
 		};
 		E7FAE327259A7B810024FDD5 /* Appstore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79B35440DA7901C4949EFDC7 /* Pods-Cloudy.release.xcconfig */;
+			baseConfigurationReference = 8C777E5DB6AA0540BAAEE53E /* Pods-Cloudy.appstore.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconAppstore;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Cloudy/Cloudy.entitlements;
@@ -767,7 +772,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.3;
 				OTHER_SWIFT_FLAGS = "-DAPPSTORE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nomad5.Cloudy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
