@@ -26,8 +26,8 @@ protocol OverlayController {
 class MenuViewController: UIViewController {
 
     /// View references
-    @IBOutlet var shadowViews:           [UIView]!
-    @IBOutlet var viewsToRemove:         [UIView]!
+    @IBOutlet var shadowViews:   [UIView]!
+    @IBOutlet var viewsToRemove: [UIView]!
     @IBOutlet weak var userAgentTextField:         UITextField!
     @IBOutlet weak var manualUserAgent:            UISwitch!
     @IBOutlet weak var addressBar:                 UITextField!
@@ -126,7 +126,11 @@ class MenuViewController: UIViewController {
             versionLabel.text = "invalid"
             return
         }
-        versionLabel.text = "Cloudy v\(versionNumber)(\(buildNumber))"
+        #if NON_APPSTORE
+            versionLabel.text = "Cloudy v\(versionNumber)(\(buildNumber))"
+        #else
+            versionLabel.text = "Cloudy v\(versionNumber)(\(buildNumber)) | Appstore"
+        #endif
     }
 }
 
