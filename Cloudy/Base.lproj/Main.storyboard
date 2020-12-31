@@ -834,10 +834,14 @@
                         <outletCollection property="shadowViews" destination="zau-rP-Nr4" collectionClass="NSMutableArray" id="NFd-iP-4Gf"/>
                         <outletCollection property="shadowViews" destination="Ao9-3G-MXT" collectionClass="NSMutableArray" id="nE1-7I-uxA"/>
                         <outletCollection property="shadowViews" destination="bFl-9U-Su7" collectionClass="NSMutableArray" id="IsP-XF-vbr"/>
-                        <outletCollection property="viewsToRemove" destination="fbJ-HA-LhZ" collectionClass="NSMutableArray" id="qNv-qR-qzj"/>
                         <outletCollection property="viewsToRemove" destination="Kdq-FP-3hb" collectionClass="NSMutableArray" id="VKP-Y3-dGL"/>
                         <outletCollection property="viewsToRemove" destination="Ao9-3G-MXT" collectionClass="NSMutableArray" id="KpH-iz-V3R"/>
                         <outletCollection property="viewsToRemove" destination="wz2-wP-jxe" collectionClass="NSMutableArray" id="Oqw-zn-9J5"/>
+                        <outletCollection property="viewsToRemove" destination="Q2P-8c-czw" collectionClass="NSMutableArray" id="BMo-oZ-4T0"/>
+                        <outletCollection property="viewsToRemove" destination="IkE-mv-Z9A" collectionClass="NSMutableArray" id="HTW-iH-EzI"/>
+                        <outletCollection property="viewsToRemove" destination="Teq-Sc-YtB" collectionClass="NSMutableArray" id="e6v-Ub-lvn"/>
+                        <outletCollection property="viewsToRemove" destination="mEQ-r6-Gbx" collectionClass="NSMutableArray" id="5Ju-Kw-UbE"/>
+                        <outletCollection property="viewsToRemove" destination="gYt-Qe-92F" collectionClass="NSMutableArray" id="onO-pn-KnM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9R8-x7-9FR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
