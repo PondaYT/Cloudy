@@ -103,13 +103,12 @@ class MenuViewController: UIViewController {
         allowInlineFeedback.isOn = UserDefaults.standard.allowInlineMedia
         standaloneSwitch.isOn = UserDefaults.standard.actAsStandaloneApp
         scalingFactorTextField.text = String(UserDefaults.standard.webViewScale)
-        #if NON_APPSTORE
-            controllerHackSwitch.isOn = UserDefaults.standard.injectControllerScripts
-            controllerIdSelector.selectedSegmentIndex = UserDefaults.standard.controllerId.rawValue
-            onScreenControllerSelector.selectedSegmentIndex = UserDefaults.standard.onScreenControlsLevel.rawValue
-            touchFeedbackSelector.selectedSegmentIndex = UserDefaults.standard.touchFeedbackType.rawValue
-            customJsInjection.text = UserDefaults.standard.customJsCodeToInject
-        #else
+        controllerHackSwitch.isOn = UserDefaults.standard.injectControllerScripts
+        controllerIdSelector.selectedSegmentIndex = UserDefaults.standard.controllerId.rawValue
+        onScreenControllerSelector.selectedSegmentIndex = UserDefaults.standard.onScreenControlsLevel.rawValue
+        touchFeedbackSelector.selectedSegmentIndex = UserDefaults.standard.touchFeedbackType.rawValue
+        customJsInjection.text = UserDefaults.standard.customJsCodeToInject
+        #if APPSTORE
             viewsToRemove.forEach { $0.removeFromSuperview() }
         #endif
         // apply shadows
@@ -215,9 +214,7 @@ extension MenuViewController {
 
     /// Change controller hack injection behavior
     @IBAction func onControllerHacksValueChanged(_ sender: Any) {
-        #if NON_APPSTORE
-            UserDefaults.standard.injectControllerScripts = controllerHackSwitch.isOn
-        #endif
+        UserDefaults.standard.injectControllerScripts = controllerHackSwitch.isOn
     }
 
     /// User agent value changed
@@ -284,55 +281,45 @@ extension MenuViewController {
 
     /// Controller ID changed in menu
     @IBAction func onControllerIdChanged(_ sender: Any) {
-        #if NON_APPSTORE
-            guard let newId = GCExtendedGamepad.id(rawValue: controllerIdSelector.selectedSegmentIndex) else {
-                Log.e("Something went wrong parsing the selected controller ID: \(onScreenControllerSelector.selectedSegmentIndex)")
-                return
-            }
-            UserDefaults.standard.controllerId = newId
-        #endif
+        guard let newId = GCExtendedGamepad.id(rawValue: controllerIdSelector.selectedSegmentIndex) else {
+            Log.e("Something went wrong parsing the selected controller ID: \(onScreenControllerSelector.selectedSegmentIndex)")
+            return
+        }
+        UserDefaults.standard.controllerId = newId
     }
 
     /// On screen controls value changed in menu
     @IBAction func onOnScreenControlChanged(_ sender: Any) {
-        #if NON_APPSTORE
-            guard let newLevel = OnScreenControlsLevel(rawValue: onScreenControllerSelector.selectedSegmentIndex) else {
-                Log.e("Something went wrong parsing the selected on screen controls level: \(onScreenControllerSelector.selectedSegmentIndex)")
-                return
-            }
-            UserDefaults.standard.onScreenControlsLevel = newLevel
-            menuActionsHandler?.updateOnScreenController(with: newLevel)
-        #endif
+        guard let newLevel = OnScreenControlsLevel(rawValue: onScreenControllerSelector.selectedSegmentIndex) else {
+            Log.e("Something went wrong parsing the selected on screen controls level: \(onScreenControllerSelector.selectedSegmentIndex)")
+            return
+        }
+        UserDefaults.standard.onScreenControlsLevel = newLevel
+        menuActionsHandler?.updateOnScreenController(with: newLevel)
     }
 
     /// Touch feedback selector changed
     @IBAction func onTouchFeedbackChanged(_ sender: Any) {
-        #if NON_APPSTORE
-            guard let newFeedbackType = TouchFeedbackType(rawValue: touchFeedbackSelector.selectedSegmentIndex) else {
-                Log.e("Something went wrong parsing the selected touch feedback type: \(touchFeedbackSelector.selectedSegmentIndex)")
-                return
-            }
-            UserDefaults.standard.touchFeedbackType = newFeedbackType
-            menuActionsHandler?.updateTouchFeedbackType(with: newFeedbackType)
-        #endif
+        guard let newFeedbackType = TouchFeedbackType(rawValue: touchFeedbackSelector.selectedSegmentIndex) else {
+            Log.e("Something went wrong parsing the selected touch feedback type: \(touchFeedbackSelector.selectedSegmentIndex)")
+            return
+        }
+        UserDefaults.standard.touchFeedbackType = newFeedbackType
+        menuActionsHandler?.updateTouchFeedbackType(with: newFeedbackType)
     }
 
     /// Custom js code injection changed
     @IBAction func onCustomJsInjectCodeChanged(_ sender: Any) {
-        #if NON_APPSTORE
-            UserDefaults.standard.customJsCodeToInject = customJsInjection.text
-        #endif
+        UserDefaults.standard.customJsCodeToInject = customJsInjection.text
     }
 
     /// Inject custom code
     @IBAction func onInjectCustomCodePressed(_ sender: Any) {
-        #if NON_APPSTORE
-            guard let code = customJsInjection.text,
-                  !code.isEmpty else {
-                return
-            }
-            menuActionsHandler?.injectCustom(code: code)
-        #endif
+        guard let code = customJsInjection.text,
+              !code.isEmpty else {
+            return
+        }
+        menuActionsHandler?.injectCustom(code: code)
     }
 
     /// Scaling changed

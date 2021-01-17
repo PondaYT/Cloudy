@@ -12,11 +12,9 @@ class FullScreenWKWebView: WKWebView {
 
 /// Listen to changed settings in menu
 protocol MenuActionsHandler {
-    #if NON_APPSTORE
         func updateOnScreenController(with value: OnScreenControlsLevel)
         func updateTouchFeedbackType(with value: TouchFeedbackType)
         func injectCustom(code: String)
-    #endif
     func updateScalingFactor(with value: Int)
 }
 
@@ -38,7 +36,6 @@ class RootViewController: UIViewController, MenuActionsHandler {
     private var  menu:                                        MenuController? = nil
 
     /// The bridge between controller and web view
-    #if NON_APPSTORE
         private let webViewControllerBridge = WebViewControllerBridge()
 
         /// The stream view that holds the on screen controls
@@ -48,7 +45,6 @@ class RootViewController: UIViewController, MenuActionsHandler {
         private lazy var touchFeedbackGenerator: TouchFeedbackGenerator = {
             AVFoundationVibratingFeedbackGenerator()
         }()
-    #endif
 
     /// By default hide the status bar
     override var prefersStatusBarHidden:                      Bool {
@@ -81,14 +77,12 @@ class RootViewController: UIViewController, MenuActionsHandler {
                                                                     injectionTime: .atDocumentEnd,
                                                                     forMainFrameOnly: true))
         }
-        #if NON_APPSTORE
             config.userContentController.addScriptMessageHandler(webViewControllerBridge, contentWorld: WKContentWorld.page, name: "controller")
             if UserDefaults.standard.injectControllerScripts {
                 config.userContentController.addUserScript(WKUserScript(source: Scripts.controllerOverride(),
                                                                         injectionTime: .atDocumentEnd,
                                                                         forMainFrameOnly: true))
             }
-        #endif
         return config
     }()
 
@@ -130,7 +124,6 @@ class RootViewController: UIViewController, MenuActionsHandler {
     /// View layout already done
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        #if NON_APPSTORE
             // stream config
             let streamConfig      = StreamConfiguration()
             // Controller support
@@ -145,28 +138,20 @@ class RootViewController: UIViewController, MenuActionsHandler {
             streamView.fillParent()
             self.streamView = streamView
             updateOnScreenController(with: UserDefaults.standard.onScreenControlsLevel)
-        #else
-            containerOnScreenController.removeFromSuperview()
-        #endif
         updateScalingFactor(with: UserDefaults.standard.webViewScale)
     }
 
     /// Update visibility of onscreen controller
-    #if NON_APPSTORE
         func updateOnScreenController(with value: OnScreenControlsLevel) {
             containerOnScreenController.alpha = value == .off ? 0 : 1
             webViewControllerBridge.controlsSource = value == .off ? .external : .onScreen
             streamView?.updateOnScreenControls()
         }
-    #endif
 
     /// Update touch feedback change
-    #if NON_APPSTORE
-        /// - Parameter value:
         func updateTouchFeedbackType(with value: TouchFeedbackType) {
             touchFeedbackGenerator.setFeedbackType(value)
         }
-    #endif
 
     /// Update the scaling factor
     func updateScalingFactor(with value: Int) {
@@ -184,7 +169,6 @@ class RootViewController: UIViewController, MenuActionsHandler {
     }
 }
 
-#if NON_APPSTORE
     extension RootViewController: UserInteractionDelegate {
         open func userInteractionBegan() {
             Log.d("userInteractionBegan")
@@ -204,7 +188,6 @@ class RootViewController: UIViewController, MenuActionsHandler {
             Log.d("gamepadPresenceChanged")
         }
     }
-#endif
 
 /// Show an web overlay
 extension RootViewController: OverlayController {

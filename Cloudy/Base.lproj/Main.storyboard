@@ -811,12 +811,12 @@
                         <outlet property="allowInlineFeedback" destination="OQM-5b-cVm" id="AvK-i0-Z5N"/>
                         <outlet property="backButton" destination="LBE-2y-SAm" id="0qk-8X-SQ1"/>
                         <outlet property="buttonBoosteroid" destination="Wfg-u9-jgh" id="DnK-sM-pzF"/>
+                        <outlet property="buttonDiscord" destination="wz2-wP-jxe" id="xL2-1B-WAs"/>
                         <outlet property="buttonGamepadTester" destination="bFl-9U-Su7" id="A08-Yh-uU6"/>
                         <outlet property="buttonGeforceNow" destination="Kdq-FP-3hb" id="1GC-Yc-UvH"/>
                         <outlet property="buttonGeforceNowBeta" destination="zau-rP-Nr4" id="RXQ-ns-OVk"/>
                         <outlet property="buttonLuna" destination="Ao9-3G-MXT" id="E6F-Lp-hKH"/>
                         <outlet property="buttonPatreon" destination="9yC-sf-omI" id="Sf3-eG-gLl"/>
-                        <outlet property="buttonDiscord" destination="wz2-wP-jxe" id="xL2-1B-WAs"/>
                         <outlet property="buttonStadia" destination="0VM-PV-WdW" id="CxB-kR-0dV"/>
                         <outlet property="controllerHackSwitch" destination="SeT-u4-e4H" id="a17-wb-xDT"/>
                         <outlet property="controllerIdSelector" destination="lpR-6L-9OT" id="CU6-rZ-Ges"/>
@@ -842,7 +842,6 @@
                         <outletCollection property="shadowViews" destination="bFl-9U-Su7" collectionClass="NSMutableArray" id="IsP-XF-vbr"/>
                         <outletCollection property="viewsToRemove" destination="Kdq-FP-3hb" collectionClass="NSMutableArray" id="VKP-Y3-dGL"/>
                         <outletCollection property="viewsToRemove" destination="Ao9-3G-MXT" collectionClass="NSMutableArray" id="KpH-iz-V3R"/>
-                        <outletCollection property="viewsToRemove" destination="wz2-wP-jxe" collectionClass="NSMutableArray" id="Oqw-zn-9J5"/>
                         <outletCollection property="viewsToRemove" destination="Q2P-8c-czw" collectionClass="NSMutableArray" id="BMo-oZ-4T0"/>
                         <outletCollection property="viewsToRemove" destination="IkE-mv-Z9A" collectionClass="NSMutableArray" id="HTW-iH-EzI"/>
                         <outletCollection property="viewsToRemove" destination="Teq-Sc-YtB" collectionClass="NSMutableArray" id="e6v-Ub-lvn"/>

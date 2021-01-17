@@ -15,8 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if NON_APPSTORE
             FirebaseApp.configure()
         #endif
-        // request mic permissions
-        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
+        // request mic permissions TODO disabled for now
+        // AVAudioSession.sharedInstance().requestRecordPermission { _ in }
         // Override point for customization after application launch.
         return true
     }

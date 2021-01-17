@@ -909,9 +909,7 @@
         }
         if(updated)
         {
-#ifdef NON_APPSTORE
             [hapticFeedback generateFeedback];
-#endif
             [_controllerSupport updateFinished:_controller];
         }
         return updated || stickTouch;

@@ -228,7 +228,6 @@ static const double MOUSE_SPEED_DIVISOR = 2.5;
         @synchronized(controller)
         {
             // Player 1 is always present for OSC
-#ifdef NON_APPSTORE
             CloudyController *cloudyController = [[CloudyController alloc] initWithControllerNumber:_multiController ? controller.playerIndex : 0
                                                                     activeGamepadMask:(_multiController ? _controllerNumbers : 1) | (_oscEnabled ? 1 : 0)
                                                                     buttonFlags:controller.lastButtonFlags
@@ -239,7 +238,6 @@ static const double MOUSE_SPEED_DIVISOR = 2.5;
                                                                     rightStickX:controller.lastRightStickX
                                                                     rightStickY:controller.lastRightStickY];
             [controllerDataReceiver submitWithControllerData:cloudyController for:ControlsSourceOnScreen];
-#endif
         }
         [_controllerStreamLock unlock];
     }
@@ -566,10 +564,8 @@ static const double MOUSE_SPEED_DIVISOR = 2.5;
             // If the mouse and keyboard disconnect later, it will reappear when the
             // first OSC input is received.
 
-#ifdef NON_APPSTORE
             CloudyController *cloudyController = [[CloudyController alloc] init];
             [controllerDataReceiver submitWithControllerData:cloudyController for:ControlsSourceOnScreen];
-#endif
         }
 
         [_osc setLevel:level];
@@ -687,11 +683,7 @@ static const double MOUSE_SPEED_DIVISOR = 2.5;
             mask = 0x1;
         }
 
-#ifdef NON_APPSTORE
         OnScreenControlsLevel level = NSUserDefaults.standardUserDefaults.onScreenControlsLevel;
-#else
-        OnScreenControlsLevel level = OnScreenControlsLevelOff;
-#endif
 
         // Even if no gamepads are present, we will always count one if OSC is enabled,
         // or it's set to auto and no keyboard or mouse is present.
@@ -722,11 +714,7 @@ static const double MOUSE_SPEED_DIVISOR = 2.5;
         _player0osc.playerIndex = 0;
 
         TemporarySettings *settings = [[TemporarySettings alloc] init];
-#ifdef NON_APPSTORE
         _oscEnabled = NSUserDefaults.standardUserDefaults.onScreenControlsLevel != OnScreenControlsLevelOff;
-#else
-        _oscEnabled = false;
-#endif
 
         LogI(@"Number of supported controllers connected: %d", [ControllerSupport getGamepadCount]);
         LogI(@"Multi-controller: %d", _multiController);
