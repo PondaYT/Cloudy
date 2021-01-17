@@ -6,13 +6,9 @@
 //  Copyright (c) 2014 Moonlight Stream. All rights reserved.
 //
 
-#ifdef NON_APPSTORE
-
 #import "StreamConfiguration.h"
 
 @implementation StreamConfiguration
 
     @synthesize host, appID, width, height, frameRate, bitRate, riKeyId, riKey, gamepadMask, appName, optimizeGameSettings, playAudioOnPC, audioConfiguration, enableHdr, multiController, allowHevc, serverCert;
 @end
-
-#endif

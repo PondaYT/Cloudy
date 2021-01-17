@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Moonlight Stream. All rights reserved.
 //
 
-#ifdef NON_APPSTORE
-
 #import <Foundation/Foundation.h>
 
 @interface StreamConfiguration : NSObject
@@ -17,21 +15,19 @@
     @property NSString *gfeVersion;
     @property NSString *appID;
     @property NSString *appName;
-    @property int width;
-    @property int height;
-    @property int frameRate;
-    @property int bitRate;
-    @property int riKeyId;
-    @property NSData *riKey;
-    @property int  gamepadMask;
-    @property BOOL optimizeGameSettings;
-    @property BOOL playAudioOnPC;
-    @property int  audioConfiguration;
-    @property BOOL enableHdr;
-    @property BOOL multiController;
-    @property BOOL allowHevc;
-    @property NSData *serverCert;
+    @property int      width;
+    @property int      height;
+    @property int      frameRate;
+    @property int      bitRate;
+    @property int      riKeyId;
+    @property NSData   *riKey;
+    @property int      gamepadMask;
+    @property BOOL     optimizeGameSettings;
+    @property BOOL     playAudioOnPC;
+    @property int      audioConfiguration;
+    @property BOOL     enableHdr;
+    @property BOOL     multiController;
+    @property BOOL     allowHevc;
+    @property NSData   *serverCert;
 
 @end
-
-#endif

@@ -6,12 +6,8 @@
 //  Copyright © 2019 Moonlight Game Streaming Project. All rights reserved.
 //
 
-#ifdef NON_APPSTORE
-
 #include "Controller.h"
 
 @implementation Controller
 
 @end
-
-#endif

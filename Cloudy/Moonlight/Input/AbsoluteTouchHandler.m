@@ -6,8 +6,6 @@
 //  Copyright © 2020 Moonlight Game Streaming Project. All rights reserved.
 //
 
-#ifdef NON_APPSTORE
-
 #import "AbsoluteTouchHandler.h"
 
 #include "Limelight.h"
@@ -132,5 +130,3 @@
     }
 
 @end
-
-#endif

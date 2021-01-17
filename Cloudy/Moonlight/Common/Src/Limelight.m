@@ -2,8 +2,6 @@
 // This header exposes the public streaming API for client usage
 //
 
-#ifdef NON_APPSTORE
-
 #include <Foundation/Foundation.h>
 #include "Limelight.h"
 #include "Log.h"
@@ -75,5 +73,3 @@ int LiSendHighResScrollEvent(short scrollAmount)
     LogD(@"LiSendHighResScrollEvent");
     return 0;
 }
-
-#endif

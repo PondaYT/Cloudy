@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Nomad5. All rights reserved.
 
 import Foundation
+import GameController
 
 /// Convenience access to persisted user defaults
 @objc extension UserDefaults {
@@ -21,7 +22,7 @@ import Foundation
     }
 
     /// Read / write the last visited url
-    var lastVisitedUrl:     URL? {
+    var          lastVisitedUrl:          URL? {
         get {
             UserDefaults.standard.url(forKey: Config.lastVisitedUrlKey)
         }
@@ -31,7 +32,7 @@ import Foundation
     }
 
     /// Read / write the manually overwritten user agent
-    var manualUserAgent:    String? {
+    var          manualUserAgent:         String? {
         get {
             UserDefaults.standard.string(forKey: Config.manualUserAgent)
         }
@@ -41,7 +42,7 @@ import Foundation
     }
 
     /// Read / write the flag if the manual user agent should be used
-    var useManualUserAgent: Bool {
+    var          useManualUserAgent:      Bool {
         get {
             if UserDefaults.standard.object(forKey: Config.useManualUserAgent) == nil {
                 return false
@@ -54,7 +55,7 @@ import Foundation
     }
 
     /// Read / write the flag if the app should act as standalone PWA
-    var actAsStandaloneApp: Bool {
+    var          actAsStandaloneApp:      Bool {
         get {
             if UserDefaults.standard.object(forKey: Config.actAsStandaloneApp) == nil {
                 return true
@@ -67,7 +68,7 @@ import Foundation
     }
 
     /// Read / write allow inline media enabled flag
-    var allowInlineMedia:   Bool {
+    var          allowInlineMedia:        Bool {
         get {
             if UserDefaults.standard.object(forKey: Config.allowInlineMedia) == nil {
                 return true
@@ -80,7 +81,7 @@ import Foundation
     }
 
     /// Read / write the webView scale
-    var webViewScale:       Int {
+    var          webViewScale:            Int {
         get {
             UserDefaults.standard.integer(forKey: Config.webViewScale)
         }
@@ -89,69 +90,66 @@ import Foundation
         }
     }
 
-    #if NON_APPSTORE
-
-        /// Read / write the flag if the app should inject the custom controller scripts
-        var          injectControllerScripts: Bool {
-            get {
-                if UserDefaults.standard.object(forKey: Config.injectControllerScripts) == nil {
-                    return true
-                }
-                return UserDefaults.standard.bool(forKey: Config.injectControllerScripts)
+    /// Read / write the flag if the app should inject the custom controller scripts
+    var          injectControllerScripts: Bool {
+        get {
+            if UserDefaults.standard.object(forKey: Config.injectControllerScripts) == nil {
+                return true
             }
-            set {
-                UserDefaults.standard.set(newValue, forKey: Config.injectControllerScripts)
-            }
+            return UserDefaults.standard.bool(forKey: Config.injectControllerScripts)
         }
-
-        /// Read / write flag for controller ID
-        @nonobjc var controllerId:            GCExtendedGamepad.id {
-            get {
-                if UserDefaults.standard.object(forKey: Config.controllerId) == nil {
-                    return .xbox
-                }
-                return GCExtendedGamepad.id(rawValue: UserDefaults.standard.integer(forKey: Config.controllerId))!
-            }
-            set {
-                UserDefaults.standard.set(newValue.rawValue, forKey: Config.controllerId)
-            }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Config.injectControllerScripts)
         }
+    }
 
-        /// Read / write flag for on screen controller
-        @objc var    onScreenControlsLevel:   OnScreenControlsLevel {
-            get {
-                if UserDefaults.standard.object(forKey: Config.onScreenControlsLevel) == nil {
-                    return .off
-                }
-                return OnScreenControlsLevel(rawValue: UserDefaults.standard.integer(forKey: Config.onScreenControlsLevel))!
+    /// Read / write flag for controller ID
+    @nonobjc var controllerId:            GCExtendedGamepad.id {
+        get {
+            if UserDefaults.standard.object(forKey: Config.controllerId) == nil {
+                return .xbox
             }
-            set {
-                UserDefaults.standard.set(newValue.rawValue, forKey: Config.onScreenControlsLevel)
-            }
+            return GCExtendedGamepad.id(rawValue: UserDefaults.standard.integer(forKey: Config.controllerId))!
         }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: Config.controllerId)
+        }
+    }
 
-        /// Read / write flag for on screen controller feedback type
-        @objc var    touchFeedbackType:       TouchFeedbackType {
-            get {
-                if UserDefaults.standard.object(forKey: Config.touchFeedbackType) == nil {
-                    return .off
-                }
-                return TouchFeedbackType(rawValue: UserDefaults.standard.integer(forKey: Config.touchFeedbackType))!
+    /// Read / write flag for on screen controller
+    @objc var    onScreenControlsLevel:   OnScreenControlsLevel {
+        get {
+            if UserDefaults.standard.object(forKey: Config.onScreenControlsLevel) == nil {
+                return .off
             }
-            set {
-                UserDefaults.standard.set(newValue.rawValue, forKey: Config.touchFeedbackType)
-            }
+            return OnScreenControlsLevel(rawValue: UserDefaults.standard.integer(forKey: Config.onScreenControlsLevel))!
         }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: Config.onScreenControlsLevel)
+        }
+    }
 
-        /// Read / write the custom js injection
-        var          customJsCodeToInject:    String? {
-            get {
-                UserDefaults.standard.string(forKey: Config.customJsCodeToInject)
+    /// Read / write flag for on screen controller feedback type
+    @objc var    touchFeedbackType:       TouchFeedbackType {
+        get {
+            if UserDefaults.standard.object(forKey: Config.touchFeedbackType) == nil {
+                return .off
             }
-            set {
-                UserDefaults.standard.set(newValue, forKey: Config.customJsCodeToInject)
-            }
+            return TouchFeedbackType(rawValue: UserDefaults.standard.integer(forKey: Config.touchFeedbackType))!
         }
-    #endif
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: Config.touchFeedbackType)
+        }
+    }
+
+    /// Read / write the custom js injection
+    var          customJsCodeToInject:    String? {
+        get {
+            UserDefaults.standard.string(forKey: Config.customJsCodeToInject)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Config.customJsCodeToInject)
+        }
+    }
 
 }

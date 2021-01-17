@@ -6,8 +6,6 @@
 //  Copyright © 2020 Moonlight Game Streaming Project. All rights reserved.
 //
 
-#ifdef NON_APPSTORE
-
 #import "RelativeTouchHandler.h"
 #import "Log.h"
 
@@ -225,5 +223,3 @@ static const int REFERENCE_HEIGHT = 720;
 #endif
 
 @end
-
-#endif

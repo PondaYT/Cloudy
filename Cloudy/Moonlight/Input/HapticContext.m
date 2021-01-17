@@ -6,8 +6,6 @@
 //  Copyright © 2020 Moonlight Game Streaming Project. All rights reserved.
 //
 
-#ifdef NON_APPSTORE
-
 #import "HapticContext.h"
 #import "Log.h"
 
@@ -175,5 +173,3 @@
     }
 
 @end
-
-#endif

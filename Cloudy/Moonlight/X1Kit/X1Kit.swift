@@ -24,17 +24,15 @@
 
 // swiftlint:disable line_length
 
-#if NON_APPSTORE
+import CoreBluetooth
 
-    import CoreBluetooth
+@objc enum X1MouseButton: UInt8 {
+    case left   = 0
+    case right  = 1
+    case middle = 2
+}
 
-    @objc enum X1MouseButton: UInt8 {
-        case left   = 0
-        case right  = 1
-        case middle = 2
-    }
-
-    @objc protocol X1KitMouseDelegate: class {
+@objc protocol X1KitMouseDelegate: class {
     func connectedStateDidChange(identifier: UUID, isConnected: Bool)
     func mouseDidMove(identifier: UUID, deltaX: Int16, deltaY: Int16)
     func mouseDown(identifier: UUID, button: X1MouseButton)
@@ -269,5 +267,3 @@ extension X1Mouse: CBPeripheralDelegate {
         }
     }
 }
-
-#endif

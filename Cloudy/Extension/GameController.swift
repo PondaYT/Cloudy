@@ -1,15 +1,13 @@
 // Copyright (c) 2020 Nomad5. All rights reserved.
 
-#if NON_APPSTORE
+import Foundation
+import GameController
 
-    import Foundation
-    import GameController
+/// Infix operator declaration
+infix operator =~: ComparisonPrecedence
 
-    /// Infix operator declaration
-    infix operator =~: ComparisonPrecedence
-
-    /// Convenience extension
-    extension GCControllerButtonInput {
+/// Convenience extension
+extension GCControllerButtonInput {
 
     /// Compare for similarity
     static func =~(lhs: GCControllerButtonInput, rhs: GCControllerButtonInput) -> Bool {
@@ -127,5 +125,3 @@ extension GCExtendedGamepad {
                 ])
     }
 }
-
-#endif

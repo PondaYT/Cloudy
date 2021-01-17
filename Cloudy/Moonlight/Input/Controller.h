@@ -6,8 +6,6 @@
 //  Copyright © 2019 Moonlight Game Streaming Project. All rights reserved.
 //
 
-#ifdef NON_APPSTORE
-
 #import "HapticContext.h"
 
 @import GameController;
@@ -31,5 +29,3 @@
     @property(nonatomic) HapticContext *_Nullable highFreqMotor;
 
 @end
-
-#endif

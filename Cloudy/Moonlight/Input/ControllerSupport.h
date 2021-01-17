@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Moonlight Stream. All rights reserved.
 //
 
-#ifdef NON_APPSTORE
-
 #import "StreamConfiguration.h"
 #import "Controller.h"
 
@@ -57,5 +55,3 @@
     - (NSUInteger)getConnectedGamepadCount;
 
 @end
-
-#endif

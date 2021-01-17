@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Moonlight Stream. All rights reserved.
 //
 
-#ifdef NON_APPSTORE
-
 #import "OnScreenControls.h"
 #import "StreamView.h"
 #import "ControllerSupport.h"
@@ -1172,5 +1170,3 @@
     }
 
 @end
-
-#endif
