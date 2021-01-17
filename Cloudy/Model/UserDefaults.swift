@@ -94,7 +94,7 @@ import GameController
     var          injectControllerScripts: Bool {
         get {
             if UserDefaults.standard.object(forKey: Config.injectControllerScripts) == nil {
-                return true
+                return false
             }
             return UserDefaults.standard.bool(forKey: Config.injectControllerScripts)
         }

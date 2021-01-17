@@ -40,7 +40,7 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var buttonBoosteroid:           UIImageView!
     @IBOutlet weak var buttonGamepadTester:        UIImageView!
     @IBOutlet weak var buttonPatreon:              UIImageView!
-    @IBOutlet weak var buttonPayPal:               UIImageView!
+    @IBOutlet weak var buttonDiscord:              UIImageView!
     @IBOutlet weak var allowInlineFeedback:        UISwitch!
     @IBOutlet weak var standaloneSwitch:           UISwitch!
     @IBOutlet weak var controllerHackSwitch:       UISwitch!
@@ -94,9 +94,9 @@ class MenuViewController: UIViewController {
         // tap for patreon button
         let tapPatreon = UITapGestureRecognizer(target: self, action: #selector(onPatreonButtonPressed))
         buttonPatreon.addGestureRecognizer(tapPatreon)
-        // tap for pay pal button
-        let tapPayPal = UITapGestureRecognizer(target: self, action: #selector(onPayPalButtonPressed))
-        buttonPayPal.addGestureRecognizer(tapPayPal)
+        // tap for discord button
+        let tapDiscord = UITapGestureRecognizer(target: self, action: #selector(onDiscordButtonPressed))
+        buttonDiscord.addGestureRecognizer(tapDiscord)
         // init
         userAgentTextField.text = UserDefaults.standard.manualUserAgent
         manualUserAgent.isOn = UserDefaults.standard.useManualUserAgent
@@ -272,10 +272,14 @@ extension MenuViewController {
         hideMenu()
     }
 
-    /// Handle paypal shortcut
-    @objc func onPayPalButtonPressed(_ sender: Any) {
-        overlayController?.showOverlay(for: Navigator.Config.Url.paypal.absoluteString)
-        hideMenu()
+    /// Handle discord shortcut
+    @objc func onDiscordButtonPressed(_ sender: Any) {
+        if UIApplication.shared.canOpenURL(Navigator.Config.Url.discord) {
+            UIApplication.shared.open(Navigator.Config.Url.discord)
+        } else {
+            overlayController?.showOverlay(for: Navigator.Config.Url.discord.absoluteString)
+            hideMenu()
+        }
     }
 
     /// Controller ID changed in menu

@@ -237,7 +237,7 @@
                                                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_patreon" translatesAutoresizingMaskIntoConstraints="NO" id="9yC-sf-omI" userLabel="Button Patreon">
                                                                 <rect key="frame" x="0.0" y="0.0" width="105" height="89.5"/>
                                                             </imageView>
-                                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_paypal" translatesAutoresizingMaskIntoConstraints="NO" id="wz2-wP-jxe" userLabel="Button PayPal">
+                                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_discord" translatesAutoresizingMaskIntoConstraints="NO" id="wz2-wP-jxe" userLabel="Button Discord">
                                                                 <rect key="frame" x="0.0" y="99.5" width="105" height="89"/>
                                                             </imageView>
                                                         </subviews>
@@ -284,10 +284,10 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="E19-IG-xpE">
                                                                 <rect key="frame" x="0.0" y="10" width="1092" height="1038"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Zt-T8-Og7">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Zt-T8-Og7" userLabel="Version">
                                                                         <rect key="frame" x="0.0" y="0.0" width="1092" height="50"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qpk-sH-aBT">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloudy v2.1.2 | Appstore" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qpk-sH-aBT">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="1092" height="50"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
@@ -439,16 +439,16 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Teq-Sc-YtB" userLabel="Controller hacks">
                                                                         <rect key="frame" x="0.0" y="232" width="1092" height="50"/>
                                                                         <subviews>
-                                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SeT-u4-e4H" userLabel="Controller hacks">
+                                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SeT-u4-e4H" userLabel="Controller hacks">
                                                                                 <rect key="frame" x="10" y="9.5" width="51" height="31"/>
                                                                                 <connections>
                                                                                     <action selector="onControllerHacksValueChanged:" destination="FIN-ZL-Y0N" eventType="valueChanged" id="hpS-Sr-ic9"/>
                                                                                 </connections>
                                                                             </switch>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j60-Tn-7CF" userLabel="Label">
-                                                                                <rect key="frame" x="69" y="15" width="347" height="20.5"/>
+                                                                                <rect key="frame" x="69" y="15" width="268.5" height="20.5"/>
                                                                                 <attributedString key="attributedText">
-                                                                                    <fragment content="Inject custom controller override ">
+                                                                                    <fragment content="Use custom controller ">
                                                                                         <attributes>
                                                                                             <font key="NSFont" metaFont="system" size="17"/>
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -496,11 +496,17 @@
                                                                                 </connections>
                                                                             </segmentedControl>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kU-Sz-C9f" userLabel="Label">
-                                                                                <rect key="frame" x="429" y="15" width="125.5" height="20.5"/>
+                                                                                <rect key="frame" x="429" y="15" width="266" height="20.5"/>
                                                                                 <attributedString key="attributedText">
-                                                                                    <fragment content="Controller layout">
+                                                                                    <fragment content="Custom controller layout ">
                                                                                         <attributes>
                                                                                             <font key="NSFont" metaFont="system" size="17"/>
+                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                    <fragment content="(experimental)">
+                                                                                        <attributes>
+                                                                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                         </attributes>
                                                                                     </fragment>
@@ -655,14 +661,14 @@
                                                                         <rect key="frame" x="0.0" y="522" width="1092" height="50"/>
                                                                         <subviews>
                                                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7D-76-MuH">
-                                                                                <rect key="frame" x="10" y="10" width="136" height="30"/>
-                                                                                <state key="normal" title="Inject Custom Code"/>
+                                                                                <rect key="frame" x="10" y="10" width="94" height="30"/>
+                                                                                <state key="normal" title="Custom Code"/>
                                                                                 <connections>
                                                                                     <action selector="onInjectCustomCodePressed:" destination="FIN-ZL-Y0N" eventType="touchUpInside" id="vOY-om-k5a"/>
                                                                                 </connections>
                                                                             </button>
                                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dgf-EK-sHG" userLabel="Custom JS">
-                                                                                <rect key="frame" x="156" y="8" width="926" height="34"/>
+                                                                                <rect key="frame" x="114" y="8" width="968" height="34"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                                                 <connections>
@@ -810,7 +816,7 @@
                         <outlet property="buttonGeforceNowBeta" destination="zau-rP-Nr4" id="RXQ-ns-OVk"/>
                         <outlet property="buttonLuna" destination="Ao9-3G-MXT" id="E6F-Lp-hKH"/>
                         <outlet property="buttonPatreon" destination="9yC-sf-omI" id="Sf3-eG-gLl"/>
-                        <outlet property="buttonPayPal" destination="wz2-wP-jxe" id="xL2-1B-WAs"/>
+                        <outlet property="buttonDiscord" destination="wz2-wP-jxe" id="xL2-1B-WAs"/>
                         <outlet property="buttonStadia" destination="0VM-PV-WdW" id="CxB-kR-0dV"/>
                         <outlet property="controllerHackSwitch" destination="SeT-u4-e4H" id="a17-wb-xDT"/>
                         <outlet property="controllerIdSelector" destination="lpR-6L-9OT" id="CU6-rZ-Ges"/>
@@ -852,12 +858,12 @@
     <resources>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="button_boosteroid" width="512" height="512"/>
+        <image name="button_discord" width="512" height="256"/>
         <image name="button_gamepad_tester" width="512" height="512"/>
         <image name="button_geforce_now" width="512" height="512"/>
         <image name="button_geforce_now_beta" width="512" height="512"/>
         <image name="button_luna" width="512" height="514"/>
         <image name="button_patreon" width="512" height="256"/>
-        <image name="button_paypal" width="512" height="256"/>
         <image name="button_stadia" width="512" height="512"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="trash.fill" catalog="system" width="121" height="128"/>
