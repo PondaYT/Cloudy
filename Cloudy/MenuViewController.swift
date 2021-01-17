@@ -26,7 +26,8 @@ protocol OverlayController {
 class MenuViewController: UIViewController {
 
     /// View references
-    @IBOutlet var shadowViews: [UIView]!
+    @IBOutlet var shadowViews:   [UIView]!
+    @IBOutlet var viewsToRemove: [UIView]!
     @IBOutlet weak var userAgentTextField:         UITextField!
     @IBOutlet weak var manualUserAgent:            UISwitch!
     @IBOutlet weak var addressBar:                 UITextField!
@@ -39,7 +40,7 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var buttonBoosteroid:           UIImageView!
     @IBOutlet weak var buttonGamepadTester:        UIImageView!
     @IBOutlet weak var buttonPatreon:              UIImageView!
-    @IBOutlet weak var buttonPayPal:               UIImageView!
+    @IBOutlet weak var buttonDiscord:              UIImageView!
     @IBOutlet weak var allowInlineFeedback:        UISwitch!
     @IBOutlet weak var standaloneSwitch:           UISwitch!
     @IBOutlet weak var controllerHackSwitch:       UISwitch!
@@ -54,6 +55,12 @@ class MenuViewController: UIViewController {
     var webController:      WebController?
     var overlayController:  OverlayController?
     var menuActionsHandler: MenuActionsHandler?
+
+    /// Mapping from a alias to a full url
+    static let   aliasMapping:           [String: String] = [
+        "stadia": Navigator.Config.Url.googleStadia.absoluteString,
+        "gfn": Navigator.Config.Url.geforceNowBeta.absoluteString,
+    ]
 
     /// By default hide the status bar
     override var prefersStatusBarHidden: Bool {
@@ -87,20 +94,24 @@ class MenuViewController: UIViewController {
         // tap for patreon button
         let tapPatreon = UITapGestureRecognizer(target: self, action: #selector(onPatreonButtonPressed))
         buttonPatreon.addGestureRecognizer(tapPatreon)
-        // tap for pay pal button
-        let tapPayPal = UITapGestureRecognizer(target: self, action: #selector(onPayPalButtonPressed))
-        buttonPayPal.addGestureRecognizer(tapPayPal)
+        // tap for discord button
+        let tapDiscord = UITapGestureRecognizer(target: self, action: #selector(onDiscordButtonPressed))
+        buttonDiscord.addGestureRecognizer(tapDiscord)
         // init
         userAgentTextField.text = UserDefaults.standard.manualUserAgent
         manualUserAgent.isOn = UserDefaults.standard.useManualUserAgent
         allowInlineFeedback.isOn = UserDefaults.standard.allowInlineMedia
         standaloneSwitch.isOn = UserDefaults.standard.actAsStandaloneApp
-        controllerHackSwitch.isOn = UserDefaults.standard.injectControllerScripts
-        controllerIdSelector.selectedSegmentIndex = UserDefaults.standard.controllerId.rawValue
-        onScreenControllerSelector.selectedSegmentIndex = UserDefaults.standard.onScreenControlsLevel.rawValue
-        touchFeedbackSelector.selectedSegmentIndex = UserDefaults.standard.touchFeedbackType.rawValue
-        customJsInjection.text = UserDefaults.standard.customJsCodeToInject
         scalingFactorTextField.text = String(UserDefaults.standard.webViewScale)
+        #if NON_APPSTORE
+            controllerHackSwitch.isOn = UserDefaults.standard.injectControllerScripts
+            controllerIdSelector.selectedSegmentIndex = UserDefaults.standard.controllerId.rawValue
+            onScreenControllerSelector.selectedSegmentIndex = UserDefaults.standard.onScreenControlsLevel.rawValue
+            touchFeedbackSelector.selectedSegmentIndex = UserDefaults.standard.touchFeedbackType.rawValue
+            customJsInjection.text = UserDefaults.standard.customJsCodeToInject
+        #else
+            viewsToRemove.forEach { $0.removeFromSuperview() }
+        #endif
         // apply shadows
         shadowViews.forEach { $0.addShadow() }
         // update stuff
@@ -115,7 +126,11 @@ class MenuViewController: UIViewController {
             versionLabel.text = "invalid"
             return
         }
-        versionLabel.text = "Cloudy v\(versionNumber)(\(buildNumber))"
+        #if NON_APPSTORE
+            versionLabel.text = "Cloudy v\(versionNumber)(\(buildNumber))"
+        #else
+            versionLabel.text = "Cloudy v\(versionNumber)(\(buildNumber)) | Appstore"
+        #endif
     }
 }
 
@@ -160,7 +175,9 @@ extension MenuViewController {
     @IBAction func onGoPressed(_ sender: Any) {
         // early exit
         guard let address = addressBar.text else { return }
-        webController?.navigateTo(address: address)
+        // map alias
+        let navigationUrl = MenuViewController.aliasMapping[address] ?? address
+        webController?.navigateTo(address: navigationUrl)
         hideMenu()
     }
 
@@ -198,7 +215,9 @@ extension MenuViewController {
 
     /// Change controller hack injection behavior
     @IBAction func onControllerHacksValueChanged(_ sender: Any) {
-        UserDefaults.standard.injectControllerScripts = controllerHackSwitch.isOn
+        #if NON_APPSTORE
+            UserDefaults.standard.injectControllerScripts = controllerHackSwitch.isOn
+        #endif
     }
 
     /// User agent value changed
@@ -253,53 +272,67 @@ extension MenuViewController {
         hideMenu()
     }
 
-    /// Handle paypal shortcut
-    @objc func onPayPalButtonPressed(_ sender: Any) {
-        overlayController?.showOverlay(for: Navigator.Config.Url.paypal.absoluteString)
-        hideMenu()
+    /// Handle discord shortcut
+    @objc func onDiscordButtonPressed(_ sender: Any) {
+        if UIApplication.shared.canOpenURL(Navigator.Config.Url.discord) {
+            UIApplication.shared.open(Navigator.Config.Url.discord)
+        } else {
+            overlayController?.showOverlay(for: Navigator.Config.Url.discord.absoluteString)
+            hideMenu()
+        }
     }
 
     /// Controller ID changed in menu
     @IBAction func onControllerIdChanged(_ sender: Any) {
-        guard let newId = GCExtendedGamepad.id(rawValue: controllerIdSelector.selectedSegmentIndex) else {
-            Log.e("Something went wrong parsing the selected controller ID: \(onScreenControllerSelector.selectedSegmentIndex)")
-            return
-        }
-        UserDefaults.standard.controllerId = newId
+        #if NON_APPSTORE
+            guard let newId = GCExtendedGamepad.id(rawValue: controllerIdSelector.selectedSegmentIndex) else {
+                Log.e("Something went wrong parsing the selected controller ID: \(onScreenControllerSelector.selectedSegmentIndex)")
+                return
+            }
+            UserDefaults.standard.controllerId = newId
+        #endif
     }
 
     /// On screen controls value changed in menu
     @IBAction func onOnScreenControlChanged(_ sender: Any) {
-        guard let newLevel = OnScreenControlsLevel(rawValue: onScreenControllerSelector.selectedSegmentIndex) else {
-            Log.e("Something went wrong parsing the selected on screen controls level: \(onScreenControllerSelector.selectedSegmentIndex)")
-            return
-        }
-        UserDefaults.standard.onScreenControlsLevel = newLevel
-        menuActionsHandler?.updateOnScreenController(with: newLevel)
+        #if NON_APPSTORE
+            guard let newLevel = OnScreenControlsLevel(rawValue: onScreenControllerSelector.selectedSegmentIndex) else {
+                Log.e("Something went wrong parsing the selected on screen controls level: \(onScreenControllerSelector.selectedSegmentIndex)")
+                return
+            }
+            UserDefaults.standard.onScreenControlsLevel = newLevel
+            menuActionsHandler?.updateOnScreenController(with: newLevel)
+        #endif
     }
 
     /// Touch feedback selector changed
     @IBAction func onTouchFeedbackChanged(_ sender: Any) {
-        guard let newFeedbackType = TouchFeedbackType(rawValue: touchFeedbackSelector.selectedSegmentIndex) else {
-            Log.e("Something went wrong parsing the selected touch feedback type: \(touchFeedbackSelector.selectedSegmentIndex)")
-            return
-        }
-        UserDefaults.standard.touchFeedbackType = newFeedbackType
-        menuActionsHandler?.updateTouchFeedbackType(with: newFeedbackType)
+        #if NON_APPSTORE
+            guard let newFeedbackType = TouchFeedbackType(rawValue: touchFeedbackSelector.selectedSegmentIndex) else {
+                Log.e("Something went wrong parsing the selected touch feedback type: \(touchFeedbackSelector.selectedSegmentIndex)")
+                return
+            }
+            UserDefaults.standard.touchFeedbackType = newFeedbackType
+            menuActionsHandler?.updateTouchFeedbackType(with: newFeedbackType)
+        #endif
     }
 
     /// Custom js code injection changed
     @IBAction func onCustomJsInjectCodeChanged(_ sender: Any) {
-        UserDefaults.standard.customJsCodeToInject = customJsInjection.text
+        #if NON_APPSTORE
+            UserDefaults.standard.customJsCodeToInject = customJsInjection.text
+        #endif
     }
 
     /// Inject custom code
     @IBAction func onInjectCustomCodePressed(_ sender: Any) {
-        guard let code = customJsInjection.text,
-              !code.isEmpty else {
-            return
-        }
-        menuActionsHandler?.injectCustom(code: code)
+        #if NON_APPSTORE
+            guard let code = customJsInjection.text,
+                  !code.isEmpty else {
+                return
+            }
+            menuActionsHandler?.injectCustom(code: code)
+        #endif
     }
 
     /// Scaling changed

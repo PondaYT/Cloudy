@@ -77,7 +77,11 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
         }
 
         onScreenControls = [[OnScreenControls alloc] initWithView:self controllerSup:controllerSupport hapticFeedback:hapticFeedbackDelegate];
+#ifdef NON_APPSTORE
         OnScreenControlsLevel level = NSUserDefaults.standardUserDefaults.onScreenControlsLevel;
+#else
+        OnScreenControlsLevel level = OnScreenControlsLevelOff;
+#endif
         if(settings.absoluteTouchMode)
         {
             LogI(@"On-screen controls disabled in absolute touch mode");
@@ -165,7 +169,9 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
     - (void)updateOnScreenControls
     {
 #if !TARGET_OS_TV
+#ifdef NON_APPSTORE
         [onScreenControls setLevel:NSUserDefaults.standardUserDefaults.onScreenControlsLevel];
+#endif
         [self becomeFirstResponder];
 #endif
     }

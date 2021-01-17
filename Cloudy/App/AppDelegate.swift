@@ -1,15 +1,20 @@
 // Copyright (c) 2020 Nomad5. All rights reserved.
 
 import UIKit
-import Firebase
 import AVFoundation
+
+#if NON_APPSTORE
+    import Firebase
+#endif
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Initialize firebase
-        FirebaseApp.configure()
+        #if NON_APPSTORE
+            FirebaseApp.configure()
+        #endif
         // request mic permissions
         AVAudioSession.sharedInstance().requestRecordPermission { _ in }
         // Override point for customization after application launch.
