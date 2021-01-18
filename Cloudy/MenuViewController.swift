@@ -2,6 +2,7 @@
 
 import Foundation
 import UIKit
+import StoreKit
 
 /// Container for address bar updates
 struct AddressBarInfo {
@@ -26,8 +27,9 @@ protocol OverlayController {
 class MenuViewController: UIViewController {
 
     /// View references
-    @IBOutlet var shadowViews:   [UIView]!
-    @IBOutlet var viewsToRemove: [UIView]!
+    @IBOutlet var shadowViews:                 [UIView]!
+    @IBOutlet var viewsToRemoveForAppstore:    [UIView]!
+    @IBOutlet var viewsToRemoveForNonAppstore: [UIView]!
     @IBOutlet weak var userAgentTextField:         UITextField!
     @IBOutlet weak var manualUserAgent:            UISwitch!
     @IBOutlet weak var addressBar:                 UITextField!
@@ -41,6 +43,7 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var buttonGamepadTester:        UIImageView!
     @IBOutlet weak var buttonPatreon:              UIImageView!
     @IBOutlet weak var buttonDiscord:              UIImageView!
+    @IBOutlet weak var buttonTipJar:               UIImageView!
     @IBOutlet weak var allowInlineFeedback:        UISwitch!
     @IBOutlet weak var standaloneSwitch:           UISwitch!
     @IBOutlet weak var controllerHackSwitch:       UISwitch!
@@ -55,6 +58,11 @@ class MenuViewController: UIViewController {
     var webController:      WebController?
     var overlayController:  OverlayController?
     var menuActionsHandler: MenuActionsHandler?
+
+    /// The alert helper
+    lazy var alerter: Alerter = {
+        Alerter(viewController: self)
+    }()
 
     /// Mapping from a alias to a full url
     static let   aliasMapping:           [String: String] = [
@@ -88,6 +96,9 @@ class MenuViewController: UIViewController {
         // tap for luna button
         let tapLuna = UITapGestureRecognizer(target: self, action: #selector(onLunaButtonPressed))
         buttonLuna.addGestureRecognizer(tapLuna)
+        // tap for tip jar button
+        let tapTipJar = UITapGestureRecognizer(target: self, action: #selector(onTipJarPressed))
+        buttonTipJar.addGestureRecognizer(tapTipJar)
         // tap for gamepad tester button
         let tapGamepadTester = UITapGestureRecognizer(target: self, action: #selector(onGamepadTesterButtonPressed))
         buttonGamepadTester.addGestureRecognizer(tapGamepadTester)
@@ -109,7 +120,10 @@ class MenuViewController: UIViewController {
         touchFeedbackSelector.selectedSegmentIndex = UserDefaults.standard.touchFeedbackType.rawValue
         customJsInjection.text = UserDefaults.standard.customJsCodeToInject
         #if APPSTORE
-            viewsToRemove.forEach { $0.removeFromSuperview() }
+            viewsToRemoveForAppstore.forEach { $0.removeFromSuperview() }
+        #endif
+        #if NON_APPSTORE
+            viewsToRemoveForNonAppstore.forEach { $0.removeFromSuperview() }
         #endif
         // apply shadows
         shadowViews.forEach { $0.addShadow() }
@@ -333,3 +347,51 @@ extension MenuViewController {
         menuActionsHandler?.updateScalingFactor(with: -factor)
     }
 }
+
+
+/// Purchasing extension
+extension MenuViewController {
+
+    /// Handle tip jar button
+    @objc func onTipJarPressed(_ sender: Any) {
+        IAPManager.shared.getProducts { (result) in
+            DispatchQueue.main.async { [weak self] in
+                switch result {
+                    case .success(let products):
+                        self?.alerter.showAlert(for: products) { [weak self] product in
+                            self?.purchase(product: product)
+                        }
+                    case .failure(let error):
+                        self?.alerter.showAlert(for: .somethingWentWrong)
+                        Log.e("Error fetching products: \(error)")
+                }
+            }
+        }
+    }
+
+    /// Purchase an item
+    func purchase(product: SKProduct) {
+        if !IAPManager.shared.canMakePayments() {
+            alerter.showAlert(for: .cannotMakePayments)
+            Log.e("User cannot make payments")
+        } else {
+            IAPManager.shared.buy(product: product) { (result) in
+                DispatchQueue.main.async { [weak self] in
+                    switch result {
+                        case .success(_):
+                            self?.alerter.showAlert(for: .purchaseSuccess)
+                        case .failure(let error):
+                            if case IAPManager.IAPManagerError.paymentWasCancelled = error {
+                                Log.i("Payment cancelled")
+                            } else {
+                                Log.e("Error occurred")
+                                self?.alerter.showAlert(for: .somethingWentWrong)
+                            }
+                    }
+                }
+            }
+        }
+    }
+}
+
+

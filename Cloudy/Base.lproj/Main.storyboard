@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="ipad10_5" orientation="landscape" layout="fullscreen" appearance="light"/>
+    <device id="ipad10_5" orientation="landscape" layout="fullscreen" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Image references" minToolsVersion="12.0"/>
@@ -213,32 +213,36 @@
                                                 <rect key="frame" x="10" y="10" width="1072" height="188.5"/>
                                                 <subviews>
                                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_stadia" translatesAutoresizingMaskIntoConstraints="NO" id="0VM-PV-WdW">
-                                                        <rect key="frame" x="0.0" y="0.0" width="153" height="188.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="134" height="188.5"/>
                                                     </imageView>
                                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_geforce_now" translatesAutoresizingMaskIntoConstraints="NO" id="Kdq-FP-3hb">
-                                                        <rect key="frame" x="161" y="0.0" width="153.5" height="188.5"/>
+                                                        <rect key="frame" x="142" y="0.0" width="134" height="188.5"/>
                                                     </imageView>
                                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_geforce_now_beta" translatesAutoresizingMaskIntoConstraints="NO" id="zau-rP-Nr4" userLabel="Button Geforce Now Beta">
-                                                        <rect key="frame" x="322.5" y="0.0" width="153" height="188.5"/>
+                                                        <rect key="frame" x="284" y="0.0" width="134" height="188.5"/>
                                                     </imageView>
                                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_luna" translatesAutoresizingMaskIntoConstraints="NO" id="Ao9-3G-MXT" userLabel="Button Luna">
-                                                        <rect key="frame" x="483.5" y="0.0" width="153" height="188.5"/>
+                                                        <rect key="frame" x="426" y="0.0" width="134" height="188.5"/>
                                                     </imageView>
                                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_boosteroid" translatesAutoresizingMaskIntoConstraints="NO" id="Wfg-u9-jgh" userLabel="Button Boosteroid">
-                                                        <rect key="frame" x="644.5" y="0.0" width="153" height="188.5"/>
+                                                        <rect key="frame" x="568" y="0.0" width="134" height="188.5"/>
                                                     </imageView>
                                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_gamepad_tester" id="bFl-9U-Su7">
-                                                        <rect key="frame" x="805.5" y="0.0" width="153.5" height="188.5"/>
+                                                        <rect key="frame" x="710" y="0.0" width="134" height="188.5"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </imageView>
+                                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_tip_jar" id="Lom-Vi-B3U" userLabel="Button Tip Jar">
+                                                        <rect key="frame" x="852" y="0.0" width="134" height="188.5"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     </imageView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9QP-Bm-aQo">
-                                                        <rect key="frame" x="967" y="0.0" width="105" height="188.5"/>
+                                                        <rect key="frame" x="994" y="0.0" width="78" height="188.5"/>
                                                         <subviews>
                                                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_patreon" translatesAutoresizingMaskIntoConstraints="NO" id="9yC-sf-omI" userLabel="Button Patreon">
-                                                                <rect key="frame" x="0.0" y="0.0" width="105" height="89.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="78" height="89.5"/>
                                                             </imageView>
                                                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_discord" translatesAutoresizingMaskIntoConstraints="NO" id="wz2-wP-jxe" userLabel="Button Discord">
-                                                                <rect key="frame" x="0.0" y="99.5" width="105" height="89"/>
+                                                                <rect key="frame" x="0.0" y="99.5" width="78" height="89"/>
                                                             </imageView>
                                                         </subviews>
                                                     </stackView>
@@ -818,6 +822,7 @@
                         <outlet property="buttonLuna" destination="Ao9-3G-MXT" id="E6F-Lp-hKH"/>
                         <outlet property="buttonPatreon" destination="9yC-sf-omI" id="Sf3-eG-gLl"/>
                         <outlet property="buttonStadia" destination="0VM-PV-WdW" id="CxB-kR-0dV"/>
+                        <outlet property="buttonTipJar" destination="Lom-Vi-B3U" id="TNH-NS-lHW"/>
                         <outlet property="controllerHackSwitch" destination="SeT-u4-e4H" id="a17-wb-xDT"/>
                         <outlet property="controllerIdSelector" destination="lpR-6L-9OT" id="CU6-rZ-Ges"/>
                         <outlet property="customJsInjection" destination="Dgf-EK-sHG" id="Di4-Iq-hVh"/>
@@ -840,13 +845,15 @@
                         <outletCollection property="shadowViews" destination="zau-rP-Nr4" collectionClass="NSMutableArray" id="NFd-iP-4Gf"/>
                         <outletCollection property="shadowViews" destination="Ao9-3G-MXT" collectionClass="NSMutableArray" id="nE1-7I-uxA"/>
                         <outletCollection property="shadowViews" destination="bFl-9U-Su7" collectionClass="NSMutableArray" id="IsP-XF-vbr"/>
-                        <outletCollection property="viewsToRemove" destination="Kdq-FP-3hb" collectionClass="NSMutableArray" id="VKP-Y3-dGL"/>
-                        <outletCollection property="viewsToRemove" destination="Ao9-3G-MXT" collectionClass="NSMutableArray" id="KpH-iz-V3R"/>
-                        <outletCollection property="viewsToRemove" destination="Q2P-8c-czw" collectionClass="NSMutableArray" id="BMo-oZ-4T0"/>
-                        <outletCollection property="viewsToRemove" destination="IkE-mv-Z9A" collectionClass="NSMutableArray" id="HTW-iH-EzI"/>
-                        <outletCollection property="viewsToRemove" destination="Teq-Sc-YtB" collectionClass="NSMutableArray" id="e6v-Ub-lvn"/>
-                        <outletCollection property="viewsToRemove" destination="mEQ-r6-Gbx" collectionClass="NSMutableArray" id="5Ju-Kw-UbE"/>
-                        <outletCollection property="viewsToRemove" destination="gYt-Qe-92F" collectionClass="NSMutableArray" id="onO-pn-KnM"/>
+                        <outletCollection property="shadowViews" destination="Lom-Vi-B3U" collectionClass="NSMutableArray" id="0xV-eX-Zpq"/>
+                        <outletCollection property="viewsToRemoveForAppstore" destination="gYt-Qe-92F" collectionClass="NSMutableArray" id="M5d-OM-ifl"/>
+                        <outletCollection property="viewsToRemoveForAppstore" destination="Ao9-3G-MXT" collectionClass="NSMutableArray" id="S8c-mO-tPM"/>
+                        <outletCollection property="viewsToRemoveForAppstore" destination="Q2P-8c-czw" collectionClass="NSMutableArray" id="dpX-5X-dff"/>
+                        <outletCollection property="viewsToRemoveForAppstore" destination="IkE-mv-Z9A" collectionClass="NSMutableArray" id="7A8-eb-g0b"/>
+                        <outletCollection property="viewsToRemoveForAppstore" destination="mEQ-r6-Gbx" collectionClass="NSMutableArray" id="30O-wj-ZAy"/>
+                        <outletCollection property="viewsToRemoveForAppstore" destination="Teq-Sc-YtB" collectionClass="NSMutableArray" id="6hc-g2-TO0"/>
+                        <outletCollection property="viewsToRemoveForNonAppstore" destination="Lom-Vi-B3U" collectionClass="NSMutableArray" id="zLN-Oe-NV3"/>
+                        <outletCollection property="viewsToRemoveForNonAppstore" destination="Ao9-3G-MXT" collectionClass="NSMutableArray" id="ZGU-Sg-hrL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9R8-x7-9FR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -864,6 +871,7 @@
         <image name="button_luna" width="512" height="514"/>
         <image name="button_patreon" width="512" height="256"/>
         <image name="button_stadia" width="512" height="512"/>
+        <image name="button_tip_jar" width="512" height="510"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="trash.fill" catalog="system" width="121" height="128"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
