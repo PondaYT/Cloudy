@@ -6,12 +6,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        // If launched via URL-Scheme, process that info.
+        if let urlContext = connectionOptions.urlContexts.first {
+            let url = urlContext.url
+            if let siteToLaunch = self.processLaunchUrl(url: url) {
+                RootViewController.launchSite = siteToLaunch
+            }
+        }
+    }
+    
+    func scene(_ scene: UIScene,
+                        openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let urlContext = URLContexts.first {
+                
+            // let sendingAppID = urlContext.options.sourceApplication?.debugDescription
+            let url = urlContext.url
+            if let siteToLaunch = self.processLaunchUrl(url: url) {
+                RootViewController.browserWindow?.webView.navigateTo(url: siteToLaunch)
+            }
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -45,3 +63,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+extension UISceneDelegate {
+    // Input: the url-scheme that Cloudy was launched with
+    // Output: the url of the website cloudy should navigate to, if available.
+    func processLaunchUrl(url: URL) -> URL? {
+        // Process the URL.
+        guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
+            let _ = components.path,
+            let params = components.queryItems else {
+                return nil
+        }
+        
+        if let knownService = params.first(where: { $0.name == "service" })?.value, let knownServiceURL = Navigator.Config.serviceToUrl[knownService] {
+            return knownServiceURL
+        } else if let siteToLaunch = params.first(where: { $0.name == "url" })?.value {
+            return URL(string: siteToLaunch)
+        } else {
+            return nil
+        }
+    }
+}
