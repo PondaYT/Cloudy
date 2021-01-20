@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="ipad10_5" orientation="landscape" layout="fullscreen" appearance="dark"/>
+    <device id="ipad10_5" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Image references" minToolsVersion="12.0"/>
@@ -854,6 +854,7 @@
                         <outletCollection property="viewsToRemoveForAppstore" destination="Teq-Sc-YtB" collectionClass="NSMutableArray" id="6hc-g2-TO0"/>
                         <outletCollection property="viewsToRemoveForNonAppstore" destination="Lom-Vi-B3U" collectionClass="NSMutableArray" id="zLN-Oe-NV3"/>
                         <outletCollection property="viewsToRemoveForNonAppstore" destination="Ao9-3G-MXT" collectionClass="NSMutableArray" id="ZGU-Sg-hrL"/>
+                        <outletCollection property="viewsToRemoveForAppstore" destination="9yC-sf-omI" collectionClass="NSMutableArray" id="eTb-Wx-Dau"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9R8-x7-9FR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
