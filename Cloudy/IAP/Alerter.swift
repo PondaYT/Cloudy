@@ -15,7 +15,7 @@ class Alerter {
 
     /// Alert texts
     private let alertInfo:      [AlertType: (title: String, message: String)] = [
-        .tipChoice: ("Wooohaaa! <3", "Thanks for considering supporting the development. Select the size of your tip!"),
+        .tipChoice: ("Wooohaaa! <3", "Thank you for your consideration to support our development. Select the size of your tip!"),
         .cannotMakePayments: ("Too sad", "It seems you are not allowed to make any payments!"),
         .somethingWentWrong: ("Strange", "Something went wrong. Please try again later"),
         .purchaseSuccess: ("You are the best!", "Huge thanks for supporting the development <3")
