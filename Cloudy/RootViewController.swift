@@ -29,7 +29,9 @@ class RootViewController: UIViewController, MenuActionsHandler {
     @IBOutlet var webviewContstraints: [NSLayoutConstraint]!
 
     /// The hacked webView
-    private var  webView:                                     FullScreenWKWebView!
+    var webView:                                     FullScreenWKWebView!
+    static var browserWindow: RootViewController? // global variable for access.
+    static var launchSite: URL? // A site to launch into.
     private let  navigator:                                   Navigator       = Navigator()
 
     /// The menu controller
@@ -98,7 +100,9 @@ class RootViewController: UIViewController, MenuActionsHandler {
         webView.navigationDelegate = self
         webView.allowsBackForwardNavigationGestures = false
         // initial
-        if let lastVisitedUrl = UserDefaults.standard.lastVisitedUrl {
+        if let launchSiteUrl = Self.launchSite {
+            webView.navigateTo(url: launchSiteUrl)
+        } else if let lastVisitedUrl = UserDefaults.standard.lastVisitedUrl {
             webView.navigateTo(url: lastVisitedUrl)
         } else {
             #if NON_APPSTORE
@@ -119,6 +123,9 @@ class RootViewController: UIViewController, MenuActionsHandler {
         addChild(menuViewController)
         view.addSubview(menuViewController.view)
         menuViewController.didMove(toParent: self)
+        
+        // Now that the view-controller is loaded, save it.
+        Self.browserWindow = self
     }
 
     /// View layout already done
