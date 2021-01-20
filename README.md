@@ -20,8 +20,8 @@ A cloud-gaming ready browser for iOS.
 - If you want to go _crazy_, you can specify your custom user agent
 - Ability to reset all cookies and caches
 - For 3rd-party devs: you can launch this app via url-scheme. Examples:
- - To launch to a specific website `"cloudybrowser://site?url=https://stadia.google.com"`
- - To launch to a service (`stadia`, `luna`, and `geforce` are supported): `"cloudybrowser://site?service=geforce"`
+- To launch to a specific website `"cloudybrowser://site?url=https://stadia.google.com"`
+- To launch to a service (`stadia`, `luna`, `geforceNowBeta` and `geforceNow` are supported): `"cloudybrowser://site?service=geforce"`
 
 ## Features in development
 

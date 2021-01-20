@@ -4,32 +4,29 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    private let argumentHelper = LaunchArgumentHandler()
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
-        // If launched via URL-Scheme, process that info.
-        if let urlContext = connectionOptions.urlContexts.first {
-            let url = urlContext.url
-            if let siteToLaunch = self.processLaunchUrl(url: url) {
-                RootViewController.launchSite = siteToLaunch
-            }
+        if let windowScene = (scene as? UIWindowScene) {
+            let window = UIWindow(windowScene: windowScene)
+            window.rootViewController = RootViewController.create(with: argumentHelper.getLaunchUrl(from: connectionOptions))
+            self.window = window
+            self.window?.makeKeyAndVisible()
         }
     }
-    
-    func scene(_ scene: UIScene,
-                        openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        if let urlContext = URLContexts.first {
-                
-            // let sendingAppID = urlContext.options.sourceApplication?.debugDescription
-            let url = urlContext.url
-            if let siteToLaunch = self.processLaunchUrl(url: url) {
-                RootViewController.browserWindow?.webView.navigateTo(url: siteToLaunch)
-            }
+
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let injectedUrl = URLContexts.first?.url,
+              let mappedUrl = argumentHelper.getLaunchUrl(from: injectedUrl),
+              let rootViewController = window?.rootViewController as? RootViewController,
+              let webController = rootViewController.webController else {
+            return
         }
+        webController.navigateTo(address: mappedUrl.absoluteString)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -58,28 +55,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
-    }
-
-
-}
-
-extension UISceneDelegate {
-    // Input: the url-scheme that Cloudy was launched with
-    // Output: the url of the website cloudy should navigate to, if available.
-    func processLaunchUrl(url: URL) -> URL? {
-        // Process the URL.
-        guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
-            let _ = components.path,
-            let params = components.queryItems else {
-                return nil
-        }
-        
-        if let knownService = params.first(where: { $0.name == "service" })?.value, let knownServiceURL = Navigator.Config.serviceToUrl[knownService] {
-            return knownServiceURL
-        } else if let siteToLaunch = params.first(where: { $0.name == "url" })?.value {
-            return URL(string: siteToLaunch)
-        } else {
-            return nil
-        }
     }
 }
