@@ -36,6 +36,19 @@ class Navigator {
         let userAgent: String?
     }
 
+    /// Get the initial navigation
+    var initialWebsite: URL {
+        if let lastVisitedUrl = UserDefaults.standard.lastVisitedUrl {
+            return lastVisitedUrl
+        }
+        #if NON_APPSTORE
+            return Config.Url.googleStadia
+        #else
+            return Config.Url.google
+        #endif
+
+    }
+
     /// Map navigation address
     func getNavigation(for address: String?) -> Navigation {
         // early exit

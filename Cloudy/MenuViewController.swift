@@ -26,6 +26,11 @@ protocol OverlayController {
 /// (after pressed the menu button)
 class MenuViewController: UIViewController {
 
+    /// Factory method
+    static func create() -> MenuViewController {
+        UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+    }
+
     /// View references
     @IBOutlet var shadowViews:                 [UIView]!
     @IBOutlet var viewsToRemoveForAppstore:    [UIView]!
