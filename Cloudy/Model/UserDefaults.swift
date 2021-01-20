@@ -1,6 +1,7 @@
 // Copyright (c) 2020 Nomad5. All rights reserved.
 
 import Foundation
+import GameController
 
 /// Convenience access to persisted user defaults
 @objc extension UserDefaults {
@@ -66,18 +67,6 @@ import Foundation
         }
     }
 
-    /// Read / write the flag if the app should inject the custom controller scripts
-    var          injectControllerScripts: Bool {
-        get {
-            if UserDefaults.standard.object(forKey: Config.injectControllerScripts) == nil {
-                return true
-            }
-            return UserDefaults.standard.bool(forKey: Config.injectControllerScripts)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: Config.injectControllerScripts)
-        }
-    }
     /// Read / write allow inline media enabled flag
     var          allowInlineMedia:        Bool {
         get {
@@ -88,6 +77,29 @@ import Foundation
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Config.allowInlineMedia)
+        }
+    }
+
+    /// Read / write the webView scale
+    var          webViewScale:            Int {
+        get {
+            UserDefaults.standard.integer(forKey: Config.webViewScale)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Config.webViewScale)
+        }
+    }
+
+    /// Read / write the flag if the app should inject the custom controller scripts
+    var          injectControllerScripts: Bool {
+        get {
+            if UserDefaults.standard.object(forKey: Config.injectControllerScripts) == nil {
+                return false
+            }
+            return UserDefaults.standard.bool(forKey: Config.injectControllerScripts)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Config.injectControllerScripts)
         }
     }
 
@@ -137,16 +149,6 @@ import Foundation
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Config.customJsCodeToInject)
-        }
-    }
-
-    /// Read / write the webView scale
-    var          webViewScale:            Int {
-        get {
-            UserDefaults.standard.integer(forKey: Config.webViewScale)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: Config.webViewScale)
         }
     }
 
