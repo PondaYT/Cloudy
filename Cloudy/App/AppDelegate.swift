@@ -18,8 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Start observing in app purchases
         IAPManager.shared.startObserving()
         // request mic permissions TODO disabled for now
-        // AVAudioSession.sharedInstance().requestRecordPermission { _ in }
-        // Override point for customization after application launch.
+//        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
+//        AVCaptureDevice.requestAccess(for: .video) { _ in }
+//        AVCaptureDevice.requestAccess(for: .audio) { _ in }
         return true
     }
 
