@@ -16,7 +16,7 @@ private var shouldPulse: Bool = false
     /// Enum for the specific json export
     public enum JsonType {
         case regular
-        case geforceNow
+        case geforceNowOld
     }
 
     /// Button of the controller
@@ -108,7 +108,7 @@ private var shouldPulse: Bool = false
 
     /// Export json string
     func toJson(for exportType: JsonType) -> String {
-        if exportType == .geforceNow {
+        if exportType == .geforceNowOld {
             buttons[6]?.pulse()
         }
         return jsonString

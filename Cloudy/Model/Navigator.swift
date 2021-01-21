@@ -33,7 +33,8 @@ class Navigator {
 
     /// The navigation that shall be executed
     struct Navigation {
-        let userAgent: String?
+        let userAgent:  String?
+        let bridgeType: CloudyController.JsonType
     }
 
     /// Get the initial navigation
@@ -53,17 +54,15 @@ class Navigator {
     func getNavigation(for address: String?) -> Navigation {
         // early exit
         guard let requestedUrl = address else {
-            return Navigation(userAgent: nil)
+            return Navigation(userAgent: nil, bridgeType: .regular)
         }
-        // no automatic navigation
-        if UserDefaults.standard.useManualUserAgent {
-            return Navigation(userAgent: UserDefaults.standard.manualUserAgent)
-        }
+        // manual user agent override
+        var userAgentOverride: String? = UserDefaults.standard.useManualUserAgent ? UserDefaults.standard.manualUserAgent : nil
         // old regular geforce now
         if requestedUrl.starts(with: Config.Url.geforceNowOld.absoluteString) {
-            return Navigation(userAgent: Config.UserAgent.chromeOS)
+            return Navigation(userAgent: userAgentOverride ?? Config.UserAgent.chromeOS, bridgeType: .geforceNowOld)
         }
-        return Navigation(userAgent: nil)
+        return Navigation(userAgent: userAgentOverride, bridgeType: .regular)
     }
 
     /// Handle popup

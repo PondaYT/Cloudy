@@ -270,6 +270,7 @@ extension RootViewController: WKNavigationDelegate, WKUIDelegate {
         let navigation = navigator.getNavigation(for: navigationAction.request.url?.absoluteString)
         Log.i("navigation -> \(navigationAction.request.url?.absoluteString ?? "nil") -> \(navigation)")
         webView.customUserAgent = navigation.userAgent
+        webViewControllerBridge.exportType = navigation.bridgeType
         decisionHandler(.allow)
     }
 
