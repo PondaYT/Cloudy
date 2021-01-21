@@ -41,10 +41,10 @@
 	<string>We need it for custom controller support</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>We need bluetooth to support your wireless keyboard and mouse</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Microphone access required to enable voice chat</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Microphone access required to enable voice chat (camera not used)</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Microphone access required to enable voice chat</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
