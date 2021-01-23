@@ -27,6 +27,7 @@
 		44A4D8885DB5BE5C73C9FB87 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D3A1BA3A8B2AB96CB81B /* UserDefaults.swift */; };
 		44A4D96805A28BC01E33FF4F /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DB5C7725B073FE1AB0E8 /* IAPManager.swift */; };
 		44A4D9B9C9363AC8D381F05F /* LaunchArgumentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D9AA937FF7595CC480CE /* LaunchArgumentHandler.swift */; };
+		44A4DB5EF1F09B9D531A5704 /* WKUserScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DFB90BD884CB5041E57D /* WKUserScript.swift */; };
 		44A4DB830BC41F131E122F7C /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D999AA39891699C55D00 /* GameController.swift */; };
 		44A4DC86DF1DDD05E6FC802A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D58736385FBD2B75856B /* MenuViewController.swift */; };
 		44A4DCA503A87B314B8CB75A /* ButtonOptionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D9F318B9593A6DD6F951 /* ButtonOptionSet.swift */; };
@@ -80,6 +81,7 @@
 		44A4DEAFE04C43372A474AF7 /* StreamConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamConfiguration.h; sourceTree = "<group>"; };
 		44A4DF345C0AE58872E1CC3A /* TemporarySettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporarySettings.swift; sourceTree = "<group>"; };
 		44A4DF4DEEC15EF8DE2B1C18 /* Cloudy-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cloudy-Bridging-Header.h"; sourceTree = "<group>"; };
+		44A4DFB90BD884CB5041E57D /* WKUserScript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKUserScript.swift; sourceTree = "<group>"; };
 		79B35440DA7901C4949EFDC7 /* Pods-Cloudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.release.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.release.xcconfig"; sourceTree = "<group>"; };
 		8C777E5DB6AA0540BAAEE53E /* Pods-Cloudy.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.appstore.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.appstore.xcconfig"; sourceTree = "<group>"; };
 		B42B0FEC073AD10E0FCA6CF1 /* Pods-Cloudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.debug.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.debug.xcconfig"; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				44A4D80ED7881A56C23C0BBD /* Bundle.swift */,
 				44A4DDFB3BA2FE8AEE10DEA9 /* Collection.swift */,
 				44A4D857B518E3369F31987F /* SKProduct.swift */,
+				44A4DFB90BD884CB5041E57D /* WKUserScript.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -503,6 +506,7 @@
 				44A4D064AE6FE05861A78C1D /* SKProduct.swift in Sources */,
 				44A4D9B9C9363AC8D381F05F /* LaunchArgumentHandler.swift in Sources */,
 				44A4D78B8F260ECEBBB39B4C /* FullScreenWKWebView.swift in Sources */,
+				44A4DB5EF1F09B9D531A5704 /* WKUserScript.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
