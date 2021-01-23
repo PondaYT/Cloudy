@@ -362,7 +362,7 @@
                                                                                 </connections>
                                                                             </switch>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hq9-DG-ekc" userLabel="Label">
-                                                                                <rect key="frame" x="69" y="15" width="309" height="20.5"/>
+                                                                                <rect key="frame" x="69" y="15" width="354.5" height="20.5"/>
                                                                                 <attributedString key="attributedText">
                                                                                     <fragment content="Allow inline media playback ">
                                                                                         <attributes>
@@ -370,7 +370,20 @@
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                         </attributes>
                                                                                     </fragment>
-                                                                                    <fragment content="(requires restart)">
+                                                                                    <fragment content="(">
+                                                                                        <attributes>
+                                                                                            <font key="NSFont" metaFont="cellTitle"/>
+                                                                                            <font key="NSOriginalFont" metaFont="cellTitle"/>
+                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                    <fragment content="will reload current page">
+                                                                                        <attributes>
+                                                                                            <font key="NSFont" metaFont="cellTitle"/>
+                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                    <fragment content=")">
                                                                                         <attributes>
                                                                                             <font key="NSFont" metaFont="cellTitle"/>
                                                                                             <font key="NSOriginalFont" metaFont="cellTitle"/>
@@ -406,7 +419,7 @@
                                                                                 </connections>
                                                                             </switch>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UmU-3H-feq" userLabel="Label">
-                                                                                <rect key="frame" x="69" y="15" width="320" height="20.5"/>
+                                                                                <rect key="frame" x="69" y="15" width="358" height="20.5"/>
                                                                                 <attributedString key="attributedText">
                                                                                     <fragment content="Act as standalone like a PWA ">
                                                                                         <attributes>
@@ -414,7 +427,20 @@
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                         </attributes>
                                                                                     </fragment>
-                                                                                    <fragment content="(requires restart)">
+                                                                                    <fragment content="(">
+                                                                                        <attributes>
+                                                                                            <font key="NSFont" metaFont="cellTitle"/>
+                                                                                            <font key="NSOriginalFont" metaFont="cellTitle"/>
+                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                    <fragment content="will reload current page">
+                                                                                        <attributes>
+                                                                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
+                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                    <fragment content=")">
                                                                                         <attributes>
                                                                                             <font key="NSFont" metaFont="cellTitle"/>
                                                                                             <font key="NSOriginalFont" metaFont="cellTitle"/>
@@ -450,7 +476,7 @@
                                                                                 </connections>
                                                                             </switch>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j60-Tn-7CF" userLabel="Label">
-                                                                                <rect key="frame" x="69" y="15" width="268.5" height="20.5"/>
+                                                                                <rect key="frame" x="69" y="15" width="306.5" height="20.5"/>
                                                                                 <attributedString key="attributedText">
                                                                                     <fragment content="Use custom controller ">
                                                                                         <attributes>
@@ -458,7 +484,20 @@
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                         </attributes>
                                                                                     </fragment>
-                                                                                    <fragment content="(requires restart)">
+                                                                                    <fragment content="(">
+                                                                                        <attributes>
+                                                                                            <font key="NSFont" metaFont="cellTitle"/>
+                                                                                            <font key="NSOriginalFont" metaFont="cellTitle"/>
+                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                    <fragment content="will reload current page">
+                                                                                        <attributes>
+                                                                                            <font key="NSFont" size="12" name="HelveticaNeue"/>
+                                                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                                        </attributes>
+                                                                                    </fragment>
+                                                                                    <fragment content=")">
                                                                                         <attributes>
                                                                                             <font key="NSFont" metaFont="cellTitle"/>
                                                                                             <font key="NSOriginalFont" metaFont="cellTitle"/>
@@ -549,7 +588,7 @@
                                                                                 </connections>
                                                                             </segmentedControl>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="td2-Ny-Ux1" userLabel="Label">
-                                                                                <rect key="frame" x="215" y="15" width="289" height="20.5"/>
+                                                                                <rect key="frame" x="215" y="15" width="334" height="20.5"/>
                                                                                 <attributedString key="attributedText">
                                                                                     <fragment content="Show on screen controller ">
                                                                                         <attributes>
@@ -557,7 +596,7 @@
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                                         </attributes>
                                                                                     </fragment>
-                                                                                    <fragment content="(requires restart)">
+                                                                                    <fragment content="(will reload current page)">
                                                                                         <attributes>
                                                                                             <font key="NSFont" size="12" name="HelveticaNeue"/>
                                                                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -855,6 +894,7 @@
                         <outletCollection property="viewsToRemoveForNonAppstore" destination="Lom-Vi-B3U" collectionClass="NSMutableArray" id="zLN-Oe-NV3"/>
                         <outletCollection property="viewsToRemoveForNonAppstore" destination="Ao9-3G-MXT" collectionClass="NSMutableArray" id="ZGU-Sg-hrL"/>
                         <outletCollection property="viewsToRemoveForAppstore" destination="9yC-sf-omI" collectionClass="NSMutableArray" id="eTb-Wx-Dau"/>
+                        <outletCollection property="viewsToRemoveForNonAppstore" destination="Q2P-8c-czw" collectionClass="NSMutableArray" id="nLd-zi-Yfy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9R8-x7-9FR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -9,6 +9,7 @@ protocol MenuActionsHandler {
     func updateTouchFeedbackType(with value: TouchFeedbackType)
     func injectCustom(code: String)
     func updateScalingFactor(with value: Int)
+    func initializeViews()
 }
 
 /// The main view controller
@@ -72,7 +73,7 @@ class RootViewController: UIViewController, MenuActionsHandler {
     }
 
     /// The configuration used for the wk webView
-    private lazy var webViewConfig: WKWebViewConfiguration = {
+    private func createWebViewConfig() -> WKWebViewConfiguration {
         let preferences = WKPreferences()
         preferences.javaScriptCanOpenWindowsAutomatically = true
         let config = WKWebViewConfiguration()
@@ -90,7 +91,7 @@ class RootViewController: UIViewController, MenuActionsHandler {
             config.userContentController.addUserScript(.controller)
         }
         return config
-    }()
+    }
 
     /// View layout already done
     override func viewDidAppear(_ animated: Bool) {
@@ -99,7 +100,7 @@ class RootViewController: UIViewController, MenuActionsHandler {
     }
 
     /// Initialize all the required views (webview, onscreen controls and menu)
-    private func initializeViews() {
+    func initializeViews() {
         createWebview()
         createOnScreenControls()
         createMenu()
@@ -140,7 +141,7 @@ class RootViewController: UIViewController, MenuActionsHandler {
         webView?.removeFromSuperview()
         webView = nil
         // create new
-        let newWebView = FullScreenWKWebView(frame: view.bounds, configuration: webViewConfig)
+        let newWebView = FullScreenWKWebView(frame: view.bounds, configuration: createWebViewConfig())
         newWebView.translatesAutoresizingMaskIntoConstraints = false
         containerWebView.addSubview(newWebView)
         newWebView.fillParent()
@@ -175,6 +176,7 @@ class RootViewController: UIViewController, MenuActionsHandler {
     /// Create the on screen controls
     private func createOnScreenControls() {
         // remove first
+        streamView?.cleanup()
         streamView?.removeFromSuperview()
         streamView = nil
         // create new
@@ -185,7 +187,10 @@ class RootViewController: UIViewController, MenuActionsHandler {
                                                   controllerDataReceiver: webViewControllerBridge)
         // stream view
         let newStreamView     = StreamView(frame: containerOnScreenController.bounds)
-        newStreamView.setupStreamView(controllerSupport, interactionDelegate: self, config: streamConfig, hapticFeedback: touchFeedbackGenerator)
+        newStreamView.setupStreamView(controllerSupport,
+                                      interactionDelegate: self,
+                                      config: streamConfig,
+                                      hapticFeedback: touchFeedbackGenerator)
         newStreamView.showOnScreenControls()
         containerOnScreenController.addSubview(newStreamView)
         newStreamView.fillParent()
@@ -222,11 +227,12 @@ extension RootViewController: OverlayController {
     func showOverlay(for address: String?) {
         // early exit
         guard let address = address,
-              let url = URL(string: address) else {
+              let url = URL(string: address),
+              let config = webView?.configuration else {
             return
         }
         // forward
-        _ = createModalWebView(for: URLRequest(url: url), configuration: webViewConfig)
+        _ = createModalWebView(for: URLRequest(url: url), configuration: config)
     }
 
     /// Internally we create a modal web view and present it

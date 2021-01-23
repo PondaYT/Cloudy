@@ -39,6 +39,8 @@
 
     - (OnScreenControlsLevel)getCurrentOscState;
 
+    - (void)cleanup;
+
 #if !TARGET_OS_TV
 
     - (void)updateCursorLocation:(CGPoint)location isMouse:(BOOL)isMouse;
