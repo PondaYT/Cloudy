@@ -1,8 +1,14 @@
-// Copyright (c) 2020 Nomad5. All rights reserved.
+// Copyright (c) 2021 Nomad5. All rights reserved.
 
 import Foundation
 import WebKit
-import GameController
+
+/// Extend web kit view to not have any insets, thus full fullscreen
+class FullScreenWKWebView: WKWebView {
+    override var safeAreaInsets: UIEdgeInsets {
+        .zero
+    }
+}
 
 /// Types of navigation
 enum Navigation {
@@ -18,7 +24,7 @@ protocol WebController {
     func clearCache()
 }
 
-extension WKWebView: WebController {
+extension FullScreenWKWebView: WebController {
 
     /// The message used for the handler
     static let messageHandlerName: String = "controller"

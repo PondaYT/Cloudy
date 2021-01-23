@@ -3,13 +3,6 @@
 import UIKit
 import WebKit
 
-/// Extend web kit view to not have any insets, thus full fullscreen
-class FullScreenWKWebView: WKWebView {
-    override var safeAreaInsets: UIEdgeInsets {
-        .zero
-    }
-}
-
 /// Listen to changed settings in menu
 protocol MenuActionsHandler {
     func updateOnScreenController(with value: OnScreenControlsLevel)

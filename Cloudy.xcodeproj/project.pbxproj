@@ -21,10 +21,10 @@
 		44A4D4CD5F66196CB7AD5CB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D965A769BDED09733089 /* AppDelegate.swift */; };
 		44A4D56785DE2ACC82B37F52 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D1A39583BB7F49ABD541 /* Log.swift */; };
 		44A4D667E367AB98368C36BC /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D80ED7881A56C23C0BBD /* Bundle.swift */; };
+		44A4D78B8F260ECEBBB39B4C /* FullScreenWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D600D66AF81438FD332D /* FullScreenWKWebView.swift */; };
 		44A4D7DCB15B8C4799D56BCA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D0057BF82C52A8F76A38 /* String.swift */; };
 		44A4D81D6A823FB908BCE224 /* AVFoundationVibratingFeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D01AC2645E64C1EB9CF9 /* AVFoundationVibratingFeedbackGenerator.swift */; };
 		44A4D8885DB5BE5C73C9FB87 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D3A1BA3A8B2AB96CB81B /* UserDefaults.swift */; };
-		44A4D8940EA58BA835224F08 /* WKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D28CC8536DDE9F1F0250 /* WKWebView.swift */; };
 		44A4D96805A28BC01E33FF4F /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DB5C7725B073FE1AB0E8 /* IAPManager.swift */; };
 		44A4D9B9C9363AC8D381F05F /* LaunchArgumentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D9AA937FF7595CC480CE /* LaunchArgumentHandler.swift */; };
 		44A4DB830BC41F131E122F7C /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D999AA39891699C55D00 /* GameController.swift */; };
@@ -55,12 +55,12 @@
 		44A4D01AC2645E64C1EB9CF9 /* AVFoundationVibratingFeedbackGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVFoundationVibratingFeedbackGenerator.swift; sourceTree = "<group>"; };
 		44A4D1A39583BB7F49ABD541 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		44A4D24369D3C549C04BC958 /* Scripts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scripts.swift; sourceTree = "<group>"; };
-		44A4D28CC8536DDE9F1F0250 /* WKWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebView.swift; sourceTree = "<group>"; };
 		44A4D3A1BA3A8B2AB96CB81B /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		44A4D42B4BF97B06DF2A6BEA /* Limelight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Limelight.m; sourceTree = "<group>"; };
 		44A4D47E3D9518C80384D8F4 /* StreamConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamConfiguration.m; sourceTree = "<group>"; };
 		44A4D58266EE8EF012AEA979 /* Navigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		44A4D58736385FBD2B75856B /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		44A4D600D66AF81438FD332D /* FullScreenWKWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenWKWebView.swift; sourceTree = "<group>"; };
 		44A4D67F8889E455A547CB96 /* WebViewControllerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewControllerBridge.swift; sourceTree = "<group>"; };
 		44A4D7B73DC83248F99BFA6F /* Limelight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Limelight.h; sourceTree = "<group>"; };
 		44A4D7CF8072725D6F7680F7 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
@@ -135,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				44A4D5D992F3D148DDC8A53C /* Feedback */,
+				44A4D600D66AF81438FD332D /* FullScreenWKWebView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -170,7 +171,6 @@
 			children = (
 				44A4D8A659024EF865AEB5D4 /* UIView.swift */,
 				44A4D999AA39891699C55D00 /* GameController.swift */,
-				44A4D28CC8536DDE9F1F0250 /* WKWebView.swift */,
 				44A4D0057BF82C52A8F76A38 /* String.swift */,
 				44A4D80ED7881A56C23C0BBD /* Bundle.swift */,
 				44A4DDFB3BA2FE8AEE10DEA9 /* Collection.swift */,
@@ -475,7 +475,6 @@
 				E723D48425532E08007413D9 /* RelativeTouchHandler.m in Sources */,
 				44A4D0FBB22CC22B053573C3 /* UIView.swift in Sources */,
 				44A4DB830BC41F131E122F7C /* GameController.swift in Sources */,
-				44A4D8940EA58BA835224F08 /* WKWebView.swift in Sources */,
 				E723D48825532E08007413D9 /* KeyboardSupport.m in Sources */,
 				44A4D8885DB5BE5C73C9FB87 /* UserDefaults.swift in Sources */,
 				44A4DD2F10965A88D83F5C0D /* SceneDelegate.swift in Sources */,
@@ -503,6 +502,7 @@
 				44A4D44641C7C146FE8BC523 /* Alerter.swift in Sources */,
 				44A4D064AE6FE05861A78C1D /* SKProduct.swift in Sources */,
 				44A4D9B9C9363AC8D381F05F /* LaunchArgumentHandler.swift in Sources */,
+				44A4D78B8F260ECEBBB39B4C /* FullScreenWKWebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
