@@ -26,7 +26,7 @@ class RootViewController: UIViewController, MenuActionsHandler {
     @IBOutlet var containerWebView:            UIView!
     @IBOutlet var containerOnScreenController: UIView!
 
-    @IBOutlet var webviewContstraints: [NSLayoutConstraint]!
+    @IBOutlet var webviewConstraints: [NSLayoutConstraint]!
 
     /// The hacked webView
     private var webView:         FullScreenWKWebView?
@@ -157,7 +157,7 @@ class RootViewController: UIViewController, MenuActionsHandler {
 
     /// Update the scaling factor
     func updateScalingFactor(with value: Int) {
-        webviewContstraints.forEach { $0.constant = CGFloat(value) }
+        webviewConstraints.forEach { $0.constant = CGFloat(value) }
     }
 
     /// Handle code injection

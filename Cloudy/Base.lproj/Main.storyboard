@@ -64,10 +64,10 @@
                     <connections>
                         <outlet property="containerOnScreenController" destination="ZTM-46-gYw" id="uEZ-Nc-rze"/>
                         <outlet property="containerWebView" destination="7dc-iF-7nX" id="SYe-nB-Np8"/>
-                        <outletCollection property="webviewContstraints" destination="Fpz-R1-vSM" collectionClass="NSMutableArray" id="ql4-13-dcK"/>
-                        <outletCollection property="webviewContstraints" destination="KBi-tX-wqS" collectionClass="NSMutableArray" id="lsZ-Xs-Cug"/>
-                        <outletCollection property="webviewContstraints" destination="ra3-S9-tSd" collectionClass="NSMutableArray" id="qOR-ok-p6Q"/>
-                        <outletCollection property="webviewContstraints" destination="sbV-T9-7qu" collectionClass="NSMutableArray" id="is1-bd-WYO"/>
+                        <outletCollection property="webviewConstraints" destination="Fpz-R1-vSM" collectionClass="NSMutableArray" id="ql4-13-dcK"/>
+                        <outletCollection property="webviewConstraints" destination="KBi-tX-wqS" collectionClass="NSMutableArray" id="lsZ-Xs-Cug"/>
+                        <outletCollection property="webviewConstraints" destination="ra3-S9-tSd" collectionClass="NSMutableArray" id="qOR-ok-p6Q"/>
+                        <outletCollection property="webviewConstraints" destination="sbV-T9-7qu" collectionClass="NSMutableArray" id="is1-bd-WYO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
