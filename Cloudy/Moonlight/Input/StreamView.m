@@ -48,6 +48,7 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
     - (void)setupStreamView:(ControllerSupport *)controllerSupport
             interactionDelegate:(id <UserInteractionDelegate>)interactionDelegate
             config:(StreamConfiguration *)streamConfig
+            hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate
     {
         self->interactionDelegate = interactionDelegate;
         self->streamAspectRatio   = (float) streamConfig.width / (float) streamConfig.height;
@@ -75,7 +76,7 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
             self->touchHandler = [[RelativeTouchHandler alloc] initWithView:self];
         }
 
-        onScreenControls = [[OnScreenControls alloc] initWithView:self controllerSup:controllerSupport];
+        onScreenControls = [[OnScreenControls alloc] initWithView:self controllerSup:controllerSupport hapticFeedback:hapticFeedbackDelegate];
         OnScreenControlsLevel level = NSUserDefaults.standardUserDefaults.onScreenControlsLevel;
         if(settings.absoluteTouchMode)
         {
@@ -755,5 +756,14 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
     }
 
 #endif
+
+    - (void)cleanup
+    {
+        self->touchHandler = nil;
+        [self->onScreenControls cleanup];
+        self->onScreenControls = nil;
+        self->x1mouse          = nil;
+    }
+
 
 @end

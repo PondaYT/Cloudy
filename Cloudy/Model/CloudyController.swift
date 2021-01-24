@@ -7,7 +7,7 @@ import GameController
 private let closeToZero: (Float) -> Bool = { abs($0) < 0.0001 }
 
 /// Hacky stuff for geforce now
-private var pulse: Bool = false
+private var shouldPulse: Bool = false
 
 /// Struct for generating a js readable json that contains the
 /// proper values from the native controller
@@ -16,7 +16,8 @@ private var pulse: Bool = false
     /// Enum for the specific json export
     public enum JsonType {
         case regular
-        case geforceNow
+        @available(*, deprecated, message: "Do not use geforceNowOld. The whole thing will be kicked soon")
+        case geforceNowOld
     }
 
     /// Button of the controller
@@ -32,11 +33,19 @@ private var pulse: Bool = false
         }
 
         func pulse() {
-            value = max(value - 0.002, 0) + 0.002
+            value = max(value - 0.002, 0) + (shouldPulse ? 0.002 : 0)
+            shouldPulse = !shouldPulse
         }
 
         static var untouched: Button {
             Button(pressed: false, touched: false, value: 0)
+        }
+
+        /// Check all values for similarity
+        static func =~(lhs: Button, rhs: Button) -> Bool {
+            lhs.pressed == rhs.pressed &&
+            lhs.touched == rhs.touched &&
+            lhs.value =~ rhs.value
         }
     }
 
@@ -46,7 +55,7 @@ private var pulse: Bool = false
 
     /// Some static ones for proper configuration
     private let connected: Bool   = true
-    private let id:        String = GCExtendedGamepad.id
+    private let id:        String = UserDefaults.standard.controllerId.chromeFormat()
     private let index:     Int    = 0
     private let mapping:   String = "standard"
     private let timestamp: Float  = 0
@@ -100,11 +109,8 @@ private var pulse: Bool = false
 
     /// Export json string
     func toJson(for exportType: JsonType) -> String {
-        if exportType == .geforceNow {
-            pulse = !pulse
-            if pulse {
-                buttons[6]?.pulse()
-            }
+        if exportType == .geforceNowOld {
+            buttons[6]?.pulse()
         }
         return jsonString
     }
@@ -116,6 +122,34 @@ private var pulse: Bool = false
             return "{}"
         }
         return string
+    }
+
+    /// Check all values for similarity
+    static func =~(lhs: CloudyController, rhs: CloudyController) -> Bool {
+        for index in 0..<lhs.axes.count {
+            guard let lhsAxis = lhs.axes[safe: index],
+                  let rhsAxis = rhs.axes[safe: index],
+                  lhsAxis =~ rhsAxis else {
+                return false
+            }
+        }
+        for index in 0..<lhs.buttons.count {
+            guard let lhsButton = lhs.buttons[safe: index],
+                  let lhsButtonNonNil = lhsButton,
+                  let rhsButton = rhs.buttons[safe: index],
+                  let rhsButtonNonNil = rhsButton,
+                  lhsButtonNonNil =~ rhsButtonNonNil else {
+                return false
+            }
+        }
+        if lhs.timestamp =~ rhs.timestamp &&
+           lhs.id == rhs.id &&
+           lhs.index == rhs.index &&
+           lhs.connected == rhs.connected &&
+           lhs.mapping == rhs.mapping {
+            return true
+        }
+        return false
     }
 
 }

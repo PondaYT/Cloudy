@@ -1,15 +1,26 @@
 // Copyright (c) 2020 Nomad5. All rights reserved.
 
 import UIKit
-import Firebase
+import AVFoundation
+
+#if NON_APPSTORE
+    import Firebase
+#endif
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Initialize firebase
-        FirebaseApp.configure()
-        // Override point for customization after application launch.
+        #if NON_APPSTORE
+            FirebaseApp.configure()
+        #endif
+        // Start observing in app purchases
+        IAPManager.shared.startObserving()
+        // request mic permissions TODO disabled for now
+//        AVAudioSession.sharedInstance().requestRecordPermission { _ in }
+//        AVCaptureDevice.requestAccess(for: .video) { _ in }
+//        AVCaptureDevice.requestAccess(for: .audio) { _ in }
         return true
     }
 
@@ -27,6 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    func applicationWillTerminate(_ application: UIApplication) {
+        IAPManager.shared.stopObserving()
+    }
 }
 

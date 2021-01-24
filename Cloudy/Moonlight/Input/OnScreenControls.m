@@ -13,6 +13,13 @@
 #include "Limelight.h"
 #import "Log.h"
 
+#define CLAMP(VAL) MAX(-1.0, MIN(1.0, VAL))
+#define NO_ANIM(VAL) \
+        [CATransaction begin]; \
+        [CATransaction setValue:(id) kCFBooleanTrue forKey:kCATransactionDisableActions]; \
+        VAL; \
+        [CATransaction commit]; \
+
 #define UPDATE_BUTTON(x, y) (buttonFlags = \
 (y) ? (buttonFlags | (x)) : (buttonFlags & ~(x)))
 
@@ -45,7 +52,9 @@
         UITouch *_yTouch;
         UITouch *_dpadTouch;
         UITouch *_lsTouch;
+        CGPoint _lsTouchStart;
         UITouch *_rsTouch;
+        CGPoint _rsTouchStart;
         UITouch *_startTouch;
         UITouch *_selectTouch;
         UITouch *_r1Touch;
@@ -70,6 +79,8 @@
         ControllerSupport *_controllerSupport;
         Controller        *_controller;
         NSMutableArray    *_deadTouches;
+
+        id <TouchFeedbackGenerator> hapticFeedback;
     }
 
     static const float EDGE_WIDTH = .05;
@@ -113,13 +124,16 @@
     static float L3_X;
     static float L3_Y;
 
-    - (id)initWithView:(UIView *)view controllerSup:(ControllerSupport *)controllerSupport
+    - (id)initWithView:(UIView *)view
+          controllerSup:(ControllerSupport *)controllerSupport
+          hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate
     {
         self               = [self init];
         _view              = view;
         _controllerSupport = controllerSupport;
         _controller        = [controllerSupport getOscController];
         _deadTouches       = [[NSMutableArray alloc] init];
+        hapticFeedback     = hapticFeedbackDelegate;
 
         _iPad        = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad);
         _controlArea = CGRectMake(0, 0, _view.frame.size.width, _view.frame.size.height);
@@ -157,6 +171,13 @@
         _rightStick           = [CALayer layer];
 
         return self;
+    }
+
+    - (void)cleanup
+    {
+        [_controllerSupport cleanup];
+        _controllerSupport = nil;
+        _controller        = nil;
     }
 
     - (void)show
@@ -577,93 +598,66 @@
 
     - (BOOL)handleTouchMovedEvent:touches
     {
-        BOOL  updated     = false;
-        BOOL  buttonTouch = false;
-        float rsMaxX      = RS_CENTER_X + STICK_OUTER_SIZE / 2;
-        float rsMaxY      = RS_CENTER_Y + STICK_OUTER_SIZE / 2;
-        float rsMinX      = RS_CENTER_X - STICK_OUTER_SIZE / 2;
-        float rsMinY      = RS_CENTER_Y - STICK_OUTER_SIZE / 2;
-        float lsMaxX      = LS_CENTER_X + STICK_OUTER_SIZE / 2;
-        float lsMaxY      = LS_CENTER_Y + STICK_OUTER_SIZE / 2;
-        float lsMinX      = LS_CENTER_X - STICK_OUTER_SIZE / 2;
-        float lsMinY      = LS_CENTER_Y - STICK_OUTER_SIZE / 2;
+        BOOL updated     = false;
+        BOOL buttonTouch = false;
+
+        CGFloat HALF_STICK_INNER_SIZE = STICK_INNER_SIZE / 2;
+        CGFloat HALF_STICK_OUTER_SIZE = STICK_OUTER_SIZE / 2;
 
         for(UITouch *touch in touches)
         {
             CGPoint touchLocation = [touch locationInView:_view];
-            float   xLoc          = touchLocation.x;
-            float   yLoc          = touchLocation.y;
+            CGFloat xLoc          = touchLocation.x;
+            CGFloat yLoc          = touchLocation.y;
             if(touch == _lsTouch)
             {
-                if(xLoc > lsMaxX)
+                CGFloat deltaX = xLoc - _lsTouchStart.x;
+                CGFloat deltaY = yLoc - _lsTouchStart.y;
+
+                CGFloat valueX = CLAMP(deltaX / HALF_STICK_OUTER_SIZE);
+                CGFloat valueY = CLAMP(deltaY / HALF_STICK_OUTER_SIZE);
+
+                NO_ANIM(_leftStick.frame = CGRectMake(LS_CENTER_X + valueX * HALF_STICK_OUTER_SIZE - HALF_STICK_INNER_SIZE,
+                                                      LS_CENTER_Y + valueY * HALF_STICK_OUTER_SIZE - HALF_STICK_INNER_SIZE,
+                                                      STICK_INNER_SIZE,
+                                                      STICK_INNER_SIZE));
+
+                if(fabs(valueX) < STICK_DEAD_ZONE)
                 {
-                    xLoc = lsMaxX;
+                    valueX = 0;
                 }
-                if(xLoc < lsMinX)
+                if(fabs(valueY) < STICK_DEAD_ZONE)
                 {
-                    xLoc = lsMinX;
-                }
-                if(yLoc > lsMaxY)
-                {
-                    yLoc = lsMaxY;
-                }
-                if(yLoc < lsMinY)
-                {
-                    yLoc = lsMinY;
+                    valueY = 0;
                 }
 
-                _leftStick.frame = CGRectMake(xLoc - STICK_INNER_SIZE / 2, yLoc - STICK_INNER_SIZE / 2, STICK_INNER_SIZE, STICK_INNER_SIZE);
-
-                float xStickVal = (xLoc - LS_CENTER_X) / (lsMaxX - LS_CENTER_X);
-                float yStickVal = (yLoc - LS_CENTER_Y) / (lsMaxY - LS_CENTER_Y);
-
-                if(fabsf(xStickVal) < STICK_DEAD_ZONE)
-                {
-                    xStickVal = 0;
-                }
-                if(fabsf(yStickVal) < STICK_DEAD_ZONE)
-                {
-                    yStickVal = 0;
-                }
-
-                [_controllerSupport updateLeftStick:_controller x:0x7FFE * xStickVal y:0x7FFE * -yStickVal];
+                [_controllerSupport updateLeftStick:_controller x:(short) (0x7FFF * valueX) y:(short) (0x7FFF * -valueY)];
 
                 updated = true;
             }
             else if(touch == _rsTouch)
             {
-                if(xLoc > rsMaxX)
+                CGFloat deltaX = xLoc - _rsTouchStart.x;
+                CGFloat deltaY = yLoc - _rsTouchStart.y;
+
+                CGFloat valueX = CLAMP(deltaX / HALF_STICK_OUTER_SIZE);
+                CGFloat valueY = CLAMP(deltaY / HALF_STICK_OUTER_SIZE);
+
+                NO_ANIM(_rightStick.frame = CGRectMake(RS_CENTER_X + valueX * HALF_STICK_OUTER_SIZE - HALF_STICK_INNER_SIZE,
+                                                       RS_CENTER_Y + valueY * HALF_STICK_OUTER_SIZE - HALF_STICK_INNER_SIZE,
+                                                       STICK_INNER_SIZE,
+                                                       STICK_INNER_SIZE));
+
+                if(fabs(valueX) < STICK_DEAD_ZONE)
                 {
-                    xLoc = rsMaxX;
+                    valueX = 0;
                 }
-                if(xLoc < rsMinX)
+                if(fabs(valueY) < STICK_DEAD_ZONE)
                 {
-                    xLoc = rsMinX;
-                }
-                if(yLoc > rsMaxY)
-                {
-                    yLoc = rsMaxY;
-                }
-                if(yLoc < rsMinY)
-                {
-                    yLoc = rsMinY;
+                    valueY = 0;
                 }
 
-                _rightStick.frame = CGRectMake(xLoc - STICK_INNER_SIZE / 2, yLoc - STICK_INNER_SIZE / 2, STICK_INNER_SIZE, STICK_INNER_SIZE);
-
-                float xStickVal = (xLoc - RS_CENTER_X) / (rsMaxX - RS_CENTER_X);
-                float yStickVal = (yLoc - RS_CENTER_Y) / (rsMaxY - RS_CENTER_Y);
-
-                if(fabsf(xStickVal) < STICK_DEAD_ZONE)
-                {
-                    xStickVal = 0;
-                }
-                if(fabsf(yStickVal) < STICK_DEAD_ZONE)
-                {
-                    yStickVal = 0;
-                }
-
-                [_controllerSupport updateRightStick:_controller x:0x7FFE * xStickVal y:0x7FFE * -yStickVal];
+                [_controllerSupport updateRightStick:_controller x:(short) (0x7FFF * valueX) y:(short) (0x7FFF * -valueY)];
 
                 updated = true;
             }
@@ -880,7 +874,7 @@
                 _r3Touch = touch;
                 updated  = true;
             }
-            else if([_leftStick.presentationLayer hitTest:touchLocation])
+            else if(touchLocation.x <= _view.bounds.size.width / 2.0 && touchLocation.y > 50)
             {
                 if(l3TouchStart != nil)
                 {
@@ -893,10 +887,11 @@
                         updated = true;
                     }
                 }
-                _lsTouch   = touch;
-                stickTouch = true;
+                _lsTouch      = touch;
+                _lsTouchStart = touchLocation;
+                stickTouch    = true;
             }
-            else if([_rightStick.presentationLayer hitTest:touchLocation])
+            else if(touchLocation.x > _view.bounds.size.width / 2.0 && touchLocation.y > 50)
             {
                 if(r3TouchStart != nil)
                 {
@@ -909,8 +904,9 @@
                         updated = true;
                     }
                 }
-                _rsTouch   = touch;
-                stickTouch = true;
+                _rsTouch      = touch;
+                _rsTouchStart = touchLocation;
+                stickTouch    = true;
             }
             if(!updated && !stickTouch && [self isInDeadZone:touch])
             {
@@ -920,6 +916,7 @@
         }
         if(updated)
         {
+            [hapticFeedback generateFeedback];
             [_controllerSupport updateFinished:_controller];
         }
         return updated || stickTouch;

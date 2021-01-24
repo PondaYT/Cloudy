@@ -1,6 +1,6 @@
 # Cloudy [![Build Status](https://app.bitrise.io/app/49fce2359d6d6a84/status.svg?token=TBrG_oLSXY9A8UfySh1Y9w&branch=develop)](https://app.bitrise.io/app/49fce2359d6d6a84)
 
-[![Cloudy Server](https://img.shields.io/discord/591914197219016707.svg?label=Discord&logo=Discord&colorB=7289da&style=for-the-badge)](https://discord.gg/9sgTxFx)
+[![Cloudy Server](https://img.shields.io/discord/770202968758419467.svg?label=Discord&logo=Discord&colorB=7289da&style=for-the-badge)](https://discord.gg/9sgTxFx)
 
 A cloud-gaming ready browser for iOS.
 
@@ -19,6 +19,9 @@ A cloud-gaming ready browser for iOS.
   - `boost` -> launch Boosteroid
 - If you want to go _crazy_, you can specify your custom user agent
 - Ability to reset all cookies and caches
+- For 3rd-party devs: you can launch this app via url-scheme. Examples:
+- To launch to a specific website `"cloudybrowser://site?url=https://stadia.google.com"`
+- To launch to a service (`stadia`, `luna`, `geforceNowBeta` and `geforceNow` are supported): `"cloudybrowser://site?service=geforce"`
 
 ## Features in development
 
@@ -26,6 +29,12 @@ A cloud-gaming ready browser for iOS.
 - Touch controls to imitate the mouse
 - Keyboard input and control in games
 - Virtual controller input
+
+## Further development planned
+
+- Proper dependency injection
+- Unit test!
+- Better abstraction of modules
 
 ## Trello development board
 
@@ -36,7 +45,7 @@ Feel free to discuss features, bugs and other improvement requests on the public
 
  Patreon             |  Paypal
 :-------------------------:|:-------------------------:
-[![patreon](Media/becomePatreon.png)](https://www.patreon.com/cloudyApp)  |  [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://paypal.me/pools/c/8tKK9M8XUi)
+[![patreon](Media/becomePatreon.png)](https://www.patreon.com/cloudyApp)  |  [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://paypal.me/pools/c/8tPw2veZIm)
 
 # Ways to get the Cloudy App on your iDevice
 

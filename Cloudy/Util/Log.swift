@@ -3,6 +3,10 @@
 import Foundation
 import os.log
 
+#if NON_APPSTORE
+    import FirebaseCrashlytics
+#endif
+
 /// Class for logging
 public class Log: NSObject {
 
@@ -34,6 +38,10 @@ public class Log: NSObject {
         var prefix = "\(Thread.isMainThread ? "+" : "-")\(prefix)| \(file):\(line)"
         #if DEBUG
             prefix = prefix.padding(toLength: 125, withPad: " ", startingAt: 0)
+        #endif
+
+        #if NON_APPSTORE
+            Crashlytics.crashlytics().log("\(prefix): \(message)")
         #endif
         os_log("%@: %@", type: type, prefix, message)
     }

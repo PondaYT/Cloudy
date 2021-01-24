@@ -30,13 +30,16 @@
 
     - (void)setupStreamView:(ControllerSupport *)controllerSupport
             interactionDelegate:(id <UserInteractionDelegate>)interactionDelegate
-            config:(StreamConfiguration *)streamConfig;
+            config:(StreamConfiguration *)streamConfig
+            hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate;
 
     - (void)showOnScreenControls;
 
     - (void)updateOnScreenControls;
 
     - (OnScreenControlsLevel)getCurrentOscState;
+
+    - (void)cleanup;
 
 #if !TARGET_OS_TV
 

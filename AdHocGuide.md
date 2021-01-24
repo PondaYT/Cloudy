@@ -19,7 +19,7 @@ Please follow this guide to register your device for [ad-hoc installation](https
 ![](Media/adhoc7.PNG)
 8. Now Safari will open up automatically and go to the link you initially enterd. (If safari does not open up automatically, please check that you have safari configured as default browser. You can set it back to your preferred browser once the registration is complete)
 This time you will see the following screen. Please provide the `UUID` to me. You can do this either directly to me in the [discord server](https://discord.gg/9sgTxFx) to `@mlostek` or message me via [patreon.com](https://www.patreon.com/cloudyApp) website.
-![](Media/adhoc8.png)
+![](Media/adhoc8.PNG)
 
 ## Give us a couple of hours to prepare your build
 

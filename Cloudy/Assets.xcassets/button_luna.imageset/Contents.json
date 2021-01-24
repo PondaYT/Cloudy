@@ -1,0 +1,23 @@
+{
+  "images": [
+    {
+      "filename": "luna.png",
+      "idiom": "universal",
+      "scale": "1x"
+    },
+    {
+      "filename": "luna@2x.png",
+      "idiom": "universal",
+      "scale": "2x"
+    },
+    {
+      "filename": "luna@3x.png",
+      "idiom": "universal",
+      "scale": "3x"
+    }
+  ],
+  "info": {
+    "author": "xcode",
+    "version": 1
+  }
+}

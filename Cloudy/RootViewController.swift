@@ -3,107 +3,107 @@
 import UIKit
 import WebKit
 
-class FullScreenWKWebView: WKWebView {
-    override var safeAreaInsets: UIEdgeInsets {
-        .zero
-    }
-}
-
-protocol OnScreenControllerUpdater {
+/// Listen to changed settings in menu
+protocol MenuActionsHandler {
     func updateOnScreenController(with value: OnScreenControlsLevel)
+    func updateTouchFeedbackType(with value: TouchFeedbackType)
+    func injectCustom(code: String)
+    func updateScalingFactor(with value: Int)
+    func initializeViews()
 }
 
-class RootViewController: UIViewController, OnScreenControllerUpdater {
+/// The main view controller
+/// TODO way too big, refactor asap
+class RootViewController: UIViewController, MenuActionsHandler {
+
+    /// Factory method
+    static func create(with launchUrl: URL?) -> RootViewController {
+        let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RootViewController") as! RootViewController
+        newViewController.injectedWebsite = launchUrl
+        return newViewController
+    }
 
     /// Containers
     @IBOutlet var containerWebView:            UIView!
     @IBOutlet var containerOnScreenController: UIView!
 
+    @IBOutlet var webviewConstraints: [NSLayoutConstraint]!
+
     /// The hacked webView
-    private var webView:   FullScreenWKWebView!
-    private let navigator: Navigator       = Navigator()
+    private var webView:         FullScreenWKWebView?
+
+    /// Optional launch url
+    private var injectedWebsite: URL?
+
+    /// The model to handle url navigation
+    private let navigator:       Navigator       = Navigator()
 
     /// The menu controller
-    private var menu:      MenuController? = nil
+    private var menu:            MenuController? = nil
 
     /// The bridge between controller and web view
-    private let webViewControllerBridge    = WebViewControllerBridge()
+    private let webViewControllerBridge          = WebViewControllerBridge()
 
-    private var  streamView:                     StreamView?
+    /// The stream view that holds the on screen controls
+    private var streamView:      StreamView?
+
+    /// Expose the web controller for navigation
+    var webController: WebController? {
+        webView
+    }
+
+    /// Touch feedback generator
+    private lazy var touchFeedbackGenerator: TouchFeedbackGenerator = {
+        AVFoundationVibratingFeedbackGenerator()
+    }()
 
     /// By default hide the status bar
-    override var prefersStatusBarHidden:         Bool {
+    override var prefersStatusBarHidden:                      Bool {
         true
     }
 
     /// Hide bottom bar on x devices
-    override var prefersHomeIndicatorAutoHidden: Bool {
+    override var prefersHomeIndicatorAutoHidden:              Bool {
         true
     }
 
+    /// Defer edge swiping animations
+    override var preferredScreenEdgesDeferringSystemGestures: UIRectEdge {
+        [.all]
+    }
+
     /// The configuration used for the wk webView
-    private lazy var webViewConfig: WKWebViewConfiguration = {
+    private func createWebViewConfig() -> WKWebViewConfiguration {
         let preferences = WKPreferences()
         preferences.javaScriptCanOpenWindowsAutomatically = true
         let config = WKWebViewConfiguration()
+        config.preferences = preferences
         config.allowsInlineMediaPlayback = UserDefaults.standard.allowInlineMedia
         config.allowsAirPlayForMediaPlayback = false
         config.allowsPictureInPictureMediaPlayback = false
         config.mediaTypesRequiringUserActionForPlayback = []
-        config.applicationNameForUserAgent = "Version/13.0.1 Safari/605.1.15"
-        config.userContentController.addScriptMessageHandler(webViewControllerBridge, contentWorld: WKContentWorld.page, name: "controller")
-        config.preferences = preferences
-        return config
-    }()
-
-    /// View will be shown shortly
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // configure webView
-        webView = FullScreenWKWebView(frame: view.bounds, configuration: webViewConfig)
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        containerWebView.addSubview(webView)
-        webView.fillParent()
-        webView.uiDelegate = self
-        webView.navigationDelegate = self
-        webView.allowsBackForwardNavigationGestures = false
-        // initial
-        if let lastVisitedUrl = UserDefaults.standard.lastVisitedUrl {
-            webView.navigateTo(url: lastVisitedUrl)
-        } else {
-            webView.navigateTo(url: Navigator.Config.Url.googleStadia)
+        config.applicationNameForUserAgent = "Version/14.0.2 Safari/605.1.15"
+        if UserDefaults.standard.actAsStandaloneApp {
+            config.userContentController.addUserScript(.standalone)
         }
-        // menu view controller
-        let menuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
-        menu = menuViewController
-        menuViewController.view.alpha = 0
-        menuViewController.webController = webView
-        menuViewController.overlayController = self
-        menuViewController.onScreenControllerUpdater = self
-        menuViewController.view.frame = view.bounds
-        menuViewController.willMove(toParent: self)
-        addChild(menuViewController)
-        view.addSubview(menuViewController.view)
-        menuViewController.didMove(toParent: self)
+        config.userContentController.addScriptMessageHandler(webViewControllerBridge, contentWorld: WKContentWorld.page, name: "controller")
+        if UserDefaults.standard.injectControllerScripts {
+            config.userContentController.addUserScript(.controller)
+        }
+        return config
     }
 
     /// View layout already done
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // stream config
-        let streamConfig      = StreamConfiguration()
-        // Controller support
-        let controllerSupport = ControllerSupport(config: streamConfig,
-                                                  presenceDelegate: self,
-                                                  controllerDataReceiver: webViewControllerBridge)
-        // stream view
-        let streamView        = StreamView(frame: containerOnScreenController.bounds)
-        streamView.setupStreamView(controllerSupport, interactionDelegate: self, config: streamConfig)
-        streamView.showOnScreenControls()
-        containerOnScreenController.addSubview(streamView)
-        streamView.fillParent()
-        self.streamView = streamView
-        updateOnScreenController(with: UserDefaults.standard.onScreenControlsLevel)
+        initializeViews()
+    }
+
+    /// Initialize all the required views (webview, onscreen controls and menu)
+    func initializeViews() {
+        createWebview()
+        createOnScreenControls()
+        createMenu()
     }
 
     /// Update visibility of onscreen controller
@@ -113,19 +113,104 @@ class RootViewController: UIViewController, OnScreenControllerUpdater {
         streamView?.updateOnScreenControls()
     }
 
+    /// Update touch feedback change
+    func updateTouchFeedbackType(with value: TouchFeedbackType) {
+        touchFeedbackGenerator.setFeedbackType(value)
+    }
+
+    /// Update the scaling factor
+    func updateScalingFactor(with value: Int) {
+        webviewConstraints.forEach { $0.constant = CGFloat(value) }
+    }
+
+    /// Handle code injection
+    func injectCustom(code: String) {
+        webView?.inject(scripts: [code])
+    }
+
     /// Tapped on the menu item
     @IBAction func onMenuButtonPressed(_ sender: Any) {
         menu?.show()
+    }
+
+    /// Create the web view
+    private func createWebview() {
+        // cleanup first
+        webView?.navigationDelegate = nil
+        webView?.uiDelegate = nil
+        webView?.removeFromSuperview()
+        webView = nil
+        // create new
+        let newWebView = FullScreenWKWebView(frame: view.bounds, configuration: createWebViewConfig())
+        newWebView.translatesAutoresizingMaskIntoConstraints = false
+        containerWebView.addSubview(newWebView)
+        newWebView.fillParent()
+        newWebView.uiDelegate = self
+        newWebView.navigationDelegate = self
+        newWebView.allowsBackForwardNavigationGestures = false
+        newWebView.navigateTo(url: injectedWebsite ?? navigator.initialWebsite)
+        webView = newWebView
+    }
+
+    /// Create the menu view controller
+    private func createMenu() {
+        // already existing?
+        if let menuViewController = menu as? MenuViewController {
+            view.bringSubviewToFront(menuViewController.view)
+            return
+        }
+        // create new
+        let menuViewController = MenuViewController.create()
+        menu = menuViewController
+        menuViewController.view.alpha = 0
+        menuViewController.webController = webView
+        menuViewController.overlayController = self
+        menuViewController.menuActionsHandler = self
+        menuViewController.view.frame = view.bounds
+        menuViewController.willMove(toParent: self)
+        addChild(menuViewController)
+        view.addSubview(menuViewController.view)
+        menuViewController.didMove(toParent: self)
+    }
+
+    /// Create the on screen controls
+    private func createOnScreenControls() {
+        // remove first
+        streamView?.cleanup()
+        streamView?.removeFromSuperview()
+        streamView = nil
+        // create new
+        let streamConfig      = StreamConfiguration()
+        // Controller support
+        let controllerSupport = ControllerSupport(config: streamConfig,
+                                                  presenceDelegate: self,
+                                                  controllerDataReceiver: webViewControllerBridge)
+        // stream view
+        let newStreamView     = StreamView(frame: containerOnScreenController.bounds)
+        newStreamView.setupStreamView(controllerSupport,
+                                      interactionDelegate: self,
+                                      config: streamConfig,
+                                      hapticFeedback: touchFeedbackGenerator)
+        newStreamView.showOnScreenControls()
+        containerOnScreenController.addSubview(newStreamView)
+        newStreamView.fillParent()
+        streamView = newStreamView
+        updateOnScreenController(with: UserDefaults.standard.onScreenControlsLevel)
+        updateScalingFactor(with: UserDefaults.standard.webViewScale)
     }
 }
 
 extension RootViewController: UserInteractionDelegate {
     open func userInteractionBegan() {
-        Log.d("userInteractionBegan")
+        UIView.animate(withDuration: 0.4) { [weak self] in
+            self?.containerOnScreenController.alpha = 1.0
+        }
     }
 
     open func userInteractionEnded() {
-        Log.d("userInteractionEnded")
+        UIView.animate(withDuration: 0.4) { [weak self] in
+            self?.containerOnScreenController.alpha = 0.2
+        }
     }
 }
 
@@ -146,11 +231,12 @@ extension RootViewController: OverlayController {
     func showOverlay(for address: String?) {
         // early exit
         guard let address = address,
-              let url = URL(string: address) else {
+              let url = URL(string: address),
+              let config = webView?.configuration else {
             return
         }
         // forward
-        _ = createModalWebView(for: URLRequest(url: url), configuration: webViewConfig)
+        _ = createModalWebView(for: URLRequest(url: url), configuration: config)
     }
 
     /// Internally we create a modal web view and present it
@@ -183,18 +269,12 @@ extension RootViewController: WKNavigationDelegate, WKUIDelegate {
 
     /// When a page finished loading, inject the controller override script
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        // inject the script
-        webView.injectControllerScript()
-        // update address
+        // update url
         menu?.updateAddressBar(with: AddressBarInfo(url: webView.url?.absoluteString,
                                                     canGoBack: webView.canGoBack,
                                                     canGoForward: webView.canGoForward))
         // save last visited url
         UserDefaults.standard.lastVisitedUrl = webView.url
-        // set user agent to iphone
-        // DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
-        //     webView.customUserAgent = Navigator.Config.UserAgent.iPhone
-        // }
     }
 
     /// Handle popups
@@ -202,6 +282,7 @@ extension RootViewController: WKNavigationDelegate, WKUIDelegate {
         if navigationAction.targetFrame == nil {
             if navigator.shouldOpenPopup(for: navigationAction.request.url?.absoluteString) {
                 let modalWebView = createModalWebView(for: navigationAction.request, configuration: configuration)
+                modalWebView?.customUserAgent = webView.customUserAgent
                 return modalWebView
             } else {
                 webView.load(navigationAction.request)
@@ -214,14 +295,9 @@ extension RootViewController: WKNavigationDelegate, WKUIDelegate {
     /// After successfully logging in, forward user to stadia
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         let navigation = navigator.getNavigation(for: navigationAction.request.url?.absoluteString)
-        print("navigation -> \(navigationAction.request.url?.absoluteString ?? "nil") -> \(navigation)")
-        webViewControllerBridge.exportType = navigation.bridgeType
+        Log.i("navigation -> \(navigationAction.request.url?.absoluteString ?? "nil") -> \(navigation)")
         webView.customUserAgent = navigation.userAgent
-        if let forwardUrl = navigation.forwardToUrl {
-            decisionHandler(.cancel)
-            webView.navigateTo(url: forwardUrl)
-            return
-        }
+        webViewControllerBridge.exportType = navigation.bridgeType
         decisionHandler(.allow)
     }
 

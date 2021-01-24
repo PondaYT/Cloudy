@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class ControllerSupport;
+@protocol TouchFeedbackGenerator;
 
 @interface OnScreenControls : NSObject
 
@@ -26,7 +27,9 @@
         OnScreenControlsLevelAutoGCExtendedGamepadWithStickButtons
     };
 
-    - (id)initWithView:(UIView *)view controllerSup:(ControllerSupport *)controllerSupport;
+    - (id)initWithView:(UIView *)view
+          controllerSup:(ControllerSupport *)controllerSupport
+          hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate;
 
     - (BOOL)handleTouchDownEvent:(NSSet *)touches;
 
@@ -40,4 +43,5 @@
 
     - (void)show;
 
+    - (void)cleanup;
 @end
