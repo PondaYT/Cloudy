@@ -16,6 +16,7 @@ private var shouldPulse: Bool = false
     /// Enum for the specific json export
     public enum JsonType {
         case regular
+        @available(*, deprecated, message: "Do not use geforceNowOld. The whole thing will be kicked soon")
         case geforceNowOld
     }
 

@@ -43,4 +43,5 @@
 
     - (void)show;
 
+    - (void)cleanup;
 @end

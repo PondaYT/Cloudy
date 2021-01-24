@@ -57,10 +57,10 @@ class Navigator {
             return Navigation(userAgent: nil, bridgeType: .regular)
         }
         // manual user agent override
-        var userAgentOverride: String? = UserDefaults.standard.useManualUserAgent ? UserDefaults.standard.manualUserAgent : nil
+        let userAgentOverride: String? = UserDefaults.standard.useManualUserAgent ? UserDefaults.standard.manualUserAgent : nil
         // old regular geforce now
         if requestedUrl.starts(with: Config.Url.geforceNowOld.absoluteString) {
-            return Navigation(userAgent: userAgentOverride ?? Config.UserAgent.chromeOS, bridgeType: .geforceNowOld)
+            return Navigation(userAgent: userAgentOverride ?? Config.UserAgent.chromeOS, bridgeType: .regular)
         }
         return Navigation(userAgent: userAgentOverride, bridgeType: .regular)
     }

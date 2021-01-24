@@ -173,6 +173,13 @@
         return self;
     }
 
+    - (void)cleanup
+    {
+        [_controllerSupport cleanup];
+        _controllerSupport = nil;
+        _controller        = nil;
+    }
+
     - (void)show
     {
         _visible = YES;

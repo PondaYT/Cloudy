@@ -37,6 +37,14 @@ extension GCExtendedGamepad {
 
     /// Check all values for similarity
     static func =~(lhs: GCExtendedGamepad, rhs: GCExtendedGamepad) -> Bool {
+        // if different nullable values,
+        guard (lhs.buttonOptions == nil) == (rhs.buttonOptions == nil),
+              (lhs.buttonHome == nil) == (rhs.buttonHome == nil),
+              (lhs.leftThumbstickButton == nil) == (rhs.leftThumbstickButton == nil),
+              (lhs.rightThumbstickButton == nil) == (rhs.rightThumbstickButton == nil) else {
+            return false
+        }
+        // compare actual values
         guard let lhsButtonOptions = lhs.buttonOptions,
               let lhsButtonHome = lhs.buttonHome,
               let lhsLeftThumbstickButton = lhs.leftThumbstickButton,

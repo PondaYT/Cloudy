@@ -224,16 +224,19 @@ extension MenuViewController {
     /// Allow inline media changed
     @IBAction func allowInlineMediaValueChanged(_ sender: Any) {
         UserDefaults.standard.allowInlineMedia = allowInlineFeedback.isOn
+        menuActionsHandler?.initializeViews()
     }
 
     /// Change standalone behavior
     @IBAction func onStandaloneValueChanged(_ sender: Any) {
         UserDefaults.standard.actAsStandaloneApp = standaloneSwitch.isOn
+        menuActionsHandler?.initializeViews()
     }
 
     /// Change controller hack injection behavior
     @IBAction func onControllerHacksValueChanged(_ sender: Any) {
         UserDefaults.standard.injectControllerScripts = controllerHackSwitch.isOn
+        menuActionsHandler?.initializeViews()
     }
 
     /// User agent value changed

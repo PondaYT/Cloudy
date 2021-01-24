@@ -165,6 +165,7 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
     - (void)updateOnScreenControls
     {
 #if !TARGET_OS_TV
+        [onScreenControls setLevel:NSUserDefaults.standardUserDefaults.onScreenControlsLevel];
         [self becomeFirstResponder];
 #endif
     }
@@ -755,5 +756,14 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
     }
 
 #endif
+
+    - (void)cleanup
+    {
+        self->touchHandler = nil;
+        [self->onScreenControls cleanup];
+        self->onScreenControls = nil;
+        self->x1mouse          = nil;
+    }
+
 
 @end

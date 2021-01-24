@@ -5,7 +5,6 @@ import WebKit
 import GameController
 
 @objc enum ControlsSource: Int {
-    case none
     case onScreen
     case external
 }
@@ -24,29 +23,27 @@ class WebViewControllerBridge: NSObject, WKScriptMessageHandlerWithReply, Contro
     private var controllerData:                 [ControlsSource: CloudyController] = [:]
 
     /// Remember last controller snapshot
-    private var lastExternalControllerSnapshot: GCExtendedGamepad?                 = nil
+    private var lastExternalControllerSnapshot: CloudyController?                  = nil
     private var lastTouchControllerSnapShot:    CloudyController?                  = nil
 
     /// current export type
     var exportType:     CloudyController.JsonType = .regular
 
     /// the controls source to use
-    var controlsSource: ControlsSource            = .none
+    var controlsSource: ControlsSource            = .external
 
     /// Handle user content controller with proper native controller data reply
     func userContentController(_ userContentController: WKUserContentController,
                                didReceive message: WKScriptMessage,
                                replyHandler: @escaping ReplyHandlerType) {
         // only execute if the correct message was received
-        guard message.name == WKWebView.messageHandlerName else {
+        guard message.name == FullScreenWKWebView.messageHandlerName else {
             Log.e("Unknown message received: \(message)")
             replyHandler(nil, nil)
             return
         }
         // return value depending on configuration
         switch (controlsSource) {
-            case .none:
-                break
             case .onScreen:
                 handleTouchController(with: replyHandler)
             case .external:
@@ -57,19 +54,20 @@ class WebViewControllerBridge: NSObject, WKScriptMessageHandlerWithReply, Contro
     /// Handle regular external controller
     private func handleRegularController(with replyHandler: @escaping ReplyHandlerType) {
         // early exit
-        guard let currentControllerState = GCController.controllers().first?.extendedGamepad else {
+        guard let currentControllerState = GCController.controllers().first?.extendedGamepad,
+              let currentCloudyController = currentControllerState.toCloudyController() else {
             replyHandler(nil, nil)
             return
         }
-        // nothing changed, skip
+        // proceed
         if let lastControllerState = lastExternalControllerSnapshot,
-           lastControllerState =~ currentControllerState {
+           lastControllerState =~ currentCloudyController {
             replyHandler(nil, nil)
             return
         }
         // update and save
-        lastExternalControllerSnapshot = currentControllerState.capture()
-        replyHandler(currentControllerState.toCloudyController()?.toJson(for: exportType), nil)
+        lastExternalControllerSnapshot = currentCloudyController
+        replyHandler(currentCloudyController.toJson(for: exportType), nil)
     }
 
     /// Handle touch controller
