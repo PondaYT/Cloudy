@@ -22,29 +22,25 @@ struct Scripts {
                                                      return { pressed: false, touched: false, value: 0 }
                                                 })
                                             }
-
-
                                             navigator.getGamepads = function() {
                                                 window.webkit.messageHandlers.controller.postMessage({}).then((controllerData) => {
-                                                    if (controllerData === null || controllerData === undefined) return;
-                                                    try {
-                                                        var data = JSON.parse(controllerData);
-                                                        for(let i = 0; i < data.axes.length; i++) {
-                                                            emulatedGamepad.axes[i] = data.axes[i];
-                                                        }
-                                                        for(let i = 0; i < data.buttons.length; i++) {
-                                                            emulatedGamepad.buttons[i].pressed = data.buttons[i].pressed;
-                                                            emulatedGamepad.buttons[i].touched = data.buttons[i].touched;
-                                                            emulatedGamepad.buttons[i].value   = data.buttons[i].value;
-                                                        }
-                                                        emulatedGamepad.timestamp = performance.now();
+                                                         if (controllerData === null || controllerData === undefined) return;
+                                                         try {
+                                                             var data = JSON.parse(controllerData);
+                                                             emulatedGamepad.axes = [data.axes[0], data.axes[1], data.axes[2], data.axes[3]];
+                                                             for(let i = 0; i < data.buttons.length; i++) {
+                                                                 emulatedGamepad.buttons[i].pressed = data.buttons[i].pressed;
+                                                                 emulatedGamepad.buttons[i].touched = data.buttons[i].touched;
+                                                                 emulatedGamepad.buttons[i].value   = data.buttons[i].value;
+                                                             }
+                                                             emulatedGamepad.timestamp = performance.now();
                                                              emulatedGamepad.id        = data.id;
                                                              // console.log(emulatedGamepad);
-                                                    } catch(e) { 
-                                                        console.error("something went wrong: " + e);  
-                                                    }
-                                                });
-                                                return [emulatedGamepad, null, null, null];
-                                            };
-                                            """ }
+                                                         } catch(e) { 
+                                                             console.error("something went wrong: " + e);  
+                                                         }
+                                                     });
+                                                     return [emulatedGamepad, null, null, null];
+                                                 };
+                                                 """ }
 }
