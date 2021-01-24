@@ -202,11 +202,15 @@ class RootViewController: UIViewController, MenuActionsHandler {
 
 extension RootViewController: UserInteractionDelegate {
     open func userInteractionBegan() {
-        Log.d("userInteractionBegan")
+        UIView.animate(withDuration: 0.4) { [weak self] in
+            self?.containerOnScreenController.alpha = 1.0
+        }
     }
 
     open func userInteractionEnded() {
-        Log.d("userInteractionEnded")
+        UIView.animate(withDuration: 0.4) { [weak self] in
+            self?.containerOnScreenController.alpha = 0.2
+        }
     }
 }
 
