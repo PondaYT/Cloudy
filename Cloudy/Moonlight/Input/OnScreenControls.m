@@ -631,7 +631,7 @@
                     valueY = 0;
                 }
 
-                [_controllerSupport updateLeftStick:_controller x:(short) (0x7FFE * valueX) y:(short) (0x7FFE * -valueY)];
+                [_controllerSupport updateLeftStick:_controller x:(short) (0x7FFF * valueX) y:(short) (0x7FFF * -valueY)];
 
                 updated = true;
             }
@@ -657,7 +657,7 @@
                     valueY = 0;
                 }
 
-                [_controllerSupport updateRightStick:_controller x:(short) (0x7FFE * valueX) y:(short) (0x7FFE * -valueY)];
+                [_controllerSupport updateRightStick:_controller x:(short) (0x7FFF * valueX) y:(short) (0x7FFF * -valueY)];
 
                 updated = true;
             }
