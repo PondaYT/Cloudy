@@ -642,11 +642,33 @@
                                                                                 </attributedString>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
+                                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0fW-Y9-U1n">
+                                                                                <rect key="frame" x="493" y="9.5" width="51" height="31"/>
+                                                                            </switch>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Fortnite Mobile HUD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BKy-1l-jaK">
+                                                                                <rect key="frame" x="562" y="15" width="211" height="20.5"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0k-TI-s1t">
+                                                                                <rect key="frame" x="793" y="10" width="113" height="30"/>
+                                                                                <state key="normal" title="Edit HUD Layout"/>
+                                                                                <connections>
+                                                                                    <segue destination="pd4-tx-jp8" kind="presentation" modalPresentationStyle="fullScreen" id="5Fb-gJ-wfx"/>
+                                                                                </connections>
+                                                                            </button>
                                                                         </subviews>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstItem="ep6-Ph-t8S" firstAttribute="centerY" secondItem="iEM-rw-XiZ" secondAttribute="centerY" id="0Uu-sK-sei"/>
+                                                                            <constraint firstItem="0fW-Y9-U1n" firstAttribute="leading" secondItem="iEM-rw-XiZ" secondAttribute="trailing" constant="50" id="1rJ-Ts-9wr"/>
+                                                                            <constraint firstItem="R0k-TI-s1t" firstAttribute="leading" secondItem="BKy-1l-jaK" secondAttribute="trailing" constant="20" id="49r-PD-IvI"/>
+                                                                            <constraint firstItem="R0k-TI-s1t" firstAttribute="centerY" secondItem="mEQ-r6-Gbx" secondAttribute="centerY" id="7fz-vC-CNx"/>
+                                                                            <constraint firstItem="0fW-Y9-U1n" firstAttribute="centerY" secondItem="mEQ-r6-Gbx" secondAttribute="centerY" id="BEA-UN-VYe"/>
+                                                                            <constraint firstItem="BKy-1l-jaK" firstAttribute="centerY" secondItem="mEQ-r6-Gbx" secondAttribute="centerY" id="C6w-nZ-ScC"/>
                                                                             <constraint firstItem="iEM-rw-XiZ" firstAttribute="leading" secondItem="ep6-Ph-t8S" secondAttribute="trailing" constant="20" id="WAt-Hl-m1I"/>
+                                                                            <constraint firstItem="BKy-1l-jaK" firstAttribute="leading" secondItem="0fW-Y9-U1n" secondAttribute="trailing" constant="20" id="aXI-10-pKN"/>
                                                                             <constraint firstItem="iEM-rw-XiZ" firstAttribute="centerY" secondItem="mEQ-r6-Gbx" secondAttribute="centerY" id="bMC-G9-zei"/>
                                                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iEM-rw-XiZ" secondAttribute="trailing" constant="20" symbolic="YES" id="tv1-pf-S5c"/>
                                                                             <constraint firstAttribute="height" constant="50" id="uk6-N2-ZwR"/>
@@ -895,8 +917,81 @@
             </objects>
             <point key="canvasLocation" x="140.625" y="-588.28125"/>
         </scene>
+        <!--FortniteHUD Customization-->
+        <scene sceneID="RO0-1u-adx">
+            <objects>
+                <viewController id="pd4-tx-jp8" customClass="FortniteHUDCustomization" customModule="Cloudy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aBG-68-efA">
+                        <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HUDBackground.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="6YG-53-uQT">
+                                <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdE-cU-bfS">
+                                <rect key="frame" x="976" y="0.0" width="68" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="68" id="0za-R9-vFK"/>
+                                    <constraint firstAttribute="height" constant="40" id="Cve-XF-HOo"/>
+                                </constraints>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" systemColor="systemGroupedBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveHUD" destination="pd4-tx-jp8" eventType="touchUpInside" id="HCr-1F-2sT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQc-67-VAd">
+                                <rect key="frame" x="1044" y="0.0" width="68" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="68" id="ek4-PY-q3J"/>
+                                    <constraint firstAttribute="height" constant="40" id="qje-Kx-j47"/>
+                                </constraints>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" systemColor="systemGroupedBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissHUDController" destination="pd4-tx-jp8" eventType="touchUpInside" id="mpB-zW-wYf"/>
+                                </connections>
+                            </button>
+                            <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="NTE-MR-8Xe">
+                                <rect key="frame" x="558" y="0.0" width="405" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="500" id="hlG-cu-IPH"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="sliderValueChangedWithSender:" destination="pd4-tx-jp8" eventType="valueChanged" id="jrE-lz-81q"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="8uK-ib-rYO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="zQc-67-VAd" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="1Eo-sm-nqm"/>
+                            <constraint firstItem="zQc-67-VAd" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="IUo-q9-oBD"/>
+                            <constraint firstItem="zQc-67-VAd" firstAttribute="trailing" secondItem="8uK-ib-rYO" secondAttribute="trailing" id="JlC-xH-iN1"/>
+                            <constraint firstItem="mdE-cU-bfS" firstAttribute="leading" secondItem="NTE-MR-8Xe" secondAttribute="trailing" constant="15" id="KFL-6M-7FE"/>
+                            <constraint firstItem="6YG-53-uQT" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="MHx-Cd-ONg"/>
+                            <constraint firstItem="zQc-67-VAd" firstAttribute="leading" secondItem="mdE-cU-bfS" secondAttribute="trailing" id="Vbi-P7-dpo"/>
+                            <constraint firstItem="6YG-53-uQT" firstAttribute="trailing" secondItem="8uK-ib-rYO" secondAttribute="trailing" id="bK2-xp-oNG"/>
+                            <constraint firstItem="6YG-53-uQT" firstAttribute="bottom" secondItem="8uK-ib-rYO" secondAttribute="bottom" id="nJh-ti-Y7C"/>
+                            <constraint firstItem="6YG-53-uQT" firstAttribute="leading" secondItem="aBG-68-efA" secondAttribute="leading" id="o1f-NM-yzc"/>
+                            <constraint firstItem="NTE-MR-8Xe" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="pYM-Em-1Az"/>
+                            <constraint firstItem="mdE-cU-bfS" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="suy-zn-wE6"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="vGo-dQ-1Kn"/>
+                    <connections>
+                        <outlet property="slider" destination="NTE-MR-8Xe" id="8Bf-zy-xHX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PTG-xv-5Um" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="802.87769784172667" y="-588.48920863309354"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="HUDBackground.jpg" width="1200" height="675"/>
         <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="button_boosteroid" width="512" height="512"/>
         <image name="button_discord" width="512" height="256"/>
@@ -912,6 +1007,9 @@
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
