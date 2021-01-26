@@ -228,15 +228,15 @@ static const double MOUSE_SPEED_DIVISOR = 2.5;
         @synchronized(controller)
         {
             // Player 1 is always present for OSC
-            CloudyController *cloudyController = [[CloudyController alloc] initWithControllerNumber:_multiController ? controller.playerIndex : 0
+            CloudyController *cloudyController = [[CloudyController alloc] initWithControllerNumber:(int8_t) (_multiController ? controller.playerIndex : 0)
                                                                     activeGamepadMask:(_multiController ? _controllerNumbers : 1) | (_oscEnabled ? 1 : 0)
                                                                     buttonFlags:controller.lastButtonFlags
-                                                                    leftTrigger:controller.lastLeftTrigger
-                                                                    rightTrigger:controller.lastRightTrigger
-                                                                    leftStickX:controller.lastLeftStickX
-                                                                    leftStickY:controller.lastLeftStickY
-                                                                    rightStickX:controller.lastRightStickX
-                                                                    rightStickY:controller.lastRightStickY];
+                                                                    leftTrigger:(float) controller.lastLeftTrigger / (float) UINT8_MAX
+                                                                    rightTrigger:(float) controller.lastRightTrigger / (float) UINT8_MAX
+                                                                    leftStickX:(float) controller.lastLeftStickX / (float) INT16_MAX
+                                                                    leftStickY:-(float) controller.lastLeftStickY / (float) INT16_MAX
+                                                                    rightStickX:(float) controller.lastRightStickX / (float) INT16_MAX
+                                                                    rightStickY:-(float) controller.lastRightStickY / (float) INT16_MAX];
             [controllerDataReceiver submitWithControllerData:cloudyController for:ControlsSourceOnScreen];
         }
         [_controllerStreamLock unlock];

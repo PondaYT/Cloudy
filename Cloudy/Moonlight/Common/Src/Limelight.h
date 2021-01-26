@@ -486,21 +486,22 @@ int LiSendMouseButtonEvent(char action, int button);
 int LiSendKeyboardEvent(short keyCode, char keyAction, char modifiers);
 
 // Button flags
-#define A_FLAG     0x1000
-#define B_FLAG     0x2000
-#define X_FLAG     0x4000
-#define Y_FLAG     0x8000
-#define UP_FLAG    0x0001
-#define DOWN_FLAG  0x0002
-#define LEFT_FLAG  0x0004
-#define RIGHT_FLAG 0x0008
-#define LB_FLAG    0x0100
-#define RB_FLAG    0x0200
-#define PLAY_FLAG  0x0010
-#define BACK_FLAG  0x0020
-#define LS_CLK_FLAG  0x0040
-#define RS_CLK_FLAG  0x0080
-#define SPECIAL_FLAG 0x0400
+#define A_FLAG          0x0001
+#define B_FLAG          0x0002
+#define X_FLAG          0x0004
+#define Y_FLAG          0x0008
+#define UP_FLAG         0x0010
+#define DOWN_FLAG       0x0020
+#define LEFT_FLAG       0x0040
+#define RIGHT_FLAG      0x0080
+#define LB_FLAG         0x0100
+#define RB_FLAG         0x0200
+#define LS_CLK_FLAG     0x0400
+#define RS_CLK_FLAG     0x0800
+#define PLAY_FLAG       0x0010
+#define BACK_FLAG       0x0020
+#define HOME_FLAG       0x0040
+#define SPECIAL_FLAG    0x0080
 
 // This function queues a controller event to be sent to the remote server. It will
 // be seen by the computer as the first controller.
