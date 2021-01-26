@@ -121,14 +121,17 @@ class MenuViewController: UIViewController {
         onScreenControllerSelector.selectedSegmentIndex = UserDefaults.standard.onScreenControlsLevel.rawValue
         touchFeedbackSelector.selectedSegmentIndex = UserDefaults.standard.touchFeedbackType.rawValue
         customJsInjection.text = UserDefaults.standard.customJsCodeToInject
+        // apply shadows
+        shadowViews.forEach { $0.addShadow() }
         #if APPSTORE
+            if !UserDefaults.standard.didDonateAlready {
+                buttonTipJar.addGlowAnimation(withColor: .yellow)
+            }
             viewsToRemoveForAppstore.forEach { $0.removeFromSuperview() }
         #endif
         #if NON_APPSTORE
             viewsToRemoveForNonAppstore.forEach { $0.removeFromSuperview() }
         #endif
-        // apply shadows
-        shadowViews.forEach { $0.addShadow() }
         // update stuff
         updateVersionLabel()
     }

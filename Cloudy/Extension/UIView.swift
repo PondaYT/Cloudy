@@ -29,9 +29,26 @@ extension UIView {
         layer.shadowOpacity = 1
         layer.shadowOffset = .zero
         layer.shadowRadius = 10
-//        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
 
     }
+
+    func addGlowAnimation(withColor color: UIColor) {
+        layer.masksToBounds = false
+        layer.shadowColor = color.cgColor
+        layer.shadowRadius = 0
+        layer.shadowOpacity = 0.8
+        layer.shadowOffset = .zero
+        let glowAnimation = CABasicAnimation(keyPath: "shadowRadius")
+        glowAnimation.fromValue = 0
+        glowAnimation.toValue = 15
+        glowAnimation.fillMode = .removed
+        glowAnimation.repeatCount = .infinity
+        glowAnimation.duration = 2
+        glowAnimation.autoreverses = true
+        layer.add(glowAnimation, forKey: "shadowGlowingAnimation")
+    }
 }
+
+

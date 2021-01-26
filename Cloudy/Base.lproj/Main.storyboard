@@ -212,18 +212,18 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6S5-j1-DgW">
                                                 <rect key="frame" x="10" y="10" width="1072" height="188.5"/>
                                                 <subviews>
-                                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_tip_jar" id="Lom-Vi-B3U" userLabel="Button Tip Jar">
-                                                        <rect key="frame" x="0.0" y="0.0" width="134" height="188.5"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    </imageView>
                                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_stadia" translatesAutoresizingMaskIntoConstraints="NO" id="0VM-PV-WdW">
-                                                        <rect key="frame" x="142" y="0.0" width="134" height="188.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="134" height="188.5"/>
                                                     </imageView>
                                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_geforce_now" translatesAutoresizingMaskIntoConstraints="NO" id="Kdq-FP-3hb">
-                                                        <rect key="frame" x="284" y="0.0" width="134" height="188.5"/>
+                                                        <rect key="frame" x="142" y="0.0" width="134" height="188.5"/>
                                                     </imageView>
                                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_geforce_now_beta" translatesAutoresizingMaskIntoConstraints="NO" id="zau-rP-Nr4" userLabel="Button Geforce Now Beta">
+                                                        <rect key="frame" x="284" y="0.0" width="134" height="188.5"/>
+                                                    </imageView>
+                                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_tip_jar" id="Lom-Vi-B3U" userLabel="Button Tip Jar">
                                                         <rect key="frame" x="426" y="0.0" width="134" height="188.5"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     </imageView>
                                                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="button_luna" translatesAutoresizingMaskIntoConstraints="NO" id="Ao9-3G-MXT" userLabel="Button Luna">
                                                         <rect key="frame" x="568" y="0.0" width="134" height="188.5"/>
