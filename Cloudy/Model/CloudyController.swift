@@ -9,6 +9,39 @@ private let closeToZero: (Float) -> Bool = { abs($0) < 0.0001 }
 /// Hacky stuff for geforce now
 private var shouldPulse: Bool = false
 
+/// Convenience structs
+struct ControllerElements {
+    struct DPad {
+        let up:    Bool
+        let down:  Bool
+        let left:  Bool
+        let right: Bool
+    }
+
+    struct Buttons {
+        let a: Bool
+        let b: Bool
+        let x: Bool
+        let y: Bool
+    }
+
+    struct Menu {
+        let back: Bool
+        let play: Bool
+    }
+
+    struct Shoulder {
+        let trigger:  Float
+        let shoulder: Bool
+    }
+
+    struct Stick {
+        let x:     Float
+        let y:     Float
+        let click: Bool
+    }
+}
+
 /// Struct for generating a js readable json that contains the
 /// proper values from the native controller
 @objc class CloudyController: NSObject, Encodable {
@@ -30,6 +63,15 @@ private var shouldPulse: Bool = false
             self.pressed = pressed
             self.touched = touched
             self.value = value
+        }
+
+        /// Convenience creation helper for a digital button
+        static let digital: (Bool) -> Button = {
+            Button(pressed: $0, touched: $0, value: $0 ? 1 : 0)
+        }
+        /// Convenience creation helper for an analog button
+        static let analog: (Float) -> Button = {
+            Button(pressed: closeToZero($0), touched: closeToZero($0), value: $0)
         }
 
         func pulse() {
@@ -73,38 +115,74 @@ private var shouldPulse: Bool = false
         self.buttons = buttons
     }
 
-    /// Construction for touch controls from objc
-    @objc init(controllerNumber: CShort, activeGamepadMask: CShort,
-               buttonFlags: CShort, leftTrigger: CUnsignedChar, rightTrigger: CUnsignedChar,
-               leftStickX: CShort, leftStickY: CShort, rightStickX: CShort, rightStickY: CShort) {
-        let buttonDigital: (Bool) -> Button = { Button(pressed: $0, touched: $0, value: $0 ? 1 : 0) }
-        let buttonAnalog: (Float) -> Button = { Button(pressed: closeToZero($0), touched: closeToZero($0), value: $0) }
-        let buttonSet = ButtonOptionSet(rawValue: Int(buttonFlags))
+    /// Convenience construction
+    init(id: Int8,
+         leftStick: ControllerElements.Stick,
+         rightStick: ControllerElements.Stick,
+         leftShoulder: ControllerElements.Shoulder,
+         rightShoulder: ControllerElements.Shoulder,
+         dpad: ControllerElements.DPad,
+         buttons: ControllerElements.Buttons,
+         menu: ControllerElements.Menu) {
         axes = [
-            Float(leftStickX) / Float(CShort.max),
-            -1.0 * Float(leftStickY) / Float(CShort.max),
-            Float(rightStickX) / Float(CShort.max),
-            -1.0 * Float(rightStickY) / Float(CShort.max),
+            leftStick.x,
+            leftStick.y,
+            rightStick.x,
+            rightStick.y,
         ]
-        buttons = [
-            /*  0 */ buttonDigital(buttonSet.contains(.A_FLAG)),
-            /*  1 */ buttonDigital(buttonSet.contains(.B_FLAG)),
-            /*  2 */ buttonDigital(buttonSet.contains(.X_FLAG)),
-            /*  3 */ buttonDigital(buttonSet.contains(.Y_FLAG)),
-            /*  4 */ buttonDigital(buttonSet.contains(.LB_FLAG)), // leftShoulder.controller,
-            /*  5 */ buttonDigital(buttonSet.contains(.RB_FLAG)), // rightShoulder.controller,
-            /*  6 */ buttonAnalog(Float(leftTrigger) / Float(CUnsignedChar.max)), // leftTrigger.controller,
-            /*  7 */ buttonAnalog(Float(rightTrigger) / Float(CUnsignedChar.max)), // rightTrigger.controller,
-            /*  8 */ buttonDigital(buttonSet.contains(.BACK_FLAG)), // buttonOptions.controller,
-            /*  9 */ buttonDigital(buttonSet.contains(.PLAY_FLAG)), // buttonMenu.controller,
-            /* 10 */ buttonDigital(buttonSet.contains(.LS_CLK_FLAG)), // leftThumbstickButton.controller,
-            /* 11 */ buttonDigital(buttonSet.contains(.RS_CLK_FLAG)), // rightThumbstickButton.controller,
-            /* 12 */ buttonDigital(buttonSet.contains(.UP_FLAG)), // dpad.up.controller,
-            /* 13 */ buttonDigital(buttonSet.contains(.DOWN_FLAG)), // dpad.down.controller,
-            /* 14 */ buttonDigital(buttonSet.contains(.LEFT_FLAG)), // dpad.left.controller,
-            /* 15 */ buttonDigital(buttonSet.contains(.RIGHT_FLAG)), // dpad.right.controller,
-            /* 16 */ buttonDigital(false), // buttonHome.controller,
+        self.buttons = [
+            /*  0 */ .digital(buttons.a),
+            /*  1 */ .digital(buttons.b),
+            /*  2 */ .digital(buttons.x),
+            /*  3 */ .digital(buttons.y),
+            /*  4 */ .digital(leftShoulder.shoulder), // leftShoulder.controller,
+            /*  5 */ .digital(rightShoulder.shoulder), // rightShoulder.controller,
+            /*  6 */ .analog(leftShoulder.trigger), // leftTrigger.controller,
+            /*  7 */ .analog(rightShoulder.trigger), // rightTrigger.controller,
+            /*  8 */ .digital(menu.back), // buttonOptions.controller,
+            /*  9 */ .digital(menu.play), // buttonMenu.controller,
+            /* 10 */ .digital(leftStick.click), // leftThumbstickButton.controller,
+            /* 11 */ .digital(rightStick.click), // rightThumbstickButton.controller,
+            /* 12 */ .digital(dpad.up), // dpad.up.controller,
+            /* 13 */ .digital(dpad.down), // dpad.down.controller,
+            /* 14 */ .digital(dpad.left), // dpad.left.controller,
+            /* 15 */ .digital(dpad.right), // dpad.right.controller,
+            /* 16 */ .digital(false), // buttonHome.controller,
         ]
+    }
+
+    /// Construction for touch controls from objc
+    @objc convenience init(controllerNumber: Int8,
+                           activeGamepadMask: Int,
+                           buttonFlags: Int,
+                           leftTrigger: Float,
+                           rightTrigger: Float,
+                           leftStickX: Float,
+                           leftStickY: Float,
+                           rightStickX: Float,
+                           rightStickY: Float) {
+        let buttonSet = ButtonOptionSet(rawValue: Int(buttonFlags))
+        self.init(id: controllerNumber,
+                  leftStick: ControllerElements.Stick(x: leftStickX,
+                                                      y: leftStickY,
+                                                      click: buttonSet.contains(.LS_CLK_FLAG)),
+                  rightStick: ControllerElements.Stick(x: rightStickX,
+                                                       y: rightStickY,
+                                                       click: buttonSet.contains(.RS_CLK_FLAG)),
+                  leftShoulder: ControllerElements.Shoulder(trigger: leftTrigger,
+                                                            shoulder: buttonSet.contains(.LB_FLAG)),
+                  rightShoulder: ControllerElements.Shoulder(trigger: rightTrigger,
+                                                             shoulder: buttonSet.contains(.RB_FLAG)),
+                  dpad: ControllerElements.DPad(up: buttonSet.contains(.UP_FLAG),
+                                                down: buttonSet.contains(.DOWN_FLAG),
+                                                left: buttonSet.contains(.LEFT_FLAG),
+                                                right: buttonSet.contains(.RIGHT_FLAG)),
+                  buttons: ControllerElements.Buttons(a: buttonSet.contains(.A_FLAG),
+                                                      b: buttonSet.contains(.B_FLAG),
+                                                      x: buttonSet.contains(.X_FLAG),
+                                                      y: buttonSet.contains(.Y_FLAG)),
+                  menu: ControllerElements.Menu(back: buttonSet.contains(.BACK_FLAG),
+                                                play: buttonSet.contains(.PLAY_FLAG)))
     }
 
     /// Export json string
