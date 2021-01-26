@@ -928,6 +928,14 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HUDBackground.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="6YG-53-uQT">
                                 <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mA5-Wl-YSh">
+                                <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RF1-9H-brL">
+                                <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdE-cU-bfS">
                                 <rect key="frame" x="976" y="0.0" width="68" height="40"/>
                                 <constraints>
@@ -939,6 +947,25 @@
                                 </state>
                                 <connections>
                                     <action selector="saveHUD" destination="pd4-tx-jp8" eventType="touchUpInside" id="HCr-1F-2sT"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Combat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dd6-zD-Zhj">
+                                <rect key="frame" x="20" y="8" width="163" height="53"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="44"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y20-Xh-FRc">
+                                <rect key="frame" x="850" y="0.0" width="126" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="126" id="JMS-sb-qjt"/>
+                                    <constraint firstAttribute="height" constant="40" id="z7A-F7-QXs"/>
+                                </constraints>
+                                <state key="normal" title="Switch Build/Edits">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="switchCombatAndBuilding" destination="pd4-tx-jp8" eventType="touchUpInside" id="tif-gP-ExU"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQc-67-VAd">
@@ -954,8 +981,8 @@
                                     <action selector="dismissHUDController" destination="pd4-tx-jp8" eventType="touchUpInside" id="mpB-zW-wYf"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="NTE-MR-8Xe">
-                                <rect key="frame" x="558" y="0.0" width="405" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="NTE-MR-8Xe">
+                                <rect key="frame" x="348" y="0.0" width="504" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="500" id="hlG-cu-IPH"/>
                                 </constraints>
@@ -968,21 +995,39 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="zQc-67-VAd" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="1Eo-sm-nqm"/>
+                            <constraint firstItem="mdE-cU-bfS" firstAttribute="leading" secondItem="y20-Xh-FRc" secondAttribute="trailing" id="1Ne-1h-Mzp"/>
+                            <constraint firstItem="y20-Xh-FRc" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="60F-3q-S4b"/>
+                            <constraint firstItem="Dd6-zD-Zhj" firstAttribute="leading" secondItem="8uK-ib-rYO" secondAttribute="leading" constant="20" id="9Gx-i8-lS6"/>
+                            <constraint firstItem="Dd6-zD-Zhj" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" constant="8" id="A9w-xG-GIY"/>
+                            <constraint firstItem="mA5-Wl-YSh" firstAttribute="bottom" secondItem="8uK-ib-rYO" secondAttribute="bottom" id="ABw-5b-jAd"/>
+                            <constraint firstItem="y20-Xh-FRc" firstAttribute="leading" secondItem="NTE-MR-8Xe" secondAttribute="trailing" id="HS1-kT-KyN"/>
+                            <constraint firstItem="mA5-Wl-YSh" firstAttribute="trailing" secondItem="8uK-ib-rYO" secondAttribute="trailing" id="Hsg-NU-reY"/>
                             <constraint firstItem="zQc-67-VAd" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="IUo-q9-oBD"/>
                             <constraint firstItem="zQc-67-VAd" firstAttribute="trailing" secondItem="8uK-ib-rYO" secondAttribute="trailing" id="JlC-xH-iN1"/>
-                            <constraint firstItem="mdE-cU-bfS" firstAttribute="leading" secondItem="NTE-MR-8Xe" secondAttribute="trailing" constant="15" id="KFL-6M-7FE"/>
                             <constraint firstItem="6YG-53-uQT" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="MHx-Cd-ONg"/>
+                            <constraint firstItem="RF1-9H-brL" firstAttribute="bottom" secondItem="8uK-ib-rYO" secondAttribute="bottom" id="R3n-Ud-tRd"/>
                             <constraint firstItem="zQc-67-VAd" firstAttribute="leading" secondItem="mdE-cU-bfS" secondAttribute="trailing" id="Vbi-P7-dpo"/>
+                            <constraint firstItem="mA5-Wl-YSh" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="b5j-8U-7F5"/>
                             <constraint firstItem="6YG-53-uQT" firstAttribute="trailing" secondItem="8uK-ib-rYO" secondAttribute="trailing" id="bK2-xp-oNG"/>
+                            <constraint firstItem="RF1-9H-brL" firstAttribute="trailing" secondItem="8uK-ib-rYO" secondAttribute="trailing" id="iEi-bF-Trb"/>
                             <constraint firstItem="6YG-53-uQT" firstAttribute="bottom" secondItem="8uK-ib-rYO" secondAttribute="bottom" id="nJh-ti-Y7C"/>
                             <constraint firstItem="6YG-53-uQT" firstAttribute="leading" secondItem="aBG-68-efA" secondAttribute="leading" id="o1f-NM-yzc"/>
                             <constraint firstItem="NTE-MR-8Xe" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="pYM-Em-1Az"/>
+                            <constraint firstItem="RF1-9H-brL" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="qhO-wu-CJw"/>
+                            <constraint firstItem="mA5-Wl-YSh" firstAttribute="leading" secondItem="8uK-ib-rYO" secondAttribute="leading" id="qzd-47-r6B"/>
+                            <constraint firstItem="RF1-9H-brL" firstAttribute="leading" secondItem="8uK-ib-rYO" secondAttribute="leading" id="sEE-3e-act"/>
                             <constraint firstItem="mdE-cU-bfS" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="suy-zn-wE6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vGo-dQ-1Kn"/>
                     <connections>
+                        <outlet property="buildingHUDView" destination="mA5-Wl-YSh" id="mfV-48-Hcl"/>
+                        <outlet property="combatHUDView" destination="RF1-9H-brL" id="H3M-td-QbX"/>
+                        <outlet property="doneButton" destination="zQc-67-VAd" id="CDB-KT-aXL"/>
+                        <outlet property="editViewLabel" destination="Dd6-zD-Zhj" id="fsl-EL-eA5"/>
+                        <outlet property="saveButton" destination="mdE-cU-bfS" id="pS4-1K-rtF"/>
                         <outlet property="slider" destination="NTE-MR-8Xe" id="8Bf-zy-xHX"/>
+                        <outlet property="switchViewButton" destination="y20-Xh-FRc" id="hXG-IK-VNO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PTG-xv-5Um" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
