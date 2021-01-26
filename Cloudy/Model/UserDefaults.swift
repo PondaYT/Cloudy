@@ -19,10 +19,32 @@ import GameController
         static let webViewScale            = "webViewScale"
         static let actAsStandaloneApp      = "actAsStandaloneApp"
         static let injectControllerScripts = "injectControllerScripts"
+        static let appOpenCount            = "appOpenCount"
+        static let didDonateAlready        = "didDonateAlready"
+    }
+
+    /// Read / write app open count
+    var appOpenCount:     Int {
+        get {
+            UserDefaults.standard.integer(forKey: Config.appOpenCount)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Config.appOpenCount)
+        }
+    }
+
+    /// Read / write if the user donated already
+    var didDonateAlready: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: Config.didDonateAlready)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Config.didDonateAlready)
+        }
     }
 
     /// Read / write the last visited url
-    var          lastVisitedUrl:          URL? {
+    var lastVisitedUrl:   URL? {
         get {
             UserDefaults.standard.url(forKey: Config.lastVisitedUrlKey)
         }
@@ -32,7 +54,7 @@ import GameController
     }
 
     /// Read / write the manually overwritten user agent
-    var          manualUserAgent:         String? {
+    var manualUserAgent:  String? {
         get {
             UserDefaults.standard.string(forKey: Config.manualUserAgent)
         }

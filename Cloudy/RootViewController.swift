@@ -57,6 +57,17 @@ class RootViewController: UIViewController, MenuActionsHandler {
         AVFoundationVibratingFeedbackGenerator()
     }()
 
+    /// The alert helper
+    lazy var alerter: Alerter = {
+        Alerter(viewController: self)
+    }()
+
+    /// The purchase helper
+    lazy var purchaseHelper = {
+        PurchaseHelper(with: alerter)
+    }()
+
+
     /// By default hide the status bar
     override var prefersStatusBarHidden:                      Bool {
         true
@@ -97,6 +108,7 @@ class RootViewController: UIViewController, MenuActionsHandler {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         initializeViews()
+        checkDonationReminder()
     }
 
     /// Initialize all the required views (webview, onscreen controls and menu)
@@ -166,6 +178,8 @@ class RootViewController: UIViewController, MenuActionsHandler {
         menuViewController.webController = webView
         menuViewController.overlayController = self
         menuViewController.menuActionsHandler = self
+        menuViewController.purchaseHelper = purchaseHelper
+        menuViewController.alerter = alerter
         menuViewController.view.frame = view.bounds
         menuViewController.willMove(toParent: self)
         addChild(menuViewController)
@@ -301,4 +315,29 @@ extension RootViewController: WKNavigationDelegate, WKUIDelegate {
         decisionHandler(.allow)
     }
 
+}
+
+/// Donation reminding logic
+extension RootViewController {
+    private func checkDonationReminder() {
+        #if APPSTORE
+            // has donated already
+            if UserDefaults.standard.didDonateAlready {
+                return
+            }
+            // not enough starts
+            if UserDefaults.standard.appOpenCount < 5 {
+                UserDefaults.standard.appOpenCount = UserDefaults.standard.appOpenCount + 1
+                return
+            }
+            // app open count is due to a reminding alert
+            UserDefaults.standard.appOpenCount = 0
+            alerter.showAlert(for: .remindToDonate,
+                              positiveAction: Alerter.Action(text: "Sure") { [weak self] in
+                                  self?.purchaseHelper.showProducts()
+                              },
+                              negativeAction: Alerter.Action(text: "Nope") {
+                              })
+        #endif
+    }
 }

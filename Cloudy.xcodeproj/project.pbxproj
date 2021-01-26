@@ -30,6 +30,7 @@
 		44A4DB5EF1F09B9D531A5704 /* WKUserScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DFB90BD884CB5041E57D /* WKUserScript.swift */; };
 		44A4DB830BC41F131E122F7C /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D999AA39891699C55D00 /* GameController.swift */; };
 		44A4DC86DF1DDD05E6FC802A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D58736385FBD2B75856B /* MenuViewController.swift */; };
+		44A4DC98C01BE31D98C4374C /* PurchaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D20E8882F769E6208730 /* PurchaseHelper.swift */; };
 		44A4DCA503A87B314B8CB75A /* ButtonOptionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D9F318B9593A6DD6F951 /* ButtonOptionSet.swift */; };
 		44A4DD2289A8D028B03463E0 /* X1Kit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D996514DEB85071D2DA7 /* X1Kit.swift */; };
 		44A4DD2F10965A88D83F5C0D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DBCCBA86600B436045E4 /* SceneDelegate.swift */; };
@@ -55,6 +56,7 @@
 		44A4D0057BF82C52A8F76A38 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		44A4D01AC2645E64C1EB9CF9 /* AVFoundationVibratingFeedbackGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVFoundationVibratingFeedbackGenerator.swift; sourceTree = "<group>"; };
 		44A4D1A39583BB7F49ABD541 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		44A4D20E8882F769E6208730 /* PurchaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseHelper.swift; sourceTree = "<group>"; };
 		44A4D24369D3C549C04BC958 /* Scripts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scripts.swift; sourceTree = "<group>"; };
 		44A4D3A1BA3A8B2AB96CB81B /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		44A4D42B4BF97B06DF2A6BEA /* Limelight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Limelight.m; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 			children = (
 				44A4DB5C7725B073FE1AB0E8 /* IAPManager.swift */,
 				44A4DD3E981844FBC3E9E5A7 /* Alerter.swift */,
+				44A4D20E8882F769E6208730 /* PurchaseHelper.swift */,
 			);
 			path = IAP;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				44A4D9B9C9363AC8D381F05F /* LaunchArgumentHandler.swift in Sources */,
 				44A4D78B8F260ECEBBB39B4C /* FullScreenWKWebView.swift in Sources */,
 				44A4DB5EF1F09B9D531A5704 /* WKUserScript.swift in Sources */,
+				44A4DC98C01BE31D98C4374C /* PurchaseHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

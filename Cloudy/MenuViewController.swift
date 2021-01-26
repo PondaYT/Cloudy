@@ -63,11 +63,8 @@ class MenuViewController: UIViewController {
     var webController:      WebController?
     var overlayController:  OverlayController?
     var menuActionsHandler: MenuActionsHandler?
-
-    /// The alert helper
-    lazy var alerter: Alerter = {
-        Alerter(viewController: self)
-    }()
+    var alerter:            Alerter?
+    var purchaseHelper:     PurchaseHelper?
 
     /// Mapping from a alias to a full url
     static let   aliasMapping:           [String: String] = [
@@ -291,6 +288,11 @@ extension MenuViewController {
         hideMenu()
     }
 
+    /// Handle tip jar button
+    @objc func onTipJarPressed(_ sender: Any) {
+        purchaseHelper?.showProducts()
+    }
+
     /// Handle discord shortcut
     @objc func onDiscordButtonPressed(_ sender: Any) {
         if UIApplication.shared.canOpenURL(Navigator.Config.Url.discord) {
@@ -355,51 +357,4 @@ extension MenuViewController {
         menuActionsHandler?.updateScalingFactor(with: -factor)
     }
 }
-
-
-/// Purchasing extension
-extension MenuViewController {
-
-    /// Handle tip jar button
-    @objc func onTipJarPressed(_ sender: Any) {
-        IAPManager.shared.getProducts { (result) in
-            DispatchQueue.main.async { [weak self] in
-                switch result {
-                    case .success(let products):
-                        self?.alerter.showAlert(for: products) { [weak self] product in
-                            self?.purchase(product: product)
-                        }
-                    case .failure(let error):
-                        self?.alerter.showAlert(for: .somethingWentWrong)
-                        Log.e("Error fetching products: \(error)")
-                }
-            }
-        }
-    }
-
-    /// Purchase an item
-    func purchase(product: SKProduct) {
-        if !IAPManager.shared.canMakePayments() {
-            alerter.showAlert(for: .cannotMakePayments)
-            Log.e("User cannot make payments")
-        } else {
-            IAPManager.shared.buy(product: product) { (result) in
-                DispatchQueue.main.async { [weak self] in
-                    switch result {
-                        case .success(_):
-                            self?.alerter.showAlert(for: .purchaseSuccess)
-                        case .failure(let error):
-                            if case IAPManager.IAPManagerError.paymentWasCancelled = error {
-                                Log.i("Payment cancelled")
-                            } else {
-                                Log.e("Error occurred")
-                                self?.alerter.showAlert(for: .somethingWentWrong)
-                            }
-                    }
-                }
-            }
-        }
-    }
-}
-
 
