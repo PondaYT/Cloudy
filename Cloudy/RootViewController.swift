@@ -26,6 +26,11 @@ class RootViewController: UIViewController, MenuActionsHandler {
     /// Containers
     @IBOutlet var containerWebView:            UIView!
     @IBOutlet var containerOnScreenController: UIView!
+    
+    @IBOutlet var combatHUDView: UIView!
+    @IBOutlet var buildingHUDView: UIView!
+    @IBOutlet var menuButton: UIButton!
+    
 
     @IBOutlet var webviewConstraints: [NSLayoutConstraint]!
 
@@ -46,6 +51,24 @@ class RootViewController: UIViewController, MenuActionsHandler {
 
     /// The stream view that holds the on screen controls
     private var streamView:      StreamView?
+    
+    
+    
+    var listOfCombatHUDButtons = ["Aim", "Autorun", "Confirm", "Crouch Down", "Crouch Up", "Cycle Weapons Down", "Cycle Weapons Up", "Edit Crosshair", "Edit Reset", "Edit", "Emote Wheel", "Exit", "Floor Selected", "Floor Unselected", "Inventory", "Jump", "Mic Muted", "Mic Unmuted", "Move Joystick", "Move Outer", "Open Chest", "Open Door", "Ping", "Pyramid Selected", "Pyramid Unselected", "Quick Chat", "Quick Heal", "Repair", "Reset", "Rotate", "Shoot Big", "Shoot", "Stair Selected", "Stair Unselected", "Switch To Build", "Switch To Combat", "Throw", "Use", "Wall Selected", "Wall Unselected"]
+    
+    var listOfBuildingHUDButtons = ["Aim", "Autorun", "Confirm", "Crouch Down", "Crouch Up", "Cycle Weapons Down", "Cycle Weapons Up", "Edit Crosshair", "Edit Reset", "Edit", "Emote Wheel", "Exit", "Floor Selected", "Floor Unselected", "Inventory", "Jump", "Mic Muted", "Mic Unmuted", "Move Joystick", "Move Outer", "Open Chest", "Open Door", "Ping", "Pyramid Selected", "Pyramid Unselected", "Quick Chat", "Quick Heal", "Repair", "Reset", "Rotate", "Shoot Big", "Shoot", "Stair Selected", "Stair Unselected", "Switch To Build", "Switch To Combat", "Throw", "Use", "Wall Selected", "Wall Unselected"]
+    
+    var HUDCombatButtonX:[CGFloat] = []
+    var HUDCombatButtonY:[CGFloat] = []
+    var HUDCombatButtonWidth:[CGFloat] = []
+    var HUDCombatButtonHeight:[CGFloat] = []
+    
+    var HUDBuildingButtonX:[CGFloat] = []
+    var HUDBuildingButtonY:[CGFloat] = []
+    var HUDBuildingButtonWidth:[CGFloat] = []
+    var HUDBuildingButtonHeight:[CGFloat] = []
+    
+    
 
     /// Expose the web controller for navigation
     var webController: WebController? {
@@ -212,7 +235,131 @@ class RootViewController: UIViewController, MenuActionsHandler {
         streamView = newStreamView
         updateOnScreenController(with: UserDefaults.standard.onScreenControlsLevel)
         updateScalingFactor(with: UserDefaults.standard.webViewScale)
+        
+        
+        
+        
+        
+        
+        
+        var x_axis:CGFloat = 0.0
+        var y_axis:CGFloat = 50.0
+        
+        let defaults = UserDefaults.standard
+        
+        var buttonTag = 0
+        for buttonImages in listOfCombatHUDButtons {
+            let button = UIButton.init()
+            
+            let HUDCombatButtonXSaved = defaults.array(forKey: "reKairosCombatHUDRectX")
+            let HUDCombatButtonYSaved = defaults.array(forKey: "reKairosCombatHUDRectY")
+            let HUDCombatButtonWidthSaved = defaults.array(forKey: "reKairosCombatHUDRectWidth")
+            let HUDCombatButtonHeightSaved = defaults.array(forKey: "reKairosCombatHUDRectHeight")
+            
+            button.setImage(self.resizeImage(UIImage(named: "\(buttonImages).png")!, targetSize: CGSize(width: HUDCombatButtonWidthSaved![buttonTag] as! CGFloat, height: HUDCombatButtonHeightSaved![buttonTag] as! CGFloat)), for: .normal)
+            
+            if HUDCombatButtonXSaved?.isEmpty == false {
+                button.frame = CGRect(x: HUDCombatButtonXSaved![buttonTag] as! CGFloat, y: HUDCombatButtonYSaved![buttonTag] as! CGFloat, width: HUDCombatButtonWidthSaved![buttonTag] as! CGFloat, height: HUDCombatButtonHeightSaved![buttonTag] as! CGFloat)
+            } else {
+                button.frame = CGRect(x: x_axis, y: y_axis, width: 50, height: 50)
+            }
+            
+            // button.addTarget(self, action:#selector(pressed), for: .touchUpInside)
+            
+            combatHUDView.addSubview(button)
+            x_axis += 50
+            buttonTag += 1
+            if x_axis >= UIWindow.init().frame.width - 50 {
+                y_axis += 50
+                x_axis = 0
+            }
+        }
+        
+        
+        for buttonImages in listOfBuildingHUDButtons {
+            let button = UIButton.init()
+            
+            let defaults = UserDefaults.standard
+            
+            let HUDBuildingButtonXSaved = defaults.array(forKey: "reKairosBuildingHUDRectX")
+            let HUDBuildingButtonYSaved = defaults.array(forKey: "reKairosBuildingHUDRectY")
+            let HUDBuildingButtonWidthSaved = defaults.array(forKey: "reKairosBuildingHUDRectWidth")
+            let HUDBuildingButtonHeightSaved = defaults.array(forKey: "reKairosBuildingHUDRectHeight")
+            
+            button.setImage(self.resizeImage(UIImage(named: "\(buttonImages).png")!, targetSize: CGSize(width: HUDBuildingButtonWidthSaved![buttonTag - 40] as! CGFloat, height: HUDBuildingButtonHeightSaved![buttonTag - 40] as! CGFloat)), for: .normal)
+            
+            if HUDBuildingButtonXSaved?.isEmpty == false {
+                print(buttonTag - 39)
+                button.frame = CGRect(x: HUDBuildingButtonXSaved![buttonTag - 40] as! CGFloat, y: HUDBuildingButtonYSaved![buttonTag - 40] as! CGFloat, width: HUDBuildingButtonWidthSaved![buttonTag - 40] as! CGFloat, height: HUDBuildingButtonHeightSaved![buttonTag - 40] as! CGFloat)
+            } else {
+                button.frame = CGRect(x: x_axis, y: y_axis, width: 50, height: 50)
+            }
+            
+            // button.addTarget(self, action:#selector(pressed), for: .touchUpInside)
+            
+            buildingHUDView.addSubview(button)
+            x_axis += 50
+            buttonTag += 1
+            if x_axis >= UIWindow.init().frame.width - 50 {
+                y_axis += 50
+                x_axis = 0
+            }
+        }
+        
+        self.view.tag = 256
+        buildingHUDView.tag = 500
+        combatHUDView.tag = 600
+        
+        buildingHUDView.alpha = 0
+        
+        self.view.bringSubviewToFront(self.combatHUDView)
+        
+        self.view.bringSubviewToFront(menuButton)
+        self.view.bringSubviewToFront(showHUD)
+        
     }
+    
+    @IBOutlet var showHUD: UISwitch!
+    
+    @IBAction func showFortniteHUD(_ sender: UISwitch) {
+        
+        if showHUD.isOn {
+            self.view.bringSubviewToFront(self.buildingHUDView)
+            self.view.bringSubviewToFront(self.combatHUDView)
+            self.view.bringSubviewToFront(self.showHUD)
+        } else {
+            self.view.sendSubviewToBack(self.buildingHUDView)
+            self.view.sendSubviewToBack(self.combatHUDView)
+        }
+    }
+    
+    
+    func resizeImage(_ image: UIImage, targetSize: CGSize) -> UIImage? {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / image.size.width
+        let heightRatio = targetSize.height / image.size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
 }
 
 extension RootViewController: UserInteractionDelegate {

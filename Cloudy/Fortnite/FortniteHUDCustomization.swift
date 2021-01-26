@@ -31,6 +31,7 @@ class FortniteHUDCustomization: UIViewController {
     var HUDBuildingButtonY:[CGFloat] = []
     var HUDBuildingButtonWidth:[CGFloat] = []
     var HUDBuildingButtonHeight:[CGFloat] = []
+    
     var buttonItems:[UIView] = []
     var buildingButtonItems:[UIView] = []
     
@@ -49,7 +50,6 @@ class FortniteHUDCustomization: UIViewController {
         var y_axis:CGFloat = 50.0
         
         let defaults = UserDefaults.standard
-        
         var buttonTag = 0
         for buttonImages in listOfCombatHUDButtons {
             let button = UIView.init()

@@ -26,6 +26,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="65m-Cv-56P">
+                                <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a9k-f7-SUL">
+                                <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uqq-x0-HgY">
+                                <rect key="frame" x="1055" y="8" width="51" height="31"/>
+                                <connections>
+                                    <action selector="showFortniteHUD:" destination="BYZ-38-t0r" eventType="valueChanged" id="RAO-Fi-T3h"/>
+                                </connections>
+                            </switch>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Jf-az-E1Q" userLabel="MENU">
                                 <rect key="frame" x="0.0" y="774" width="60" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -49,21 +63,35 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="a9k-f7-SUL" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="3Wg-T3-hue"/>
+                            <constraint firstItem="Uqq-x0-HgY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="50i-2R-3US"/>
                             <constraint firstItem="ZTM-46-gYw" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="AvK-mC-7p4"/>
                             <constraint firstItem="5Jf-az-E1Q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Cf6-UC-O3k"/>
                             <constraint firstItem="7dc-iF-7nX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Fpz-R1-vSM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="5Jf-az-E1Q" secondAttribute="bottom" id="K8R-Ja-grY"/>
                             <constraint firstAttribute="bottom" secondItem="7dc-iF-7nX" secondAttribute="bottom" id="KBi-tX-wqS"/>
+                            <constraint firstItem="65m-Cv-56P" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="LFu-Hh-Se4"/>
+                            <constraint firstItem="65m-Cv-56P" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="M2S-CY-UKo"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Uqq-x0-HgY" secondAttribute="trailing" constant="8" id="QWd-8G-LTU"/>
                             <constraint firstItem="ZTM-46-gYw" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="W0j-do-61e"/>
                             <constraint firstAttribute="trailing" secondItem="ZTM-46-gYw" secondAttribute="trailing" id="YDS-DM-8kh"/>
+                            <constraint firstItem="65m-Cv-56P" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="a92-fa-3sx"/>
+                            <constraint firstItem="65m-Cv-56P" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="dwE-R4-IIh"/>
                             <constraint firstAttribute="bottom" secondItem="ZTM-46-gYw" secondAttribute="bottom" id="oN5-c2-BGF"/>
+                            <constraint firstItem="a9k-f7-SUL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ogS-nb-4r4"/>
+                            <constraint firstItem="a9k-f7-SUL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="qF4-Db-d0B"/>
+                            <constraint firstItem="a9k-f7-SUL" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="qu7-Y5-qYj"/>
                             <constraint firstAttribute="trailing" secondItem="7dc-iF-7nX" secondAttribute="trailing" id="ra3-S9-tSd"/>
                             <constraint firstItem="7dc-iF-7nX" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="sbV-T9-7qu"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buildingHUDView" destination="65m-Cv-56P" id="sd8-Ui-AxO"/>
+                        <outlet property="combatHUDView" destination="a9k-f7-SUL" id="0ft-TT-PMs"/>
                         <outlet property="containerOnScreenController" destination="ZTM-46-gYw" id="uEZ-Nc-rze"/>
                         <outlet property="containerWebView" destination="7dc-iF-7nX" id="SYe-nB-Np8"/>
+                        <outlet property="menuButton" destination="5Jf-az-E1Q" id="Jyl-84-cAW"/>
+                        <outlet property="showHUD" destination="Uqq-x0-HgY" id="TAu-jj-ncd"/>
                         <outletCollection property="webviewConstraints" destination="Fpz-R1-vSM" collectionClass="NSMutableArray" id="ql4-13-dcK"/>
                         <outletCollection property="webviewConstraints" destination="KBi-tX-wqS" collectionClass="NSMutableArray" id="lsZ-Xs-Cug"/>
                         <outletCollection property="webviewConstraints" destination="ra3-S9-tSd" collectionClass="NSMutableArray" id="qOR-ok-p6Q"/>
@@ -72,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140.55555555555554" y="120.74074074074073"/>
+            <point key="canvasLocation" x="140.28776978417267" y="120.14388489208633"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="jUM-bk-2UJ">
