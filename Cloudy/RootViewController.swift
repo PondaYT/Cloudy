@@ -107,6 +107,7 @@ class RootViewController: UIViewController, MenuActionsHandler {
     /// View layout already done
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        UIApplication.shared.isIdleTimerDisabled = true
         initializeViews()
         checkDonationReminder()
     }
