@@ -45,7 +45,7 @@
 
     - (void)cleanup;
 
-- (void)hideButtons;
+    - (void)hideButtons;
 
-- (void)drawButtons;
+    - (void)drawButtons;
 @end
