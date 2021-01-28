@@ -29,9 +29,10 @@
 #endif
 
 - (void)setupStreamView:(ControllerSupport *)controllerSupport
-    interactionDelegate:(id <UserInteractionDelegate>)interactionDelegate
-                 config:(StreamConfiguration *)streamConfig
-         hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate;
+        interactionDelegate:(id <UserInteractionDelegate>)interactionDelegate
+        config:(StreamConfiguration *)streamConfig
+        hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate
+        extensionDelegate:(id <OnScreenControlsExtension>)extensionDelegate;
 
 - (void)showOnScreenControls;
 

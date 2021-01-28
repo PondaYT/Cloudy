@@ -4,7 +4,7 @@ import Foundation
 
 /// Button option mask used by moonlight
 struct ButtonOptionSet: OptionSet {
-    let rawValue: Int
+    let rawValue: Int32
 
     static let A_FLAG       = ButtonOptionSet(rawValue: 0x0001)
     static let B_FLAG       = ButtonOptionSet(rawValue: 0x0002)

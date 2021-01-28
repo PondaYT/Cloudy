@@ -26,11 +26,11 @@ class RootViewController: UIViewController, MenuActionsHandler {
     /// Containers
     @IBOutlet var containerWebView:            UIView!
     @IBOutlet var containerOnScreenController: UIView!
-    
-    @IBOutlet var combatHUDView: UIView!
+
+    @IBOutlet var combatHUDView:   UIView!
     @IBOutlet var buildingHUDView: UIView!
-    @IBOutlet var menuButton: UIButton!
-    
+    @IBOutlet var menuButton:      UIButton!
+
 
     @IBOutlet var webviewConstraints: [NSLayoutConstraint]!
 
@@ -51,22 +51,23 @@ class RootViewController: UIViewController, MenuActionsHandler {
 
     /// The stream view that holds the on screen controls
     private var streamView:      StreamView?
-    
-    
-    var HUDCombatButtonX:[CGFloat] = []
-    var HUDCombatButtonY:[CGFloat] = []
-    var HUDCombatButtonWidth:[CGFloat] = []
-    var HUDCombatButtonHeight:[CGFloat] = []
-    
-    var HUDBuildingButtonX:[CGFloat] = []
-    var HUDBuildingButtonY:[CGFloat] = []
-    var HUDBuildingButtonWidth:[CGFloat] = []
-    var HUDBuildingButtonHeight:[CGFloat] = []
-    
-    
+
+    /// The fortnite hud extension
+    private let fortniteHUDOnScreenControls      = FortniteHUD()
+
+    var HUDCombatButtonX:      [CGFloat] = []
+    var HUDCombatButtonY:      [CGFloat] = []
+    var HUDCombatButtonWidth:  [CGFloat] = []
+    var HUDCombatButtonHeight: [CGFloat] = []
+
+    var HUDBuildingButtonX:      [CGFloat] = []
+    var HUDBuildingButtonY:      [CGFloat] = []
+    var HUDBuildingButtonWidth:  [CGFloat] = []
+    var HUDBuildingButtonHeight: [CGFloat] = []
+
 
     /// Expose the web controller for navigation
-    var webController: WebController? {
+    var webController:           WebController? {
         webView
     }
 
@@ -223,30 +224,31 @@ class RootViewController: UIViewController, MenuActionsHandler {
         newStreamView.setupStreamView(controllerSupport,
                                       interactionDelegate: self,
                                       config: streamConfig,
-                                      hapticFeedback: touchFeedbackGenerator)
+                                      hapticFeedback: touchFeedbackGenerator,
+                                      extensionDelegate: fortniteHUDOnScreenControls)
         newStreamView.showOnScreenControls()
         containerOnScreenController.addSubview(newStreamView)
         newStreamView.fillParent()
         streamView = newStreamView
         updateOnScreenController(with: UserDefaults.standard.onScreenControlsLevel)
         updateScalingFactor(with: UserDefaults.standard.webViewScale)
-        
+
         self.view.bringSubviewToFront(menuButton)
         self.view.bringSubviewToFront(showHUD)
-        
+
     }
-    
+
     @IBOutlet var showHUD: UISwitch!
-    
+
     @IBAction func showFortniteHUD(_ sender: UISwitch) {
-        
+
         if showHUD.isOn {
             streamView!.hideControllerButtons()
         } else {
             streamView!.showControllerButtons()
         }
     }
-        
+
 }
 
 extension RootViewController: UserInteractionDelegate {

@@ -155,14 +155,14 @@ struct ControllerElements {
     /// Construction for touch controls from objc
     @objc convenience init(controllerNumber: Int8,
                            activeGamepadMask: Int,
-                           buttonFlags: Int,
+                           buttonFlags: Int32,
                            leftTrigger: Float,
                            rightTrigger: Float,
                            leftStickX: Float,
                            leftStickY: Float,
                            rightStickX: Float,
                            rightStickY: Float) {
-        let buttonSet = ButtonOptionSet(rawValue: Int(buttonFlags))
+        let buttonSet = ButtonOptionSet(rawValue: buttonFlags)
         self.init(id: controllerNumber,
                   leftStick: ControllerElements.Stick(x: leftStickX,
                                                       y: leftStickY,
