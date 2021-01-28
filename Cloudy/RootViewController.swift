@@ -241,7 +241,7 @@ class RootViewController: UIViewController, MenuActionsHandler {
         
         
         
-        
+        /*
         var x_axis:CGFloat = 0.0
         var y_axis:CGFloat = 50.0
         
@@ -313,7 +313,7 @@ class RootViewController: UIViewController, MenuActionsHandler {
         buildingHUDView.alpha = 0
         
         self.view.bringSubviewToFront(self.combatHUDView)
-        
+        */
         self.view.bringSubviewToFront(menuButton)
         self.view.bringSubviewToFront(showHUD)
         
@@ -324,12 +324,14 @@ class RootViewController: UIViewController, MenuActionsHandler {
     @IBAction func showFortniteHUD(_ sender: UISwitch) {
         
         if showHUD.isOn {
-            self.view.bringSubviewToFront(self.buildingHUDView)
-            self.view.bringSubviewToFront(self.combatHUDView)
-            self.view.bringSubviewToFront(self.showHUD)
+            //self.view.bringSubviewToFront(self.buildingHUDView)
+            //self.view.bringSubviewToFront(self.combatHUDView)
+            //self.view.bringSubviewToFront(self.showHUD)
+            streamView!.hideControllerButtons()
         } else {
-            self.view.sendSubviewToBack(self.buildingHUDView)
-            self.view.sendSubviewToBack(self.combatHUDView)
+           // self.view.sendSubviewToBack(self.buildingHUDView)
+            //self.view.sendSubviewToBack(self.combatHUDView)
+            streamView!.showControllerButtons()
         }
     }
     

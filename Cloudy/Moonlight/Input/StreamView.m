@@ -45,6 +45,15 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
         NSDictionary<NSString *, NSNumber *> *dictCodes;
     }
 
+- (void) hideControllerButtons {
+    [onScreenControls hideButtons];
+}
+
+- (void) showControllerButtons {
+
+    [onScreenControls drawButtons];
+}
+
     - (void)setupStreamView:(ControllerSupport *)controllerSupport
             interactionDelegate:(id <UserInteractionDelegate>)interactionDelegate
             config:(StreamConfiguration *)streamConfig

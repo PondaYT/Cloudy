@@ -12,9 +12,9 @@
 
 @protocol UserInteractionDelegate <NSObject>
 
-    - (void)userInteractionBegan;
+- (void)userInteractionBegan;
 
-    - (void)userInteractionEnded;
+- (void)userInteractionEnded;
 
 @end
 
@@ -28,22 +28,26 @@
 
 #endif
 
-    - (void)setupStreamView:(ControllerSupport *)controllerSupport
-            interactionDelegate:(id <UserInteractionDelegate>)interactionDelegate
-            config:(StreamConfiguration *)streamConfig
-            hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate;
+- (void)setupStreamView:(ControllerSupport *)controllerSupport
+    interactionDelegate:(id <UserInteractionDelegate>)interactionDelegate
+                 config:(StreamConfiguration *)streamConfig
+         hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate;
 
-    - (void)showOnScreenControls;
+- (void)showOnScreenControls;
 
-    - (void)updateOnScreenControls;
+- (void)updateOnScreenControls;
 
-    - (OnScreenControlsLevel)getCurrentOscState;
+- (OnScreenControlsLevel)getCurrentOscState;
 
-    - (void)cleanup;
+- (void)cleanup;
+
+- (void)hideControllerButtons;
+
+- (void)showControllerButtons;
 
 #if !TARGET_OS_TV
 
-    - (void)updateCursorLocation:(CGPoint)location isMouse:(BOOL)isMouse;
+- (void)updateCursorLocation:(CGPoint)location isMouse:(BOOL)isMouse;
 
 #endif
 

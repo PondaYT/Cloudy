@@ -65,6 +65,88 @@
         UITouch *_l1Touch;
         UITouch *_l2Touch;
         UITouch *_l3Touch;
+        
+        CALayer *Aim;
+        CALayer *Autorun;
+        CALayer *Confirm;
+        CALayer *Crouch_Down;
+        CALayer *Crouch_Up;
+        CALayer *Cycle_Weapons_Down;
+        CALayer *Cycle_Weapons_Up;
+        CALayer *Edit_Crosshair;
+        CALayer *Edit_Reset;
+        CALayer *Edit;
+        CALayer *Emote_Wheel;
+        CALayer *Exit;
+        CALayer *Floor_Selected;
+        CALayer *Floor_Unselected;
+        CALayer *Inventory;
+        CALayer *Jump;
+        CALayer *Mic_Muted;
+        CALayer *Mic_Unmuted;
+        CALayer *Move_Joystick;
+        CALayer *Move_Outer;
+        CALayer *Open_Chest;
+        CALayer *Open_Door;
+        CALayer *Ping;
+        CALayer *Pyramid_Selected;
+        CALayer *Pyramid_Unselected;
+        CALayer *Quick_Chat;
+        CALayer *Quick_Heal;
+        CALayer *Repair;
+        CALayer *Reset;
+        CALayer *Rotate;
+        CALayer *Shoot_Big;
+        CALayer *Shoot;
+        CALayer *Stair_Selected;
+        CALayer *Stair_Unselected;
+        CALayer *Switch_To_Build;
+        CALayer *Switch_To_Combat;
+        CALayer *Throw;
+        CALayer *Use;
+        CALayer *Wall_Selected;
+        CALayer *Wall_Unselected;
+        
+        UITouch *AimTouch;
+        UITouch *AutorunTouch;
+        UITouch *ConfirmTouch;
+        UITouch *Crouch_DownTouch;
+        UITouch *Crouch_UpTouch;
+        UITouch *Cycle_Weapons_DownTouch;
+        UITouch *Cycle_Weapons_UpTouch;
+        UITouch *Edit_CrosshairTouch;
+        UITouch *Edit_ResetTouch;
+        UITouch *EditTouch;
+        UITouch *Emote_WheelTouch;
+        UITouch *ExitTouch;
+        UITouch *Floor_SelectedTouch;
+        UITouch *Floor_UnselectedTouch;
+        UITouch *InventoryTouch;
+        UITouch *JumpTouch;
+        UITouch *Mic_MutedTouch;
+        UITouch *Mic_UnmutedTouch;
+        UITouch *Move_JoystickTouch;
+        UITouch *Move_OuterTouch;
+        UITouch *Open_ChestTouch;
+        UITouch *Open_DoorTouch;
+        UITouch *PingTouch;
+        UITouch *Pyramid_SelectedTouch;
+        UITouch *Pyramid_UnselectedTouch;
+        UITouch *Quick_ChatTouch;
+        UITouch *Quick_HealTouch;
+        UITouch *RepairTouch;
+        UITouch *ResetTouch;
+        UITouch *RotateTouch;
+        UITouch *Shoot_BigTouch;
+        UITouch *ShootTouch;
+        UITouch *Stair_SelectedTouch;
+        UITouch *Stair_UnselectedTouch;
+        UITouch *Switch_To_BuildTouch;
+        UITouch *Switch_To_CombatTouch;
+        UITouch *ThrowTouch;
+        UITouch *UseTouch;
+        UITouch *Wall_SelectedTouch;
+        UITouch *Wall_UnselectedTouch;
 
         NSDate *l3TouchStart;
         NSDate *r3TouchStart;
@@ -474,7 +556,273 @@
         _leftButton.frame    = CGRectMake(D_PAD_CENTER_X - D_PAD_DIST - leftButtonImage.size.width, D_PAD_CENTER_Y - leftButtonImage.size.height / 2, leftButtonImage.size.width, leftButtonImage.size.height);
         _leftButton.contents = (id) leftButtonImage.CGImage;
         [_view.layer addSublayer:_leftButton];
+        
+        NSInteger i = 0;
+        
+        NSArray *HUDCombatButtonXSaved = [[NSUserDefaults standardUserDefaults] objectForKey:@"reKairosCombatHUDRectX"];
+        NSArray *HUDCombatButtonYSaved = [[NSUserDefaults standardUserDefaults] objectForKey:@"reKairosCombatHUDRectY"];
+        NSArray *HUDCombatButtonWidthSaved = [[NSUserDefaults standardUserDefaults] objectForKey:@"reKairosCombatHUDRectWidth"];
+        NSArray *HUDCombatButtonHeightSaved = [[NSUserDefaults standardUserDefaults] objectForKey:@"reKairosCombatHUDRectHeight"];
+        
+        Aim = [CALayer layer];
+        Autorun = [CALayer layer];
+        Confirm = [CALayer layer];
+        Crouch_Down = [CALayer layer];
+        Crouch_Up = [CALayer layer];
+        Cycle_Weapons_Down = [CALayer layer];
+        Cycle_Weapons_Up = [CALayer layer];
+        Edit_Crosshair = [CALayer layer];
+        Edit_Reset = [CALayer layer];
+        Edit = [CALayer layer];
+        Emote_Wheel = [CALayer layer];
+        Exit = [CALayer layer];
+        Floor_Selected = [CALayer layer];
+        Floor_Unselected = [CALayer layer];
+        Inventory = [CALayer layer];
+        Jump = [CALayer layer];
+        Mic_Muted = [CALayer layer];
+        Mic_Unmuted = [CALayer layer];
+        Move_Joystick = [CALayer layer];
+        Move_Outer = [CALayer layer];
+        Open_Chest = [CALayer layer];
+        Open_Door = [CALayer layer];
+        Ping = [CALayer layer];
+        Pyramid_Selected = [CALayer layer];
+        Pyramid_Unselected = [CALayer layer];
+        Quick_Chat = [CALayer layer];
+        Quick_Heal = [CALayer layer];
+        Repair = [CALayer layer];
+        Reset = [CALayer layer];
+        Rotate = [CALayer layer];
+        Shoot_Big = [CALayer layer];
+        Shoot = [CALayer layer];
+        Stair_Selected = [CALayer layer];
+        Stair_Unselected = [CALayer layer];
+        Switch_To_Build = [CALayer layer];
+        Switch_To_Combat = [CALayer layer];
+        Throw = [CALayer layer];
+        Use = [CALayer layer];
+        Wall_Selected = [CALayer layer];
+        Wall_Unselected = [CALayer layer];
+
+        
+        UIImage *AimImage = [self imageWithImage:[UIImage imageNamed: @"Aim.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:0] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:0] floatValue])];
+        Aim.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:0] floatValue], [[HUDCombatButtonYSaved objectAtIndex:0] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:0] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:0] floatValue]);
+        Aim.contents = (id) AimImage.CGImage;
+        [_view.layer addSublayer:Aim];
+
+        UIImage *AutorunImage = [self imageWithImage:[UIImage imageNamed: @"Autorun.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:1] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:1] floatValue])];
+        Autorun.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:1] floatValue], [[HUDCombatButtonYSaved objectAtIndex:1] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:1] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:1] floatValue]);
+        Autorun.contents = (id) AutorunImage.CGImage;
+        [_view.layer addSublayer:Autorun];
+
+        UIImage *ConfirmImage = [self imageWithImage:[UIImage imageNamed: @"Confirm.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:2] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:2] floatValue])];
+        Confirm.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:2] floatValue], [[HUDCombatButtonYSaved objectAtIndex:2] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:2] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:2] floatValue]);
+        Confirm.contents = (id) ConfirmImage.CGImage;
+        [_view.layer addSublayer:Confirm];
+
+        UIImage *Crouch_DownImage = [self imageWithImage:[UIImage imageNamed: @"Crouch Down.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:3] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:3] floatValue])];
+        Crouch_Down.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:3] floatValue], [[HUDCombatButtonYSaved objectAtIndex:3] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:3] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:3] floatValue]);
+        Crouch_Down.contents = (id) Crouch_DownImage.CGImage;
+        [_view.layer addSublayer:Crouch_Down];
+
+        UIImage *Crouch_UpImage = [self imageWithImage:[UIImage imageNamed: @"Crouch Up.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:4] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:4] floatValue])];
+        Crouch_Up.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:4] floatValue], [[HUDCombatButtonYSaved objectAtIndex:4] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:4] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:4] floatValue]);
+        Crouch_Up.contents = (id) Crouch_UpImage.CGImage;
+        [_view.layer addSublayer:Crouch_Up];
+
+        UIImage *Cycle_Weapons_DownImage = [self imageWithImage:[UIImage imageNamed: @"Cycle Weapons Down.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:5] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:5] floatValue])];
+        Cycle_Weapons_Down.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:5] floatValue], [[HUDCombatButtonYSaved objectAtIndex:5] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:5] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:5] floatValue]);
+        Cycle_Weapons_Down.contents = (id) Cycle_Weapons_DownImage.CGImage;
+        [_view.layer addSublayer:Cycle_Weapons_Down];
+
+        UIImage *Cycle_Weapons_UpImage = [self imageWithImage:[UIImage imageNamed: @"Cycle Weapons Up.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:6] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:6] floatValue])];
+        Cycle_Weapons_Up.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:6] floatValue], [[HUDCombatButtonYSaved objectAtIndex:6] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:6] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:6] floatValue]);
+        Cycle_Weapons_Up.contents = (id) Cycle_Weapons_UpImage.CGImage;
+        [_view.layer addSublayer:Cycle_Weapons_Up];
+
+        UIImage *Edit_CrosshairImage = [self imageWithImage:[UIImage imageNamed: @"Edit Crosshair.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:7] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:7] floatValue])];
+        Edit_Crosshair.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:7] floatValue], [[HUDCombatButtonYSaved objectAtIndex:7] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:7] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:7] floatValue]);
+        Edit_Crosshair.contents = (id) Edit_CrosshairImage.CGImage;
+        [_view.layer addSublayer:Edit_Crosshair];
+
+        UIImage *Edit_ResetImage = [self imageWithImage:[UIImage imageNamed: @"Edit Reset.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:8] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:8] floatValue])];
+        Edit_Reset.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:8] floatValue], [[HUDCombatButtonYSaved objectAtIndex:8] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:8] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:8] floatValue]);
+        Edit_Reset.contents = (id) Edit_ResetImage.CGImage;
+        [_view.layer addSublayer:Edit_Reset];
+
+        UIImage *EditImage = [self imageWithImage:[UIImage imageNamed: @"Edit.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:9] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:9] floatValue])];
+        Edit.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:9] floatValue], [[HUDCombatButtonYSaved objectAtIndex:9] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:9] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:9] floatValue]);
+        Edit.contents = (id) EditImage.CGImage;
+        [_view.layer addSublayer:Edit];
+
+        UIImage *Emote_WheelImage = [self imageWithImage:[UIImage imageNamed: @"Emote Wheel.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:10] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:10] floatValue])];
+        Emote_Wheel.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:10] floatValue], [[HUDCombatButtonYSaved objectAtIndex:10] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:10] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:10] floatValue]);
+        Emote_Wheel.contents = (id) Emote_WheelImage.CGImage;
+        [_view.layer addSublayer:Emote_Wheel];
+
+        UIImage *ExitImage = [self imageWithImage:[UIImage imageNamed: @"Exit.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:11] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:11] floatValue])];
+        Exit.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:11] floatValue], [[HUDCombatButtonYSaved objectAtIndex:11] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:11] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:11] floatValue]);
+        Exit.contents = (id) ExitImage.CGImage;
+        [_view.layer addSublayer:Exit];
+
+        UIImage *Floor_SelectedImage = [self imageWithImage:[UIImage imageNamed: @"Floor Selected.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:12] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:12] floatValue])];
+        Floor_Selected.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:12] floatValue], [[HUDCombatButtonYSaved objectAtIndex:12] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:12] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:12] floatValue]);
+        Floor_Selected.contents = (id) Floor_SelectedImage.CGImage;
+        [_view.layer addSublayer:Floor_Selected];
+
+        UIImage *Floor_UnselectedImage = [self imageWithImage:[UIImage imageNamed: @"Floor Unselected.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:13] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:13] floatValue])];
+        Floor_Unselected.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:13] floatValue], [[HUDCombatButtonYSaved objectAtIndex:13] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:13] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:13] floatValue]);
+        Floor_Unselected.contents = (id) Floor_UnselectedImage.CGImage;
+        [_view.layer addSublayer:Floor_Unselected];
+
+        UIImage *InventoryImage = [self imageWithImage:[UIImage imageNamed: @"Inventory.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:14] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:14] floatValue])];
+        Inventory.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:14] floatValue], [[HUDCombatButtonYSaved objectAtIndex:14] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:14] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:14] floatValue]);
+        Inventory.contents = (id) InventoryImage.CGImage;
+        [_view.layer addSublayer:Inventory];
+
+        UIImage *JumpImage = [self imageWithImage:[UIImage imageNamed: @"Jump.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:15] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:15] floatValue])];
+        Jump.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:15] floatValue], [[HUDCombatButtonYSaved objectAtIndex:15] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:15] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:15] floatValue]);
+        Jump.contents = (id) JumpImage.CGImage;
+        [_view.layer addSublayer:Jump];
+
+        UIImage *Mic_MutedImage = [self imageWithImage:[UIImage imageNamed: @"Mic Muted.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:16] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:16] floatValue])];
+        Mic_Muted.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:16] floatValue], [[HUDCombatButtonYSaved objectAtIndex:16] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:16] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:16] floatValue]);
+        Mic_Muted.contents = (id) Mic_MutedImage.CGImage;
+        [_view.layer addSublayer:Mic_Muted];
+
+        UIImage *Mic_UnmutedImage = [self imageWithImage:[UIImage imageNamed: @"Mic Unmuted.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:17] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:17] floatValue])];
+        Mic_Unmuted.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:17] floatValue], [[HUDCombatButtonYSaved objectAtIndex:17] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:17] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:17] floatValue]);
+        Mic_Unmuted.contents = (id) Mic_UnmutedImage.CGImage;
+        [_view.layer addSublayer:Mic_Unmuted];
+
+        UIImage *Move_JoystickImage = [self imageWithImage:[UIImage imageNamed: @"Move Joystick.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:18] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:18] floatValue])];
+        Move_Joystick.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:18] floatValue], [[HUDCombatButtonYSaved objectAtIndex:18] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:18] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:18] floatValue]);
+        Move_Joystick.contents = (id) Move_JoystickImage.CGImage;
+        [_view.layer addSublayer:Move_Joystick];
+
+        UIImage *Move_OuterImage = [self imageWithImage:[UIImage imageNamed: @"Move Outer.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:19] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:19] floatValue])];
+        Move_Outer.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:19] floatValue], [[HUDCombatButtonYSaved objectAtIndex:19] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:19] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:19] floatValue]);
+        Move_Outer.contents = (id) Move_OuterImage.CGImage;
+        [_view.layer addSublayer:Move_Outer];
+
+        UIImage *Open_ChestImage = [self imageWithImage:[UIImage imageNamed: @"Open Chest.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:20] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:20] floatValue])];
+        Open_Chest.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:20] floatValue], [[HUDCombatButtonYSaved objectAtIndex:20] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:20] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:20] floatValue]);
+        Open_Chest.contents = (id) Open_ChestImage.CGImage;
+        [_view.layer addSublayer:Open_Chest];
+
+        UIImage *Open_DoorImage = [self imageWithImage:[UIImage imageNamed: @"Open Door.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:21] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:21] floatValue])];
+        Open_Door.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:21] floatValue], [[HUDCombatButtonYSaved objectAtIndex:21] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:21] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:21] floatValue]);
+        Open_Door.contents = (id) Open_DoorImage.CGImage;
+        [_view.layer addSublayer:Open_Door];
+
+        UIImage *PingImage = [self imageWithImage:[UIImage imageNamed: @"Ping.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:22] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:22] floatValue])];
+        Ping.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:22] floatValue], [[HUDCombatButtonYSaved objectAtIndex:22] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:22] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:22] floatValue]);
+        Ping.contents = (id) PingImage.CGImage;
+        [_view.layer addSublayer:Ping];
+
+        UIImage *Pyramid_SelectedImage = [self imageWithImage:[UIImage imageNamed: @"Pyramid Selected.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:23] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:23] floatValue])];
+        Pyramid_Selected.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:23] floatValue], [[HUDCombatButtonYSaved objectAtIndex:23] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:23] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:23] floatValue]);
+        Pyramid_Selected.contents = (id) Pyramid_SelectedImage.CGImage;
+        [_view.layer addSublayer:Pyramid_Selected];
+
+        UIImage *Pyramid_UnselectedImage = [self imageWithImage:[UIImage imageNamed: @"Pyramid Unselected.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:24] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:24] floatValue])];
+        Pyramid_Unselected.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:24] floatValue], [[HUDCombatButtonYSaved objectAtIndex:24] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:24] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:24] floatValue]);
+        Pyramid_Unselected.contents = (id) Pyramid_UnselectedImage.CGImage;
+        [_view.layer addSublayer:Pyramid_Unselected];
+
+        UIImage *Quick_ChatImage = [self imageWithImage:[UIImage imageNamed: @"Quick Chat.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:25] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:25] floatValue])];
+        Quick_Chat.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:25] floatValue], [[HUDCombatButtonYSaved objectAtIndex:25] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:25] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:25] floatValue]);
+        Quick_Chat.contents = (id) Quick_ChatImage.CGImage;
+        [_view.layer addSublayer:Quick_Chat];
+
+        UIImage *Quick_HealImage = [self imageWithImage:[UIImage imageNamed: @"Quick Heal.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:26] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:26] floatValue])];
+        Quick_Heal.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:26] floatValue], [[HUDCombatButtonYSaved objectAtIndex:26] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:26] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:26] floatValue]);
+        Quick_Heal.contents = (id) Quick_HealImage.CGImage;
+        [_view.layer addSublayer:Quick_Heal];
+
+        UIImage *RepairImage = [self imageWithImage:[UIImage imageNamed: @"Repair.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:27] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:27] floatValue])];
+        Repair.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:27] floatValue], [[HUDCombatButtonYSaved objectAtIndex:27] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:27] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:27] floatValue]);
+        Repair.contents = (id) RepairImage.CGImage;
+        [_view.layer addSublayer:Repair];
+
+        UIImage *ResetImage = [self imageWithImage:[UIImage imageNamed: @"Reset.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:28] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:28] floatValue])];
+        Reset.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:28] floatValue], [[HUDCombatButtonYSaved objectAtIndex:28] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:28] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:28] floatValue]);
+        Reset.contents = (id) ResetImage.CGImage;
+        [_view.layer addSublayer:Reset];
+
+        UIImage *RotateImage = [self imageWithImage:[UIImage imageNamed: @"Rotate.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:29] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:29] floatValue])];
+        Rotate.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:29] floatValue], [[HUDCombatButtonYSaved objectAtIndex:29] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:29] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:29] floatValue]);
+        Rotate.contents = (id) RotateImage.CGImage;
+        [_view.layer addSublayer:Rotate];
+
+        UIImage *Shoot_BigImage = [self imageWithImage:[UIImage imageNamed: @"Shoot Big.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:30] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:30] floatValue])];
+        Shoot_Big.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:30] floatValue], [[HUDCombatButtonYSaved objectAtIndex:30] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:30] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:30] floatValue]);
+        Shoot_Big.contents = (id) Shoot_BigImage.CGImage;
+        [_view.layer addSublayer:Shoot_Big];
+
+        UIImage *ShootImage = [self imageWithImage:[UIImage imageNamed: @"Shoot.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:31] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:31] floatValue])];
+        Shoot.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:31] floatValue], [[HUDCombatButtonYSaved objectAtIndex:31] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:31] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:31] floatValue]);
+        Shoot.contents = (id) ShootImage.CGImage;
+        [_view.layer addSublayer:Shoot];
+
+        UIImage *Stair_SelectedImage = [self imageWithImage:[UIImage imageNamed: @"Stair Selected.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:32] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:32] floatValue])];
+        Stair_Selected.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:32] floatValue], [[HUDCombatButtonYSaved objectAtIndex:32] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:32] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:32] floatValue]);
+        Stair_Selected.contents = (id) Stair_SelectedImage.CGImage;
+        [_view.layer addSublayer:Stair_Selected];
+
+        UIImage *Stair_UnselectedImage = [self imageWithImage:[UIImage imageNamed: @"Stair Unselected.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:33] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:33] floatValue])];
+        Stair_Unselected.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:33] floatValue], [[HUDCombatButtonYSaved objectAtIndex:33] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:33] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:33] floatValue]);
+        Stair_Unselected.contents = (id) Stair_UnselectedImage.CGImage;
+        [_view.layer addSublayer:Stair_Unselected];
+
+        UIImage *Switch_To_BuildImage = [self imageWithImage:[UIImage imageNamed: @"Switch To Build.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:34] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:34] floatValue])];
+        Switch_To_Build.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:34] floatValue], [[HUDCombatButtonYSaved objectAtIndex:34] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:34] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:34] floatValue]);
+        Switch_To_Build.contents = (id) Switch_To_BuildImage.CGImage;
+        [_view.layer addSublayer:Switch_To_Build];
+
+        UIImage *Switch_To_CombatImage = [self imageWithImage:[UIImage imageNamed: @"Switch To Combat.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:35] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:35] floatValue])];
+        Switch_To_Combat.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:35] floatValue], [[HUDCombatButtonYSaved objectAtIndex:35] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:35] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:35] floatValue]);
+        Switch_To_Combat.contents = (id) Switch_To_CombatImage.CGImage;
+        [_view.layer addSublayer:Switch_To_Combat];
+
+        UIImage *ThrowImage = [self imageWithImage:[UIImage imageNamed: @"Throw.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:36] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:36] floatValue])];
+        Throw.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:36] floatValue], [[HUDCombatButtonYSaved objectAtIndex:36] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:36] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:36] floatValue]);
+        Throw.contents = (id) ThrowImage.CGImage;
+        [_view.layer addSublayer:Throw];
+
+        UIImage *UseImage = [self imageWithImage:[UIImage imageNamed: @"Use.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:37] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:37] floatValue])];
+        Use.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:37] floatValue], [[HUDCombatButtonYSaved objectAtIndex:37] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:37] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:37] floatValue]);
+        Use.contents = (id) UseImage.CGImage;
+        [_view.layer addSublayer:Use];
+
+        UIImage *Wall_SelectedImage = [self imageWithImage:[UIImage imageNamed: @"Wall Selected.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:38] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:38] floatValue])];
+        Wall_Selected.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:38] floatValue], [[HUDCombatButtonYSaved objectAtIndex:38] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:38] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:38] floatValue]);
+        Wall_Selected.contents = (id) Wall_SelectedImage.CGImage;
+        [_view.layer addSublayer:Wall_Selected];
+
+        UIImage *Wall_UnselectedImage = [self imageWithImage:[UIImage imageNamed: @"Wall Unselected.png"] scaledToFillSize:CGSizeMake([[HUDCombatButtonWidthSaved objectAtIndex:39] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:39] floatValue])];
+        Wall_Unselected.frame = CGRectMake([[HUDCombatButtonXSaved objectAtIndex:39] floatValue], [[HUDCombatButtonYSaved objectAtIndex:39] floatValue], [[HUDCombatButtonWidthSaved objectAtIndex:39] floatValue], [[HUDCombatButtonHeightSaved objectAtIndex:39] floatValue]);
+        Wall_Unselected.contents = (id) Wall_UnselectedImage.CGImage;
+        [_view.layer addSublayer:Wall_Unselected];
     }
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToFillSize:(CGSize)size
+{
+    CGFloat scale = MAX(size.width/image.size.width, size.height/image.size.height);
+    CGFloat width = image.size.width * scale;
+    CGFloat height = image.size.height * scale;
+    CGRect imageRect = CGRectMake((size.width - width)/2.0f,
+                                  (size.height - height)/2.0f,
+                                  width,
+                                  height);
+
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    [image drawInRect:imageRect];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
 
     - (void)drawStartSelectHome
     {
@@ -763,7 +1111,126 @@
             else if(touch == _r3Touch)
             {
                 buttonTouch = true;
-            }
+            } else if (touch == AimTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == AutorunTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == ConfirmTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Crouch_DownTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Crouch_UpTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Cycle_Weapons_DownTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Cycle_Weapons_UpTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Edit_CrosshairTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Edit_ResetTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == EditTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Emote_WheelTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == ExitTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Floor_SelectedTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Floor_UnselectedTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == InventoryTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == JumpTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Mic_MutedTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Mic_UnmutedTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Move_JoystickTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Move_OuterTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Open_ChestTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Open_DoorTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == PingTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Pyramid_SelectedTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Pyramid_UnselectedTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Quick_ChatTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Quick_HealTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == RepairTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == ResetTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == RotateTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Shoot_BigTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == ShootTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Stair_SelectedTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Stair_UnselectedTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Switch_To_BuildTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Switch_To_CombatTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == ThrowTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == UseTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Wall_SelectedTouch) {
+                buttonTouch = true;
+             }
+             else if (touch == Wall_UnselectedTouch) {
+                buttonTouch = true;
+             }
             if([_deadTouches containsObject:touch])
             {
                 updated = true;
@@ -939,7 +1406,232 @@
                 _rsTouch      = touch;
                 _rsTouchStart = touchLocation;
                 stickTouch    = true;
-            }
+            } else if([Aim.presentationLayer hitTest:touchLocation]) {
+                [_controllerSupport updateLeftTrigger:_controller left:0xFF];
+              AimTouch = touch;
+           updated = true;
+           }
+            else if([Autorun.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              AutorunTouch = touch;
+           updated = true;
+           }
+            else if([Confirm.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              ConfirmTouch = touch;
+           updated = true;
+           }
+            else if([Crouch_Down.presentationLayer hitTest:touchLocation]) {
+               // [_controllerSupport setButtonFlag:_controller flags:RIGHT_FLAG];
+                [_controllerSupport setButtonFlag:_controller flags:RS_CLK_FLAG];
+              Crouch_DownTouch = touch;
+           updated = true;
+           }
+            else if([Crouch_Up.presentationLayer hitTest:touchLocation]) {
+                //[_controllerSupport setButtonFlag:_controller flags:RIGHT_FLAG];
+                [_controllerSupport setButtonFlag:_controller flags:RS_CLK_FLAG];
+              Crouch_UpTouch = touch;
+           updated = true;
+           }
+            else if([Cycle_Weapons_Down.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Cycle_Weapons_DownTouch = touch;
+           updated = true;
+           }
+            else if([Cycle_Weapons_Up.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Cycle_Weapons_UpTouch = touch;
+           updated = true;
+           }
+            else if([Edit_Crosshair.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Edit_CrosshairTouch = touch;
+           updated = true;
+           }
+            else if([Edit_Reset.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Edit_ResetTouch = touch;
+           updated = true;
+           }
+            else if([Edit.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              EditTouch = touch;
+           updated = true;
+           }
+            else if([Emote_Wheel.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Emote_WheelTouch = touch;
+           updated = true;
+           }
+            else if([Exit.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              ExitTouch = touch;
+           updated = true;
+           }
+            else if([Floor_Selected.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Floor_SelectedTouch = touch;
+           updated = true;
+           }
+            else if([Floor_Unselected.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Floor_UnselectedTouch = touch;
+           updated = true;
+           }
+            else if([Inventory.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              InventoryTouch = touch;
+           updated = true;
+           }
+            else if([Jump.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              JumpTouch = touch;
+           updated = true;
+           }
+            else if([Mic_Muted.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Mic_MutedTouch = touch;
+           updated = true;
+           }
+            else if([Mic_Unmuted.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Mic_UnmutedTouch = touch;
+           updated = true;
+           }
+            else if([Move_Joystick.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Move_JoystickTouch = touch;
+           updated = true;
+           }
+            else if([Move_Outer.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Move_OuterTouch = touch;
+           updated = true;
+           }
+            else if([Open_Chest.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Open_ChestTouch = touch;
+           updated = true;
+           }
+            else if([Open_Door.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Open_DoorTouch = touch;
+           updated = true;
+           }
+            else if([Ping.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+                [_controllerSupport updateFinished:_controller];
+                
+                double delayInSeconds = 0.02;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [self->_controllerSupport clearButtonFlag:self->_controller flags:A_FLAG];
+                    [self->_controllerSupport updateFinished:self->_controller];
+                });
+
+                
+                double delayInSeconds3 = 0.04;
+                dispatch_time_t popTime3 = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds3 * NSEC_PER_SEC));
+                dispatch_after(popTime3, dispatch_get_main_queue(), ^(void){
+                    [self->_controllerSupport updateRightTrigger:self->_controller right:0xFF];
+                    [self->_controllerSupport updateFinished:self->_controller];
+                });
+                
+                double delayInSeconds2 = 0.06;
+                dispatch_time_t popTime2 = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds2 * NSEC_PER_SEC));
+                dispatch_after(popTime2, dispatch_get_main_queue(), ^(void){
+                    [_controllerSupport updateRightTrigger:_controller right:0];
+                    [self->_controllerSupport updateFinished:self->_controller];
+                });
+
+              //PingTouch = touch;
+           //updated = true;
+           }
+            else if([Pyramid_Selected.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Pyramid_SelectedTouch = touch;
+           updated = true;
+           }
+            else if([Pyramid_Unselected.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Pyramid_UnselectedTouch = touch;
+           updated = true;
+           }
+            else if([Quick_Chat.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Quick_ChatTouch = touch;
+           updated = true;
+           }
+            else if([Quick_Heal.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Quick_HealTouch = touch;
+           updated = true;
+           }
+            else if([Repair.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              RepairTouch = touch;
+           updated = true;
+           }
+            else if([Reset.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              ResetTouch = touch;
+           updated = true;
+           }
+            else if([Rotate.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              RotateTouch = touch;
+           updated = true;
+           }
+            else if([Shoot_Big.presentationLayer hitTest:touchLocation]) {
+                [_controllerSupport updateRightTrigger:_controller right:0xFF];
+              Shoot_BigTouch = touch;
+           updated = true;
+           }
+            else if([Shoot.presentationLayer hitTest:touchLocation]) {
+                [_controllerSupport updateRightTrigger:_controller right:0xFF];
+              ShootTouch = touch;
+           updated = true;
+           }
+            else if([Stair_Selected.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Stair_SelectedTouch = touch;
+           updated = true;
+           }
+            else if([Stair_Unselected.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Stair_UnselectedTouch = touch;
+           updated = true;
+           }
+            else if([Switch_To_Build.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:B_FLAG];
+              Switch_To_BuildTouch = touch;
+           updated = true;
+           }
+            else if([Switch_To_Combat.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:B_FLAG];
+              Switch_To_CombatTouch = touch;
+           updated = true;
+           }
+            else if([Throw.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              ThrowTouch = touch;
+           updated = true;
+           }
+            else if([Use.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              UseTouch = touch;
+           updated = true;
+           }
+            else if([Wall_Selected.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Wall_SelectedTouch = touch;
+           updated = true;
+           }
+            else if([Wall_Unselected.presentationLayer hitTest:touchLocation]) {
+              [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
+              Wall_UnselectedTouch = touch;
+           updated = true;
+           }
             if(!updated && !stickTouch && [self isInDeadZone:touch])
             {
                 [_deadTouches addObject:touch];
@@ -1060,7 +1752,208 @@
             {
                 _r3Touch = nil;
                 touched  = true;
-            }
+            } else if (touch == AimTouch) {
+                [_controllerSupport updateLeftTrigger:_controller left:0];
+              AimTouch = nil;
+              updated = true;
+           }
+            else if (touch == AutorunTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              AutorunTouch = nil;
+              updated = true;
+           }
+            else if (touch == ConfirmTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              ConfirmTouch = nil;
+              updated = true;
+           }
+            else if (touch == Crouch_DownTouch) {
+                [_controllerSupport clearButtonFlag:_controller flags:RS_CLK_FLAG];
+              Crouch_DownTouch = nil;
+              updated = true;
+           }
+            else if (touch == Crouch_UpTouch) {
+                [_controllerSupport clearButtonFlag:_controller flags:RS_CLK_FLAG];
+              Crouch_UpTouch = nil;
+              updated = true;
+           }
+            else if (touch == Cycle_Weapons_DownTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Cycle_Weapons_DownTouch = nil;
+              updated = true;
+           }
+            else if (touch == Cycle_Weapons_UpTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Cycle_Weapons_UpTouch = nil;
+              updated = true;
+           }
+            else if (touch == Edit_CrosshairTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Edit_CrosshairTouch = nil;
+              updated = true;
+           }
+            else if (touch == Edit_ResetTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Edit_ResetTouch = nil;
+              updated = true;
+           }
+            else if (touch == EditTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              EditTouch = nil;
+              updated = true;
+           }
+            else if (touch == Emote_WheelTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Emote_WheelTouch = nil;
+              updated = true;
+           }
+            else if (touch == ExitTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              ExitTouch = nil;
+              updated = true;
+           }
+            else if (touch == Floor_SelectedTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Floor_SelectedTouch = nil;
+              updated = true;
+           }
+            else if (touch == Floor_UnselectedTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Floor_UnselectedTouch = nil;
+              updated = true;
+           }
+            else if (touch == InventoryTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              InventoryTouch = nil;
+              updated = true;
+           }
+            else if (touch == JumpTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              JumpTouch = nil;
+              updated = true;
+           }
+            else if (touch == Mic_MutedTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Mic_MutedTouch = nil;
+              updated = true;
+           }
+            else if (touch == Mic_UnmutedTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Mic_UnmutedTouch = nil;
+              updated = true;
+           }
+            else if (touch == Move_JoystickTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Move_JoystickTouch = nil;
+              updated = true;
+           }
+            else if (touch == Move_OuterTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Move_OuterTouch = nil;
+              updated = true;
+           }
+            else if (touch == Open_ChestTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Open_ChestTouch = nil;
+              updated = true;
+           }
+            else if (touch == Open_DoorTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Open_DoorTouch = nil;
+              updated = true;
+           }
+            else if (touch == PingTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              PingTouch = nil;
+              updated = true;
+           }
+            else if (touch == Pyramid_SelectedTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Pyramid_SelectedTouch = nil;
+              updated = true;
+           }
+            else if (touch == Pyramid_UnselectedTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Pyramid_UnselectedTouch = nil;
+              updated = true;
+           }
+            else if (touch == Quick_ChatTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Quick_ChatTouch = nil;
+              updated = true;
+           }
+            else if (touch == Quick_HealTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Quick_HealTouch = nil;
+              updated = true;
+           }
+            else if (touch == RepairTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              RepairTouch = nil;
+              updated = true;
+           }
+            else if (touch == ResetTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              ResetTouch = nil;
+              updated = true;
+           }
+            else if (touch == RotateTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              RotateTouch = nil;
+              updated = true;
+           }
+            else if (touch == Shoot_BigTouch) {
+                //[_controllerSupport updateRightTrigger:_controller right:0xFF];
+                [_controllerSupport updateRightTrigger:_controller right:0];
+              Shoot_BigTouch = nil;
+              updated = true;
+           }
+            else if (touch == ShootTouch) {
+                //[_controllerSupport updateRightTrigger:_controller right:0xFF];
+                [_controllerSupport updateRightTrigger:_controller right:0];
+              ShootTouch = nil;
+              updated = true;
+           }
+            else if (touch == Stair_SelectedTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Stair_SelectedTouch = nil;
+              updated = true;
+           }
+            else if (touch == Stair_UnselectedTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Stair_UnselectedTouch = nil;
+              updated = true;
+           }
+            else if (touch == Switch_To_BuildTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:B_FLAG];
+              Switch_To_BuildTouch = nil;
+              updated = true;
+           }
+            else if (touch == Switch_To_CombatTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:B_FLAG];
+              Switch_To_CombatTouch = nil;
+              updated = true;
+           }
+            else if (touch == ThrowTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              ThrowTouch = nil;
+              updated = true;
+           }
+            else if (touch == UseTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              UseTouch = nil;
+              updated = true;
+           }
+            else if (touch == Wall_SelectedTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Wall_SelectedTouch = nil;
+              updated = true;
+           }
+            else if (touch == Wall_UnselectedTouch) {
+              [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
+              Wall_UnselectedTouch = nil;
+              updated = true;
+           }
             if([_deadTouches containsObject:touch])
             {
                 [_deadTouches removeObject:touch];
