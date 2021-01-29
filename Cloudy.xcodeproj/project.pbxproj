@@ -15,6 +15,7 @@
 		44A4D1A9A30B84DCDD3F66C7 /* Scripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D24369D3C549C04BC958 /* Scripts.swift */; };
 		44A4D20C0B0DF5819CE21F17 /* CloudyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DA6DC6F7876B0D6B7A64 /* CloudyController.swift */; };
 		44A4D240730D282493AC380E /* StreamConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D47E3D9518C80384D8F4 /* StreamConfiguration.m */; };
+		44A4D274B7623C77656A0288 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DA80D911909ACEC88C1E /* Queue.swift */; };
 		44A4D313CD82BF86B7841B19 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DDFB3BA2FE8AEE10DEA9 /* Collection.swift */; };
 		44A4D3B8AE0372A4C71E32EC /* TemporarySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DF345C0AE58872E1CC3A /* TemporarySettings.swift */; };
 		44A4D44641C7C146FE8BC523 /* Alerter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DD3E981844FBC3E9E5A7 /* Alerter.swift */; };
@@ -120,6 +121,7 @@
 		44A4D9AA937FF7595CC480CE /* LaunchArgumentHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchArgumentHandler.swift; sourceTree = "<group>"; };
 		44A4D9F318B9593A6DD6F951 /* ButtonOptionSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonOptionSet.swift; sourceTree = "<group>"; };
 		44A4DA6DC6F7876B0D6B7A64 /* CloudyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudyController.swift; sourceTree = "<group>"; };
+		44A4DA80D911909ACEC88C1E /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		44A4DB5C7725B073FE1AB0E8 /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		44A4DBCCBA86600B436045E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		44A4DD3E981844FBC3E9E5A7 /* Alerter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alerter.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				44A4D24369D3C549C04BC958 /* Scripts.swift */,
 				44A4DA6DC6F7876B0D6B7A64 /* CloudyController.swift */,
 				44A4D9AA937FF7595CC480CE /* LaunchArgumentHandler.swift */,
+				44A4DA80D911909ACEC88C1E /* Queue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -699,6 +702,7 @@
 				44A4DB5EF1F09B9D531A5704 /* WKUserScript.swift in Sources */,
 				44A4DC98C01BE31D98C4374C /* PurchaseHelper.swift in Sources */,
 				44A4DA9F12FCC427A4D65E16 /* FortniteHUD.swift in Sources */,
+				44A4D274B7623C77656A0288 /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

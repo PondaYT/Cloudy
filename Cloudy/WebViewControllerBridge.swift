@@ -12,19 +12,21 @@ import GameController
 /// Protocol to handle incoming cloudy controller sources
 @objc protocol ControllerDataReceiver {
     @objc func submit(controllerData: CloudyController, for type: ControlsSource)
+    @objc func enqueue(controllerData: [CloudyController], for type: ControlsSource)
 }
 
 /// Main module that connects the web views controller scripts to the native controller handling
 class WebViewControllerBridge: NSObject, WKScriptMessageHandlerWithReply, ControllerDataReceiver {
 
-    /// Alias for the reply type back to the webWiew
+    /// Alias for the reply type back to the webView
     typealias ReplyHandlerType = (Any?, String?) -> Void
 
-    private var controllerData:                 [ControlsSource: CloudyController] = [:]
+    private var controllerDataQueue:            [ControlsSource: Queue<CloudyController>] = [.external: Queue(), .onScreen: Queue()]
+    private var controllerData:                 [ControlsSource: CloudyController]        = [:]
 
     /// Remember last controller snapshot
-    private var lastExternalControllerSnapshot: CloudyController?                  = nil
-    private var lastTouchControllerSnapShot:    CloudyController?                  = nil
+    private var lastExternalControllerSnapshot: CloudyController?                         = nil
+    private var lastTouchControllerSnapShot:    CloudyController?                         = nil
 
     /// current export type
     var exportType:     CloudyController.JsonType = .regular
@@ -51,11 +53,23 @@ class WebViewControllerBridge: NSObject, WKScriptMessageHandlerWithReply, Contro
         }
     }
 
+    /// Helper to get the controller data to process
+    private func getControllerData(for type: ControlsSource) -> CloudyController? {
+        if let queueElement = controllerDataQueue[type]?.dequeue() {
+            return queueElement
+        }
+        switch type {
+            case .onScreen:
+                return controllerData[.onScreen]
+            case .external:
+                return GCController.controllers().first?.extendedGamepad?.toCloudyController()
+        }
+    }
+
     /// Handle regular external controller
     private func handleRegularController(with replyHandler: @escaping ReplyHandlerType) {
         // early exit
-        guard let currentControllerState = GCController.controllers().first?.extendedGamepad,
-              let currentCloudyController = currentControllerState.toCloudyController() else {
+        guard let currentCloudyController = getControllerData(for: .external) else {
             replyHandler(nil, nil)
             return
         }
@@ -73,7 +87,7 @@ class WebViewControllerBridge: NSObject, WKScriptMessageHandlerWithReply, Contro
     /// Handle touch controller
     private func handleTouchController(with replyHandler: @escaping ReplyHandlerType) {
         // early exit
-        guard let currentControllerData = controllerData[.onScreen] else {
+        guard let currentControllerData = getControllerData(for: .onScreen) else {
             replyHandler(nil, nil)
             return
         }
@@ -91,5 +105,10 @@ class WebViewControllerBridge: NSObject, WKScriptMessageHandlerWithReply, Contro
     /// Receive the controller data
     func submit(controllerData: CloudyController, for type: ControlsSource) {
         self.controllerData[type] = controllerData
+    }
+
+    /// Enqueue some commands
+    func enqueue(controllerData: [CloudyController], for type: ControlsSource) {
+        self.controllerDataQueue[type]?.enqueue(controllerData)
     }
 }
