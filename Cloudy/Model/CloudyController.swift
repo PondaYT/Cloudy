@@ -94,7 +94,7 @@ struct ControllerElements {
 
     /// Axes and buttons are the only dynamic values
     let axes:    [Float]
-    let buttons: [Button?]
+    var buttons: [Button?]
 
     /// Some static ones for proper configuration
     private let connected: Bool   = true
