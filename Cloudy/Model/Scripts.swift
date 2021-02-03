@@ -64,14 +64,12 @@ struct Scripts {
                                                  function getCorrectGamepad() {
                                                    if (emulatedGamepadQueue.length > 0) {
                                                      return emulatedGamepadQueue.shift();
-
                                                    }
                                                    return emulatedGamepad;
                                                  }
 
                                                  /// ORIGINAL NAVIGATOR FUNCTION THAT IS CALLED FROM THE PLATFORM
                                                  navigator.getGamepads = function() {
-                                                 console.log("AAA");
                                                    window.webkit.messageHandlers.controller.postMessage({}).then(handleNativeControllerData);
                                                    let currentGamepad = getCorrectGamepad();
                                                    return [currentGamepad, null, null, null];
