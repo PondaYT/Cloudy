@@ -62,7 +62,6 @@ class FortniteHUDCustomization: UIViewController {
         
         let defaults = UserDefaults.standard
         var buttonTag = 0
-        var combatButtonExcludeIndex = 0
         for buttonImages in listOfCombatHUDButtons {
             print(buttonImages)
             let button = UIView.init()
@@ -105,8 +104,12 @@ class FortniteHUDCustomization: UIViewController {
             buttonTag += 1
         }
         
+        var indexInBuildHUDButton = 0
         
+        print(listOfBuildingHUDButtons.count)
         for buttonImages in listOfBuildingHUDButtons {
+            
+            print(indexInBuildHUDButton)
             let button = UIView.init()
             let image = UIImageView.init()
             
@@ -121,8 +124,8 @@ class FortniteHUDCustomization: UIViewController {
             let HUDBuildingButtonHeightSaved = defaults.array(forKey: "reKairosBuildingHUDRectHeight")
             
             if HUDBuildingButtonXSaved?.isEmpty == false {
-                print(buttonTag - 39)
-                button.frame = CGRect(x: HUDBuildingButtonXSaved![buttonTag - 40] as! CGFloat, y: HUDBuildingButtonYSaved![buttonTag - 40] as! CGFloat, width: HUDBuildingButtonWidthSaved![buttonTag - 40] as! CGFloat, height: HUDBuildingButtonHeightSaved![buttonTag - 40] as! CGFloat)
+                //print(buttonTag - 39)
+                button.frame = CGRect(x: HUDBuildingButtonXSaved![indexInBuildHUDButton] as! CGFloat, y: HUDBuildingButtonYSaved![indexInBuildHUDButton] as! CGFloat, width: HUDBuildingButtonWidthSaved![indexInBuildHUDButton] as! CGFloat, height: HUDBuildingButtonHeightSaved![indexInBuildHUDButton] as! CGFloat)
             } else {
                 button.frame = CGRect(x: x_axis, y: y_axis, width: 50, height: 50)
             }
@@ -144,12 +147,15 @@ class FortniteHUDCustomization: UIViewController {
             buildingHUDView.addSubview(button)
             x_axis += 50
             buttonTag += 1
+            indexInBuildHUDButton += 1
             if x_axis >= UIWindow.init().frame.width - 50 {
                 y_axis += 50
                 x_axis = 0
             }
         }
         
+        
+        var indexInEditHUD = 0
         for buttonImages in listOfEditHUDButtons {
             let button = UIView.init()
             let image = UIImageView.init()
@@ -166,7 +172,7 @@ class FortniteHUDCustomization: UIViewController {
             
             if HUDEditButtonXSaved?.isEmpty == false {
                 print(buttonTag - 39)
-                button.frame = CGRect(x: HUDEditButtonXSaved![buttonTag - 40] as! CGFloat, y: HUDEditButtonYSaved![buttonTag - 40] as! CGFloat, width: HUDEditButtonWidthSaved![buttonTag - 40] as! CGFloat, height: HUDEditButtonHeightSaved![buttonTag - 40] as! CGFloat)
+                button.frame = CGRect(x: HUDEditButtonXSaved![indexInEditHUD] as! CGFloat, y: HUDEditButtonYSaved![indexInEditHUD] as! CGFloat, width: HUDEditButtonWidthSaved![indexInEditHUD] as! CGFloat, height: HUDEditButtonHeightSaved![indexInEditHUD] as! CGFloat)
             } else {
                 button.frame = CGRect(x: x_axis, y: y_axis, width: 50, height: 50)
             }
@@ -188,6 +194,7 @@ class FortniteHUDCustomization: UIViewController {
             editHUDView.addSubview(button)
             x_axis += 50
             buttonTag += 1
+            indexInEditHUD += 1
             if x_axis >= UIWindow.init().frame.width - 50 {
                 y_axis += 50
                 x_axis = 0
@@ -204,6 +211,7 @@ class FortniteHUDCustomization: UIViewController {
         doneButton.tag = 1000
         
         buildingHUDView.alpha = 0
+        editHUDView.alpha = 0
         
     }
     
@@ -286,7 +294,11 @@ class FortniteHUDCustomization: UIViewController {
             HUDCombatButtonHeight.append(buttons.frame.height)
         }
         
+        var i = 0
+        
         for buttons in buildingButtonItems {
+            print(i)
+            i += 1
             HUDBuildingButtonX.append(buttons.frame.minX)
             HUDBuildingButtonY.append(buttons.frame.minY)
             HUDBuildingButtonWidth.append(buttons.frame.width)
