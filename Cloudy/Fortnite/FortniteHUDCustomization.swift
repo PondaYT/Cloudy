@@ -198,9 +198,10 @@ class FortniteHUDCustomization: UIViewController {
         slider.tag = 257
         buildingHUDView.tag = 500
         combatHUDView.tag = 600
+        editHUDView.tag = 900
         switchViewButton.tag = 700
         saveButton.tag = 800
-        doneButton.tag = 800
+        doneButton.tag = 1000
         
         buildingHUDView.alpha = 0
         
