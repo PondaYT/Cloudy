@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18121" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad10_5" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18091"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -956,6 +956,10 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HUDBackground.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="6YG-53-uQT">
                                 <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6cD-ka-tIu">
+                                <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mA5-Wl-YSh">
                                 <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1024,6 +1028,7 @@
                         <constraints>
                             <constraint firstItem="zQc-67-VAd" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="1Eo-sm-nqm"/>
                             <constraint firstItem="mdE-cU-bfS" firstAttribute="leading" secondItem="y20-Xh-FRc" secondAttribute="trailing" id="1Ne-1h-Mzp"/>
+                            <constraint firstItem="6cD-ka-tIu" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="5oi-ax-jok"/>
                             <constraint firstItem="y20-Xh-FRc" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="60F-3q-S4b"/>
                             <constraint firstItem="Dd6-zD-Zhj" firstAttribute="leading" secondItem="8uK-ib-rYO" secondAttribute="leading" constant="20" id="9Gx-i8-lS6"/>
                             <constraint firstItem="Dd6-zD-Zhj" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" constant="8" id="A9w-xG-GIY"/>
@@ -1041,10 +1046,13 @@
                             <constraint firstItem="6YG-53-uQT" firstAttribute="bottom" secondItem="8uK-ib-rYO" secondAttribute="bottom" id="nJh-ti-Y7C"/>
                             <constraint firstItem="6YG-53-uQT" firstAttribute="leading" secondItem="aBG-68-efA" secondAttribute="leading" id="o1f-NM-yzc"/>
                             <constraint firstItem="NTE-MR-8Xe" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="pYM-Em-1Az"/>
+                            <constraint firstAttribute="trailing" secondItem="6cD-ka-tIu" secondAttribute="trailing" id="qIt-vF-w1J"/>
                             <constraint firstItem="RF1-9H-brL" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="qhO-wu-CJw"/>
                             <constraint firstItem="mA5-Wl-YSh" firstAttribute="leading" secondItem="8uK-ib-rYO" secondAttribute="leading" id="qzd-47-r6B"/>
+                            <constraint firstAttribute="bottom" secondItem="6cD-ka-tIu" secondAttribute="bottom" id="rCd-aP-u7j"/>
                             <constraint firstItem="RF1-9H-brL" firstAttribute="leading" secondItem="8uK-ib-rYO" secondAttribute="leading" id="sEE-3e-act"/>
                             <constraint firstItem="mdE-cU-bfS" firstAttribute="top" secondItem="8uK-ib-rYO" secondAttribute="top" id="suy-zn-wE6"/>
+                            <constraint firstItem="6cD-ka-tIu" firstAttribute="leading" secondItem="8uK-ib-rYO" secondAttribute="leading" id="ubu-hg-rgz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vGo-dQ-1Kn"/>
@@ -1052,6 +1060,7 @@
                         <outlet property="buildingHUDView" destination="mA5-Wl-YSh" id="mfV-48-Hcl"/>
                         <outlet property="combatHUDView" destination="RF1-9H-brL" id="H3M-td-QbX"/>
                         <outlet property="doneButton" destination="zQc-67-VAd" id="CDB-KT-aXL"/>
+                        <outlet property="editHUDView" destination="6cD-ka-tIu" id="xDx-0g-TYx"/>
                         <outlet property="editViewLabel" destination="Dd6-zD-Zhj" id="fsl-EL-eA5"/>
                         <outlet property="saveButton" destination="mdE-cU-bfS" id="pS4-1K-rtF"/>
                         <outlet property="slider" destination="NTE-MR-8Xe" id="8Bf-zy-xHX"/>

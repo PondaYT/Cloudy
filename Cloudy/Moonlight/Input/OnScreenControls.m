@@ -639,7 +639,11 @@
             CGPoint touchLocation = [touch locationInView:_view];
             CGFloat xLoc          = touchLocation.x;
             CGFloat yLoc          = touchLocation.y;
-            if(touch == _lsTouch)
+            
+            if (onScreenExtension && [onScreenExtension handleTouchMovedEvent:touch])
+            {
+                buttonTouch = true;
+            } else if(touch == _lsTouch)
             {
                 CGFloat deltaX = xLoc - _lsTouchStart.x;
                 CGFloat deltaY = yLoc - _lsTouchStart.y;
@@ -772,10 +776,6 @@
             {
                 buttonTouch = true;
             }
-            else if(onScreenExtension && [onScreenExtension handleTouchMovedEvent:touch])
-            {
-                buttonTouch = true;
-            }
             if([_deadTouches containsObject:touch])
             {
                 updated = true;
@@ -796,7 +796,16 @@
         {
             CGPoint touchLocation = [touch locationInView:_view];
 
-            if([_aButton.presentationLayer hitTest:touchLocation])
+            
+            if(onScreenExtension &&
+                    [onScreenExtension handleTouchDownEvent:touch
+                                       touchLocation:touchLocation
+                                       controller:_controller
+                                       controllerSupport:_controllerSupport])
+            {
+                updated = true;
+            }
+            else if([_aButton.presentationLayer hitTest:touchLocation])
             {
                 [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
                 _aTouch = touch;
@@ -952,14 +961,6 @@
                 _rsTouchStart = touchLocation;
                 stickTouch    = true;
             }
-            else if(onScreenExtension &&
-                    [onScreenExtension handleTouchDownEvent:touch
-                                       touchLocation:touchLocation
-                                       controller:_controller
-                                       controllerSupport:_controllerSupport])
-            {
-                updated = true;
-            }
             if(!updated && !stickTouch && [self isInDeadZone:touch])
             {
                 [_deadTouches addObject:touch];
@@ -980,7 +981,15 @@
         BOOL        touched = false;
         for(UITouch *touch in touches)
         {
-            if(touch == _aTouch)
+            
+            if(onScreenExtension &&
+                    [onScreenExtension handleTouchUpEvent:touch
+                                       controller:_controller
+                                       controllerSupport:_controllerSupport])
+            {
+                updated = true;
+            }
+            else if(touch == _aTouch)
             {
                 [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
                 _aTouch = nil;
@@ -1080,13 +1089,6 @@
             {
                 _r3Touch = nil;
                 touched  = true;
-            }
-            else if(onScreenExtension &&
-                    [onScreenExtension handleTouchUpEvent:touch
-                                       controller:_controller
-                                       controllerSupport:_controllerSupport])
-            {
-                updated = true;
             }
             if([_deadTouches containsObject:touch])
             {
