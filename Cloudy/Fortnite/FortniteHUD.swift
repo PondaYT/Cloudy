@@ -606,13 +606,13 @@ class FortniteHUD: OnScreenControlsExtension {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LS_CLK_FLAG.rawValue);
                 fortniteCrouch_DownTouch = nil
                 return true
-            } else if (touch == fortniteSlot_Pickaxe) {
+            } else if (touch == fortniteSlot_PickaxeTouch) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.Y_FLAG.rawValue);
                 fortniteSlot_PickaxeTouch = nil
                 return true
-            } else if (touch == fortniteEditResetTouch) {
+            } else if (touch == fortniteEdit_ResetTouch) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
-                fortniteEditResetTouch = nil
+                fortniteEdit_ResetTouch = nil
                 return true
             } else if (touch == fortniteReloadTouch) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue);
@@ -639,7 +639,7 @@ class FortniteHUD: OnScreenControlsExtension {
                 fortniteStair_SelectedTouch = nil
                 return true
             } else if (touch == fortniteCycle_Weapons_DownTouch) {
-                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LB_FLAG.rawValue);
+                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
                 fortniteCycle_Weapons_DownTouch = nil
                 return true
             } else if (touch == fortniteCycle_Weapons_UpTouch) {
@@ -820,6 +820,10 @@ class FortniteHUD: OnScreenControlsExtension {
                 controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue)
                 fortniteInteractTouch = touch
                 return true
+            } else if (fortniteEdit_Reset.presentation()?.hitTest(touchLocation) != nil) {
+                controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue)
+                fortniteEdit_ResetTouch = touch
+                return true
             } else if (fortnitePyramid_Selected.presentation()?.hitTest(touchLocation)) != nil {
                 
                 /*
@@ -894,7 +898,7 @@ class FortniteHUD: OnScreenControlsExtension {
                 fortniteStair_SelectedTouch = touch
                 return true
             } else if (fortniteCycle_Weapons_Down.presentation()?.hitTest(touchLocation) != nil) {
-                controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LB_FLAG.rawValue)
+                controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue)
                 fortniteCycle_Weapons_DownTouch = touch
                 return true
             } else if (fortniteCycle_Weapons_Up.presentation()?.hitTest(touchLocation) != nil) {
