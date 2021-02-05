@@ -12,7 +12,7 @@ class FortniteHUD: OnScreenControlsExtension {
     private let fortniteEmote_Wheel        = CALayer()
     private let fortniteFloor_Selected     = CALayer()
     private let fortniteInventory          = CALayer()
-    private let fortniteInteract           = CALayer() // ADD THIS!
+    private let fortniteInteract           = CALayer()
     private let fortniteJump               = CALayer()
     private let fortnitePing               = CALayer()
     private let fortnitePyramid_Selected   = CALayer()
@@ -22,14 +22,20 @@ class FortniteHUD: OnScreenControlsExtension {
     private let fortniteSwitch_To_Build    = CALayer()
     private let fortniteUse                = CALayer()
     private let fortniteWall_Selected      = CALayer()
+    private let fortniteReload             = CALayer()
+    private let fortniteSlot_1              = CALayer()
+    private let fortniteSlot_2              = CALayer()
+    private let fortniteSlot_3              = CALayer()
+    private let fortniteSlot_4              = CALayer()
+    private let fortniteSlot_Pickaxe        = CALayer()
     
     private var fortniteAimTouch:                UITouch?
-    private var fortniteCrouch_DownTouch:          UITouch?
+    private var fortniteCrouch_DownTouch:        UITouch?
     private var fortniteEdit_ResetTouch:         UITouch?
     private var fortniteEmote_WheelTouch:        UITouch?
     private var fortniteFloor_SelectedTouch:     UITouch?
     private var fortniteInventoryTouch:          UITouch?
-    private var fortniteInteractTouch:           UITouch? // ADD THIS!
+    private var fortniteInteractTouch:           UITouch?
     private var fortniteJumpTouch:               UITouch?
     private var fortnitePingTouch:               UITouch?
     private var fortnitePyramid_SelectedTouch:   UITouch?
@@ -39,6 +45,12 @@ class FortniteHUD: OnScreenControlsExtension {
     private var fortniteSwitch_To_BuildTouch:    UITouch?
     private var fortniteUseTouch:                UITouch?
     private var fortniteWall_SelectedTouch:      UITouch?
+    private var fortniteReloadTouch:             UITouch?
+    private var fortniteSlot_1Touch:              UITouch?
+    private var fortniteSlot_2Touch:              UITouch?
+    private var fortniteSlot_3Touch:              UITouch?
+    private var fortniteSlot_4Touch:              UITouch?
+    private var fortniteSlot_PickaxeTouch:        UITouch?
     
     
     // BUILD CALAYER AND TOUCHES
@@ -74,7 +86,6 @@ class FortniteHUD: OnScreenControlsExtension {
     private var fortniteBuildUseTouch: UITouch?
     private var fortniteBuildWall_SelectedTouch: UITouch?
     
-    var listOfBuildingHUDButtons = ["Edit Reset",  "Emote Wheel",  "Floor Selected", "Jump", "Ping", "Pyramid Selected", "Repair", "Reset", "Rotate", "Shoot Big", "Shoot", "Stair Selected", "Switch To Combat", "Use", "Wall Selected"]
     
     // EDIT MODE CALAYER AND UITOUCH
     private let fortniteEditConfirm = CALayer()
@@ -85,8 +96,6 @@ class FortniteHUD: OnScreenControlsExtension {
     private let fortniteEditShoot_Big = CALayer()
     private let fortniteEditShoot = CALayer()
     private let fortniteEditSwitch_To_Combat = CALayer()
-
-    var listOfEditHUDButtons = ["Confirm", "Edit", "Ping", "Reset", "Rotate", "Shoot Big", "Shoot", "Switch To Combat"]
     
     private var fortniteEditConfirmTouch: UITouch?
     private var fortniteEditEditTouch: UITouch?
@@ -163,7 +172,7 @@ class FortniteHUD: OnScreenControlsExtension {
         
         let InteractImage = UIImage(named: "Interact.png")
         fortniteInteract.frame = CGRect(x: HUDCombatButtonXSaved[6], y: HUDCombatButtonYSaved[6], width: HUDCombatButtonWidthSaved[6], height: HUDCombatButtonHeightSaved[6])
-        fortniteInteract.contents = InventoryImage?.cgImage
+        fortniteInteract.contents = InteractImage?.cgImage
         layer.addSublayer(fortniteInteract)
 
         let JumpImage = UIImage(named: "Jump.png")
@@ -214,6 +223,38 @@ class FortniteHUD: OnScreenControlsExtension {
         fortniteWall_Selected.contents = Wall_SelectedImage?.cgImage
         layer.addSublayer(fortniteWall_Selected)
         
+        
+        let ReloadImage = UIImage(named: "Reload.png")
+        fortniteReload.frame = CGRect(x: HUDCombatButtonXSaved[16], y: HUDCombatButtonYSaved[16], width: HUDCombatButtonWidthSaved[16], height: HUDCombatButtonHeightSaved[16])
+        fortniteReload.contents = ReloadImage?.cgImage
+        layer.addSublayer(fortniteReload)
+        
+        let Slot_1Image = UIImage(named: "Slot 1.png")
+        fortniteSlot_1.frame = CGRect(x: HUDCombatButtonXSaved[17], y: HUDCombatButtonYSaved[17], width: HUDCombatButtonWidthSaved[17], height: HUDCombatButtonHeightSaved[17])
+        fortniteSlot_1.contents = Slot_1Image?.cgImage
+        layer.addSublayer(fortniteSlot_1)
+
+        let Slot_2Image = UIImage(named: "Slot 2.png")
+        fortniteSlot_2.frame = CGRect(x: HUDCombatButtonXSaved[18], y: HUDCombatButtonYSaved[18], width: HUDCombatButtonWidthSaved[18], height: HUDCombatButtonHeightSaved[18])
+        fortniteSlot_2.contents = Slot_2Image?.cgImage
+        layer.addSublayer(fortniteSlot_2)
+
+        let Slot_3Image = UIImage(named: "Slot 3.png")
+        fortniteSlot_3.frame = CGRect(x: HUDCombatButtonXSaved[19], y: HUDCombatButtonYSaved[19], width: HUDCombatButtonWidthSaved[19], height: HUDCombatButtonHeightSaved[19])
+        fortniteSlot_3.contents = Slot_3Image?.cgImage
+        layer.addSublayer(fortniteSlot_3)
+
+        let Slot_4Image = UIImage(named: "Slot 4.png")
+        fortniteSlot_4.frame = CGRect(x: HUDCombatButtonXSaved[20], y: HUDCombatButtonYSaved[20], width: HUDCombatButtonWidthSaved[20], height: HUDCombatButtonHeightSaved[20])
+        fortniteSlot_4.contents = Slot_4Image?.cgImage
+        layer.addSublayer(fortniteSlot_4)
+
+        let Slot_PickaxeImage = UIImage(named: "Slot Pickaxe.png")
+        fortniteSlot_Pickaxe.frame = CGRect(x: HUDCombatButtonXSaved[21], y: HUDCombatButtonYSaved[21], width: HUDCombatButtonWidthSaved[21], height: HUDCombatButtonHeightSaved[21])
+        fortniteSlot_Pickaxe.contents = Slot_PickaxeImage?.cgImage
+        layer.addSublayer(fortniteSlot_Pickaxe)
+
+
         
         
 
@@ -334,6 +375,8 @@ class FortniteHUD: OnScreenControlsExtension {
         fortniteEditSwitch_To_Combat.frame = CGRect(x: HUDEditButtonXSaved[7], y: HUDEditButtonYSaved[7], width: HUDEditButtonWidthSaved[7], height: HUDEditButtonHeightSaved[7])
         fortniteEditSwitch_To_Combat.contents = Switch_To_CombatEditImage?.cgImage
         layer.addSublayer(fortniteEditSwitch_To_Combat)
+        
+        hideHUDButtons(hideCombat: false, hideBuild: true, hideEdit: true)
 
 
     }
@@ -382,6 +425,13 @@ class FortniteHUD: OnScreenControlsExtension {
         return false
     }
     
+    func hideAllHUDButtons() {
+        hideHUDButtons(hideCombat: true, hideBuild: true, hideEdit: true)
+    }
+    
+    func unhideAllHUDButtons() {
+        unhideHUDButtons(unhideCombat: true, unhideBuild: false, unhideEdit: false)
+    }
     
     func hideHUDButtons(hideCombat: Bool, hideBuild: Bool, hideEdit:Bool) {
         
@@ -392,6 +442,7 @@ class FortniteHUD: OnScreenControlsExtension {
             fortniteEmote_Wheel.isHidden = true
             fortniteFloor_Selected.isHidden = true
             fortniteInventory.isHidden = true
+            fortniteInteract.isHidden = true
             fortniteJump.isHidden = true
             fortnitePing.isHidden = true
             fortnitePyramid_Selected.isHidden = true
@@ -401,7 +452,14 @@ class FortniteHUD: OnScreenControlsExtension {
             fortniteSwitch_To_Build.isHidden = true
             fortniteUse.isHidden = true
             fortniteWall_Selected.isHidden = true
-        } else if hideBuild {
+            fortniteReload.isHidden = true
+            fortniteSlot_1.isHidden = true
+            fortniteSlot_2.isHidden = true
+            fortniteSlot_3.isHidden = true
+            fortniteSlot_4.isHidden = true
+        }
+        
+        if hideBuild {
 
             fortniteBuildEdit_Reset.isHidden = true
             fortniteBuildEmote_Wheel.isHidden = true
@@ -419,7 +477,9 @@ class FortniteHUD: OnScreenControlsExtension {
             fortniteBuildUse.isHidden = true
             fortniteBuildWall_Selected.isHidden = true
 
-        } else if hideEdit {
+        }
+        
+        if hideEdit {
             fortniteEditConfirm.isHidden = true
             fortniteEditEdit.isHidden = true
             fortniteEditPing.isHidden = true
@@ -441,6 +501,7 @@ class FortniteHUD: OnScreenControlsExtension {
             fortniteEmote_Wheel.isHidden = false
             fortniteFloor_Selected.isHidden = false
             fortniteInventory.isHidden = false
+            fortniteInteract.isHidden = false
             fortniteJump.isHidden = false
             fortnitePing.isHidden = false
             fortnitePyramid_Selected.isHidden = false
@@ -450,7 +511,14 @@ class FortniteHUD: OnScreenControlsExtension {
             fortniteSwitch_To_Build.isHidden = false
             fortniteUse.isHidden = false
             fortniteWall_Selected.isHidden = false
-        } else if unhideBuild {
+            fortniteReload.isHidden = false
+            fortniteSlot_1.isHidden = false
+            fortniteSlot_2.isHidden = false
+            fortniteSlot_3.isHidden = false
+            fortniteSlot_4.isHidden = false
+        }
+        
+        if unhideBuild {
             fortniteBuildEdit_Reset.isHidden = false
             fortniteBuildEmote_Wheel.isHidden = false
             fortniteBuildFloor_Selected.isHidden = false
@@ -466,7 +534,9 @@ class FortniteHUD: OnScreenControlsExtension {
             fortniteBuildSwitch_To_Combat.isHidden = false
             fortniteBuildUse.isHidden = false
             fortniteBuildWall_Selected.isHidden = false
-        } else if unhideEdit {
+        }
+        
+        if unhideEdit {
             fortniteEditConfirm.isHidden = false
             fortniteEditEdit.isHidden = false
             fortniteEditPing.isHidden = false
@@ -475,7 +545,6 @@ class FortniteHUD: OnScreenControlsExtension {
             fortniteEditShoot_Big.isHidden = false
             fortniteEditShoot.isHidden = false
             fortniteEditSwitch_To_Combat.isHidden = false
-
         }
         
     }
@@ -605,6 +674,7 @@ class FortniteHUD: OnScreenControlsExtension {
             }
             else if (touch == fortniteEditResetTouch) {
                 fortniteEditResetTouch = nil
+                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
                 return true
             }
             else if (touch == fortniteEditRotateTouch) {
@@ -733,6 +803,7 @@ class FortniteHUD: OnScreenControlsExtension {
             }
             else if (fortniteEditReset.presentation()?.hitTest(touchLocation)) != nil {
                 fortniteEditResetTouch = touch
+                controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
                 return true
             }
             else if (fortniteEditRotate.presentation()?.hitTest(touchLocation)) != nil {

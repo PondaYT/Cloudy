@@ -77,6 +77,13 @@
 		5151C17225BE8EB800EA0E06 /* Exit.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C14A25BE8EB800EA0E06 /* Exit.png */; };
 		5151C17325BE8EB800EA0E06 /* Wall Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C14B25BE8EB800EA0E06 /* Wall Selected.png */; };
 		5151C17625BE8EFB00EA0E06 /* FortniteHUDCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5151C17525BE8EFB00EA0E06 /* FortniteHUDCustomization.swift */; };
+		518F0ECC25CCFBE70080C321 /* Slot 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 518F0EC625CCFBE70080C321 /* Slot 2.png */; };
+		518F0ECD25CCFBE70080C321 /* Slot 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 518F0EC725CCFBE70080C321 /* Slot 4.png */; };
+		518F0ECE25CCFBE70080C321 /* Slot Pickaxe.png in Resources */ = {isa = PBXBuildFile; fileRef = 518F0EC825CCFBE70080C321 /* Slot Pickaxe.png */; };
+		518F0ECF25CCFBE70080C321 /* Slot 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 518F0EC925CCFBE70080C321 /* Slot 3.png */; };
+		518F0ED025CCFBE70080C321 /* Slot 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 518F0ECA25CCFBE70080C321 /* Slot 5.png */; };
+		518F0ED125CCFBE70080C321 /* Slot 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 518F0ECB25CCFBE70080C321 /* Slot 1.png */; };
+		518F0ED325CCFFA10080C321 /* Reload.png in Resources */ = {isa = PBXBuildFile; fileRef = 518F0ED225CCFFA10080C321 /* Reload.png */; };
 		519AB8AF25CC85C9002050D5 /* Interact.png in Resources */ = {isa = PBXBuildFile; fileRef = 519AB8AE25CC85C9002050D5 /* Interact.png */; };
 		5CDDBA53FB1B62159C8668EF /* Pods_Cloudy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BF8562B1619F13A7254171F /* Pods_Cloudy.framework */; };
 		E712FF9825520978003CF78C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E712FF9725520978003CF78C /* Images.xcassets */; };
@@ -171,6 +178,13 @@
 		5151C14A25BE8EB800EA0E06 /* Exit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Exit.png; sourceTree = "<group>"; };
 		5151C14B25BE8EB800EA0E06 /* Wall Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Wall Selected.png"; sourceTree = "<group>"; };
 		5151C17525BE8EFB00EA0E06 /* FortniteHUDCustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortniteHUDCustomization.swift; sourceTree = "<group>"; };
+		518F0EC625CCFBE70080C321 /* Slot 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slot 2.png"; sourceTree = "<group>"; };
+		518F0EC725CCFBE70080C321 /* Slot 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slot 4.png"; sourceTree = "<group>"; };
+		518F0EC825CCFBE70080C321 /* Slot Pickaxe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slot Pickaxe.png"; sourceTree = "<group>"; };
+		518F0EC925CCFBE70080C321 /* Slot 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slot 3.png"; sourceTree = "<group>"; };
+		518F0ECA25CCFBE70080C321 /* Slot 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slot 5.png"; sourceTree = "<group>"; };
+		518F0ECB25CCFBE70080C321 /* Slot 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slot 1.png"; sourceTree = "<group>"; };
+		518F0ED225CCFFA10080C321 /* Reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reload.png; sourceTree = "<group>"; };
 		519AB8AE25CC85C9002050D5 /* Interact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Interact.png; sourceTree = "<group>"; };
 		79B35440DA7901C4949EFDC7 /* Pods-Cloudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.release.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.release.xcconfig"; sourceTree = "<group>"; };
 		8C777E5DB6AA0540BAAEE53E /* Pods-Cloudy.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.appstore.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.appstore.xcconfig"; sourceTree = "<group>"; };
@@ -393,6 +407,12 @@
 				5151C12E25BE8EB300EA0E06 /* Floor Selected.png */,
 				5151C13325BE8EB400EA0E06 /* Floor Unselected.png */,
 				519AB8AE25CC85C9002050D5 /* Interact.png */,
+				518F0ECB25CCFBE70080C321 /* Slot 1.png */,
+				518F0EC625CCFBE70080C321 /* Slot 2.png */,
+				518F0EC925CCFBE70080C321 /* Slot 3.png */,
+				518F0EC725CCFBE70080C321 /* Slot 4.png */,
+				518F0ECA25CCFBE70080C321 /* Slot 5.png */,
+				518F0EC825CCFBE70080C321 /* Slot Pickaxe.png */,
 				5151C13825BE8EB500EA0E06 /* Inventory.png */,
 				5151C13125BE8EB400EA0E06 /* Jump.png */,
 				5151C13225BE8EB400EA0E06 /* Mic Muted.png */,
@@ -407,6 +427,7 @@
 				5151C13625BE8EB500EA0E06 /* Quick Chat.png */,
 				5151C14325BE8EB700EA0E06 /* Quick Heal.png */,
 				5151C13725BE8EB500EA0E06 /* Repair.png */,
+				518F0ED225CCFFA10080C321 /* Reload.png */,
 				5151C13D25BE8EB600EA0E06 /* Reset.png */,
 				5151C14625BE8EB700EA0E06 /* Rotate.png */,
 				5151C13F25BE8EB600EA0E06 /* Shoot Big.png */,
@@ -547,22 +568,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				5151C15825BE8EB800EA0E06 /* Emote Wheel.png in Resources */,
+				518F0ECF25CCFBE70080C321 /* Slot 3.png in Resources */,
 				5151C15E25BE8EB800EA0E06 /* Quick Chat.png in Resources */,
+				518F0ECE25CCFBE70080C321 /* Slot Pickaxe.png in Resources */,
 				5151C16225BE8EB800EA0E06 /* Cycle Weapons Up.png in Resources */,
 				5151C15125BE8EB800EA0E06 /* Throw.png in Resources */,
 				E7B87E3325338124004358E3 /* LaunchScreen.storyboard in Resources */,
 				5151C16E25BE8EB800EA0E06 /* Rotate.png in Resources */,
+				518F0ED125CCFBE70080C321 /* Slot 1.png in Resources */,
 				5151C16C25BE8EB800EA0E06 /* Move Outer.png in Resources */,
 				5151C16F25BE8EB800EA0E06 /* Switch To Combat.png in Resources */,
 				5151C15B25BE8EB800EA0E06 /* Floor Unselected.png in Resources */,
 				5151C15D25BE8EB800EA0E06 /* Confirm.png in Resources */,
+				518F0ED025CCFBE70080C321 /* Slot 5.png in Resources */,
 				5151C16A25BE8EB800EA0E06 /* Use.png in Resources */,
 				5151C15625BE8EB800EA0E06 /* Floor Selected.png in Resources */,
 				5151C12025BE8D8800EA0E06 /* HUDBackground.jpg in Resources */,
 				E712FF9825520978003CF78C /* Images.xcassets in Resources */,
 				E776E038254AE08E00684328 /* GoogleService-Info.plist in Resources */,
 				5151C15925BE8EB800EA0E06 /* Jump.png in Resources */,
+				518F0ECD25CCFBE70080C321 /* Slot 4.png in Resources */,
 				5151C15C25BE8EB800EA0E06 /* Mic Unmuted.png in Resources */,
+				518F0ECC25CCFBE70080C321 /* Slot 2.png in Resources */,
 				5151C17325BE8EB800EA0E06 /* Wall Selected.png in Resources */,
 				5151C14E25BE8EB800EA0E06 /* Switch To Build.png in Resources */,
 				5151C16825BE8EB800EA0E06 /* Shoot.png in Resources */,
@@ -584,6 +611,7 @@
 				519AB8AF25CC85C9002050D5 /* Interact.png in Resources */,
 				5151C15A25BE8EB800EA0E06 /* Mic Muted.png in Resources */,
 				5151C14F25BE8EB800EA0E06 /* Cycle Weapons Down.png in Resources */,
+				518F0ED325CCFFA10080C321 /* Reload.png in Resources */,
 				5151C16725BE8EB800EA0E06 /* Shoot Big.png in Resources */,
 				5151C17025BE8EB800EA0E06 /* Wall Unselected.png in Resources */,
 				5151C15F25BE8EB800EA0E06 /* Repair.png in Resources */,

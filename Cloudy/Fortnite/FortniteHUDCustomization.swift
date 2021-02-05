@@ -19,7 +19,7 @@ class FortniteHUDCustomization: UIViewController {
     @IBOutlet var saveButton: UIButton!
     @IBOutlet var doneButton: UIButton!
     
-    var listOfCombatHUDButtons = ["Aim", "Crouch Down", "Edit Reset", "Emote Wheel", "Floor Selected", "Inventory", "Interact", "Jump", "Ping", "Pyramid Selected", "Shoot Big", "Shoot", "Stair Selected", "Switch To Build", "Use", "Wall Selected"]
+    var listOfCombatHUDButtons = ["Aim", "Crouch Down", "Edit Reset", "Emote Wheel", "Floor Selected", "Inventory", "Interact", "Jump", "Ping", "Pyramid Selected", "Shoot Big", "Shoot", "Stair Selected", "Switch To Build", "Use", "Wall Selected", "Reload", "Slot 1", "Slot 2", "Slot 3", "Slot 4" , "Slot Pickaxe"]
     
     var listOfBuildingHUDButtons = ["Edit Reset",  "Emote Wheel",  "Floor Selected", "Jump", "Ping", "Pyramid Selected", "Repair", "Reset", "Rotate", "Shoot Big", "Shoot", "Stair Selected", "Switch To Combat", "Use", "Wall Selected"]
     
@@ -29,6 +29,7 @@ class FortniteHUDCustomization: UIViewController {
     var HUDCombatButtonY:[CGFloat] = []
     var HUDCombatButtonWidth:[CGFloat] = []
     var HUDCombatButtonHeight:[CGFloat] = []
+    
     
     var HUDBuildingButtonX:[CGFloat] = []
     var HUDBuildingButtonY:[CGFloat] = []
@@ -69,13 +70,20 @@ class FortniteHUDCustomization: UIViewController {
             image.image = UIImage(named: "\(buttonImages).png")!
             image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
             
-            let HUDCombatButtonXSaved = defaults.array(forKey: "reKairosCombatHUDRectX")
-            let HUDCombatButtonYSaved = defaults.array(forKey: "reKairosCombatHUDRectY")
-            let HUDCombatButtonWidthSaved = defaults.array(forKey: "reKairosCombatHUDRectWidth")
-            let HUDCombatButtonHeightSaved = defaults.array(forKey: "reKairosCombatHUDRectHeight")
+            var HUDCombatButtonXSaved = defaults.array(forKey: "reKairosCombatHUDRectX")
+            var HUDCombatButtonYSaved = defaults.array(forKey: "reKairosCombatHUDRectY")
+            var HUDCombatButtonWidthSaved = defaults.array(forKey: "reKairosCombatHUDRectWidth")
+            var HUDCombatButtonHeightSaved = defaults.array(forKey: "reKairosCombatHUDRectHeight")
+            var use = true
             
-            if HUDCombatButtonXSaved?.isEmpty == false {
+            
+            
+ 
+            
+            if HUDCombatButtonXSaved?.isEmpty == false  {
+               
                 button.frame = CGRect(x: HUDCombatButtonXSaved![buttonTag] as! CGFloat, y: HUDCombatButtonYSaved![buttonTag] as! CGFloat, width: HUDCombatButtonWidthSaved![buttonTag] as! CGFloat, height: HUDCombatButtonHeightSaved![buttonTag] as! CGFloat)
+                
             } else {
                 button.frame = CGRect(x: x_axis, y: y_axis, width: 50, height: 50)
             }
