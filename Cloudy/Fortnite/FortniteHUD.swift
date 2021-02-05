@@ -649,7 +649,31 @@ class FortniteHUD: OnScreenControlsExtension {
                 fortniteInteractTouch = nil
                 return true
                 
+            }else if (touch == fortnitePyramid_SelectedTouch) {
+                fortnitePyramid_SelectedTouch = nil
+                return true
+            } else if (touch == fortniteWall_SelectedTouch) {
+                
+                fortniteWall_SelectedTouch = nil
+                return true
+            } else if (touch == fortniteFloor_SelectedTouch) {
+                
+                fortniteFloor_SelectedTouch = nil
+                return true
+            } else if (touch == fortniteStair_SelectedTouch) {
+                
+                fortniteStair_SelectedTouch = nil
+                return true
             }
+                
+                
+                
+                
+                
+                
+                
+                
+            
         } else if buildMode {
             if (touch == fortniteBuildSwitch_To_CombatTouch) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
@@ -813,6 +837,79 @@ class FortniteHUD: OnScreenControlsExtension {
             } else if (fortniteInteract.presentation()?.hitTest(touchLocation) != nil) {
                 controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue)
                 fortniteInteractTouch = touch
+                return true
+            } else if (fortnitePyramid_Selected.presentation()?.hitTest(touchLocation)) != nil {
+                
+                /*
+                let c1 = CloudyController()
+                c1.buttons[0] = .digital(true)
+                let c2 = CloudyController()
+                c2.buttons[0] = .digital(false)
+                controllerSupport.controllerDataReceiver.enqueue(controllerData: [c1,  c2], for: .onScreen)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                    let c3 = CloudyController()
+                    c3.buttons[1] = .digital(true)
+                    let c4 = CloudyController()
+                    c4.buttons[1] = .digital(false)
+                    controllerSupport.controllerDataReceiver.enqueue(controllerData: [c3,  c4], for: .onScreen)
+                }
+                */
+                fortnitePyramid_SelectedTouch = touch
+                return true
+            } else if (fortniteWall_Selected.presentation()?.hitTest(touchLocation)) != nil {
+                /*
+                let c1 = CloudyController()
+                c1.buttons[0] = .digital(true)
+                let c2 = CloudyController()
+                c2.buttons[0] = .digital(false)
+                controllerSupport.controllerDataReceiver.enqueue(controllerData: [c1,  c2], for: .onScreen)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                    let c3 = CloudyController()
+                    c3.buttons[1] = .digital(true)
+                    let c4 = CloudyController()
+                    c4.buttons[1] = .digital(false)
+                    controllerSupport.controllerDataReceiver.enqueue(controllerData: [c3,  c4], for: .onScreen)
+                }
+                */
+                fortniteWall_SelectedTouch = touch
+                return true
+            } else if (fortniteBuildFloor_Selected.presentation()?.hitTest(touchLocation)) != nil {
+                /*
+                let c1 = CloudyController()
+                c1.buttons[0] = .digital(true)
+                let c2 = CloudyController()
+                c2.buttons[0] = .digital(false)
+                controllerSupport.controllerDataReceiver.enqueue(controllerData: [c1,  c2], for: .onScreen)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                    let c3 = CloudyController()
+                    c3.buttons[1] = .digital(true)
+                    let c4 = CloudyController()
+                    c4.buttons[1] = .digital(false)
+                    controllerSupport.controllerDataReceiver.enqueue(controllerData: [c3,  c4], for: .onScreen)
+                }
+                */
+                fortniteFloor_SelectedTouch = touch
+                return true
+            } else if (fortniteStair_Selected.presentation()?.hitTest(touchLocation)) != nil {
+                /*
+                let c1 = CloudyController()
+                c1.buttons[0] = .digital(true)
+                let c2 = CloudyController()
+                c2.buttons[0] = .digital(false)
+                controllerSupport.controllerDataReceiver.enqueue(controllerData: [c1,  c2], for: .onScreen)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                    let c3 = CloudyController()
+                    c3.buttons[1] = .digital(true)
+                    let c4 = CloudyController()
+                    c4.buttons[1] = .digital(false)
+                    controllerSupport.controllerDataReceiver.enqueue(controllerData: [c3,  c4], for: .onScreen)
+                }
+                */
+                fortniteStair_SelectedTouch = touch
                 return true
             }
             
