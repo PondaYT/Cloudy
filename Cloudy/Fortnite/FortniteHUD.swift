@@ -23,11 +23,8 @@ class FortniteHUD: OnScreenControlsExtension {
     private let fortniteUse                = CALayer()
     private let fortniteWall_Selected      = CALayer()
     private let fortniteReload             = CALayer()
-    private let fortniteSlot_1              = CALayer()
-    private let fortniteSlot_2              = CALayer()
-    private let fortniteSlot_3              = CALayer()
-    private let fortniteSlot_4              = CALayer()
-    private let fortniteSlot_5              = CALayer()
+    private let fortniteCycle_Weapons_Up   = CALayer()
+    private let fortniteCycle_Weapons_Down = CALayer()
     private let fortniteSlot_Pickaxe        = CALayer()
     
     private var fortniteAimTouch:                UITouch?
@@ -47,11 +44,8 @@ class FortniteHUD: OnScreenControlsExtension {
     private var fortniteUseTouch:                UITouch?
     private var fortniteWall_SelectedTouch:      UITouch?
     private var fortniteReloadTouch:             UITouch?
-    private var fortniteSlot_1Touch:              UITouch?
-    private var fortniteSlot_2Touch:              UITouch?
-    private var fortniteSlot_3Touch:              UITouch?
-    private var fortniteSlot_4Touch:              UITouch?
-    private var fortniteSlot_5Touch:              UITouch?
+    private var fortniteCycle_Weapons_DownTouch: UITouch?
+    private var fortniteCycle_Weapons_UpTouch:   UITouch?
     private var fortniteSlot_PickaxeTouch:        UITouch?
     
     
@@ -231,36 +225,22 @@ class FortniteHUD: OnScreenControlsExtension {
         fortniteReload.contents = ReloadImage?.cgImage
         layer.addSublayer(fortniteReload)
         
-        let Slot_1Image = UIImage(named: "Slot 1.png")
-        fortniteSlot_1.frame = CGRect(x: HUDCombatButtonXSaved[17], y: HUDCombatButtonYSaved[17], width: HUDCombatButtonWidthSaved[17], height: HUDCombatButtonHeightSaved[17])
-        fortniteSlot_1.contents = Slot_1Image?.cgImage
-        layer.addSublayer(fortniteSlot_1)
-
-        let Slot_2Image = UIImage(named: "Slot 2.png")
-        fortniteSlot_2.frame = CGRect(x: HUDCombatButtonXSaved[18], y: HUDCombatButtonYSaved[18], width: HUDCombatButtonWidthSaved[18], height: HUDCombatButtonHeightSaved[18])
-        fortniteSlot_2.contents = Slot_2Image?.cgImage
-        layer.addSublayer(fortniteSlot_2)
-
-        let Slot_3Image = UIImage(named: "Slot 3.png")
-        fortniteSlot_3.frame = CGRect(x: HUDCombatButtonXSaved[19], y: HUDCombatButtonYSaved[19], width: HUDCombatButtonWidthSaved[19], height: HUDCombatButtonHeightSaved[19])
-        fortniteSlot_3.contents = Slot_3Image?.cgImage
-        layer.addSublayer(fortniteSlot_3)
-
-        let Slot_4Image = UIImage(named: "Slot 4.png")
-        fortniteSlot_4.frame = CGRect(x: HUDCombatButtonXSaved[20], y: HUDCombatButtonYSaved[20], width: HUDCombatButtonWidthSaved[20], height: HUDCombatButtonHeightSaved[20])
-        fortniteSlot_4.contents = Slot_4Image?.cgImage
-        layer.addSublayer(fortniteSlot_4)
-
         let Slot_PickaxeImage = UIImage(named: "Slot Pickaxe.png")
-        fortniteSlot_Pickaxe.frame = CGRect(x: HUDCombatButtonXSaved[21], y: HUDCombatButtonYSaved[21], width: HUDCombatButtonWidthSaved[21], height: HUDCombatButtonHeightSaved[21])
+        fortniteSlot_Pickaxe.frame = CGRect(x: HUDCombatButtonXSaved[17], y: HUDCombatButtonYSaved[17], width: HUDCombatButtonWidthSaved[17], height: HUDCombatButtonHeightSaved[17])
         fortniteSlot_Pickaxe.contents = Slot_PickaxeImage?.cgImage
         layer.addSublayer(fortniteSlot_Pickaxe)
-        
-        
-        let Slot_5Image = UIImage(named: "Slot 5.png")
-        fortniteSlot_5.frame = CGRect(x: HUDCombatButtonXSaved[22], y: HUDCombatButtonYSaved[22], width: HUDCombatButtonWidthSaved[22], height: HUDCombatButtonHeightSaved[22])
-        fortniteSlot_5.contents = Slot_5Image?.cgImage
-        layer.addSublayer(fortniteSlot_5)
+
+        let Cycle_Weapons_DownImage = UIImage(named: "Cycle Weapons Down.png")
+        fortniteCycle_Weapons_Down.frame = CGRect(x: HUDCombatButtonXSaved[18], y: HUDCombatButtonYSaved[18], width: HUDCombatButtonWidthSaved[18], height: HUDCombatButtonHeightSaved[18])
+        fortniteCycle_Weapons_Down.contents = Cycle_Weapons_DownImage?.cgImage
+        layer.addSublayer(fortniteCycle_Weapons_Down)
+
+        let Cycle_Weapons_UpImage = UIImage(named: "Cycle Weapons Up.png")
+        fortniteCycle_Weapons_Up.frame = CGRect(x: HUDCombatButtonXSaved[19], y: HUDCombatButtonYSaved[19], width: HUDCombatButtonWidthSaved[19], height: HUDCombatButtonHeightSaved[19])
+        fortniteCycle_Weapons_Up.contents = Cycle_Weapons_UpImage?.cgImage
+        layer.addSublayer(fortniteCycle_Weapons_Up)
+
+
 
 
         
@@ -467,11 +447,8 @@ class FortniteHUD: OnScreenControlsExtension {
             fortniteUse.isHidden = true
             fortniteWall_Selected.isHidden = true
             fortniteReload.isHidden = true
-            fortniteSlot_1.isHidden = true
-            fortniteSlot_2.isHidden = true
-            fortniteSlot_3.isHidden = true
-            fortniteSlot_4.isHidden = true
-            fortniteSlot_5.isHidden = true
+            fortniteCycle_Weapons_Up.isHidden = true
+            fortniteCycle_Weapons_Down.isHidden = true
             fortniteSlot_Pickaxe.isHidden = true
         }
         
@@ -528,11 +505,8 @@ class FortniteHUD: OnScreenControlsExtension {
             fortniteUse.isHidden = false
             fortniteWall_Selected.isHidden = false
             fortniteReload.isHidden = false
-            fortniteSlot_1.isHidden = false
-            fortniteSlot_2.isHidden = false
-            fortniteSlot_3.isHidden = false
-            fortniteSlot_4.isHidden = false
-            fortniteSlot_5.isHidden = false
+            fortniteCycle_Weapons_Up.isHidden = false
+            fortniteCycle_Weapons_Down.isHidden = false
             fortniteSlot_Pickaxe.isHidden = false
         }
         
@@ -663,6 +637,14 @@ class FortniteHUD: OnScreenControlsExtension {
             } else if (touch == fortniteStair_SelectedTouch) {
                 
                 fortniteStair_SelectedTouch = nil
+                return true
+            } else if (touch == fortniteCycle_Weapons_DownTouch) {
+                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LB_FLAG.rawValue);
+                fortniteCycle_Weapons_DownTouch = nil
+                return true
+            } else if (touch == fortniteCycle_Weapons_UpTouch) {
+                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
+                fortniteCycle_Weapons_DownTouch = nil
                 return true
             }
                 
@@ -910,6 +892,14 @@ class FortniteHUD: OnScreenControlsExtension {
                 }
                 */
                 fortniteStair_SelectedTouch = touch
+                return true
+            } else if (fortniteCycle_Weapons_Down.presentation()?.hitTest(touchLocation) != nil) {
+                controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LB_FLAG.rawValue)
+                fortniteCycle_Weapons_DownTouch = touch
+                return true
+            } else if (fortniteCycle_Weapons_Up.presentation()?.hitTest(touchLocation) != nil) {
+                controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue)
+                fortniteCycle_Weapons_UpTouch = touch
                 return true
             }
             

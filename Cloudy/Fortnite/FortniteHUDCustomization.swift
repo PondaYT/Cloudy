@@ -19,7 +19,7 @@ class FortniteHUDCustomization: UIViewController {
     @IBOutlet var saveButton: UIButton!
     @IBOutlet var doneButton: UIButton!
     
-    var listOfCombatHUDButtons = ["Aim", "Crouch Down", "Edit Reset", "Emote Wheel", "Floor Selected", "Inventory", "Interact", "Jump", "Ping", "Pyramid Selected", "Shoot Big", "Shoot", "Stair Selected", "Switch To Build", "Use", "Wall Selected", "Reload", "Slot 1", "Slot 2", "Slot 3", "Slot 4" , "Slot Pickaxe", "Slot 5"]
+    var listOfCombatHUDButtons = ["Aim", "Crouch Down", "Edit Reset", "Emote Wheel", "Floor Selected", "Inventory", "Interact", "Jump", "Ping", "Pyramid Selected", "Shoot Big", "Shoot", "Stair Selected", "Switch To Build", "Use", "Wall Selected", "Reload", "Slot Pickaxe", "Cycle Weapons Down", "Cycle Weapons Up"]
     
     var listOfBuildingHUDButtons = ["Edit Reset",  "Emote Wheel",  "Floor Selected", "Jump", "Ping", "Pyramid Selected", "Repair", "Reset", "Rotate", "Shoot Big", "Shoot", "Stair Selected", "Switch To Combat", "Use", "Wall Selected"]
     
