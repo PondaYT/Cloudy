@@ -27,6 +27,7 @@ class FortniteHUD: OnScreenControlsExtension {
     private let fortniteSlot_2              = CALayer()
     private let fortniteSlot_3              = CALayer()
     private let fortniteSlot_4              = CALayer()
+    private let fortniteSlot_5              = CALayer()
     private let fortniteSlot_Pickaxe        = CALayer()
     
     private var fortniteAimTouch:                UITouch?
@@ -50,6 +51,7 @@ class FortniteHUD: OnScreenControlsExtension {
     private var fortniteSlot_2Touch:              UITouch?
     private var fortniteSlot_3Touch:              UITouch?
     private var fortniteSlot_4Touch:              UITouch?
+    private var fortniteSlot_5Touch:              UITouch?
     private var fortniteSlot_PickaxeTouch:        UITouch?
     
     
@@ -253,6 +255,12 @@ class FortniteHUD: OnScreenControlsExtension {
         fortniteSlot_Pickaxe.frame = CGRect(x: HUDCombatButtonXSaved[21], y: HUDCombatButtonYSaved[21], width: HUDCombatButtonWidthSaved[21], height: HUDCombatButtonHeightSaved[21])
         fortniteSlot_Pickaxe.contents = Slot_PickaxeImage?.cgImage
         layer.addSublayer(fortniteSlot_Pickaxe)
+        
+        
+        let Slot_5Image = UIImage(named: "Slot 5.png")
+        fortniteSlot_5.frame = CGRect(x: HUDCombatButtonXSaved[22], y: HUDCombatButtonYSaved[22], width: HUDCombatButtonWidthSaved[22], height: HUDCombatButtonHeightSaved[22])
+        fortniteSlot_5.contents = Slot_5Image?.cgImage
+        layer.addSublayer(fortniteSlot_5)
 
 
         
@@ -427,10 +435,16 @@ class FortniteHUD: OnScreenControlsExtension {
     
     func hideAllHUDButtons() {
         hideHUDButtons(hideCombat: true, hideBuild: true, hideEdit: true)
+        editMode = false
+        buildMode = false
+        combatMode = true
     }
     
     func unhideAllHUDButtons() {
         unhideHUDButtons(unhideCombat: true, unhideBuild: false, unhideEdit: false)
+        editMode = false
+        buildMode = false
+        combatMode = true
     }
     
     func hideHUDButtons(hideCombat: Bool, hideBuild: Bool, hideEdit:Bool) {
@@ -457,6 +471,8 @@ class FortniteHUD: OnScreenControlsExtension {
             fortniteSlot_2.isHidden = true
             fortniteSlot_3.isHidden = true
             fortniteSlot_4.isHidden = true
+            fortniteSlot_5.isHidden = true
+            fortniteSlot_Pickaxe.isHidden = true
         }
         
         if hideBuild {
@@ -516,6 +532,8 @@ class FortniteHUD: OnScreenControlsExtension {
             fortniteSlot_2.isHidden = false
             fortniteSlot_3.isHidden = false
             fortniteSlot_4.isHidden = false
+            fortniteSlot_5.isHidden = false
+            fortniteSlot_Pickaxe.isHidden = false
         }
         
         if unhideBuild {
@@ -600,7 +618,7 @@ class FortniteHUD: OnScreenControlsExtension {
             }
             // ...
             else if (touch == fortnitePingTouch) {
-                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
+                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RS_CLK_FLAG.rawValue);
                 
                 fortnitePingTouch = nil
                 return true
@@ -608,9 +626,29 @@ class FortniteHUD: OnScreenControlsExtension {
             // ...
             else if (touch == fortniteEmote_WheelTouch) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
-                
                 fortniteEmote_WheelTouch = nil
                 return true
+            } else if (touch == fortniteCrouch_DownTouch) {
+                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LS_CLK_FLAG.rawValue);
+                fortniteCrouch_DownTouch = nil
+                return true
+            } else if (touch == fortniteSlot_Pickaxe) {
+                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.Y_FLAG.rawValue);
+                fortniteSlot_PickaxeTouch = nil
+                return true
+            } else if (touch == fortniteEditResetTouch) {
+                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
+                fortniteEditResetTouch = nil
+                return true
+            } else if (touch == fortniteReloadTouch) {
+                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue);
+                fortniteReloadTouch = nil
+                return true
+            } else if (touch == fortniteInteractTouch) {
+                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue);
+                fortniteInteractTouch = nil
+                return true
+                
             }
         } else if buildMode {
             if (touch == fortniteBuildSwitch_To_CombatTouch) {
@@ -652,10 +690,19 @@ class FortniteHUD: OnScreenControlsExtension {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.A_FLAG.rawValue);
                 fortniteBuildJumpTouch = nil
                 return true
+            } else if (touch == fortniteBuildShootTouch) {
+                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
+                fortniteBuildShootTouch = nil
+                return true
+            } else if (touch == fortniteBuildShoot_BigTouch) {
+                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
+                fortniteBuildShoot_BigTouch = nil
+                return true
             }
         } else if editMode {
             if (touch == fortniteEditConfirmTouch) {
                 fortniteEditConfirmTouch = nil
+                controllerSupport.updateLeftTrigger(controller, left: 0)
                 hideHUDButtons(hideCombat: false, hideBuild: false, hideEdit: true)
                 unhideHUDButtons(unhideCombat: false, unhideBuild: true, unhideEdit: false)
                 editMode = false
@@ -741,7 +788,7 @@ class FortniteHUD: OnScreenControlsExtension {
             }
             // ...
             else if (fortnitePing.presentation()?.hitTest(touchLocation) != nil) {
-                controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
+                controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RS_CLK_FLAG.rawValue)
                 fortnitePingTouch = touch
                 return true
             }
@@ -749,6 +796,23 @@ class FortniteHUD: OnScreenControlsExtension {
             else if (fortniteEmote_Wheel.presentation()?.hitTest(touchLocation) != nil) {
                 controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
                 fortniteEmote_WheelTouch = touch
+                return true
+            } else if (fortniteCrouch_Down.presentation()?.hitTest(touchLocation) != nil) {
+                //[_controllerSupport setButtonFlag:_controller flags:LS_CLK_FLAG];
+                controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LS_CLK_FLAG.rawValue)
+                fortniteCrouch_DownTouch = touch
+                return true
+            } else if (fortniteSlot_Pickaxe.presentation()?.hitTest(touchLocation) != nil) {
+                controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.Y_FLAG.rawValue)
+                fortniteSlot_PickaxeTouch = touch
+                return true
+            } else if (fortniteReload.presentation()?.hitTest(touchLocation) != nil) {
+                controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue)
+                fortniteReloadTouch = touch
+                return true
+            } else if (fortniteInteract.presentation()?.hitTest(touchLocation) != nil) {
+                controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue)
+                fortniteInteractTouch = touch
                 return true
             }
             
@@ -784,12 +848,21 @@ class FortniteHUD: OnScreenControlsExtension {
                 controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
                 fortniteBuildEdit_ResetTouch = touch
                 return true
+            } else if (fortniteBuildShoot.presentation()?.hitTest(touchLocation) != nil) {
+                controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
+                fortniteBuildShootTouch = touch
+                return true
+            } else if (fortniteBuildShoot_Big.presentation()?.hitTest(touchLocation) != nil) {
+                controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
+                fortniteBuildShoot_BigTouch = touch
+                return true
             }
             
             
         } else if editMode {
             if (fortniteEditConfirm.presentation()?.hitTest(touchLocation)) != nil {
                 fortniteEditConfirmTouch = touch
+                controllerSupport.updateLeftTrigger(controller, left: 0xFF)
                 return true
             }
             else if (fortniteEditEdit.presentation()?.hitTest(touchLocation)) != nil {
