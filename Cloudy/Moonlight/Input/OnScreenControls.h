@@ -26,6 +26,11 @@
             touchLocation:(CGPoint)touchLocation
             controller:(Controller *__nonnull)controller
             controllerSupport:(ControllerSupport *__nonnull)controllerSupport;
+
+    - (void)hideAllHUDButtons;
+
+    - (void)unhideAllHUDButtons;
+
 @end
 
 @interface OnScreenControls : NSObject
@@ -66,4 +71,10 @@
     - (void)hideButtons;
 
     - (void)drawButtons;
+
+    - (void)hideAndDisableControllerButtons;
+
+    - (void)showAndEnableControllerButtons;
+
+    - (void)hideAllHUDButtons;
 @end
