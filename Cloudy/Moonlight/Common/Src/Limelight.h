@@ -501,7 +501,6 @@ int LiSendKeyboardEvent(short keyCode, char keyAction, char modifiers);
 #define LS_CLK_FLAG  0x0040
 #define RS_CLK_FLAG  0x0080
 #define SPECIAL_FLAG 0x0400
-#define HOME_FLAG       0x0040
 
 // This function queues a controller event to be sent to the remote server. It will
 // be seen by the computer as the first controller.

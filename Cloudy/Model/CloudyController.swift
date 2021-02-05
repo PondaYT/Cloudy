@@ -28,7 +28,6 @@ struct ControllerElements {
     struct Menu {
         let back: Bool
         let play: Bool
-        let home: Bool
     }
 
     struct Shoulder {
@@ -148,7 +147,7 @@ struct ControllerElements {
             /* 13 */ .digital(dpad.down), // dpad.down.controller,
             /* 14 */ .digital(dpad.left), // dpad.left.controller,
             /* 15 */ .digital(dpad.right), // dpad.right.controller,
-            /* 16 */ .digital(menu.home), // buttonHome.controller,
+            /* 16 */ .digital(false), // buttonHome.controller,
         ]
     }
 
@@ -183,8 +182,7 @@ struct ControllerElements {
                                                       x: buttonSet.contains(.X_FLAG),
                                                       y: buttonSet.contains(.Y_FLAG)),
                   menu: ControllerElements.Menu(back: buttonSet.contains(.BACK_FLAG),
-                                                play: buttonSet.contains(.PLAY_FLAG),
-                                                home: buttonSet.contains(.HOME_FLAG)))
+                                                play: buttonSet.contains(.PLAY_FLAG)))
     }
 
     /// Export json string

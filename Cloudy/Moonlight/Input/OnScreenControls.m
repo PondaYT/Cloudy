@@ -39,7 +39,6 @@
         CALayer *_rightStick;
         CALayer *_startButton;
         CALayer *_selectButton;
-        CALayer *_homeButton;
         CALayer *_r1Button;
         CALayer *_r2Button;
         CALayer *_r3Button;
@@ -58,7 +57,6 @@
         CGPoint _rsTouchStart;
         UITouch *_startTouch;
         UITouch *_selectTouch;
-        UITouch *_homeTouch;
         UITouch *_r1Touch;
         UITouch *_r2Touch;
         UITouch *_r3Touch;
@@ -113,9 +111,6 @@
 
     static float SELECT_X;
     static float SELECT_Y;
-
-    static float HOME_X;
-    static float HOME_Y;
 
     static float R1_X;
     static float R1_Y;
@@ -173,7 +168,6 @@
         _r3Button             = [CALayer layer];
         _startButton          = [CALayer layer];
         _selectButton         = [CALayer layer];
-        _homeButton           = [CALayer layer];
         _leftStickBackground  = [CALayer layer];
         _rightStickBackground = [CALayer layer];
         _leftStick            = [CALayer layer];
@@ -221,7 +215,7 @@
                 [self hideButtons];
                 [self hideBumpers];
                 [self hideTriggers];
-                [self hideStartSelectHome];
+                [self hideStartSelect];
                 [self hideSticks];
                 [self hideL3R3];
                 break;
@@ -234,7 +228,7 @@
                 [self hideBumpers];
                 [self hideL3R3];
                 [self drawTriggers];
-                [self drawStartSelectHome];
+                [self drawStartSelect];
                 [self drawSticks];
                 break;
             case OnScreenControlsLevelAutoGCExtendedGamepad:
@@ -244,7 +238,7 @@
                 [self hideButtons];
                 [self hideBumpers];
                 [self hideTriggers];
-                [self drawStartSelectHome];
+                [self drawStartSelect];
                 [self hideSticks];
                 [self drawL3R3];
                 break;
@@ -257,7 +251,7 @@
                 [self hideBumpers];
                 [self hideTriggers];
                 [self hideL3R3];
-                [self drawStartSelectHome];
+                [self drawStartSelect];
                 [self hideSticks];
                 break;
             case OnScreenControlsLevelSimple:
@@ -267,14 +261,14 @@
                 [self hideL3R3];
                 [self hideBumpers];
                 [self hideSticks];
-                [self drawStartSelectHome];
+                [self drawStartSelect];
                 [self drawButtons];
                 break;
             case OnScreenControlsLevelFull:
                 [self setupComplexControls];
 
                 [self drawButtons];
-                [self drawStartSelectHome];
+                [self drawStartSelect];
                 [self drawBumpers];
                 [self drawTriggers];
                 [self drawSticks];
@@ -300,8 +294,6 @@
         START_Y  = _controlArea.size.height * .9 + _controlArea.origin.y;
         SELECT_X = _controlArea.size.width * .05 + _controlArea.origin.x;
         SELECT_Y = _controlArea.size.height * .9 + _controlArea.origin.y;
-        HOME_X   = _controlArea.size.width * .5 + _controlArea.origin.x;
-        HOME_Y   = _controlArea.size.height * .9 + _controlArea.origin.y;
 
         L3_Y = _controlArea.size.height * .85 + _controlArea.origin.y;
         R3_Y = _controlArea.size.height * .85 + _controlArea.origin.y;
@@ -335,8 +327,6 @@
         START_Y  = _controlArea.size.height * .95 + _controlArea.origin.y;
         SELECT_X = _controlArea.size.width * .05 + _controlArea.origin.x;
         SELECT_Y = _controlArea.size.height * .95 + _controlArea.origin.y;
-        HOME_X   = _controlArea.size.width * .5 + _controlArea.origin.x;
-        HOME_Y   = _controlArea.size.height * .9 + _controlArea.origin.y;
 
         if(_iPad)
         {
@@ -354,8 +344,6 @@
 
         START_Y  = _controlArea.size.height * .9 + _controlArea.origin.y;
         SELECT_Y = _controlArea.size.height * .9 + _controlArea.origin.y;
-        HOME_X   = _controlArea.size.width * .5 + _controlArea.origin.x;
-        HOME_Y   = _controlArea.size.height * .9 + _controlArea.origin.y;
 
         L2_Y = _controlArea.size.height * .9 + _controlArea.origin.y;
         L2_X = _controlArea.size.width * .1 + _controlArea.origin.x;
@@ -407,8 +395,6 @@
         START_Y  = _controlArea.size.height * .9 + _controlArea.origin.y;
         SELECT_X = _controlArea.size.width * .1 + _controlArea.origin.x;
         SELECT_Y = _controlArea.size.height * .9 + _controlArea.origin.y;
-        HOME_X   = _controlArea.size.width * .5 + _controlArea.origin.x;
-        HOME_Y   = _controlArea.size.height * .9 + _controlArea.origin.y;
 
         L1_Y = _controlArea.size.height * .27 + _controlArea.origin.y;
         L2_Y = _controlArea.size.height * .1 + _controlArea.origin.y;
@@ -484,7 +470,7 @@
 
     }
 
-    - (void)drawStartSelectHome
+    - (void)drawStartSelect
     {
         // create Start button
         UIImage *startButtonImage = [UIImage imageNamed:@"StartButton"];
@@ -497,13 +483,6 @@
         _selectButton.frame    = CGRectMake(SELECT_X - selectButtonImage.size.width / 2, SELECT_Y - selectButtonImage.size.height / 2, selectButtonImage.size.width, selectButtonImage.size.height);
         _selectButton.contents = (id) selectButtonImage.CGImage;
         [_view.layer addSublayer:_selectButton];
-
-        // create Home button
-        UIImage *homeButtonImage = [UIImage imageNamed:@"HomeButton"];
-        _homeButton.frame    = CGRectMake(HOME_X - homeButtonImage.size.width / 2, HOME_Y - homeButtonImage.size.height / 2, homeButtonImage.size.width, homeButtonImage.size.height);
-        _homeButton.contents = (id) homeButtonImage.CGImage;
-        // TODO fix home button sending to webview
-        // [_view.layer addSublayer:_homeButton];
     }
 
     - (void)drawBumpers
@@ -593,6 +572,7 @@
         [_rightButton removeFromSuperlayer];
     }
 
+
     - (void)hideAndDisableControllerButtons
     {
         [_aButton setHidden:YES];
@@ -652,11 +632,9 @@
 
     }
 
-    - (void)hideStartSelectHome
     {
         [_startButton removeFromSuperlayer];
         [_selectButton removeFromSuperlayer];
-        [_homeButton removeFromSuperlayer];
     }
 
     - (void)hideBumpers
@@ -808,10 +786,6 @@
             {
                 buttonTouch = true;
             }
-            else if(touch == _homeTouch)
-            {
-                buttonTouch = true;
-            }
             else if(touch == _l1Touch)
             {
                 buttonTouch = true;
@@ -918,12 +892,6 @@
                 [_controllerSupport setButtonFlag:_controller flags:PLAY_FLAG];
                 _startTouch = touch;
                 updated     = true;
-            }
-            else if([_homeButton.presentationLayer hitTest:touchLocation])
-            {
-                [_controllerSupport setButtonFlag:_controller flags:HOME_FLAG];
-                _homeTouch = touch;
-                updated    = true;
             }
             else if([_selectButton.presentationLayer hitTest:touchLocation])
             {
@@ -1086,12 +1054,6 @@
                 _startTouch = nil;
                 updated     = true;
             }
-            else if(touch == _homeTouch)
-            {
-                [_controllerSupport clearButtonFlag:_controller flags:HOME_FLAG];
-                _homeTouch = nil;
-                updated    = true;
-            }
             else if(touch == _selectTouch)
             {
                 [_controllerSupport clearButtonFlag:_controller flags:BACK_FLAG];
@@ -1184,11 +1146,7 @@
         {
             return true;
         }
-        else if(_startButton.superlayer != nil && [self isStartSelectHomeDeadZone:touch])
-        {
-            return true;
-        }
-        else if(_homeButton.superlayer != nil && [self isStartSelectHomeDeadZone:touch])
+        else if(_startButton.superlayer != nil && [self isStartSelectDeadZone:touch])
         {
             return true;
         }
@@ -1264,7 +1222,7 @@
                         endY:_view.frame.origin.y + _view.frame.size.height];
     }
 
-    - (BOOL)isStartSelectHomeDeadZone:(UITouch *)touch
+    - (BOOL)isStartSelectDeadZone:(UITouch *)touch
     {
         return [self isDeadZone:touch
                      startX:_startButton.frame.origin.x

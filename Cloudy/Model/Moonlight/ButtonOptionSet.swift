@@ -16,14 +16,11 @@ struct ButtonOptionSet: OptionSet {
     static let RIGHT_FLAG   = ButtonOptionSet(rawValue: 0x0008)
     static let LB_FLAG      = ButtonOptionSet(rawValue: 0x0100)
     static let RB_FLAG      = ButtonOptionSet(rawValue: 0x0200)
-    
+
     static let PLAY_FLAG    = ButtonOptionSet(rawValue: 0x0010)
     static let BACK_FLAG    = ButtonOptionSet(rawValue: 0x0020)
     static let LS_CLK_FLAG  = ButtonOptionSet(rawValue: 0x0040)
     static let RS_CLK_FLAG  = ButtonOptionSet(rawValue: 0x0080)
     static let SPECIAL_FLAG = ButtonOptionSet(rawValue: 0x0400)
-    
-    
-    
-    static let HOME_FLAG    = ButtonOptionSet(rawValue: 0x0040)
+
 }
