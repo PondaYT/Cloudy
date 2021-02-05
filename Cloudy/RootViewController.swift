@@ -44,18 +44,20 @@ class RootViewController: UIViewController, MenuActionsHandler {
     /// The bridge between controller and web view
     private let webViewControllerBridge          = WebViewControllerBridge()
 
-    /// The stream view that holds the on screen controls
-    private var streamView:      StreamView?
+    #if NON_APPSTORE
+        /// The stream view that holds the on screen controls
+        private var streamView: StreamView?
+
+        /// Touch feedback generator
+        private lazy var touchFeedbackGenerator: TouchFeedbackGenerator = {
+            AVFoundationVibratingFeedbackGenerator()
+        }()
+    #endif
 
     /// Expose the web controller for navigation
     var webController: WebController? {
         webView
     }
-
-    /// Touch feedback generator
-    private lazy var touchFeedbackGenerator: TouchFeedbackGenerator = {
-        AVFoundationVibratingFeedbackGenerator()
-    }()
 
     /// The alert helper
     lazy var alerter: Alerter = {
@@ -97,10 +99,12 @@ class RootViewController: UIViewController, MenuActionsHandler {
         if UserDefaults.standard.actAsStandaloneApp {
             config.userContentController.addUserScript(.standalone)
         }
-        config.userContentController.addScriptMessageHandler(webViewControllerBridge, contentWorld: WKContentWorld.page, name: "controller")
-        if UserDefaults.standard.injectControllerScripts {
-            config.userContentController.addUserScript(.controller)
-        }
+        #if NON_APPSTORE
+            config.userContentController.addScriptMessageHandler(webViewControllerBridge, contentWorld: WKContentWorld.page, name: "controller")
+            if UserDefaults.standard.injectControllerScripts {
+                config.userContentController.addUserScript(.controller)
+            }
+        #endif
         return config
     }
 
@@ -117,18 +121,25 @@ class RootViewController: UIViewController, MenuActionsHandler {
         createWebview()
         createOnScreenControls()
         createMenu()
+        #if APPSTORE
+            containerOnScreenController.removeFromSuperview()
+        #endif
     }
 
     /// Update visibility of onscreen controller
     func updateOnScreenController(with value: OnScreenControlsLevel) {
         containerOnScreenController.alpha = value == .off ? 0 : 1
         webViewControllerBridge.controlsSource = value == .off ? .external : .onScreen
-        streamView?.updateOnScreenControls()
+        #if NON_APPSTORE
+            streamView?.updateOnScreenControls()
+        #endif
     }
 
     /// Update touch feedback change
     func updateTouchFeedbackType(with value: TouchFeedbackType) {
-        touchFeedbackGenerator.setFeedbackType(value)
+        #if NON_APPSTORE
+            touchFeedbackGenerator.setFeedbackType(value)
+        #endif
     }
 
     /// Update the scaling factor
@@ -190,28 +201,30 @@ class RootViewController: UIViewController, MenuActionsHandler {
 
     /// Create the on screen controls
     private func createOnScreenControls() {
-        // remove first
-        streamView?.cleanup()
-        streamView?.removeFromSuperview()
-        streamView = nil
-        // create new
-        let streamConfig      = StreamConfiguration()
-        // Controller support
-        let controllerSupport = ControllerSupport(config: streamConfig,
-                                                  presenceDelegate: self,
-                                                  controllerDataReceiver: webViewControllerBridge)
-        // stream view
-        let newStreamView     = StreamView(frame: containerOnScreenController.bounds)
-        newStreamView.setupStreamView(controllerSupport,
-                                      interactionDelegate: self,
-                                      config: streamConfig,
-                                      hapticFeedback: touchFeedbackGenerator)
-        newStreamView.showOnScreenControls()
-        containerOnScreenController.addSubview(newStreamView)
-        newStreamView.fillParent()
-        streamView = newStreamView
-        updateOnScreenController(with: UserDefaults.standard.onScreenControlsLevel)
-        updateScalingFactor(with: UserDefaults.standard.webViewScale)
+        #if NON_APPSTORE
+            // remove first
+            streamView?.cleanup()
+            streamView?.removeFromSuperview()
+            streamView = nil
+            // create new
+            let streamConfig      = StreamConfiguration()
+            // Controller support
+            let controllerSupport = ControllerSupport(config: streamConfig,
+                                                      presenceDelegate: self,
+                                                      controllerDataReceiver: webViewControllerBridge)
+            // stream view
+            let newStreamView     = StreamView(frame: containerOnScreenController.bounds)
+            newStreamView.setupStreamView(controllerSupport,
+                                          interactionDelegate: self,
+                                          config: streamConfig,
+                                          hapticFeedback: touchFeedbackGenerator)
+            newStreamView.showOnScreenControls()
+            containerOnScreenController.addSubview(newStreamView)
+            newStreamView.fillParent()
+            streamView = newStreamView
+            updateOnScreenController(with: UserDefaults.standard.onScreenControlsLevel)
+            updateScalingFactor(with: UserDefaults.standard.webViewScale)
+        #endif
     }
 }
 

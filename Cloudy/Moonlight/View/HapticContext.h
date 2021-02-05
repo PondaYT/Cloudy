@@ -6,6 +6,8 @@
 //  Copyright © 2020 Moonlight Game Streaming Project. All rights reserved.
 //
 
+#ifdef NON_APPSTORE
+
 @import CoreHaptics;
 @import GameController;
 
@@ -20,3 +22,5 @@
     + (HapticContext *)createContextForLowFreqMotor:(GCController *)gamepad;
 
 @end
+
+#endif

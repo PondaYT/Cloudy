@@ -1,13 +1,15 @@
 // Copyright (c) 2020 Nomad5. All rights reserved.
 
 import Foundation
-import GameController
 
 /// Helper to see if a value is close to zero
 private let closeToZero: (Float) -> Bool = { abs($0) < 0.0001 }
 
 /// Hacky stuff for geforce now
 private var shouldPulse: Bool = false
+
+/// Infix operator declaration
+infix operator =~: ComparisonPrecedence
 
 /// Convenience structs
 struct ControllerElements {

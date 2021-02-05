@@ -1,7 +1,6 @@
 // Copyright (c) 2020 Nomad5. All rights reserved.
 
 import Foundation
-import GameController
 
 /// Model class to map navigation based on url
 class Navigator {

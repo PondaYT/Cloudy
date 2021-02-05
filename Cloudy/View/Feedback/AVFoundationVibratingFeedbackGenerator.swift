@@ -3,14 +3,6 @@
 import UIKit
 import AVFoundation
 
-/// The different types of feedback
-@objc enum TouchFeedbackType: Int {
-    case off      = 0
-    case acoustic = 1
-    case vibrate  = 2
-    case all      = 3
-}
-
 /// Protocol to generate touch feedback
 @objc protocol TouchFeedbackGenerator {
 

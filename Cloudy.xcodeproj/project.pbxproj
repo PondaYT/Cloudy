@@ -17,7 +17,9 @@
 		44A4D240730D282493AC380E /* StreamConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D47E3D9518C80384D8F4 /* StreamConfiguration.m */; };
 		44A4D313CD82BF86B7841B19 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DDFB3BA2FE8AEE10DEA9 /* Collection.swift */; };
 		44A4D3B8AE0372A4C71E32EC /* TemporarySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DF345C0AE58872E1CC3A /* TemporarySettings.swift */; };
+		44A4D42E63964FEAD11402C9 /* ControllerId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D355F9FC2B0B0407D925 /* ControllerId.swift */; };
 		44A4D44641C7C146FE8BC523 /* Alerter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DD3E981844FBC3E9E5A7 /* Alerter.swift */; };
+		44A4D462F6B9BB3200645FEF /* TouchFeedbackType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D251D0510B4A29CC74F0 /* TouchFeedbackType.swift */; };
 		44A4D4CD5F66196CB7AD5CB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D965A769BDED09733089 /* AppDelegate.swift */; };
 		44A4D56785DE2ACC82B37F52 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D1A39583BB7F49ABD541 /* Log.swift */; };
 		44A4D667E367AB98368C36BC /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D80ED7881A56C23C0BBD /* Bundle.swift */; };
@@ -34,16 +36,17 @@
 		44A4DCA503A87B314B8CB75A /* ButtonOptionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D9F318B9593A6DD6F951 /* ButtonOptionSet.swift */; };
 		44A4DD2289A8D028B03463E0 /* X1Kit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D996514DEB85071D2DA7 /* X1Kit.swift */; };
 		44A4DD2F10965A88D83F5C0D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DBCCBA86600B436045E4 /* SceneDelegate.swift */; };
+		44A4DF24B14D4379ED99E351 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DC3B80142D290BBCE80C /* Float.swift */; };
 		5CDDBA53FB1B62159C8668EF /* Pods_Cloudy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BF8562B1619F13A7254171F /* Pods_Cloudy.framework */; };
 		E712FF9825520978003CF78C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E712FF9725520978003CF78C /* Images.xcassets */; };
-		E723D48225532E08007413D9 /* StreamView.m in Sources */ = {isa = PBXBuildFile; fileRef = E723D47625532E08007413D9 /* StreamView.m */; };
-		E723D48325532E08007413D9 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = E723D47725532E08007413D9 /* Controller.m */; };
-		E723D48425532E08007413D9 /* RelativeTouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E723D47825532E08007413D9 /* RelativeTouchHandler.m */; };
-		E723D48525532E08007413D9 /* ControllerSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = E723D47925532E08007413D9 /* ControllerSupport.m */; };
-		E723D48625532E08007413D9 /* AbsoluteTouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E723D47C25532E08007413D9 /* AbsoluteTouchHandler.m */; };
-		E723D48725532E08007413D9 /* OnScreenControls.m in Sources */ = {isa = PBXBuildFile; fileRef = E723D47F25532E08007413D9 /* OnScreenControls.m */; };
-		E723D48825532E08007413D9 /* KeyboardSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = E723D48025532E08007413D9 /* KeyboardSupport.m */; };
-		E723D48925532E08007413D9 /* HapticContext.m in Sources */ = {isa = PBXBuildFile; fileRef = E723D48125532E08007413D9 /* HapticContext.m */; };
+		E7646CB325CE04CA00E33E35 /* ControllerSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = E7646CA125CE04C900E33E35 /* ControllerSupport.m */; };
+		E7646CB425CE04CA00E33E35 /* AbsoluteTouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E7646CA625CE04C900E33E35 /* AbsoluteTouchHandler.m */; };
+		E7646CB525CE04CA00E33E35 /* RelativeTouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = E7646CA725CE04C900E33E35 /* RelativeTouchHandler.m */; };
+		E7646CB625CE04CA00E33E35 /* HapticContext.m in Sources */ = {isa = PBXBuildFile; fileRef = E7646CA825CE04C900E33E35 /* HapticContext.m */; };
+		E7646CB725CE04CA00E33E35 /* OnScreenControls.m in Sources */ = {isa = PBXBuildFile; fileRef = E7646CAA25CE04C900E33E35 /* OnScreenControls.m */; };
+		E7646CB825CE04CA00E33E35 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = E7646CAB25CE04C900E33E35 /* Controller.m */; };
+		E7646CB925CE04CA00E33E35 /* KeyboardSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = E7646CAC25CE04CA00E33E35 /* KeyboardSupport.m */; };
+		E7646CBA25CE04CA00E33E35 /* StreamView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7646CB025CE04CA00E33E35 /* StreamView.m */; };
 		E776E038254AE08E00684328 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E776E037254AE08E00684328 /* GoogleService-Info.plist */; };
 		E7B87E2B25338121004358E3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B87E2A25338121004358E3 /* RootViewController.swift */; };
 		E7B87E2E25338121004358E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7B87E2C25338121004358E3 /* Main.storyboard */; };
@@ -58,6 +61,8 @@
 		44A4D1A39583BB7F49ABD541 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		44A4D20E8882F769E6208730 /* PurchaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseHelper.swift; sourceTree = "<group>"; };
 		44A4D24369D3C549C04BC958 /* Scripts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scripts.swift; sourceTree = "<group>"; };
+		44A4D251D0510B4A29CC74F0 /* TouchFeedbackType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchFeedbackType.swift; sourceTree = "<group>"; };
+		44A4D355F9FC2B0B0407D925 /* ControllerId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerId.swift; sourceTree = "<group>"; };
 		44A4D3A1BA3A8B2AB96CB81B /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		44A4D42B4BF97B06DF2A6BEA /* Limelight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Limelight.m; sourceTree = "<group>"; };
 		44A4D47E3D9518C80384D8F4 /* StreamConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamConfiguration.m; sourceTree = "<group>"; };
@@ -78,33 +83,38 @@
 		44A4DA6DC6F7876B0D6B7A64 /* CloudyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudyController.swift; sourceTree = "<group>"; };
 		44A4DB5C7725B073FE1AB0E8 /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		44A4DBCCBA86600B436045E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		44A4DC3B80142D290BBCE80C /* Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
 		44A4DD3E981844FBC3E9E5A7 /* Alerter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alerter.swift; sourceTree = "<group>"; };
 		44A4DDFB3BA2FE8AEE10DEA9 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		44A4DEAFE04C43372A474AF7 /* StreamConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamConfiguration.h; sourceTree = "<group>"; };
 		44A4DF345C0AE58872E1CC3A /* TemporarySettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporarySettings.swift; sourceTree = "<group>"; };
-		44A4DF4DEEC15EF8DE2B1C18 /* Cloudy-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cloudy-Bridging-Header.h"; sourceTree = "<group>"; };
 		44A4DFB90BD884CB5041E57D /* WKUserScript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKUserScript.swift; sourceTree = "<group>"; };
 		79B35440DA7901C4949EFDC7 /* Pods-Cloudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.release.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.release.xcconfig"; sourceTree = "<group>"; };
 		8C777E5DB6AA0540BAAEE53E /* Pods-Cloudy.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.appstore.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.appstore.xcconfig"; sourceTree = "<group>"; };
 		B42B0FEC073AD10E0FCA6CF1 /* Pods-Cloudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.debug.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.debug.xcconfig"; sourceTree = "<group>"; };
 		B68A92C425596BFB00A22D82 /* Cloudy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cloudy.entitlements; sourceTree = "<group>"; };
 		E712FF9725520978003CF78C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		E723D47225532E08007413D9 /* RelativeTouchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RelativeTouchHandler.h; path = Cloudy/Moonlight/Input/RelativeTouchHandler.h; sourceTree = SOURCE_ROOT; };
-		E723D47325532E08007413D9 /* ControllerSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControllerSupport.h; path = Cloudy/Moonlight/Input/ControllerSupport.h; sourceTree = SOURCE_ROOT; };
-		E723D47425532E08007413D9 /* StreamView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamView.h; path = Cloudy/Moonlight/Input/StreamView.h; sourceTree = SOURCE_ROOT; };
-		E723D47525532E08007413D9 /* AbsoluteTouchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AbsoluteTouchHandler.h; path = Cloudy/Moonlight/Input/AbsoluteTouchHandler.h; sourceTree = SOURCE_ROOT; };
-		E723D47625532E08007413D9 /* StreamView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreamView.m; path = Cloudy/Moonlight/Input/StreamView.m; sourceTree = SOURCE_ROOT; };
-		E723D47725532E08007413D9 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Controller.m; path = Cloudy/Moonlight/Input/Controller.m; sourceTree = SOURCE_ROOT; };
-		E723D47825532E08007413D9 /* RelativeTouchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RelativeTouchHandler.m; path = Cloudy/Moonlight/Input/RelativeTouchHandler.m; sourceTree = SOURCE_ROOT; };
-		E723D47925532E08007413D9 /* ControllerSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ControllerSupport.m; path = Cloudy/Moonlight/Input/ControllerSupport.m; sourceTree = SOURCE_ROOT; };
-		E723D47A25532E08007413D9 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Controller.h; path = Cloudy/Moonlight/Input/Controller.h; sourceTree = SOURCE_ROOT; };
-		E723D47B25532E08007413D9 /* OnScreenControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OnScreenControls.h; path = Cloudy/Moonlight/Input/OnScreenControls.h; sourceTree = SOURCE_ROOT; };
-		E723D47C25532E08007413D9 /* AbsoluteTouchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AbsoluteTouchHandler.m; path = Cloudy/Moonlight/Input/AbsoluteTouchHandler.m; sourceTree = SOURCE_ROOT; };
-		E723D47D25532E08007413D9 /* HapticContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HapticContext.h; path = Cloudy/Moonlight/Input/HapticContext.h; sourceTree = SOURCE_ROOT; };
-		E723D47E25532E08007413D9 /* KeyboardSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyboardSupport.h; path = Cloudy/Moonlight/Input/KeyboardSupport.h; sourceTree = SOURCE_ROOT; };
-		E723D47F25532E08007413D9 /* OnScreenControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OnScreenControls.m; path = Cloudy/Moonlight/Input/OnScreenControls.m; sourceTree = SOURCE_ROOT; };
-		E723D48025532E08007413D9 /* KeyboardSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyboardSupport.m; path = Cloudy/Moonlight/Input/KeyboardSupport.m; sourceTree = SOURCE_ROOT; };
-		E723D48125532E08007413D9 /* HapticContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HapticContext.m; path = Cloudy/Moonlight/Input/HapticContext.m; sourceTree = SOURCE_ROOT; };
+		E7646C9E25CE04C900E33E35 /* AbsoluteTouchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbsoluteTouchHandler.h; sourceTree = "<group>"; };
+		E7646C9F25CE04C900E33E35 /* InputPresenceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputPresenceDelegate.h; sourceTree = "<group>"; };
+		E7646CA025CE04C900E33E35 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
+		E7646CA125CE04C900E33E35 /* ControllerSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControllerSupport.m; sourceTree = "<group>"; };
+		E7646CA225CE04C900E33E35 /* OnScreenControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnScreenControls.h; sourceTree = "<group>"; };
+		E7646CA325CE04C900E33E35 /* HapticContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HapticContext.h; sourceTree = "<group>"; };
+		E7646CA425CE04C900E33E35 /* OnScreenControlsLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnScreenControlsLevel.h; sourceTree = "<group>"; };
+		E7646CA525CE04C900E33E35 /* ControllerSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControllerSupport.h; sourceTree = "<group>"; };
+		E7646CA625CE04C900E33E35 /* AbsoluteTouchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbsoluteTouchHandler.m; sourceTree = "<group>"; };
+		E7646CA725CE04C900E33E35 /* RelativeTouchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelativeTouchHandler.m; sourceTree = "<group>"; };
+		E7646CA825CE04C900E33E35 /* HapticContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HapticContext.m; sourceTree = "<group>"; };
+		E7646CA925CE04C900E33E35 /* Moonlight-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Moonlight-Bridging-Header.h"; sourceTree = "<group>"; };
+		E7646CAA25CE04C900E33E35 /* OnScreenControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnScreenControls.m; sourceTree = "<group>"; };
+		E7646CAB25CE04C900E33E35 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
+		E7646CAC25CE04CA00E33E35 /* KeyboardSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardSupport.m; sourceTree = "<group>"; };
+		E7646CAD25CE04CA00E33E35 /* KeyboardSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardSupport.h; sourceTree = "<group>"; };
+		E7646CAE25CE04CA00E33E35 /* StreamView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamView.h; sourceTree = "<group>"; };
+		E7646CAF25CE04CA00E33E35 /* RelativeTouchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelativeTouchHandler.h; sourceTree = "<group>"; };
+		E7646CB025CE04CA00E33E35 /* StreamView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamView.m; sourceTree = "<group>"; };
+		E7646CB125CE04CA00E33E35 /* UserInteractionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInteractionDelegate.h; sourceTree = "<group>"; };
+		E7646CB225CE04CA00E33E35 /* Cloudy-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cloudy-Bridging-Header.h"; sourceTree = "<group>"; };
 		E776E037254AE08E00684328 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E7B87E2325338121004358E3 /* Cloudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cloudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7B87E2A25338121004358E3 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +190,7 @@
 				44A4DDFB3BA2FE8AEE10DEA9 /* Collection.swift */,
 				44A4D857B518E3369F31987F /* SKProduct.swift */,
 				44A4DFB90BD884CB5041E57D /* WKUserScript.swift */,
+				44A4DC3B80142D290BBCE80C /* Float.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -187,23 +198,27 @@
 		44A4D437C146B24C01CA81BD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E723D47525532E08007413D9 /* AbsoluteTouchHandler.h */,
-				E723D47C25532E08007413D9 /* AbsoluteTouchHandler.m */,
-				E723D47A25532E08007413D9 /* Controller.h */,
-				E723D47725532E08007413D9 /* Controller.m */,
-				E723D47325532E08007413D9 /* ControllerSupport.h */,
-				E723D47925532E08007413D9 /* ControllerSupport.m */,
-				E723D47D25532E08007413D9 /* HapticContext.h */,
-				E723D48125532E08007413D9 /* HapticContext.m */,
-				E723D47E25532E08007413D9 /* KeyboardSupport.h */,
-				E723D48025532E08007413D9 /* KeyboardSupport.m */,
-				E723D47B25532E08007413D9 /* OnScreenControls.h */,
-				E723D47F25532E08007413D9 /* OnScreenControls.m */,
-				E723D47225532E08007413D9 /* RelativeTouchHandler.h */,
-				E723D47825532E08007413D9 /* RelativeTouchHandler.m */,
-				E723D47425532E08007413D9 /* StreamView.h */,
-				E723D47625532E08007413D9 /* StreamView.m */,
-				44A4DF4DEEC15EF8DE2B1C18 /* Cloudy-Bridging-Header.h */,
+				E7646C9E25CE04C900E33E35 /* AbsoluteTouchHandler.h */,
+				E7646CA625CE04C900E33E35 /* AbsoluteTouchHandler.m */,
+				E7646CB225CE04CA00E33E35 /* Cloudy-Bridging-Header.h */,
+				E7646CA025CE04C900E33E35 /* Controller.h */,
+				E7646CAB25CE04C900E33E35 /* Controller.m */,
+				E7646CA525CE04C900E33E35 /* ControllerSupport.h */,
+				E7646CA125CE04C900E33E35 /* ControllerSupport.m */,
+				E7646CA325CE04C900E33E35 /* HapticContext.h */,
+				E7646CA825CE04C900E33E35 /* HapticContext.m */,
+				E7646C9F25CE04C900E33E35 /* InputPresenceDelegate.h */,
+				E7646CAD25CE04CA00E33E35 /* KeyboardSupport.h */,
+				E7646CAC25CE04CA00E33E35 /* KeyboardSupport.m */,
+				E7646CA925CE04C900E33E35 /* Moonlight-Bridging-Header.h */,
+				E7646CA225CE04C900E33E35 /* OnScreenControls.h */,
+				E7646CAA25CE04C900E33E35 /* OnScreenControls.m */,
+				E7646CA425CE04C900E33E35 /* OnScreenControlsLevel.h */,
+				E7646CAF25CE04CA00E33E35 /* RelativeTouchHandler.h */,
+				E7646CA725CE04C900E33E35 /* RelativeTouchHandler.m */,
+				E7646CAE25CE04CA00E33E35 /* StreamView.h */,
+				E7646CB025CE04CA00E33E35 /* StreamView.m */,
+				E7646CB125CE04CA00E33E35 /* UserInteractionDelegate.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -218,6 +233,7 @@
 				44A4D24369D3C549C04BC958 /* Scripts.swift */,
 				44A4DA6DC6F7876B0D6B7A64 /* CloudyController.swift */,
 				44A4D9AA937FF7595CC480CE /* LaunchArgumentHandler.swift */,
+				44A4D355F9FC2B0B0407D925 /* ControllerId.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -235,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				44A4D01AC2645E64C1EB9CF9 /* AVFoundationVibratingFeedbackGenerator.swift */,
+				44A4D251D0510B4A29CC74F0 /* TouchFeedbackType.swift */,
 			);
 			path = Feedback;
 			sourceTree = "<group>";
@@ -475,32 +492,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E723D48925532E08007413D9 /* HapticContext.m in Sources */,
 				E7B87E2B25338121004358E3 /* RootViewController.swift in Sources */,
 				44A4D07E127721BBFE3C3EA5 /* WebViewControllerBridge.swift in Sources */,
-				E723D48425532E08007413D9 /* RelativeTouchHandler.m in Sources */,
 				44A4D0FBB22CC22B053573C3 /* UIView.swift in Sources */,
 				44A4DB830BC41F131E122F7C /* GameController.swift in Sources */,
-				E723D48825532E08007413D9 /* KeyboardSupport.m in Sources */,
 				44A4D8885DB5BE5C73C9FB87 /* UserDefaults.swift in Sources */,
 				44A4DD2F10965A88D83F5C0D /* SceneDelegate.swift in Sources */,
+				E7646CB725CE04CA00E33E35 /* OnScreenControls.m in Sources */,
 				44A4D4CD5F66196CB7AD5CB0 /* AppDelegate.swift in Sources */,
 				44A4D7DCB15B8C4799D56BCA /* String.swift in Sources */,
-				E723D48525532E08007413D9 /* ControllerSupport.m in Sources */,
-				E723D48625532E08007413D9 /* AbsoluteTouchHandler.m in Sources */,
-				E723D48225532E08007413D9 /* StreamView.m in Sources */,
-				E723D48725532E08007413D9 /* OnScreenControls.m in Sources */,
-				E723D48325532E08007413D9 /* Controller.m in Sources */,
 				44A4D13A82DE5B9006FED3DC /* Navigator.swift in Sources */,
 				44A4DC86DF1DDD05E6FC802A /* MenuViewController.swift in Sources */,
+				E7646CB425CE04CA00E33E35 /* AbsoluteTouchHandler.m in Sources */,
 				44A4D3B8AE0372A4C71E32EC /* TemporarySettings.swift in Sources */,
 				44A4D56785DE2ACC82B37F52 /* Log.swift in Sources */,
 				44A4DD2289A8D028B03463E0 /* X1Kit.swift in Sources */,
 				44A4D12458F1925C8B716EAD /* Limelight.m in Sources */,
 				44A4D240730D282493AC380E /* StreamConfiguration.m in Sources */,
+				E7646CB325CE04CA00E33E35 /* ControllerSupport.m in Sources */,
+				E7646CB925CE04CA00E33E35 /* KeyboardSupport.m in Sources */,
 				44A4DCA503A87B314B8CB75A /* ButtonOptionSet.swift in Sources */,
 				44A4D81D6A823FB908BCE224 /* AVFoundationVibratingFeedbackGenerator.swift in Sources */,
 				44A4D1A9A30B84DCDD3F66C7 /* Scripts.swift in Sources */,
+				E7646CB525CE04CA00E33E35 /* RelativeTouchHandler.m in Sources */,
 				44A4D667E367AB98368C36BC /* Bundle.swift in Sources */,
 				44A4D20C0B0DF5819CE21F17 /* CloudyController.swift in Sources */,
 				44A4D313CD82BF86B7841B19 /* Collection.swift in Sources */,
@@ -508,9 +522,15 @@
 				44A4D44641C7C146FE8BC523 /* Alerter.swift in Sources */,
 				44A4D064AE6FE05861A78C1D /* SKProduct.swift in Sources */,
 				44A4D9B9C9363AC8D381F05F /* LaunchArgumentHandler.swift in Sources */,
+				E7646CB825CE04CA00E33E35 /* Controller.m in Sources */,
 				44A4D78B8F260ECEBBB39B4C /* FullScreenWKWebView.swift in Sources */,
 				44A4DB5EF1F09B9D531A5704 /* WKUserScript.swift in Sources */,
 				44A4DC98C01BE31D98C4374C /* PurchaseHelper.swift in Sources */,
+				E7646CBA25CE04CA00E33E35 /* StreamView.m in Sources */,
+				44A4D462F6B9BB3200645FEF /* TouchFeedbackType.swift in Sources */,
+				E7646CB625CE04CA00E33E35 /* HapticContext.m in Sources */,
+				44A4D42E63964FEAD11402C9 /* ControllerId.swift in Sources */,
+				44A4DF24B14D4379ED99E351 /* Float.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
