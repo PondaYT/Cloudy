@@ -308,7 +308,7 @@ extension MenuViewController {
 
     /// Controller ID changed in menu
     @IBAction func onControllerIdChanged(_ sender: Any) {
-        guard let newId = GCExtendedGamepad.id(rawValue: controllerIdSelector.selectedSegmentIndex) else {
+        guard let newId = ControllerId(rawValue: controllerIdSelector.selectedSegmentIndex) else {
             Log.e("Something went wrong parsing the selected controller ID: \(onScreenControllerSelector.selectedSegmentIndex)")
             return
         }

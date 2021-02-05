@@ -6,26 +6,15 @@
 //  Copyright (c) 2014 Moonlight Stream. All rights reserved.
 //
 
+#ifdef NON_APPSTORE
+
 #import <UIKit/UIKit.h>
+#import "OnScreenControlsLevel.h"
 
 @class ControllerSupport;
 @protocol TouchFeedbackGenerator;
 
 @interface OnScreenControls : NSObject
-
-    typedef NS_ENUM(NSInteger, OnScreenControlsLevel)
-    {
-        OnScreenControlsLevelOff,
-        OnScreenControlsLevelSimple,
-        OnScreenControlsLevelFull,
-
-        OnScreenControlsLevelAuto,
-
-        // Internal levels selected by ControllerSupport
-        OnScreenControlsLevelAutoGCGamepad,
-        OnScreenControlsLevelAutoGCExtendedGamepad,
-        OnScreenControlsLevelAutoGCExtendedGamepadWithStickButtons
-    };
 
     - (id)initWithView:(UIView *)view
           controllerSup:(ControllerSupport *)controllerSupport
@@ -45,3 +34,5 @@
 
     - (void)cleanup;
 @end
+
+#endif

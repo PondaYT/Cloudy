@@ -6,6 +6,8 @@
 //  Copyright © 2020 Moonlight Game Streaming Project. All rights reserved.
 //
 
+#ifdef NON_APPSTORE
+
 #import "AbsoluteTouchHandler.h"
 
 #include "Limelight.h"
@@ -55,7 +57,7 @@
             return;
         }
 
-        UITouch *touch = [touches anyObject];
+        UITouch *touch        = [touches anyObject];
         CGPoint touchLocation = [touch locationInView:view];
 
         // Don't reposition for finger down events within the deadzone. This makes double-clicking easier.
@@ -88,7 +90,7 @@
             return;
         }
 
-        UITouch *touch = [touches anyObject];
+        UITouch *touch        = [touches anyObject];
         CGPoint touchLocation = [touch locationInView:view];
 
         if(sqrt(pow((touchLocation.x / view.bounds.size.width) - (lastTouchDownLocation.x / view.bounds.size.width), 2) +
@@ -130,3 +132,5 @@
     }
 
 @end
+
+#endif

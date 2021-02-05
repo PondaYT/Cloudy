@@ -6,17 +6,13 @@
 //  Copyright (c) 2014 Moonlight Stream. All rights reserved.
 //
 
+#ifdef NON_APPSTORE
+
+#import "UserInteractionDelegate.h"
 #import "ControllerSupport.h"
+#import "OnScreenControlsLevel.h"
 #import "OnScreenControls.h"
 #import "StreamConfiguration.h"
-
-@protocol UserInteractionDelegate <NSObject>
-
-    - (void)userInteractionBegan;
-
-    - (void)userInteractionEnded;
-
-@end
 
 @protocol X1KitMouseDelegate;
 
@@ -48,3 +44,5 @@
 #endif
 
 @end
+
+#endif

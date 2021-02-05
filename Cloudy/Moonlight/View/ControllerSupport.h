@@ -6,19 +6,14 @@
 //  Copyright (c) 2014 Moonlight Stream. All rights reserved.
 //
 
+#ifdef NON_APPSTORE
+
+#import "InputPresenceDelegate.h"
 #import "StreamConfiguration.h"
 #import "Controller.h"
 
 @class OnScreenControls;
 @protocol ControllerDataReceiver;
-
-@protocol InputPresenceDelegate <NSObject>
-
-    - (void)gamepadPresenceChanged;
-
-    - (void)mousePresenceChanged;
-
-@end
 
 @interface ControllerSupport : NSObject
 
@@ -55,3 +50,5 @@
     - (NSUInteger)getConnectedGamepadCount;
 
 @end
+
+#endif

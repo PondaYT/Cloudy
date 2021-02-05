@@ -2,7 +2,9 @@
 
 import Foundation
 import WebKit
-import GameController
+
+/// Infix operator declaration
+infix operator =~: ComparisonPrecedence
 
 @objc enum ControlsSource: Int {
     case onScreen
@@ -53,21 +55,25 @@ class WebViewControllerBridge: NSObject, WKScriptMessageHandlerWithReply, Contro
 
     /// Handle regular external controller
     private func handleRegularController(with replyHandler: @escaping ReplyHandlerType) {
-        // early exit
-        guard let currentControllerState = GCController.controllers().first?.extendedGamepad,
-              let currentCloudyController = currentControllerState.toCloudyController() else {
+        #if NON_APPSTORE
+            // early exit
+            guard let currentControllerState = GCController.controllers().first?.extendedGamepad,
+                  let currentCloudyController = currentControllerState.toCloudyController() else {
+                replyHandler(nil, nil)
+                return
+            }
+            // proceed
+            if let lastControllerState = lastExternalControllerSnapshot,
+               lastControllerState =~ currentCloudyController {
+                replyHandler(nil, nil)
+                return
+            }
+            // update and save
+            lastExternalControllerSnapshot = currentCloudyController
+            replyHandler(currentCloudyController.toJson(for: exportType), nil)
+        #else
             replyHandler(nil, nil)
-            return
-        }
-        // proceed
-        if let lastControllerState = lastExternalControllerSnapshot,
-           lastControllerState =~ currentCloudyController {
-            replyHandler(nil, nil)
-            return
-        }
-        // update and save
-        lastExternalControllerSnapshot = currentCloudyController
-        replyHandler(currentCloudyController.toJson(for: exportType), nil)
+        #endif
     }
 
     /// Handle touch controller

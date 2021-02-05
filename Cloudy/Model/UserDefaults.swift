@@ -1,7 +1,6 @@
 // Copyright (c) 2020 Nomad5. All rights reserved.
 
 import Foundation
-import GameController
 
 /// Convenience access to persisted user defaults
 @objc extension UserDefaults {
@@ -24,7 +23,7 @@ import GameController
     }
 
     /// Read / write app open count
-    var appOpenCount:     Int {
+    var          appOpenCount:     Int {
         get {
             UserDefaults.standard.integer(forKey: Config.appOpenCount)
         }
@@ -34,7 +33,7 @@ import GameController
     }
 
     /// Read / write if the user donated already
-    var didDonateAlready: Bool {
+    var          didDonateAlready: Bool {
         get {
             UserDefaults.standard.bool(forKey: Config.didDonateAlready)
         }
@@ -44,7 +43,7 @@ import GameController
     }
 
     /// Read / write the last visited url
-    var lastVisitedUrl:   URL? {
+    var          lastVisitedUrl:   URL? {
         get {
             UserDefaults.standard.url(forKey: Config.lastVisitedUrlKey)
         }
@@ -54,7 +53,7 @@ import GameController
     }
 
     /// Read / write the manually overwritten user agent
-    var manualUserAgent:  String? {
+    var          manualUserAgent:  String? {
         get {
             UserDefaults.standard.string(forKey: Config.manualUserAgent)
         }
@@ -126,12 +125,12 @@ import GameController
     }
 
     /// Read / write flag for controller ID
-    @nonobjc var controllerId:            GCExtendedGamepad.id {
+    @nonobjc var controllerId:     ControllerId {
         get {
             if UserDefaults.standard.object(forKey: Config.controllerId) == nil {
                 return .xbox
             }
-            return GCExtendedGamepad.id(rawValue: UserDefaults.standard.integer(forKey: Config.controllerId))!
+            return ControllerId(rawValue: UserDefaults.standard.integer(forKey: Config.controllerId))!
         }
         set {
             UserDefaults.standard.set(newValue.rawValue, forKey: Config.controllerId)
