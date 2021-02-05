@@ -15,6 +15,7 @@
 		44A4D1A9A30B84DCDD3F66C7 /* Scripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D24369D3C549C04BC958 /* Scripts.swift */; };
 		44A4D20C0B0DF5819CE21F17 /* CloudyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DA6DC6F7876B0D6B7A64 /* CloudyController.swift */; };
 		44A4D240730D282493AC380E /* StreamConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D47E3D9518C80384D8F4 /* StreamConfiguration.m */; };
+		44A4D274B7623C77656A0288 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DA80D911909ACEC88C1E /* Queue.swift */; };
 		44A4D313CD82BF86B7841B19 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DDFB3BA2FE8AEE10DEA9 /* Collection.swift */; };
 		44A4D3B8AE0372A4C71E32EC /* TemporarySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DF345C0AE58872E1CC3A /* TemporarySettings.swift */; };
 		44A4D44641C7C146FE8BC523 /* Alerter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DD3E981844FBC3E9E5A7 /* Alerter.swift */; };
@@ -27,6 +28,7 @@
 		44A4D8885DB5BE5C73C9FB87 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D3A1BA3A8B2AB96CB81B /* UserDefaults.swift */; };
 		44A4D96805A28BC01E33FF4F /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DB5C7725B073FE1AB0E8 /* IAPManager.swift */; };
 		44A4D9B9C9363AC8D381F05F /* LaunchArgumentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D9AA937FF7595CC480CE /* LaunchArgumentHandler.swift */; };
+		44A4DA9F12FCC427A4D65E16 /* FortniteHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D78CDEC3A83F90A9050A /* FortniteHUD.swift */; };
 		44A4DB5EF1F09B9D531A5704 /* WKUserScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DFB90BD884CB5041E57D /* WKUserScript.swift */; };
 		44A4DB830BC41F131E122F7C /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D999AA39891699C55D00 /* GameController.swift */; };
 		44A4DC86DF1DDD05E6FC802A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D58736385FBD2B75856B /* MenuViewController.swift */; };
@@ -34,6 +36,48 @@
 		44A4DCA503A87B314B8CB75A /* ButtonOptionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D9F318B9593A6DD6F951 /* ButtonOptionSet.swift */; };
 		44A4DD2289A8D028B03463E0 /* X1Kit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D996514DEB85071D2DA7 /* X1Kit.swift */; };
 		44A4DD2F10965A88D83F5C0D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DBCCBA86600B436045E4 /* SceneDelegate.swift */; };
+		5151C12025BE8D8800EA0E06 /* HUDBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5151C11F25BE8D8800EA0E06 /* HUDBackground.jpg */; };
+		5151C14C25BE8EB800EA0E06 /* Stair Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C12425BE8EB200EA0E06 /* Stair Selected.png */; };
+		5151C14D25BE8EB800EA0E06 /* Autorun.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C12525BE8EB200EA0E06 /* Autorun.png */; };
+		5151C14E25BE8EB800EA0E06 /* Switch To Combat.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C12625BE8EB200EA0E06 /* Switch To Combat.png */; };
+		5151C14F25BE8EB800EA0E06 /* Cycle Weapons Down.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C12725BE8EB200EA0E06 /* Cycle Weapons Down.png */; };
+		5151C15025BE8EB800EA0E06 /* Open Chest.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C12825BE8EB300EA0E06 /* Open Chest.png */; };
+		5151C15125BE8EB800EA0E06 /* Throw.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C12925BE8EB300EA0E06 /* Throw.png */; };
+		5151C15225BE8EB800EA0E06 /* Open Door.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C12A25BE8EB300EA0E06 /* Open Door.png */; };
+		5151C15325BE8EB800EA0E06 /* Move Joystick.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C12B25BE8EB300EA0E06 /* Move Joystick.png */; };
+		5151C15425BE8EB800EA0E06 /* Crouch Down.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C12C25BE8EB300EA0E06 /* Crouch Down.png */; };
+		5151C15525BE8EB800EA0E06 /* Stair Unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C12D25BE8EB300EA0E06 /* Stair Unselected.png */; };
+		5151C15625BE8EB800EA0E06 /* Floor Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C12E25BE8EB300EA0E06 /* Floor Selected.png */; };
+		5151C15725BE8EB800EA0E06 /* Aim.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C12F25BE8EB400EA0E06 /* Aim.png */; };
+		5151C15825BE8EB800EA0E06 /* Emote Wheel.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C13025BE8EB400EA0E06 /* Emote Wheel.png */; };
+		5151C15925BE8EB800EA0E06 /* Jump.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C13125BE8EB400EA0E06 /* Jump.png */; };
+		5151C15A25BE8EB800EA0E06 /* Mic Muted.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C13225BE8EB400EA0E06 /* Mic Muted.png */; };
+		5151C15B25BE8EB800EA0E06 /* Floor Unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C13325BE8EB400EA0E06 /* Floor Unselected.png */; };
+		5151C15C25BE8EB800EA0E06 /* Mic Unmuted.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C13425BE8EB400EA0E06 /* Mic Unmuted.png */; };
+		5151C15D25BE8EB800EA0E06 /* Confirm.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C13525BE8EB500EA0E06 /* Confirm.png */; };
+		5151C15E25BE8EB800EA0E06 /* Quick Chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C13625BE8EB500EA0E06 /* Quick Chat.png */; };
+		5151C15F25BE8EB800EA0E06 /* Repair.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C13725BE8EB500EA0E06 /* Repair.png */; };
+		5151C16025BE8EB800EA0E06 /* Inventory.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C13825BE8EB500EA0E06 /* Inventory.png */; };
+		5151C16125BE8EB800EA0E06 /* Pyramid Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C13925BE8EB500EA0E06 /* Pyramid Selected.png */; };
+		5151C16225BE8EB800EA0E06 /* Cycle Weapons Up.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C13A25BE8EB500EA0E06 /* Cycle Weapons Up.png */; };
+		5151C16325BE8EB800EA0E06 /* Crouch Up.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C13B25BE8EB500EA0E06 /* Crouch Up.png */; };
+		5151C16425BE8EB800EA0E06 /* Pyramid Unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C13C25BE8EB600EA0E06 /* Pyramid Unselected.png */; };
+		5151C16525BE8EB800EA0E06 /* Reset.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C13D25BE8EB600EA0E06 /* Reset.png */; };
+		5151C16625BE8EB800EA0E06 /* Ping.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C13E25BE8EB600EA0E06 /* Ping.png */; };
+		5151C16725BE8EB800EA0E06 /* Shoot Big.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C13F25BE8EB600EA0E06 /* Shoot Big.png */; };
+		5151C16825BE8EB800EA0E06 /* Shoot.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C14025BE8EB600EA0E06 /* Shoot.png */; };
+		5151C16925BE8EB800EA0E06 /* Edit Crosshair.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C14125BE8EB600EA0E06 /* Edit Crosshair.png */; };
+		5151C16A25BE8EB800EA0E06 /* Use.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C14225BE8EB700EA0E06 /* Use.png */; };
+		5151C16B25BE8EB800EA0E06 /* Quick Heal.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C14325BE8EB700EA0E06 /* Quick Heal.png */; };
+		5151C16C25BE8EB800EA0E06 /* Move Outer.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C14425BE8EB700EA0E06 /* Move Outer.png */; };
+		5151C16D25BE8EB800EA0E06 /* Edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C14525BE8EB700EA0E06 /* Edit.png */; };
+		5151C16E25BE8EB800EA0E06 /* Rotate.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C14625BE8EB700EA0E06 /* Rotate.png */; };
+		5151C16F25BE8EB800EA0E06 /* Switch To Build.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C14725BE8EB700EA0E06 /* Switch To Build.png */; };
+		5151C17025BE8EB800EA0E06 /* Wall Unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C14825BE8EB700EA0E06 /* Wall Unselected.png */; };
+		5151C17125BE8EB800EA0E06 /* Edit Reset.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C14925BE8EB800EA0E06 /* Edit Reset.png */; };
+		5151C17225BE8EB800EA0E06 /* Exit.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C14A25BE8EB800EA0E06 /* Exit.png */; };
+		5151C17325BE8EB800EA0E06 /* Wall Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C14B25BE8EB800EA0E06 /* Wall Selected.png */; };
+		5151C17625BE8EFB00EA0E06 /* FortniteHUDCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5151C17525BE8EFB00EA0E06 /* FortniteHUDCustomization.swift */; };
 		5CDDBA53FB1B62159C8668EF /* Pods_Cloudy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BF8562B1619F13A7254171F /* Pods_Cloudy.framework */; };
 		E712FF9825520978003CF78C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E712FF9725520978003CF78C /* Images.xcassets */; };
 		E723D48225532E08007413D9 /* StreamView.m in Sources */ = {isa = PBXBuildFile; fileRef = E723D47625532E08007413D9 /* StreamView.m */; };
@@ -65,6 +109,7 @@
 		44A4D58736385FBD2B75856B /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		44A4D600D66AF81438FD332D /* FullScreenWKWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenWKWebView.swift; sourceTree = "<group>"; };
 		44A4D67F8889E455A547CB96 /* WebViewControllerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewControllerBridge.swift; sourceTree = "<group>"; };
+		44A4D78CDEC3A83F90A9050A /* FortniteHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortniteHUD.swift; sourceTree = "<group>"; };
 		44A4D7B73DC83248F99BFA6F /* Limelight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Limelight.h; sourceTree = "<group>"; };
 		44A4D7CF8072725D6F7680F7 /* Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Log.h; sourceTree = "<group>"; };
 		44A4D80ED7881A56C23C0BBD /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
@@ -76,6 +121,7 @@
 		44A4D9AA937FF7595CC480CE /* LaunchArgumentHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchArgumentHandler.swift; sourceTree = "<group>"; };
 		44A4D9F318B9593A6DD6F951 /* ButtonOptionSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonOptionSet.swift; sourceTree = "<group>"; };
 		44A4DA6DC6F7876B0D6B7A64 /* CloudyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudyController.swift; sourceTree = "<group>"; };
+		44A4DA80D911909ACEC88C1E /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		44A4DB5C7725B073FE1AB0E8 /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		44A4DBCCBA86600B436045E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		44A4DD3E981844FBC3E9E5A7 /* Alerter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alerter.swift; sourceTree = "<group>"; };
@@ -84,6 +130,48 @@
 		44A4DF345C0AE58872E1CC3A /* TemporarySettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporarySettings.swift; sourceTree = "<group>"; };
 		44A4DF4DEEC15EF8DE2B1C18 /* Cloudy-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cloudy-Bridging-Header.h"; sourceTree = "<group>"; };
 		44A4DFB90BD884CB5041E57D /* WKUserScript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKUserScript.swift; sourceTree = "<group>"; };
+		5151C11F25BE8D8800EA0E06 /* HUDBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HUDBackground.jpg; sourceTree = "<group>"; };
+		5151C12425BE8EB200EA0E06 /* Stair Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stair Selected.png"; sourceTree = "<group>"; };
+		5151C12525BE8EB200EA0E06 /* Autorun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Autorun.png; sourceTree = "<group>"; };
+		5151C12625BE8EB200EA0E06 /* Switch To Combat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Switch To Combat.png"; sourceTree = "<group>"; };
+		5151C12725BE8EB200EA0E06 /* Cycle Weapons Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cycle Weapons Down.png"; sourceTree = "<group>"; };
+		5151C12825BE8EB300EA0E06 /* Open Chest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Open Chest.png"; sourceTree = "<group>"; };
+		5151C12925BE8EB300EA0E06 /* Throw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Throw.png; sourceTree = "<group>"; };
+		5151C12A25BE8EB300EA0E06 /* Open Door.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Open Door.png"; sourceTree = "<group>"; };
+		5151C12B25BE8EB300EA0E06 /* Move Joystick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Move Joystick.png"; sourceTree = "<group>"; };
+		5151C12C25BE8EB300EA0E06 /* Crouch Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Crouch Down.png"; sourceTree = "<group>"; };
+		5151C12D25BE8EB300EA0E06 /* Stair Unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stair Unselected.png"; sourceTree = "<group>"; };
+		5151C12E25BE8EB300EA0E06 /* Floor Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Floor Selected.png"; sourceTree = "<group>"; };
+		5151C12F25BE8EB400EA0E06 /* Aim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Aim.png; sourceTree = "<group>"; };
+		5151C13025BE8EB400EA0E06 /* Emote Wheel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Emote Wheel.png"; sourceTree = "<group>"; };
+		5151C13125BE8EB400EA0E06 /* Jump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Jump.png; sourceTree = "<group>"; };
+		5151C13225BE8EB400EA0E06 /* Mic Muted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mic Muted.png"; sourceTree = "<group>"; };
+		5151C13325BE8EB400EA0E06 /* Floor Unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Floor Unselected.png"; sourceTree = "<group>"; };
+		5151C13425BE8EB400EA0E06 /* Mic Unmuted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mic Unmuted.png"; sourceTree = "<group>"; };
+		5151C13525BE8EB500EA0E06 /* Confirm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Confirm.png; sourceTree = "<group>"; };
+		5151C13625BE8EB500EA0E06 /* Quick Chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Quick Chat.png"; sourceTree = "<group>"; };
+		5151C13725BE8EB500EA0E06 /* Repair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Repair.png; sourceTree = "<group>"; };
+		5151C13825BE8EB500EA0E06 /* Inventory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Inventory.png; sourceTree = "<group>"; };
+		5151C13925BE8EB500EA0E06 /* Pyramid Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pyramid Selected.png"; sourceTree = "<group>"; };
+		5151C13A25BE8EB500EA0E06 /* Cycle Weapons Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cycle Weapons Up.png"; sourceTree = "<group>"; };
+		5151C13B25BE8EB500EA0E06 /* Crouch Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Crouch Up.png"; sourceTree = "<group>"; };
+		5151C13C25BE8EB600EA0E06 /* Pyramid Unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pyramid Unselected.png"; sourceTree = "<group>"; };
+		5151C13D25BE8EB600EA0E06 /* Reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reset.png; sourceTree = "<group>"; };
+		5151C13E25BE8EB600EA0E06 /* Ping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ping.png; sourceTree = "<group>"; };
+		5151C13F25BE8EB600EA0E06 /* Shoot Big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Shoot Big.png"; sourceTree = "<group>"; };
+		5151C14025BE8EB600EA0E06 /* Shoot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shoot.png; sourceTree = "<group>"; };
+		5151C14125BE8EB600EA0E06 /* Edit Crosshair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Edit Crosshair.png"; sourceTree = "<group>"; };
+		5151C14225BE8EB700EA0E06 /* Use.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Use.png; sourceTree = "<group>"; };
+		5151C14325BE8EB700EA0E06 /* Quick Heal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Quick Heal.png"; sourceTree = "<group>"; };
+		5151C14425BE8EB700EA0E06 /* Move Outer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Move Outer.png"; sourceTree = "<group>"; };
+		5151C14525BE8EB700EA0E06 /* Edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Edit.png; sourceTree = "<group>"; };
+		5151C14625BE8EB700EA0E06 /* Rotate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rotate.png; sourceTree = "<group>"; };
+		5151C14725BE8EB700EA0E06 /* Switch To Build.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Switch To Build.png"; sourceTree = "<group>"; };
+		5151C14825BE8EB700EA0E06 /* Wall Unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Wall Unselected.png"; sourceTree = "<group>"; };
+		5151C14925BE8EB800EA0E06 /* Edit Reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Edit Reset.png"; sourceTree = "<group>"; };
+		5151C14A25BE8EB800EA0E06 /* Exit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Exit.png; sourceTree = "<group>"; };
+		5151C14B25BE8EB800EA0E06 /* Wall Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Wall Selected.png"; sourceTree = "<group>"; };
+		5151C17525BE8EFB00EA0E06 /* FortniteHUDCustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortniteHUDCustomization.swift; sourceTree = "<group>"; };
 		79B35440DA7901C4949EFDC7 /* Pods-Cloudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.release.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.release.xcconfig"; sourceTree = "<group>"; };
 		8C777E5DB6AA0540BAAEE53E /* Pods-Cloudy.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.appstore.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.appstore.xcconfig"; sourceTree = "<group>"; };
 		B42B0FEC073AD10E0FCA6CF1 /* Pods-Cloudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.debug.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.debug.xcconfig"; sourceTree = "<group>"; };
@@ -218,6 +306,7 @@
 				44A4D24369D3C549C04BC958 /* Scripts.swift */,
 				44A4DA6DC6F7876B0D6B7A64 /* CloudyController.swift */,
 				44A4D9AA937FF7595CC480CE /* LaunchArgumentHandler.swift */,
+				44A4DA80D911909ACEC88C1E /* Queue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -276,6 +365,64 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		5151C11E25BE8D7700EA0E06 /* Fortnite */ = {
+			isa = PBXGroup;
+			children = (
+				5151C12225BE8E9000EA0E06 /* Combat + Build + Edit */,
+				5151C11F25BE8D8800EA0E06 /* HUDBackground.jpg */,
+				5151C17525BE8EFB00EA0E06 /* FortniteHUDCustomization.swift */,
+				44A4D78CDEC3A83F90A9050A /* FortniteHUD.swift */,
+			);
+			path = Fortnite;
+			sourceTree = "<group>";
+		};
+		5151C12225BE8E9000EA0E06 /* Combat + Build + Edit */ = {
+			isa = PBXGroup;
+			children = (
+				5151C12F25BE8EB400EA0E06 /* Aim.png */,
+				5151C12525BE8EB200EA0E06 /* Autorun.png */,
+				5151C13525BE8EB500EA0E06 /* Confirm.png */,
+				5151C12C25BE8EB300EA0E06 /* Crouch Down.png */,
+				5151C13B25BE8EB500EA0E06 /* Crouch Up.png */,
+				5151C12725BE8EB200EA0E06 /* Cycle Weapons Down.png */,
+				5151C13A25BE8EB500EA0E06 /* Cycle Weapons Up.png */,
+				5151C14125BE8EB600EA0E06 /* Edit Crosshair.png */,
+				5151C14925BE8EB800EA0E06 /* Edit Reset.png */,
+				5151C14525BE8EB700EA0E06 /* Edit.png */,
+				5151C13025BE8EB400EA0E06 /* Emote Wheel.png */,
+				5151C14A25BE8EB800EA0E06 /* Exit.png */,
+				5151C12E25BE8EB300EA0E06 /* Floor Selected.png */,
+				5151C13325BE8EB400EA0E06 /* Floor Unselected.png */,
+				5151C13825BE8EB500EA0E06 /* Inventory.png */,
+				5151C13125BE8EB400EA0E06 /* Jump.png */,
+				5151C13225BE8EB400EA0E06 /* Mic Muted.png */,
+				5151C13425BE8EB400EA0E06 /* Mic Unmuted.png */,
+				5151C12B25BE8EB300EA0E06 /* Move Joystick.png */,
+				5151C14425BE8EB700EA0E06 /* Move Outer.png */,
+				5151C12825BE8EB300EA0E06 /* Open Chest.png */,
+				5151C12A25BE8EB300EA0E06 /* Open Door.png */,
+				5151C13E25BE8EB600EA0E06 /* Ping.png */,
+				5151C13925BE8EB500EA0E06 /* Pyramid Selected.png */,
+				5151C13C25BE8EB600EA0E06 /* Pyramid Unselected.png */,
+				5151C13625BE8EB500EA0E06 /* Quick Chat.png */,
+				5151C14325BE8EB700EA0E06 /* Quick Heal.png */,
+				5151C13725BE8EB500EA0E06 /* Repair.png */,
+				5151C13D25BE8EB600EA0E06 /* Reset.png */,
+				5151C14625BE8EB700EA0E06 /* Rotate.png */,
+				5151C13F25BE8EB600EA0E06 /* Shoot Big.png */,
+				5151C14025BE8EB600EA0E06 /* Shoot.png */,
+				5151C12425BE8EB200EA0E06 /* Stair Selected.png */,
+				5151C12D25BE8EB300EA0E06 /* Stair Unselected.png */,
+				5151C14725BE8EB700EA0E06 /* Switch To Build.png */,
+				5151C12625BE8EB200EA0E06 /* Switch To Combat.png */,
+				5151C12925BE8EB300EA0E06 /* Throw.png */,
+				5151C14225BE8EB700EA0E06 /* Use.png */,
+				5151C14B25BE8EB800EA0E06 /* Wall Selected.png */,
+				5151C14825BE8EB700EA0E06 /* Wall Unselected.png */,
+			);
+			path = "Combat + Build + Edit";
+			sourceTree = "<group>";
+		};
 		CAC63E443E260BECDB6A0652 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +463,7 @@
 				E7B87E3125338124004358E3 /* LaunchScreen.storyboard */,
 				E7B87E3425338124004358E3 /* Info.plist */,
 				44A4D67F8889E455A547CB96 /* WebViewControllerBridge.swift */,
+				5151C11E25BE8D7700EA0E06 /* Fortnite */,
 				44A4D35F4287C173F7E152C8 /* Extension */,
 				44A4D54D8E4FC726157DAB44 /* Model */,
 				44A4D1438C45504101E3F0F6 /* App */,
@@ -398,11 +546,52 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5151C15825BE8EB800EA0E06 /* Emote Wheel.png in Resources */,
+				5151C15E25BE8EB800EA0E06 /* Quick Chat.png in Resources */,
+				5151C16225BE8EB800EA0E06 /* Cycle Weapons Up.png in Resources */,
+				5151C15125BE8EB800EA0E06 /* Throw.png in Resources */,
 				E7B87E3325338124004358E3 /* LaunchScreen.storyboard in Resources */,
+				5151C16E25BE8EB800EA0E06 /* Rotate.png in Resources */,
+				5151C16C25BE8EB800EA0E06 /* Move Outer.png in Resources */,
+				5151C16F25BE8EB800EA0E06 /* Switch To Build.png in Resources */,
+				5151C15B25BE8EB800EA0E06 /* Floor Unselected.png in Resources */,
+				5151C15D25BE8EB800EA0E06 /* Confirm.png in Resources */,
+				5151C16A25BE8EB800EA0E06 /* Use.png in Resources */,
+				5151C15625BE8EB800EA0E06 /* Floor Selected.png in Resources */,
+				5151C12025BE8D8800EA0E06 /* HUDBackground.jpg in Resources */,
 				E712FF9825520978003CF78C /* Images.xcassets in Resources */,
 				E776E038254AE08E00684328 /* GoogleService-Info.plist in Resources */,
+				5151C15925BE8EB800EA0E06 /* Jump.png in Resources */,
+				5151C15C25BE8EB800EA0E06 /* Mic Unmuted.png in Resources */,
+				5151C17325BE8EB800EA0E06 /* Wall Selected.png in Resources */,
+				5151C14E25BE8EB800EA0E06 /* Switch To Combat.png in Resources */,
+				5151C16825BE8EB800EA0E06 /* Shoot.png in Resources */,
+				5151C16D25BE8EB800EA0E06 /* Edit.png in Resources */,
+				5151C16025BE8EB800EA0E06 /* Inventory.png in Resources */,
+				5151C16325BE8EB800EA0E06 /* Crouch Up.png in Resources */,
+				5151C15525BE8EB800EA0E06 /* Stair Unselected.png in Resources */,
+				5151C15225BE8EB800EA0E06 /* Open Door.png in Resources */,
+				5151C15425BE8EB800EA0E06 /* Crouch Down.png in Resources */,
+				5151C14D25BE8EB800EA0E06 /* Autorun.png in Resources */,
+				5151C16925BE8EB800EA0E06 /* Edit Crosshair.png in Resources */,
+				5151C17225BE8EB800EA0E06 /* Exit.png in Resources */,
+				5151C16125BE8EB800EA0E06 /* Pyramid Selected.png in Resources */,
+				5151C16625BE8EB800EA0E06 /* Ping.png in Resources */,
 				E7B87E3025338124004358E3 /* Assets.xcassets in Resources */,
+				5151C17125BE8EB800EA0E06 /* Edit Reset.png in Resources */,
 				E7B87E2E25338121004358E3 /* Main.storyboard in Resources */,
+				5151C15025BE8EB800EA0E06 /* Open Chest.png in Resources */,
+				5151C15A25BE8EB800EA0E06 /* Mic Muted.png in Resources */,
+				5151C14F25BE8EB800EA0E06 /* Cycle Weapons Down.png in Resources */,
+				5151C16725BE8EB800EA0E06 /* Shoot Big.png in Resources */,
+				5151C17025BE8EB800EA0E06 /* Wall Unselected.png in Resources */,
+				5151C15F25BE8EB800EA0E06 /* Repair.png in Resources */,
+				5151C16B25BE8EB800EA0E06 /* Quick Heal.png in Resources */,
+				5151C16425BE8EB800EA0E06 /* Pyramid Unselected.png in Resources */,
+				5151C15725BE8EB800EA0E06 /* Aim.png in Resources */,
+				5151C14C25BE8EB800EA0E06 /* Stair Selected.png in Resources */,
+				5151C15325BE8EB800EA0E06 /* Move Joystick.png in Resources */,
+				5151C16525BE8EB800EA0E06 /* Reset.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +674,7 @@
 				44A4D8885DB5BE5C73C9FB87 /* UserDefaults.swift in Sources */,
 				44A4DD2F10965A88D83F5C0D /* SceneDelegate.swift in Sources */,
 				44A4D4CD5F66196CB7AD5CB0 /* AppDelegate.swift in Sources */,
+				5151C17625BE8EFB00EA0E06 /* FortniteHUDCustomization.swift in Sources */,
 				44A4D7DCB15B8C4799D56BCA /* String.swift in Sources */,
 				E723D48525532E08007413D9 /* ControllerSupport.m in Sources */,
 				E723D48625532E08007413D9 /* AbsoluteTouchHandler.m in Sources */,
@@ -511,6 +701,8 @@
 				44A4D78B8F260ECEBBB39B4C /* FullScreenWKWebView.swift in Sources */,
 				44A4DB5EF1F09B9D531A5704 /* WKUserScript.swift in Sources */,
 				44A4DC98C01BE31D98C4374C /* PurchaseHelper.swift in Sources */,
+				44A4DA9F12FCC427A4D65E16 /* FortniteHUD.swift in Sources */,
+				44A4D274B7623C77656A0288 /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

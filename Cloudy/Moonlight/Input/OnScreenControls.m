@@ -80,7 +80,8 @@
         Controller        *_controller;
         NSMutableArray    *_deadTouches;
 
-        id <TouchFeedbackGenerator> hapticFeedback;
+        id <TouchFeedbackGenerator>    hapticFeedback;
+        id <OnScreenControlsExtension> onScreenExtension;
     }
 
     static const float EDGE_WIDTH = .05;
@@ -127,12 +128,14 @@
     - (id)initWithView:(UIView *)view
           controllerSup:(ControllerSupport *)controllerSupport
           hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate
+          extensionDelegate:(id <OnScreenControlsExtension>)extensionDelegate;
     {
         self               = [self init];
         _view              = view;
         _controllerSupport = controllerSupport;
         _controller        = [controllerSupport getOscController];
         _deadTouches       = [[NSMutableArray alloc] init];
+        onScreenExtension  = extensionDelegate;
         hapticFeedback     = hapticFeedbackDelegate;
 
         _iPad        = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad);
@@ -270,6 +273,10 @@
                 [self drawTriggers];
                 [self drawSticks];
                 [self hideL3R3]; // Full controls don't need these they have the sticks
+                if(onScreenExtension)
+                {
+                    [onScreenExtension drawButtonsIn:_view.layer];
+                }
                 break;
             default:
                 LogE(@"Unknown on-screen controls level: %d", (int) _level);
@@ -460,6 +467,7 @@
         _leftButton.frame    = CGRectMake(D_PAD_CENTER_X - D_PAD_DIST - leftButtonImage.size.width, D_PAD_CENTER_Y - leftButtonImage.size.height / 2, leftButtonImage.size.width, leftButtonImage.size.height);
         _leftButton.contents = (id) leftButtonImage.CGImage;
         [_view.layer addSublayer:_leftButton];
+
     }
 
     - (void)drawStartSelect
@@ -738,6 +746,10 @@
             {
                 buttonTouch = true;
             }
+            else if(onScreenExtension && [onScreenExtension handleTouchMovedEvent:touch])
+            {
+                buttonTouch = true;
+            }
             if([_deadTouches containsObject:touch])
             {
                 updated = true;
@@ -908,6 +920,14 @@
                 _rsTouchStart = touchLocation;
                 stickTouch    = true;
             }
+            else if(onScreenExtension &&
+                    [onScreenExtension handleTouchDownEvent:touch
+                                       touchLocation:touchLocation
+                                       controller:_controller
+                                       controllerSupport:_controllerSupport])
+            {
+                updated = true;
+            }
             if(!updated && !stickTouch && [self isInDeadZone:touch])
             {
                 [_deadTouches addObject:touch];
@@ -1022,6 +1042,13 @@
             {
                 _r3Touch = nil;
                 touched  = true;
+            }
+            else if(onScreenExtension &&
+                    [onScreenExtension handleTouchUpEvent:touch
+                                       controller:_controller
+                                       controllerSupport:_controllerSupport])
+            {
+                updated = true;
             }
             if([_deadTouches containsObject:touch])
             {
