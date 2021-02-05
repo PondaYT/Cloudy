@@ -45,10 +45,22 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
         NSDictionary<NSString *, NSNumber *> *dictCodes;
     }
 
+    - (void)hideControllerButtons
+    {
+        [onScreenControls hideAndDisableControllerButtons];
+    }
+
+    - (void)showControllerButtons
+    {
+
+        [onScreenControls showAndEnableControllerButtons];
+    }
+
     - (void)setupStreamView:(ControllerSupport *)controllerSupport
             interactionDelegate:(id <UserInteractionDelegate>)interactionDelegate
             config:(StreamConfiguration *)streamConfig
             hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate
+            extensionDelegate:(id <OnScreenControlsExtension>)extensionDelegate
     {
         self->interactionDelegate = interactionDelegate;
         self->streamAspectRatio   = (float) streamConfig.width / (float) streamConfig.height;
@@ -76,7 +88,10 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
             self->touchHandler = [[RelativeTouchHandler alloc] initWithView:self];
         }
 
-        onScreenControls = [[OnScreenControls alloc] initWithView:self controllerSup:controllerSupport hapticFeedback:hapticFeedbackDelegate];
+        onScreenControls = [[OnScreenControls alloc] initWithView:self
+                                              controllerSup:controllerSupport
+                                              hapticFeedback:hapticFeedbackDelegate
+                                              extensionDelegate:extensionDelegate];
         OnScreenControlsLevel level = NSUserDefaults.standardUserDefaults.onScreenControlsLevel;
         if(settings.absoluteTouchMode)
         {

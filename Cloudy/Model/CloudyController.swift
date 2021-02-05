@@ -28,6 +28,7 @@ struct ControllerElements {
     struct Menu {
         let back: Bool
         let play: Bool
+        let home: Bool
     }
 
     struct Shoulder {
@@ -147,21 +148,21 @@ struct ControllerElements {
             /* 13 */ .digital(dpad.down), // dpad.down.controller,
             /* 14 */ .digital(dpad.left), // dpad.left.controller,
             /* 15 */ .digital(dpad.right), // dpad.right.controller,
-            /* 16 */ .digital(false), // buttonHome.controller,
+            /* 16 */ .digital(menu.home), // buttonHome.controller,
         ]
     }
 
     /// Construction for touch controls from objc
     @objc convenience init(controllerNumber: Int8,
                            activeGamepadMask: Int,
-                           buttonFlags: Int,
+                           buttonFlags: Int32,
                            leftTrigger: Float,
                            rightTrigger: Float,
                            leftStickX: Float,
                            leftStickY: Float,
                            rightStickX: Float,
                            rightStickY: Float) {
-        let buttonSet = ButtonOptionSet(rawValue: Int(buttonFlags))
+        let buttonSet = ButtonOptionSet(rawValue: buttonFlags)
         self.init(id: controllerNumber,
                   leftStick: ControllerElements.Stick(x: leftStickX,
                                                       y: leftStickY,
@@ -182,7 +183,8 @@ struct ControllerElements {
                                                       x: buttonSet.contains(.X_FLAG),
                                                       y: buttonSet.contains(.Y_FLAG)),
                   menu: ControllerElements.Menu(back: buttonSet.contains(.BACK_FLAG),
-                                                play: buttonSet.contains(.PLAY_FLAG)))
+                                                play: buttonSet.contains(.PLAY_FLAG),
+                                                home: buttonSet.contains(.HOME_FLAG)))
     }
 
     /// Export json string

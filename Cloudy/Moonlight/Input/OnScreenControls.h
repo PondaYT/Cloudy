@@ -9,7 +9,29 @@
 #import <UIKit/UIKit.h>
 
 @class ControllerSupport;
+@class Controller;
 @protocol TouchFeedbackGenerator;
+
+@protocol OnScreenControlsExtension
+
+    - (void)drawButtonsIn:(CALayer *__nonnull)layer;
+
+    - (BOOL)handleTouchMovedEvent:(UITouch *__nonnull)touch;
+
+    - (BOOL)handleTouchUpEvent:(UITouch *__nonnull)touches
+            controller:(Controller *__nonnull)controller
+            controllerSupport:(ControllerSupport *__nonnull)controllerSupport;
+
+    - (BOOL)handleTouchDownEvent:(UITouch *__nonnull)touch
+            touchLocation:(CGPoint)touchLocation
+            controller:(Controller *__nonnull)controller
+            controllerSupport:(ControllerSupport *__nonnull)controllerSupport;
+
+    - (void)hideAllHUDButtons;
+
+    - (void)unhideAllHUDButtons;
+
+@end
 
 @interface OnScreenControls : NSObject
 
@@ -29,7 +51,8 @@
 
     - (id)initWithView:(UIView *)view
           controllerSup:(ControllerSupport *)controllerSupport
-          hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate;
+          hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate
+          extensionDelegate:(id <OnScreenControlsExtension>)extensionDelegate;
 
     - (BOOL)handleTouchDownEvent:(NSSet *)touches;
 
@@ -44,4 +67,14 @@
     - (void)show;
 
     - (void)cleanup;
+
+    - (void)hideButtons;
+
+    - (void)drawButtons;
+
+    - (void)hideAndDisableControllerButtons;
+
+    - (void)showAndEnableControllerButtons;
+
+    - (void)hideAllHUDButtons;
 @end
