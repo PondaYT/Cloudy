@@ -108,6 +108,8 @@ class FortniteHUD: OnScreenControlsExtension {
     var buildMode = false
     var editMode = false
     
+    var editFromCombat = true
+    
     
     
 
@@ -578,8 +580,9 @@ class FortniteHUD: OnScreenControlsExtension {
                 unhideHUDButtons(unhideCombat: false, unhideBuild: true, unhideEdit: false)
                 buildMode = true
                 combatMode = false
+                editFromCombat = false
                 
-                print("BUILD")
+                cleanCombatTouches(controller: controller, controllerSupport: controllerSupport)
                 
                 return true
             }
@@ -613,6 +616,14 @@ class FortniteHUD: OnScreenControlsExtension {
             } else if (touch == fortniteEdit_ResetTouch) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
                 fortniteEdit_ResetTouch = nil
+                hideHUDButtons(hideCombat: true, hideBuild: false, hideEdit: false)
+                unhideHUDButtons(unhideCombat: false, unhideBuild: false, unhideEdit: true)
+                buildMode = false
+                editMode = true
+                combatMode = false
+                editFromCombat = true
+                cleanCombatTouches(controller: controller, controllerSupport: controllerSupport)
+                
                 return true
             } else if (touch == fortniteReloadTouch) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue);
@@ -647,14 +658,6 @@ class FortniteHUD: OnScreenControlsExtension {
                 fortniteCycle_Weapons_DownTouch = nil
                 return true
             }
-                
-                
-                
-                
-                
-                
-                
-                
             
         } else if buildMode {
             if (touch == fortniteBuildSwitch_To_CombatTouch) {
@@ -664,8 +667,8 @@ class FortniteHUD: OnScreenControlsExtension {
                 unhideHUDButtons(unhideCombat: true, unhideBuild: false, unhideEdit: false)
                 buildMode = false
                 combatMode = true
-                print("COMBAT NOW")
-                
+                editFromCombat = true
+                cleanBuildTouches(controller: controller, controllerSupport: controllerSupport)
                 return true
             } else if (touch == fortniteBuildPyramid_SelectedTouch) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LB_FLAG.rawValue);
@@ -709,11 +712,22 @@ class FortniteHUD: OnScreenControlsExtension {
             if (touch == fortniteEditConfirmTouch) {
                 fortniteEditConfirmTouch = nil
                 controllerSupport.updateLeftTrigger(controller, left: 0)
-                hideHUDButtons(hideCombat: false, hideBuild: false, hideEdit: true)
-                unhideHUDButtons(unhideCombat: false, unhideBuild: true, unhideEdit: false)
-                editMode = false
-                buildMode = true
-                combatMode = false
+                
+                if !editFromCombat {
+                    hideHUDButtons(hideCombat: false, hideBuild: false, hideEdit: true)
+                    unhideHUDButtons(unhideCombat: false, unhideBuild: true, unhideEdit: false)
+                    editMode = false
+                    buildMode = true
+                    combatMode = false
+                } else {
+                    hideHUDButtons(hideCombat: false, hideBuild: false, hideEdit: true)
+                    unhideHUDButtons(unhideCombat: true, unhideBuild: false, unhideEdit: false)
+                    editMode = false
+                    buildMode = false
+                    combatMode = true
+                }
+                
+                cleanEditTouches(controller: controller, controllerSupport: controllerSupport)
                 return true
             }
             else if (touch == fortniteEditEditTouch) {
@@ -746,11 +760,7 @@ class FortniteHUD: OnScreenControlsExtension {
                 fortniteEditSwitch_To_CombatTouch = nil
                 return true
             }
-
         }
-        
-        //fortniteSwitch_To_BuildTouch
-
         return false
     }
 
@@ -986,10 +996,246 @@ class FortniteHUD: OnScreenControlsExtension {
                 fortniteEditSwitch_To_CombatTouch = touch
                 return true
             }
-
-            
         }
         return false
+    }
+    
+    func cleanCombatTouches(controller:Controller, controllerSupport: ControllerSupport) {
+        if (fortniteAimTouch != nil) {
+            controllerSupport.updateLeftTrigger(controller, left: 0);
+            fortniteAimTouch = nil
+            
+        }
+        // ...
+        else if (fortniteJumpTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.A_FLAG.rawValue);
+            fortniteJumpTouch = nil
+            
+        }
+        // ...
+        else if (fortniteShootTouch != nil) {
+            controllerSupport.updateRightTrigger(controller, right: 0)
+            fortniteShootTouch = nil
+            
+        }
+        // ...
+        else if (fortniteShoot_BigTouch != nil) {
+            controllerSupport.updateRightTrigger(controller, right: 0)
+            
+            fortniteShoot_BigTouch = nil
+            
+        }
+        // ...
+        else if (fortniteSwitch_To_BuildTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
+            
+            fortniteSwitch_To_BuildTouch = nil
+            hideHUDButtons(hideCombat: true, hideBuild: false, hideEdit: false)
+            unhideHUDButtons(unhideCombat: false, unhideBuild: true, unhideEdit: false)
+            buildMode = true
+            combatMode = false
+            editFromCombat = false
+            
+            print("BUILD")
+            
+            
+        }
+        // ...
+        else if (fortniteInventoryTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
+            
+            fortniteInventoryTouch = nil
+            
+        }
+        // ...
+        else if (fortnitePingTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RS_CLK_FLAG.rawValue);
+            
+            fortnitePingTouch = nil
+            
+        }
+        // ...
+        else if (fortniteEmote_WheelTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
+            fortniteEmote_WheelTouch = nil
+            
+        } else if (fortniteCrouch_DownTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LS_CLK_FLAG.rawValue);
+            fortniteCrouch_DownTouch = nil
+            
+        } else if (fortniteSlot_PickaxeTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.Y_FLAG.rawValue);
+            fortniteSlot_PickaxeTouch = nil
+            
+        } else if (fortniteEdit_ResetTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
+            fortniteEdit_ResetTouch = nil
+            hideHUDButtons(hideCombat: true, hideBuild: false, hideEdit: false)
+            unhideHUDButtons(unhideCombat: false, unhideBuild: false, unhideEdit: true)
+            buildMode = false
+            editMode = true
+            combatMode = false
+            editFromCombat = true
+            
+            
+        } else if (fortniteReloadTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue);
+            fortniteReloadTouch = nil
+            
+        } else if (fortniteInteractTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue);
+            fortniteInteractTouch = nil
+            
+            
+        }else if (fortnitePyramid_SelectedTouch != nil) {
+            fortnitePyramid_SelectedTouch = nil
+            
+        } else if (fortniteWall_SelectedTouch != nil) {
+            
+            fortniteWall_SelectedTouch = nil
+            
+        } else if (fortniteFloor_SelectedTouch != nil) {
+            
+            fortniteFloor_SelectedTouch = nil
+            
+        } else if (fortniteStair_SelectedTouch != nil) {
+            
+            fortniteStair_SelectedTouch = nil
+            
+        } else if (fortniteCycle_Weapons_DownTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
+            fortniteCycle_Weapons_DownTouch = nil
+            
+        } else if (fortniteCycle_Weapons_UpTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
+            fortniteCycle_Weapons_DownTouch = nil
+            
+        }
+        
+    }
+    
+    
+    func cleanBuildTouches(controller: Controller, controllerSupport: ControllerSupport) {
+        
+        if (fortniteBuildSwitch_To_CombatTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
+            fortniteBuildSwitch_To_CombatTouch = nil
+        } else if (fortniteBuildPyramid_SelectedTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LB_FLAG.rawValue);
+            fortniteBuildPyramid_SelectedTouch = nil
+            
+        } else if (fortniteBuildWall_SelectedTouch != nil) {
+            controllerSupport.updateRightTrigger(controller, right: 0)
+            fortniteBuildWall_SelectedTouch = nil
+            
+        } else if (fortniteBuildFloor_SelectedTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
+            fortniteBuildFloor_SelectedTouch = nil
+            
+        } else if (fortniteBuildStair_SelectedTouch != nil) {
+            controllerSupport.updateLeftTrigger(controller, left: 0)
+            fortniteBuildStair_SelectedTouch = nil
+            
+        } else if (fortniteBuildEdit_ResetTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
+            fortniteBuildEdit_ResetTouch = nil
+            
+        } else if (fortniteBuildJumpTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.A_FLAG.rawValue);
+            fortniteBuildJumpTouch = nil
+            
+        } else if (fortniteBuildShootTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
+            fortniteBuildShootTouch = nil
+            
+        } else if (fortniteBuildShoot_BigTouch != nil) {
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
+            fortniteBuildShoot_BigTouch = nil
+            
+        }
+   
+        if (fortniteEditConfirmTouch != nil) {
+            fortniteEditConfirmTouch = nil
+            controllerSupport.updateLeftTrigger(controller, left: 0)
+        }
+            
+        
+         if (fortniteEditEditTouch != nil) {
+            fortniteEditEditTouch = nil
+            controllerSupport.updateRightTrigger(controller, right: 0)
+            
+        }
+        else if (fortniteEditPingTouch != nil) {
+            fortniteEditPingTouch = nil
+            
+        }
+        else if (fortniteEditResetTouch != nil) {
+            fortniteEditResetTouch = nil
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
+            
+        }
+        else if (fortniteEditRotateTouch != nil) {
+            fortniteEditRotateTouch = nil
+            
+        }
+        else if (fortniteEditShoot_BigTouch != nil) {
+            fortniteEditShoot_BigTouch = nil
+            
+        }
+        else if (fortniteEditShootTouch != nil) {
+            fortniteEditShootTouch = nil
+            
+        }
+        else if (fortniteEditSwitch_To_CombatTouch != nil) {
+            fortniteEditSwitch_To_CombatTouch = nil
+            
+        }
+    }
+    
+    func cleanEditTouches(controller: Controller, controllerSupport: ControllerSupport) {
+        
+        if (fortniteEditConfirmTouch != nil) {
+            fortniteEditConfirmTouch = nil
+            controllerSupport.updateLeftTrigger(controller, left: 0)
+            
+            if !editFromCombat {
+                hideHUDButtons(hideCombat: false, hideBuild: false, hideEdit: true)
+                unhideHUDButtons(unhideCombat: false, unhideBuild: true, unhideEdit: false)
+                editMode = false
+                buildMode = true
+                combatMode = false
+            } else {
+                hideHUDButtons(hideCombat: false, hideBuild: false, hideEdit: true)
+                unhideHUDButtons(unhideCombat: true, unhideBuild: false, unhideEdit: false)
+                editMode = false
+                buildMode = false
+                combatMode = true
+                
+            }
+        }
+        else if (fortniteEditEditTouch != nil) {
+            fortniteEditEditTouch = nil
+            controllerSupport.updateRightTrigger(controller, right: 0)
+        }
+        else if (fortniteEditPingTouch != nil) {
+            fortniteEditPingTouch = nil
+        }
+        else if (fortniteEditResetTouch != nil) {
+            fortniteEditResetTouch = nil
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
+        }
+        else if (fortniteEditRotateTouch != nil) {
+            fortniteEditRotateTouch = nil
+        }
+        else if (fortniteEditShoot_BigTouch != nil) {
+            fortniteEditShoot_BigTouch = nil
+        }
+        else if (fortniteEditShootTouch != nil) {
+            fortniteEditShootTouch = nil
+        }
+        else if (fortniteEditSwitch_To_CombatTouch != nil) {
+            fortniteEditSwitch_To_CombatTouch = nil
+        }
     }
 
 }
