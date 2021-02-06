@@ -22,6 +22,9 @@
 
 @interface ControllerSupport : NSObject
 
+
+    @property (nonatomic) id<ControllerDataReceiver> controllerDataReceiver;
+
     - (id)initWithConfig:(StreamConfiguration *)streamConfig presenceDelegate:(id <InputPresenceDelegate>)delegate controllerDataReceiver:(id <ControllerDataReceiver>)controllerDataReceiverDelegate;
 
     - (void)initAutoOnScreenControlMode:(OnScreenControls *)osc;

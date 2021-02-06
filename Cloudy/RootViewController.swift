@@ -30,7 +30,8 @@ class RootViewController: UIViewController, MenuActionsHandler {
     @IBOutlet var combatHUDView:   UIView!
     @IBOutlet var buildingHUDView: UIView!
     @IBOutlet var menuButton:      UIButton!
-
+    
+    @IBOutlet var showHUD: UISwitch!
 
     @IBOutlet var webviewConstraints: [NSLayoutConstraint]!
 
@@ -129,6 +130,8 @@ class RootViewController: UIViewController, MenuActionsHandler {
         UIApplication.shared.isIdleTimerDisabled = true
         initializeViews()
         checkDonationReminder()
+        
+        showFortniteHUD(showHUD)
     }
 
     /// Initialize all the required views (webview, onscreen controls and menu)
@@ -238,7 +241,7 @@ class RootViewController: UIViewController, MenuActionsHandler {
 
     }
 
-    @IBOutlet var showHUD: UISwitch!
+
 
     @IBAction func showFortniteHUD(_ sender: UISwitch) {
 

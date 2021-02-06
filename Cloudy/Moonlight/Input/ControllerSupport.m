@@ -31,7 +31,7 @@ static const double MOUSE_SPEED_DIVISOR = 2.5;
         NSLock                      *_controllerStreamLock;
         NSMutableDictionary         *_controllers;
         id <InputPresenceDelegate>  _presenceDelegate;
-        id <ControllerDataReceiver> controllerDataReceiver;
+        
 
         float accumulatedDeltaX;
         float accumulatedDeltaY;
@@ -237,7 +237,7 @@ static const double MOUSE_SPEED_DIVISOR = 2.5;
                                                                     leftStickY:-(float) controller.lastLeftStickY / (float) INT16_MAX
                                                                     rightStickX:(float) controller.lastRightStickX / (float) INT16_MAX
                                                                     rightStickY:-(float) controller.lastRightStickY / (float) INT16_MAX];
-            [controllerDataReceiver submitWithControllerData:cloudyController for:ControlsSourceOnScreen];
+            [_controllerDataReceiver submitWithControllerData:cloudyController for:ControlsSourceOnScreen];
         }
         [_controllerStreamLock unlock];
     }
@@ -565,7 +565,7 @@ static const double MOUSE_SPEED_DIVISOR = 2.5;
             // first OSC input is received.
 
             CloudyController *cloudyController = [[CloudyController alloc] init];
-            [controllerDataReceiver submitWithControllerData:cloudyController for:ControlsSourceOnScreen];
+            [_controllerDataReceiver submitWithControllerData:cloudyController for:ControlsSourceOnScreen];
         }
 
         [_osc setLevel:level];
@@ -709,7 +709,7 @@ static const double MOUSE_SPEED_DIVISOR = 2.5;
         _controllerNumbers     = 0;
         _multiController       = streamConfig.multiController;
         _presenceDelegate      = delegate;
-        controllerDataReceiver = controllerDataReceiverDelegate;
+        _controllerDataReceiver = controllerDataReceiverDelegate;
         _player0osc            = [[Controller alloc] init];
         _player0osc.playerIndex = 0;
 
