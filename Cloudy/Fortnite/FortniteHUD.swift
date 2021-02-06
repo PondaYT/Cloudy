@@ -634,7 +634,7 @@ class FortniteHUD: OnScreenControlsExtension {
                 fortniteInteractTouch = nil
                 return true
                 
-            }else if (touch == fortnitePyramid_SelectedTouch) {
+            } /*else if (touch == fortnitePyramid_SelectedTouch) {
                 fortnitePyramid_SelectedTouch = nil
                 hideHUDButtons(hideCombat: true, hideBuild: false, hideEdit: false)
                 unhideHUDButtons(unhideCombat: false, unhideBuild: true, unhideEdit: false)
@@ -651,6 +651,10 @@ class FortniteHUD: OnScreenControlsExtension {
                 combatMode = false
                 editFromCombat = false
                 cleanCombatTouches(controller: controller, controllerSupport: controllerSupport)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
+                }
                 return true
             } else if (touch == fortniteFloor_SelectedTouch) {
                 fortniteFloor_SelectedTouch = nil
@@ -660,6 +664,9 @@ class FortniteHUD: OnScreenControlsExtension {
                 combatMode = false
                 editFromCombat = false
                 cleanCombatTouches(controller: controller, controllerSupport: controllerSupport)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
+                }
                 return true
             } else if (touch == fortniteStair_SelectedTouch) {
                 fortniteStair_SelectedTouch = nil
@@ -670,7 +677,7 @@ class FortniteHUD: OnScreenControlsExtension {
                 editFromCombat = false
                 cleanCombatTouches(controller: controller, controllerSupport: controllerSupport)
                 return true
-            } else if (touch == fortniteCycle_Weapons_DownTouch) {
+            } */else if (touch == fortniteCycle_Weapons_DownTouch) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
                 fortniteCycle_Weapons_DownTouch = nil
                 return true
@@ -696,7 +703,8 @@ class FortniteHUD: OnScreenControlsExtension {
                 fortniteBuildPyramid_SelectedTouch = nil
                 return true
             } else if (touch == fortniteBuildWall_SelectedTouch) {
-                controllerSupport.updateRightTrigger(controller, right: 0)
+                //controllerSupport.updateRightTrigger(controller, right: 0)
+                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
                 fortniteBuildWall_SelectedTouch = nil
                 return true
             } else if (touch == fortniteBuildFloor_SelectedTouch) {
@@ -704,7 +712,8 @@ class FortniteHUD: OnScreenControlsExtension {
                 fortniteBuildFloor_SelectedTouch = nil
                 return true
             } else if (touch == fortniteBuildStair_SelectedTouch) {
-                controllerSupport.updateLeftTrigger(controller, left: 0)
+                //controllerSupport.updateLeftTrigger(controller, left: 0)
+                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
                 fortniteBuildStair_SelectedTouch = nil
                 return true
             } else if (touch == fortniteBuildEdit_ResetTouch) {
@@ -855,7 +864,7 @@ class FortniteHUD: OnScreenControlsExtension {
                 controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue)
                 fortniteEdit_ResetTouch = touch
                 return true
-            } else if (fortnitePyramid_Selected.presentation()?.hitTest(touchLocation)) != nil {
+            } /*else if (fortnitePyramid_Selected.presentation()?.hitTest(touchLocation)) != nil {
                 
                 
                 let c1 = CloudyController()
@@ -883,9 +892,9 @@ class FortniteHUD: OnScreenControlsExtension {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
                     let c3 = CloudyController()
-                    c3.buttons[7] = .analog(0xFF) // SHOULD BE L1
+                    c3.buttons[12] = .digital(true)
                     let c4 = CloudyController()
-                    c4.buttons[7] = .analog(0)
+                    c4.buttons[12] = .digital(false)
                     controllerSupport.controllerDataReceiver.enqueue(controllerData: [c3,  c4], for: .onScreen)
                 }
                 fortniteWall_SelectedTouch = touch
@@ -915,14 +924,14 @@ class FortniteHUD: OnScreenControlsExtension {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.005) {
                     let c3 = CloudyController()
-                    c3.buttons[6] = .analog(Float(ButtonOptionSet.LB_FLAG.rawValue)) // SHOULD BE L1
+                    c3.buttons[13] = .digital(true) // SHOULD BE L1
                     let c4 = CloudyController()
-                    c4.buttons[6] = .analog(0)
+                    c4.buttons[13] = .digital(false)
                     controllerSupport.controllerDataReceiver.enqueue(controllerData: [c3,  c4], for: .onScreen)
                 }
                 fortniteStair_SelectedTouch = touch
                 return true
-            } else if (fortniteCycle_Weapons_Down.presentation()?.hitTest(touchLocation) != nil) {
+            } */ else if (fortniteCycle_Weapons_Down.presentation()?.hitTest(touchLocation) != nil) {
                 controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue)
                 fortniteCycle_Weapons_DownTouch = touch
                 return true
@@ -945,7 +954,8 @@ class FortniteHUD: OnScreenControlsExtension {
                 fortniteBuildPyramid_SelectedTouch = touch
                 return true
             } else if (fortniteBuildWall_Selected.presentation()?.hitTest(touchLocation)) != nil {
-                controllerSupport.updateRightTrigger(controller, right: 0xFF)
+                //controllerSupport.updateRightTrigger(controller, right: 0xFF)
+                controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
                 fortniteBuildWall_SelectedTouch = touch
                 return true
             } else if (fortniteBuildFloor_Selected.presentation()?.hitTest(touchLocation)) != nil {
@@ -953,7 +963,8 @@ class FortniteHUD: OnScreenControlsExtension {
                 fortniteBuildFloor_SelectedTouch = touch
                 return true
             } else if (fortniteBuildStair_Selected.presentation()?.hitTest(touchLocation)) != nil {
-                controllerSupport.updateLeftTrigger(controller, left: 0xFF)
+                //controllerSupport.updateLeftTrigger(controller, left: 0xFF)
+                controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
                 fortniteBuildStair_SelectedTouch = touch
                 return true
             } else if (fortniteBuildJump.presentation()?.hitTest(touchLocation)) != nil {
@@ -1044,14 +1055,6 @@ class FortniteHUD: OnScreenControlsExtension {
         else if (fortniteSwitch_To_BuildTouch != nil) {
             controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
             
-            fortniteSwitch_To_BuildTouch = nil
-            hideHUDButtons(hideCombat: true, hideBuild: false, hideEdit: false)
-            unhideHUDButtons(unhideCombat: false, unhideBuild: true, unhideEdit: false)
-            buildMode = true
-            combatMode = false
-            editFromCombat = false
-            
-            print("BUILD")
             
             
         }
@@ -1085,12 +1088,12 @@ class FortniteHUD: OnScreenControlsExtension {
         } else if (fortniteEdit_ResetTouch != nil) {
             controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
             fortniteEdit_ResetTouch = nil
-            hideHUDButtons(hideCombat: true, hideBuild: false, hideEdit: false)
-            unhideHUDButtons(unhideCombat: false, unhideBuild: false, unhideEdit: true)
-            buildMode = false
-            editMode = true
-            combatMode = false
-            editFromCombat = true
+            //hideHUDButtons(hideCombat: true, hideBuild: false, hideEdit: false)
+            //unhideHUDButtons(unhideCombat: false, unhideBuild: false, unhideEdit: true)
+            //buildMode = false
+            //editMode = true
+            //combatMode = false
+            //editFromCombat = true
             
             
         } else if (fortniteReloadTouch != nil) {
@@ -1102,7 +1105,7 @@ class FortniteHUD: OnScreenControlsExtension {
             fortniteInteractTouch = nil
             
             
-        }else if (fortnitePyramid_SelectedTouch != nil) {
+        }/* else if (fortnitePyramid_SelectedTouch != nil) {
             fortnitePyramid_SelectedTouch = nil
             
         } else if (fortniteWall_SelectedTouch != nil) {
@@ -1117,7 +1120,7 @@ class FortniteHUD: OnScreenControlsExtension {
             
             fortniteStair_SelectedTouch = nil
             
-        } else if (fortniteCycle_Weapons_DownTouch != nil) {
+        } */else if (fortniteCycle_Weapons_DownTouch != nil) {
             controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
             fortniteCycle_Weapons_DownTouch = nil
             
@@ -1140,7 +1143,7 @@ class FortniteHUD: OnScreenControlsExtension {
             fortniteBuildPyramid_SelectedTouch = nil
             
         } else if (fortniteBuildWall_SelectedTouch != nil) {
-            controllerSupport.updateRightTrigger(controller, right: 0)
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
             fortniteBuildWall_SelectedTouch = nil
             
         } else if (fortniteBuildFloor_SelectedTouch != nil) {
@@ -1148,7 +1151,7 @@ class FortniteHUD: OnScreenControlsExtension {
             fortniteBuildFloor_SelectedTouch = nil
             
         } else if (fortniteBuildStair_SelectedTouch != nil) {
-            controllerSupport.updateLeftTrigger(controller, left: 0)
+            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
             fortniteBuildStair_SelectedTouch = nil
             
         } else if (fortniteBuildEdit_ResetTouch != nil) {
@@ -1169,42 +1172,7 @@ class FortniteHUD: OnScreenControlsExtension {
             
         }
    
-        if (fortniteEditConfirmTouch != nil) {
-            fortniteEditConfirmTouch = nil
-            controllerSupport.updateLeftTrigger(controller, left: 0)
-        }
-            
         
-         if (fortniteEditEditTouch != nil) {
-            fortniteEditEditTouch = nil
-            controllerSupport.updateRightTrigger(controller, right: 0)
-            
-        }
-        else if (fortniteEditPingTouch != nil) {
-            fortniteEditPingTouch = nil
-            
-        }
-        else if (fortniteEditResetTouch != nil) {
-            fortniteEditResetTouch = nil
-            controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
-            
-        }
-        else if (fortniteEditRotateTouch != nil) {
-            fortniteEditRotateTouch = nil
-            
-        }
-        else if (fortniteEditShoot_BigTouch != nil) {
-            fortniteEditShoot_BigTouch = nil
-            
-        }
-        else if (fortniteEditShootTouch != nil) {
-            fortniteEditShootTouch = nil
-            
-        }
-        else if (fortniteEditSwitch_To_CombatTouch != nil) {
-            fortniteEditSwitch_To_CombatTouch = nil
-            
-        }
     }
     
     func cleanEditTouches(controller: Controller, controllerSupport: ControllerSupport) {
