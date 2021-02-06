@@ -311,10 +311,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="1092" height="525.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGP-Ji-Kst">
-                                                        <rect key="frame" x="0.0" y="0.0" width="1092" height="1048"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="1092" height="1106"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="E19-IG-xpE">
-                                                                <rect key="frame" x="0.0" y="10" width="1092" height="1038"/>
+                                                                <rect key="frame" x="0.0" y="10" width="1092" height="1096"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Zt-T8-Og7" userLabel="Version">
                                                                         <rect key="frame" x="0.0" y="0.0" width="1092" height="50"/>
@@ -670,33 +670,11 @@
                                                                                 </attributedString>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0fW-Y9-U1n">
-                                                                                <rect key="frame" x="493" y="9.5" width="51" height="31"/>
-                                                                            </switch>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Fortnite Mobile HUD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BKy-1l-jaK">
-                                                                                <rect key="frame" x="562" y="15" width="211" height="20.5"/>
-                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                <nil key="textColor"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0k-TI-s1t">
-                                                                                <rect key="frame" x="793" y="10" width="113" height="30"/>
-                                                                                <state key="normal" title="Edit HUD Layout"/>
-                                                                                <connections>
-                                                                                    <segue destination="pd4-tx-jp8" kind="presentation" modalPresentationStyle="fullScreen" id="5Fb-gJ-wfx"/>
-                                                                                </connections>
-                                                                            </button>
                                                                         </subviews>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstItem="ep6-Ph-t8S" firstAttribute="centerY" secondItem="iEM-rw-XiZ" secondAttribute="centerY" id="0Uu-sK-sei"/>
-                                                                            <constraint firstItem="0fW-Y9-U1n" firstAttribute="leading" secondItem="iEM-rw-XiZ" secondAttribute="trailing" constant="50" id="1rJ-Ts-9wr"/>
-                                                                            <constraint firstItem="R0k-TI-s1t" firstAttribute="leading" secondItem="BKy-1l-jaK" secondAttribute="trailing" constant="20" id="49r-PD-IvI"/>
-                                                                            <constraint firstItem="R0k-TI-s1t" firstAttribute="centerY" secondItem="mEQ-r6-Gbx" secondAttribute="centerY" id="7fz-vC-CNx"/>
-                                                                            <constraint firstItem="0fW-Y9-U1n" firstAttribute="centerY" secondItem="mEQ-r6-Gbx" secondAttribute="centerY" id="BEA-UN-VYe"/>
-                                                                            <constraint firstItem="BKy-1l-jaK" firstAttribute="centerY" secondItem="mEQ-r6-Gbx" secondAttribute="centerY" id="C6w-nZ-ScC"/>
                                                                             <constraint firstItem="iEM-rw-XiZ" firstAttribute="leading" secondItem="ep6-Ph-t8S" secondAttribute="trailing" constant="20" id="WAt-Hl-m1I"/>
-                                                                            <constraint firstItem="BKy-1l-jaK" firstAttribute="leading" secondItem="0fW-Y9-U1n" secondAttribute="trailing" constant="20" id="aXI-10-pKN"/>
                                                                             <constraint firstItem="iEM-rw-XiZ" firstAttribute="centerY" secondItem="mEQ-r6-Gbx" secondAttribute="centerY" id="bMC-G9-zei"/>
                                                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iEM-rw-XiZ" secondAttribute="trailing" constant="20" symbolic="YES" id="tv1-pf-S5c"/>
                                                                             <constraint firstAttribute="height" constant="50" id="uk6-N2-ZwR"/>
@@ -708,8 +686,45 @@
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NkC-mV-DXq" userLabel="Scaling">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bqC-gh-GhG" userLabel="Touch feedback">
                                                                         <rect key="frame" x="0.0" y="464" width="1092" height="50"/>
+                                                                        <subviews>
+                                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0fW-Y9-U1n">
+                                                                                <rect key="frame" x="251" y="9.5" width="51" height="31"/>
+                                                                            </switch>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Fortnite Mobile HUD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BKy-1l-jaK">
+                                                                                <rect key="frame" x="20" y="15" width="211" height="20.5"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0k-TI-s1t">
+                                                                                <rect key="frame" x="330" y="6" width="154" height="36"/>
+                                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                                                <state key="normal" title="Edit HUD Layout"/>
+                                                                                <connections>
+                                                                                    <segue destination="pd4-tx-jp8" kind="presentation" modalPresentationStyle="fullScreen" id="5Fb-gJ-wfx"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <constraints>
+                                                                            <constraint firstItem="BKy-1l-jaK" firstAttribute="leading" secondItem="bqC-gh-GhG" secondAttribute="leading" constant="20" id="DxG-e4-ury"/>
+                                                                            <constraint firstItem="0fW-Y9-U1n" firstAttribute="leading" secondItem="BKy-1l-jaK" secondAttribute="trailing" constant="20" id="Rob-0p-YEb"/>
+                                                                            <constraint firstItem="0fW-Y9-U1n" firstAttribute="centerY" secondItem="bqC-gh-GhG" secondAttribute="centerY" id="crf-jZ-4xS"/>
+                                                                            <constraint firstItem="R0k-TI-s1t" firstAttribute="leading" secondItem="0fW-Y9-U1n" secondAttribute="trailing" constant="30" id="dvZ-KP-JJC"/>
+                                                                            <constraint firstAttribute="height" constant="50" id="hdW-li-1Iz"/>
+                                                                            <constraint firstItem="R0k-TI-s1t" firstAttribute="centerY" secondItem="bqC-gh-GhG" secondAttribute="centerY" constant="-1" id="qf2-6d-6wo"/>
+                                                                            <constraint firstItem="BKy-1l-jaK" firstAttribute="centerY" secondItem="bqC-gh-GhG" secondAttribute="centerY" id="xjA-qI-Z6q"/>
+                                                                        </constraints>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                                <integer key="value" value="10"/>
+                                                                            </userDefinedRuntimeAttribute>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NkC-mV-DXq" userLabel="Scaling">
+                                                                        <rect key="frame" x="0.0" y="522" width="1092" height="50"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scaling" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSj-hn-Nbl">
                                                                                 <rect key="frame" x="10" y="0.0" width="55.5" height="50"/>
@@ -745,7 +760,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gYt-Qe-92F" userLabel="Custom Inject">
-                                                                        <rect key="frame" x="0.0" y="522" width="1092" height="50"/>
+                                                                        <rect key="frame" x="0.0" y="580" width="1092" height="50"/>
                                                                         <subviews>
                                                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7D-76-MuH">
                                                                                 <rect key="frame" x="10" y="10" width="94" height="30"/>
@@ -779,7 +794,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAd-te-Bru" userLabel="Delete cache">
-                                                                        <rect key="frame" x="0.0" y="580" width="1092" height="50"/>
+                                                                        <rect key="frame" x="0.0" y="638" width="1092" height="50"/>
                                                                         <subviews>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7HL-oZ-bIE" userLabel="Delete Cache Button">
                                                                                 <rect key="frame" x="10" y="12.5" width="49" height="25.5"/>
@@ -817,7 +832,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JFX-9d-gcg" userLabel="DUMMY">
-                                                                        <rect key="frame" x="0.0" y="638" width="1092" height="400"/>
+                                                                        <rect key="frame" x="0.0" y="696" width="1092" height="400"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="400" id="c6l-UO-5gd"/>
@@ -943,7 +958,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9R8-x7-9FR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140.625" y="-588.28125"/>
+            <point key="canvasLocation" x="140.28776978417267" y="-588.48920863309354"/>
         </scene>
         <!--FortniteHUD Customization-->
         <scene sceneID="RO0-1u-adx">
