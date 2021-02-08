@@ -36,7 +36,7 @@
 		44A4DCA503A87B314B8CB75A /* ButtonOptionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D9F318B9593A6DD6F951 /* ButtonOptionSet.swift */; };
 		44A4DD2289A8D028B03463E0 /* X1Kit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D996514DEB85071D2DA7 /* X1Kit.swift */; };
 		44A4DD2F10965A88D83F5C0D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DBCCBA86600B436045E4 /* SceneDelegate.swift */; };
-		5151C12025BE8D8800EA0E06 /* HUDBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5151C11F25BE8D8800EA0E06 /* HUDBackground.jpg */; };
+		512C337A25D0E230000DA095 /* HUDBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 512C337925D0E230000DA095 /* HUDBackground.jpg */; };
 		5151C14C25BE8EB800EA0E06 /* Stair Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C12425BE8EB200EA0E06 /* Stair Selected.png */; };
 		5151C14D25BE8EB800EA0E06 /* Autorun.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C12525BE8EB200EA0E06 /* Autorun.png */; };
 		5151C14E25BE8EB800EA0E06 /* Switch To Build.png in Resources */ = {isa = PBXBuildFile; fileRef = 5151C12625BE8EB200EA0E06 /* Switch To Build.png */; };
@@ -138,7 +138,7 @@
 		44A4DF345C0AE58872E1CC3A /* TemporarySettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporarySettings.swift; sourceTree = "<group>"; };
 		44A4DF4DEEC15EF8DE2B1C18 /* Cloudy-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cloudy-Bridging-Header.h"; sourceTree = "<group>"; };
 		44A4DFB90BD884CB5041E57D /* WKUserScript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKUserScript.swift; sourceTree = "<group>"; };
-		5151C11F25BE8D8800EA0E06 /* HUDBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HUDBackground.jpg; sourceTree = "<group>"; };
+		512C337925D0E230000DA095 /* HUDBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HUDBackground.jpg; sourceTree = "<group>"; };
 		5151C12425BE8EB200EA0E06 /* Stair Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stair Selected.png"; sourceTree = "<group>"; };
 		5151C12525BE8EB200EA0E06 /* Autorun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Autorun.png; sourceTree = "<group>"; };
 		5151C12625BE8EB200EA0E06 /* Switch To Build.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Switch To Build.png"; sourceTree = "<group>"; };
@@ -385,9 +385,9 @@
 			isa = PBXGroup;
 			children = (
 				5151C12225BE8E9000EA0E06 /* Combat + Build + Edit */,
-				5151C11F25BE8D8800EA0E06 /* HUDBackground.jpg */,
 				5151C17525BE8EFB00EA0E06 /* FortniteHUDCustomization.swift */,
 				44A4D78CDEC3A83F90A9050A /* FortniteHUD.swift */,
+				512C337925D0E230000DA095 /* HUDBackground.jpg */,
 			);
 			path = Fortnite;
 			sourceTree = "<group>";
@@ -586,7 +586,6 @@
 				518F0ED025CCFBE70080C321 /* Slot 5.png in Resources */,
 				5151C16A25BE8EB800EA0E06 /* Use.png in Resources */,
 				5151C15625BE8EB800EA0E06 /* Floor Selected.png in Resources */,
-				5151C12025BE8D8800EA0E06 /* HUDBackground.jpg in Resources */,
 				E712FF9825520978003CF78C /* Images.xcassets in Resources */,
 				E776E038254AE08E00684328 /* GoogleService-Info.plist in Resources */,
 				5151C15925BE8EB800EA0E06 /* Jump.png in Resources */,
@@ -596,6 +595,7 @@
 				5151C17325BE8EB800EA0E06 /* Wall Selected.png in Resources */,
 				5151C14E25BE8EB800EA0E06 /* Switch To Build.png in Resources */,
 				5151C16825BE8EB800EA0E06 /* Shoot.png in Resources */,
+				512C337A25D0E230000DA095 /* HUDBackground.jpg in Resources */,
 				5151C16D25BE8EB800EA0E06 /* Edit.png in Resources */,
 				5151C16025BE8EB800EA0E06 /* Inventory.png in Resources */,
 				5151C16325BE8EB800EA0E06 /* Crouch Up.png in Resources */,
@@ -903,7 +903,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4.0;
 				OTHER_SWIFT_FLAGS = "-DNON_APPSTORE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nomad5.Cloudy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -939,7 +939,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4.0;
 				OTHER_SWIFT_FLAGS = "-DNON_APPSTORE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nomad5.Cloudy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1031,7 +1031,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.1;
+				MARKETING_VERSION = 2.4.0;
 				OTHER_SWIFT_FLAGS = "-DAPPSTORE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nomad5.Cloudy;
 				PRODUCT_NAME = "$(TARGET_NAME)";

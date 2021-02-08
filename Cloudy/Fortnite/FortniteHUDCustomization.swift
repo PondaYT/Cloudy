@@ -18,6 +18,11 @@ class FortniteHUDCustomization: UIViewController {
     @IBOutlet var editViewLabel: UILabel!
     @IBOutlet var saveButton: UIButton!
     @IBOutlet var doneButton: UIButton!
+    @IBOutlet var HUDSettingsView: UIView!
+    @IBOutlet var pullDownHUDButton: UIButton!
+    @IBOutlet var buttonSettingLabel: UILabel!
+    @IBOutlet var HUDSettingsTopConstraint: NSLayoutConstraint!
+   
     
     var listOfCombatHUDButtons = ["Aim", "Crouch Down", "Edit Reset", "Emote Wheel", "Floor Selected", "Inventory", "Interact", "Jump", "Ping", "Pyramid Selected", "Shoot Big", "Shoot", "Stair Selected", "Switch To Build", "Use", "Wall Selected", "Reload", "Slot Pickaxe", "Cycle Weapons Down", "Cycle Weapons Up"]
     
@@ -50,6 +55,7 @@ class FortniteHUDCustomization: UIViewController {
     var combatView = true
     var editView = false
     var buildingView = false
+    var pulledDown = true
     
     
     override func viewDidLoad() {
@@ -222,10 +228,46 @@ class FortniteHUDCustomization: UIViewController {
         switchViewButton.tag = 700
         saveButton.tag = 800
         doneButton.tag = 1000
+        HUDSettingsView.tag = 1100
+        pullDownHUDButton.tag = 1200
+        buttonSettingLabel.tag = 1300
         
         buildingHUDView.alpha = 0
         editHUDView.alpha = 0
+        combatHUDView.alpha = 0
         
+        HUDSettingsView.layer.cornerRadius = 10.0
+        HUDSettingsView.clipsToBounds = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            UIView.animate(withDuration: 0.5) {
+                self.combatHUDView.alpha = 1
+            }
+        }
+        
+    }
+
+    
+    @IBAction func pullDownHUDSettings() {
+        if pulledDown {
+            HUDSettingsTopConstraint.constant = -242
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+                self.view.layoutIfNeeded()
+            })
+            let size = UIImage.SymbolConfiguration(pointSize: 50, weight: .regular, scale: .default)
+            let image = UIImage(systemName: "chevron.compact.down", withConfiguration: size)
+            pullDownHUDButton.setImage(image, for: .normal)
+            pulledDown = false
+        } else {
+            HUDSettingsTopConstraint.constant = -40
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+                self.view.layoutIfNeeded()
+            })
+            let size = UIImage.SymbolConfiguration(pointSize: 50, weight: .regular, scale: .default)
+            let image = UIImage(systemName: "chevron.compact.up", withConfiguration: size)
+            pullDownHUDButton.setImage(image, for: .normal)
+            pulledDown = true
+        }
     }
     
     @IBAction func switchCombatAndBuilding() {
@@ -237,6 +279,7 @@ class FortniteHUDCustomization: UIViewController {
             self.view.bringSubviewToFront(self.editViewLabel)
             self.view.bringSubviewToFront(self.saveButton)
             self.view.bringSubviewToFront(self.doneButton)
+            self.view.bringSubviewToFront(HUDSettingsView)
             
             self.combatHUDView.alpha = 0
             self.buildingHUDView.alpha = 1
@@ -252,6 +295,7 @@ class FortniteHUDCustomization: UIViewController {
             self.view.bringSubviewToFront(self.editViewLabel)
             self.view.bringSubviewToFront(self.saveButton)
             self.view.bringSubviewToFront(self.doneButton)
+            self.view.bringSubviewToFront(HUDSettingsView)
             
             self.combatHUDView.alpha = 0
             self.buildingHUDView.alpha = 0
@@ -269,6 +313,7 @@ class FortniteHUDCustomization: UIViewController {
             self.view.bringSubviewToFront(self.editViewLabel)
             self.view.bringSubviewToFront(self.saveButton)
             self.view.bringSubviewToFront(self.doneButton)
+            self.view.bringSubviewToFront(HUDSettingsView)
           
             self.combatHUDView.alpha = 1
             self.buildingHUDView.alpha = 0
@@ -359,7 +404,7 @@ class FortniteHUDCustomization: UIViewController {
     
     
     @IBAction func dismissHUDController() {
-        
+        HUDSettingsView.alpha = 0
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -415,29 +460,4 @@ class FortniteHUDCustomization: UIViewController {
     }
     
     
-    func resizeImage(_ image: UIImage, targetSize: CGSize) -> UIImage? {
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / image.size.width
-        let heightRatio = targetSize.height / image.size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
-        }
-        
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage
-    }
 }
