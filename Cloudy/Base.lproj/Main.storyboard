@@ -992,15 +992,19 @@
                                             <action selector="sliderValueChangedWithSender:" destination="pd4-tx-jp8" eventType="valueChanged" id="jrE-lz-81q"/>
                                         </connections>
                                     </slider>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y20-Xh-FRc">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y20-Xh-FRc">
                                         <rect key="frame" x="27" y="242" width="200" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="JMS-sb-qjt"/>
                                             <constraint firstAttribute="height" constant="50" id="z7A-F7-QXs"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                        <state key="normal" title="Switch Mode">
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title=" Switch Mode" image="switch.2" catalog="system">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
+                                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                            </preferredSymbolConfiguration>
                                         </state>
                                         <connections>
                                             <action selector="switchCombatAndBuilding" destination="pd4-tx-jp8" eventType="touchUpInside" id="tif-gP-ExU"/>
@@ -1012,29 +1016,35 @@
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQc-67-VAd">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQc-67-VAd">
                                         <rect key="frame" x="533" y="242" width="70" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="aKc-Bl-w7u"/>
                                             <constraint firstAttribute="width" constant="70" id="mCc-B8-vLf"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                        <state key="normal" title="Done">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="checkmark.circle.fill" catalog="system">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
+                                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                            </preferredSymbolConfiguration>
                                         </state>
                                         <connections>
                                             <action selector="dismissHUDController" destination="pd4-tx-jp8" eventType="touchUpInside" id="mpB-zW-wYf"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdE-cU-bfS">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdE-cU-bfS">
                                         <rect key="frame" x="445" y="242" width="80" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="ArE-2H-nrZ"/>
                                             <constraint firstAttribute="width" constant="80" id="oHX-xy-bxt"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
-                                        <state key="normal" title="Save">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="doc.fill" catalog="system">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
+                                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                            </preferredSymbolConfiguration>
                                         </state>
                                         <connections>
                                             <action selector="saveHUD" destination="pd4-tx-jp8" eventType="touchUpInside" id="HCr-1F-2sT"/>
@@ -1154,8 +1164,11 @@
         <image name="button_patreon" width="512" height="256"/>
         <image name="button_stadia" width="512" height="512"/>
         <image name="button_tip_jar" width="512" height="510"/>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
         <image name="chevron.compact.down" catalog="system" width="128" height="43"/>
+        <image name="doc.fill" catalog="system" width="115" height="128"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
+        <image name="switch.2" catalog="system" width="128" height="109"/>
         <image name="trash.fill" catalog="system" width="121" height="128"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
