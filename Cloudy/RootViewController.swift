@@ -25,7 +25,12 @@ class RootViewController: UIViewController, MenuActionsHandler {
 
     /// Containers
     @IBOutlet var containerWebView:            UIView!
+    @IBOutlet var containerHud:                UIView!
     @IBOutlet var containerOnScreenController: UIView!
+
+    /// Interactive views
+    @IBOutlet var menuButton:                  UIButton!
+    @IBOutlet var showHUD:                     UISwitch!
 
     @IBOutlet var webviewConstraints: [NSLayoutConstraint]!
 
@@ -44,13 +49,22 @@ class RootViewController: UIViewController, MenuActionsHandler {
     /// The bridge between controller and web view
     private let webViewControllerBridge          = WebViewControllerBridge()
 
-    #if NON_APPSTORE
+    #if !APPSTORE
         /// The stream view that holds the on screen controls
         private var streamView: StreamView?
 
         /// Touch feedback generator
         private lazy var touchFeedbackGenerator: TouchFeedbackGenerator = {
             AVFoundationVibratingFeedbackGenerator()
+        }()
+
+        /// The optional reKairos HUD
+        lazy var additionalHud: FortniteHUD? = {
+            #if REKAIROS
+                return FortniteHUD()
+            #else
+                return nil
+            #endif
         }()
     #endif
 
@@ -65,10 +79,9 @@ class RootViewController: UIViewController, MenuActionsHandler {
     }()
 
     /// The purchase helper
-    lazy var purchaseHelper = {
+    lazy var purchaseHelper: PurchaseHelper = {
         PurchaseHelper(with: alerter)
     }()
-
 
     /// By default hide the status bar
     override var prefersStatusBarHidden:                      Bool {
@@ -108,6 +121,17 @@ class RootViewController: UIViewController, MenuActionsHandler {
         return config
     }
 
+    /// Invoked before view is visible
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        #if APPSTORE
+            containerHud.removeFromSuperview()
+        #endif
+        #if !REKAIROS
+            showHUD.removeFromSuperview()
+        #endif
+    }
+
     /// View layout already done
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -121,14 +145,11 @@ class RootViewController: UIViewController, MenuActionsHandler {
         createWebview()
         createOnScreenControls()
         createMenu()
-        #if APPSTORE
-            containerOnScreenController.removeFromSuperview()
-        #endif
     }
 
     /// Update visibility of onscreen controller
     func updateOnScreenController(with value: OnScreenControlsLevel) {
-        containerOnScreenController.alpha = value == .off ? 0 : 1
+        containerHud.alpha = value == .off ? 0 : 1
         webViewControllerBridge.controlsSource = value == .off ? .external : .onScreen
         #if NON_APPSTORE
             streamView?.updateOnScreenControls()
@@ -217,7 +238,8 @@ class RootViewController: UIViewController, MenuActionsHandler {
             newStreamView.setupStreamView(controllerSupport,
                                           interactionDelegate: self,
                                           config: streamConfig,
-                                          hapticFeedback: touchFeedbackGenerator)
+                                          hapticFeedback: touchFeedbackGenerator,
+                                          extensionDelegate: additionalHud)
             newStreamView.showOnScreenControls()
             containerOnScreenController.addSubview(newStreamView)
             newStreamView.fillParent()
@@ -226,6 +248,18 @@ class RootViewController: UIViewController, MenuActionsHandler {
             updateScalingFactor(with: UserDefaults.standard.webViewScale)
         #endif
     }
+
+    /// Show the fortnite hud overlay
+    @IBAction func showFortniteHUD(_ sender: UISwitch) {
+        #if REKAIROS
+            if showHUD.isOn {
+                streamView!.hideControllerButtons()
+            } else {
+                streamView!.showControllerButtons()
+            }
+        #endif
+    }
+
 }
 
 extension RootViewController: UserInteractionDelegate {

@@ -82,7 +82,8 @@
         Controller        *_controller;
         NSMutableArray    *_deadTouches;
 
-        id <TouchFeedbackGenerator> hapticFeedback;
+        id <TouchFeedbackGenerator>    hapticFeedback;
+        id <OnScreenControlsExtension> onScreenExtension;
     }
 
     static const float EDGE_WIDTH = .05;
@@ -129,12 +130,14 @@
     - (id)initWithView:(UIView *)view
           controllerSup:(ControllerSupport *)controllerSupport
           hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate
+          extensionDelegate:(id <OnScreenControlsExtension>)extensionDelegate;
     {
         self               = [self init];
         _view              = view;
         _controllerSupport = controllerSupport;
         _controller        = [controllerSupport getOscController];
         _deadTouches       = [[NSMutableArray alloc] init];
+        onScreenExtension  = extensionDelegate;
         hapticFeedback     = hapticFeedbackDelegate;
 
         _iPad        = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad);
@@ -272,6 +275,10 @@
                 [self drawTriggers];
                 [self drawSticks];
                 [self hideL3R3]; // Full controls don't need these they have the sticks
+                if(onScreenExtension)
+                {
+                    [onScreenExtension drawButtonsIn:_view.layer];
+                }
                 break;
             default:
                 LogE(@"Unknown on-screen controls level: %d", (int) _level);
@@ -566,6 +573,64 @@
         [_rightButton removeFromSuperlayer];
     }
 
+    // TODO fix this, its nasty
+    - (void)hideAndDisableControllerButtons
+    {
+        [_aButton setHidden:YES];
+        [_bButton setHidden:YES];
+        [_xButton setHidden:YES];
+        [_yButton setHidden:YES];
+        [_upButton setHidden:YES];
+        [_downButton setHidden:YES];
+        [_leftButton setHidden:YES];
+        [_rightButton setHidden:YES];
+
+        [_startButton setHidden:YES];
+        [_selectButton setHidden:YES];
+        [_l1Button setHidden:YES];
+        [_r1Button setHidden:YES];
+        [_l2Button setHidden:YES];
+        [_r2Button setHidden:YES];
+
+        [_rightStickBackground removeFromSuperlayer];
+        [_rightStick removeFromSuperlayer];
+
+        [onScreenExtension unhideAllHUDButtons];
+    }
+
+    // TODO fix this, its nasty
+    - (void)showAndEnableControllerButtons
+    {
+        [_aButton setHidden:NO];
+        [_bButton setHidden:NO];
+        [_xButton setHidden:NO];
+        [_yButton setHidden:NO];
+        [_upButton setHidden:NO];
+        [_downButton setHidden:NO];
+        [_leftButton setHidden:NO];
+        [_rightButton setHidden:NO];
+
+        [_startButton setHidden:NO];
+        [_selectButton setHidden:NO];
+        [_l1Button setHidden:NO];
+        [_r1Button setHidden:NO];
+        [_l2Button setHidden:NO];
+        [_r2Button setHidden:NO];
+
+        // create right analog stick
+        UIImage *rightStickBgImage = [UIImage imageNamed:@"StickOuter"];
+        _rightStickBackground.frame    = CGRectMake(RS_CENTER_X - rightStickBgImage.size.width / 2, RS_CENTER_Y - rightStickBgImage.size.height / 2, rightStickBgImage.size.width, rightStickBgImage.size.height);
+        _rightStickBackground.contents = (id) rightStickBgImage.CGImage;
+        [_view.layer addSublayer:_rightStickBackground];
+
+        UIImage *rightStickImage = [UIImage imageNamed:@"StickInner"];
+        _rightStick.frame    = CGRectMake(RS_CENTER_X - rightStickImage.size.width / 2, RS_CENTER_Y - rightStickImage.size.height / 2, rightStickImage.size.width, rightStickImage.size.height);
+        _rightStick.contents = (id) rightStickImage.CGImage;
+        [_view.layer addSublayer:_rightStick];
+
+        [onScreenExtension hideAllHUDButtons];
+    }
+
     - (void)hideStartSelect
     {
         [_startButton removeFromSuperlayer];
@@ -611,7 +676,12 @@
             CGPoint touchLocation = [touch locationInView:_view];
             CGFloat xLoc          = touchLocation.x;
             CGFloat yLoc          = touchLocation.y;
-            if(touch == _lsTouch)
+
+            if(onScreenExtension && [onScreenExtension handleTouchMovedEvent:touch])
+            {
+                buttonTouch = true;
+            }
+            else if(touch == _lsTouch)
             {
                 CGFloat deltaX = xLoc - _lsTouchStart.x;
                 CGFloat deltaY = yLoc - _lsTouchStart.y;
@@ -760,7 +830,15 @@
         {
             CGPoint touchLocation = [touch locationInView:_view];
 
-            if([_aButton.presentationLayer hitTest:touchLocation])
+            if(onScreenExtension &&
+               [onScreenExtension handleTouchDownEvent:touch
+                                  touchLocation:touchLocation
+                                  controller:_controller
+                                  controllerSupport:_controllerSupport])
+            {
+                updated = true;
+            }
+            else if([_aButton.presentationLayer hitTest:touchLocation])
             {
                 [_controllerSupport setButtonFlag:_controller flags:A_FLAG];
                 _aTouch = touch;
@@ -883,7 +961,8 @@
                     // Find elapsed time and convert to milliseconds
                     // Use (-) modifier to conversion since receiver is earlier than now
                     double l3TouchTime = [l3TouchStart timeIntervalSinceNow] * -1000.0;
-                    if(l3TouchTime < STICK_CLICK_RATE)
+                    // TODO fix this, its nasty -> && (!onScreenExtension)
+                    if((l3TouchTime < STICK_CLICK_RATE) && (!onScreenExtension))
                     {
                         [_controllerSupport setButtonFlag:_controller flags:LS_CLK_FLAG];
                         updated = true;
@@ -900,7 +979,8 @@
                     // Find elapsed time and convert to milliseconds
                     // Use (-) modifier to conversion since receiver is earlier than now
                     double r3TouchTime = [r3TouchStart timeIntervalSinceNow] * -1000.0;
-                    if(r3TouchTime < STICK_CLICK_RATE)
+                    // TODO fix this, its nasty -> && (!onScreenExtension)
+                    if((r3TouchTime < STICK_CLICK_RATE) && (!onScreenExtension))
                     {
                         [_controllerSupport setButtonFlag:_controller flags:RS_CLK_FLAG];
                         updated = true;
@@ -930,7 +1010,15 @@
         BOOL        touched = false;
         for(UITouch *touch in touches)
         {
-            if(touch == _aTouch)
+
+            if(onScreenExtension &&
+               [onScreenExtension handleTouchUpEvent:touch
+                                  controller:_controller
+                                  controllerSupport:_controllerSupport])
+            {
+                updated = true;
+            }
+            else if(touch == _aTouch)
             {
                 [_controllerSupport clearButtonFlag:_controller flags:A_FLAG];
                 _aTouch = nil;

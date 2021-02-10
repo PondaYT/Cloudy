@@ -14,19 +14,18 @@ infix operator =~: ComparisonPrecedence
 /// Protocol to handle incoming cloudy controller sources
 @objc protocol ControllerDataReceiver {
     @objc func submit(controllerData: CloudyController, for type: ControlsSource)
+    @objc func enqueue(controllerData: [CloudyController], for type: ControlsSource)
 }
 
 /// Main module that connects the web views controller scripts to the native controller handling
 class WebViewControllerBridge: NSObject, WKScriptMessageHandlerWithReply, ControllerDataReceiver {
 
-    /// Alias for the reply type back to the webWiew
+    /// Alias for the reply type back to the webView
     typealias ReplyHandlerType = (Any?, String?) -> Void
 
-    private var controllerData:                 [ControlsSource: CloudyController] = [:]
-
-    /// Remember last controller snapshot
-    private var lastExternalControllerSnapshot: CloudyController?                  = nil
-    private var lastTouchControllerSnapShot:    CloudyController?                  = nil
+    private var controllerDataQueue: [ControlsSource: [CloudyController]] = [.external: [], .onScreen: []]
+    private var controllerData:      [ControlsSource: CloudyController]   = [:]
+    private var controllerSnapshots: [ControlsSource: CloudyController]   = [:]
 
     /// current export type
     var exportType:     CloudyController.JsonType = .regular
@@ -44,58 +43,51 @@ class WebViewControllerBridge: NSObject, WKScriptMessageHandlerWithReply, Contro
             replyHandler(nil, nil)
             return
         }
-        // return value depending on configuration
-        switch (controlsSource) {
-            case .onScreen:
-                handleTouchController(with: replyHandler)
-            case .external:
-                handleRegularController(with: replyHandler)
+        // check if we have a queue for the current control source
+        if let currentControllerQueue = controllerDataQueue[controlsSource],
+           !currentControllerQueue.isEmpty {
+            let stringifiedQueue = currentControllerQueue.map { $0.toJson(for: exportType) }
+            controllerDataQueue[controlsSource]?.removeAll()
+            replyHandler(stringifiedQueue, nil)
+            return
         }
-    }
-
-    /// Handle regular external controller
-    private func handleRegularController(with replyHandler: @escaping ReplyHandlerType) {
-        #if NON_APPSTORE
-            // early exit
-            guard let currentControllerState = GCController.controllers().first?.extendedGamepad,
-                  let currentCloudyController = currentControllerState.toCloudyController() else {
-                replyHandler(nil, nil)
-                return
-            }
-            // proceed
-            if let lastControllerState = lastExternalControllerSnapshot,
-               lastControllerState =~ currentCloudyController {
-                replyHandler(nil, nil)
-                return
-            }
-            // update and save
-            lastExternalControllerSnapshot = currentCloudyController
-            replyHandler(currentCloudyController.toJson(for: exportType), nil)
-        #else
-            replyHandler(nil, nil)
-        #endif
-    }
-
-    /// Handle touch controller
-    private func handleTouchController(with replyHandler: @escaping ReplyHandlerType) {
-        // early exit
-        guard let currentControllerData = controllerData[.onScreen] else {
+        // early exit for regular controller
+        guard let currentCloudyController = getControllerData(for: controlsSource) else {
             replyHandler(nil, nil)
             return
         }
-        // nothing changed, skip
-        if let lastControllerData = lastTouchControllerSnapShot,
-           lastControllerData =~ currentControllerData {
+        // did something change since the last snapshot?
+        if let lastControllerState = controllerSnapshots[controlsSource],
+           lastControllerState =~ currentCloudyController {
             replyHandler(nil, nil)
             return
         }
         // update and save
-        lastTouchControllerSnapShot = currentControllerData
-        replyHandler(currentControllerData.toJson(for: exportType), nil)
+        controllerSnapshots[controlsSource] = currentCloudyController
+        replyHandler(currentCloudyController.toJson(for: exportType), nil)
+    }
+
+    /// Helper to get the controller data to process
+    private func getControllerData(for type: ControlsSource) -> CloudyController? {
+        switch type {
+            case .onScreen:
+                return controllerData[.onScreen]
+            case .external:
+                #if !APPSTORE
+                    return GCController.controllers().first?.extendedGamepad?.toCloudyController()
+                #else
+                    return nil
+                #endif
+        }
     }
 
     /// Receive the controller data
     func submit(controllerData: CloudyController, for type: ControlsSource) {
         self.controllerData[type] = controllerData
+    }
+
+    /// Enqueue some commands
+    func enqueue(controllerData: [CloudyController], for type: ControlsSource) {
+        self.controllerDataQueue[type]?.append(contentsOf: controllerData)
     }
 }
