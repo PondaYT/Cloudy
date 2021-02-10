@@ -95,8 +95,7 @@ struct ControllerElements {
 
     /// Axes and buttons are the only dynamic values
     let axes:    [Float]
-    /// TODO - make this let again, and offer other way to override one button
-    var buttons: [Button?]
+    let buttons: [Button?]
 
     /// Some static ones for proper configuration
     private let connected: Bool   = true
