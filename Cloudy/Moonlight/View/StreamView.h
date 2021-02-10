@@ -27,7 +27,8 @@
     - (void)setupStreamView:(ControllerSupport *)controllerSupport
             interactionDelegate:(id <UserInteractionDelegate>)interactionDelegate
             config:(StreamConfiguration *)streamConfig
-            hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate;
+            hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate
+            extensionDelegate:(id <OnScreenControlsExtension>)extensionDelegate;
 
     - (void)showOnScreenControls;
 
@@ -36,6 +37,8 @@
     - (OnScreenControlsLevel)getCurrentOscState;
 
     - (void)cleanup;
+
+    - (void)mixinControllerExtension:(bool)visible;
 
 #if !TARGET_OS_TV
 

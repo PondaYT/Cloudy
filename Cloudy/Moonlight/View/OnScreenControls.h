@@ -12,13 +12,41 @@
 #import "OnScreenControlsLevel.h"
 
 @class ControllerSupport;
+@class Controller;
+@class VisibleButtons;
 @protocol TouchFeedbackGenerator;
+
+@protocol OnScreenControlsExtension
+
+    - (void)drawButtonsIn:(CALayer *__nonnull)layer;
+
+    - (BOOL)handleTouchMovedEvent:(UITouch *__nonnull)touch;
+
+    - (BOOL)handleTouchUpEvent:(UITouch *__nonnull)touches
+            controller:(Controller *__nonnull)controller
+            controllerSupport:(ControllerSupport *__nonnull)controllerSupport;
+
+    - (BOOL)handleTouchDownEvent:(UITouch *__nonnull)touch
+            touchLocation:(CGPoint)touchLocation
+            controller:(Controller *__nonnull)controller
+            controllerSupport:(ControllerSupport *__nonnull)controllerSupport;
+
+    - (BOOL)leftStickClickEnabled;
+
+    - (BOOL)rightStickClickEnabled;
+
+    /// Mix in the on screen controller extension, and return what should
+    /// be visible from the regular controller
+    - (VisibleButtons *__nullable)mixin:(bool)visible;
+
+@end
 
 @interface OnScreenControls : NSObject
 
     - (id)initWithView:(UIView *)view
           controllerSup:(ControllerSupport *)controllerSupport
-          hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate;
+          hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate
+          extensionDelegate:(id <OnScreenControlsExtension>)extensionDelegate;
 
     - (BOOL)handleTouchDownEvent:(NSSet *)touches;
 
@@ -33,6 +61,9 @@
     - (void)show;
 
     - (void)cleanup;
+
+    - (void)mixinControllerExtension:(bool)visible;
+
 @end
 
 #endif

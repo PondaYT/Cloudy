@@ -35,6 +35,7 @@ class MenuViewController: UIViewController {
     @IBOutlet var shadowViews:                 [UIView]!
     @IBOutlet var viewsToRemoveForAppstore:    [UIView]!
     @IBOutlet var viewsToRemoveForNonAppstore: [UIView]!
+    @IBOutlet var viewsToRemoveForNonReKairos: [UIView]!
     @IBOutlet weak var userAgentTextField:         UITextField!
     @IBOutlet weak var manualUserAgent:            UISwitch!
     @IBOutlet weak var addressBar:                 UITextField!
@@ -132,6 +133,9 @@ class MenuViewController: UIViewController {
         #if NON_APPSTORE
             viewsToRemoveForNonAppstore.forEach { $0.removeFromSuperview() }
         #endif
+        #if !REKAIROS
+            viewsToRemoveForNonReKairos.forEach { $0.removeFromSuperview() }
+        #endif
         // update stuff
         updateVersionLabel()
     }
@@ -146,6 +150,8 @@ class MenuViewController: UIViewController {
         }
         #if NON_APPSTORE
             versionLabel.text = "Cloudy v\(versionNumber)(\(buildNumber))"
+        #elseif REKAIROS
+            versionLabel.text = "reKairos v\(versionNumber)(\(buildNumber))"
         #else
             versionLabel.text = "Cloudy v\(versionNumber)(\(buildNumber)) | Appstore"
         #endif
