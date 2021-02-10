@@ -99,6 +99,7 @@
 		E7646CB825CE04CA00E33E35 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = E7646CAB25CE04C900E33E35 /* Controller.m */; };
 		E7646CB925CE04CA00E33E35 /* KeyboardSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = E7646CAC25CE04CA00E33E35 /* KeyboardSupport.m */; };
 		E7646CBA25CE04CA00E33E35 /* StreamView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7646CB025CE04CA00E33E35 /* StreamView.m */; };
+		E77546FC25D4928200CF54AC /* LaunchScreenReKairos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77546FA25D4928200CF54AC /* LaunchScreenReKairos.storyboard */; };
 		E776E038254AE08E00684328 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E776E037254AE08E00684328 /* GoogleService-Info.plist */; };
 		E7B87E2B25338121004358E3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B87E2A25338121004358E3 /* RootViewController.swift */; };
 		E7B87E2E25338121004358E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7B87E2C25338121004358E3 /* Main.storyboard */; };
@@ -220,6 +221,7 @@
 		E7646CB025CE04CA00E33E35 /* StreamView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamView.m; sourceTree = "<group>"; };
 		E7646CB125CE04CA00E33E35 /* UserInteractionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInteractionDelegate.h; sourceTree = "<group>"; };
 		E7646CB225CE04CA00E33E35 /* Cloudy-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cloudy-Bridging-Header.h"; sourceTree = "<group>"; };
+		E77546FB25D4928200CF54AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenReKairos.storyboard; sourceTree = "<group>"; };
 		E776E037254AE08E00684328 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E7B87E2325338121004358E3 /* Cloudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cloudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7B87E2A25338121004358E3 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -521,6 +523,7 @@
 				E7B87E2A25338121004358E3 /* RootViewController.swift */,
 				E7B87E2C25338121004358E3 /* Main.storyboard */,
 				E7B87E2F25338124004358E3 /* Assets.xcassets */,
+				E77546FA25D4928200CF54AC /* LaunchScreenReKairos.storyboard */,
 				E7B87E3125338124004358E3 /* LaunchScreen.storyboard */,
 				E7B87E3425338124004358E3 /* Info.plist */,
 				44A4D67F8889E455A547CB96 /* WebViewControllerBridge.swift */,
@@ -625,6 +628,7 @@
 				44A4D1138AE40F820DBFBEEE /* Emote Wheel.png in Resources */,
 				44A4D0DC41CC18E23D085B91 /* Exit.png in Resources */,
 				44A4D164446727109AA13F8D /* Floor Selected.png in Resources */,
+				E77546FC25D4928200CF54AC /* LaunchScreenReKairos.storyboard in Resources */,
 				44A4DCC40273F99C6A2E9E9F /* Floor Unselected.png in Resources */,
 				44A4D4D6A3F9F047DFA71BB1 /* Interact.png in Resources */,
 				44A4DE23E95D3FB0D3012B6A /* Slot 1.png in Resources */,
@@ -781,6 +785,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		E77546FA25D4928200CF54AC /* LaunchScreenReKairos.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E77546FB25D4928200CF54AC /* Base */,
+			);
+			name = LaunchScreenReKairos.storyboard;
+			sourceTree = "<group>";
+		};
 		E7B87E2C25338121004358E3 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -873,13 +885,14 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LAUNCH_SCREEN_NAME = LaunchScreenReKairos;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.4.0;
 				OTHER_SWIFT_FLAGS = "-DNON_APPSTORE -DREKAIROS";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nomad5.Cloudy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nomad5.reKairos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_MACCATALYST = NO;
@@ -968,13 +981,14 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LAUNCH_SCREEN_NAME = LaunchScreenReKairos;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.4.0;
 				OTHER_SWIFT_FLAGS = "-DNON_APPSTORE -DREKAIROS";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nomad5.Cloudy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nomad5.reKairos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_MACCATALYST = NO;
@@ -1121,6 +1135,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LAUNCH_SCREEN_NAME = LaunchScreen;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1154,6 +1169,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LAUNCH_SCREEN_NAME = LaunchScreen;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1243,6 +1259,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LAUNCH_SCREEN_NAME = LaunchScreen;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
