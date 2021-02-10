@@ -591,8 +591,8 @@
         [_leftButton setHidden:!visibleButtons.dpad];
         [_rightButton setHidden:!visibleButtons.dpad];
 
-        [_startButton setHidden:visibleButtons.menuButtons];
-        [_selectButton setHidden:visibleButtons.menuButtons];
+        [_startButton setHidden:!visibleButtons.menuButtons];
+        [_selectButton setHidden:!visibleButtons.menuButtons];
 
         [_l1Button setHidden:!visibleButtons.leftShoulder];
         [_l2Button setHidden:!visibleButtons.leftShoulder];
