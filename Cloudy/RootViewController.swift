@@ -252,11 +252,7 @@ class RootViewController: UIViewController, MenuActionsHandler {
     /// Show the fortnite hud overlay
     @IBAction func showFortniteHUD(_ sender: UISwitch) {
         #if REKAIROS
-            if showHUD.isOn {
-                streamView!.hideControllerButtons()
-            } else {
-                streamView!.showControllerButtons()
-            }
+            streamView?.mixinControllerExtension(showHUD.isOn)
         #endif
     }
 

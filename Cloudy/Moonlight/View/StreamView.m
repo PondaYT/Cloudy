@@ -47,16 +47,9 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
         NSDictionary<NSString *, NSNumber *> *dictCodes;
     }
 
-    // TODO fix this, its nasty
-    - (void)hideControllerButtons
+    - (void)mixinControllerExtension:(bool)visible
     {
-        [onScreenControls hideAndDisableControllerButtons];
-    }
-
-    // TODO fix this, its nasty
-    - (void)showControllerButtons
-    {
-        [onScreenControls showAndEnableControllerButtons];
+        [onScreenControls mixinControllerExtension:visible];
     }
 
     - (void)setupStreamView:(ControllerSupport *)controllerSupport

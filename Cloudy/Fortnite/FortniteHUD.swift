@@ -104,6 +104,8 @@ import UIKit
         private var fortniteEditShootTouch:            UITouch?
         private var fortniteEditSwitch_To_CombatTouch: UITouch?
 
+        let onScreenButtonsWhenActive   = VisibleButtons(leftStick: true)
+        let onScreenButtonsWhenInactive = VisibleButtons.all
 
         var combatMode = true
         var buildMode  = false
@@ -111,6 +113,13 @@ import UIKit
 
         var editFromCombat = true
 
+        func leftStickClickEnabled() -> Bool {
+            false
+        }
+
+        func rightStickClickEnabled() -> Bool {
+            false
+        }
 
         /// Draw all buttons
         func drawButtons(in layer: CALayer) {
@@ -408,18 +417,20 @@ import UIKit
             return false
         }
 
-        func hideAllHUDButtons() {
-            hideHUDButtons(hideCombat: true, hideBuild: true, hideEdit: true)
-            editMode = false
-            buildMode = false
-            combatMode = true
-        }
-
-        func unhideAllHUDButtons() {
-            unhideHUDButtons(unhideCombat: true, unhideBuild: false, unhideEdit: false)
-            editMode = false
-            buildMode = false
-            combatMode = true
+        func mixin(_ visible: Bool) -> VisibleButtons? {
+            if visible {
+                unhideHUDButtons(unhideCombat: true, unhideBuild: false, unhideEdit: false)
+                editMode = false
+                buildMode = false
+                combatMode = true
+                return onScreenButtonsWhenActive
+            } else {
+                hideHUDButtons(hideCombat: true, hideBuild: true, hideEdit: true)
+                editMode = false
+                buildMode = false
+                combatMode = true
+                return onScreenButtonsWhenInactive
+            }
         }
 
         func hideHUDButtons(hideCombat: Bool, hideBuild: Bool, hideEdit: Bool) {

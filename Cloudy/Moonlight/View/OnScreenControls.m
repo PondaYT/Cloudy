@@ -573,62 +573,37 @@
         [_rightButton removeFromSuperlayer];
     }
 
-    // TODO fix this, its nasty
-    - (void)hideAndDisableControllerButtons
+    - (void)mixinControllerExtension:(bool)visible
     {
-        [_aButton setHidden:YES];
-        [_bButton setHidden:YES];
-        [_xButton setHidden:YES];
-        [_yButton setHidden:YES];
-        [_upButton setHidden:YES];
-        [_downButton setHidden:YES];
-        [_leftButton setHidden:YES];
-        [_rightButton setHidden:YES];
-
-        [_startButton setHidden:YES];
-        [_selectButton setHidden:YES];
-        [_l1Button setHidden:YES];
-        [_r1Button setHidden:YES];
-        [_l2Button setHidden:YES];
-        [_r2Button setHidden:YES];
-
-        [_rightStickBackground removeFromSuperlayer];
-        [_rightStick removeFromSuperlayer];
-
-        [onScreenExtension unhideAllHUDButtons];
+        VisibleButtons *visibleButtons = [onScreenExtension mixin:visible];
+        [self applyButtonVisibility:visibleButtons];
     }
 
-    // TODO fix this, its nasty
-    - (void)showAndEnableControllerButtons
+    - (void)applyButtonVisibility:(VisibleButtons *)visibleButtons
     {
-        [_aButton setHidden:NO];
-        [_bButton setHidden:NO];
-        [_xButton setHidden:NO];
-        [_yButton setHidden:NO];
-        [_upButton setHidden:NO];
-        [_downButton setHidden:NO];
-        [_leftButton setHidden:NO];
-        [_rightButton setHidden:NO];
+        [_aButton setHidden:!visibleButtons.buttons];
+        [_bButton setHidden:!visibleButtons.buttons];
+        [_xButton setHidden:!visibleButtons.buttons];
+        [_yButton setHidden:!visibleButtons.buttons];
 
-        [_startButton setHidden:NO];
-        [_selectButton setHidden:NO];
-        [_l1Button setHidden:NO];
-        [_r1Button setHidden:NO];
-        [_l2Button setHidden:NO];
-        [_r2Button setHidden:NO];
+        [_upButton setHidden:!visibleButtons.dpad];
+        [_downButton setHidden:!visibleButtons.dpad];
+        [_leftButton setHidden:!visibleButtons.dpad];
+        [_rightButton setHidden:!visibleButtons.dpad];
 
-        // create right analog stick
-        UIImage *rightStickBgImage = [UIImage imageNamed:@"StickOuter"];
-        _rightStickBackground.frame    = CGRectMake(RS_CENTER_X - rightStickBgImage.size.width / 2, RS_CENTER_Y - rightStickBgImage.size.height / 2, rightStickBgImage.size.width, rightStickBgImage.size.height);
-        _rightStickBackground.contents = (id) rightStickBgImage.CGImage;
-        [_view.layer addSublayer:_rightStickBackground];
+        [_startButton setHidden:visibleButtons.menuButtons];
+        [_selectButton setHidden:visibleButtons.menuButtons];
 
-        UIImage *rightStickImage = [UIImage imageNamed:@"StickInner"];
-        _rightStick.frame    = CGRectMake(RS_CENTER_X - rightStickImage.size.width / 2, RS_CENTER_Y - rightStickImage.size.height / 2, rightStickImage.size.width, rightStickImage.size.height);
-        _rightStick.contents = (id) rightStickImage.CGImage;
-        [_view.layer addSublayer:_rightStick];
+        [_l1Button setHidden:!visibleButtons.leftShoulder];
+        [_l2Button setHidden:!visibleButtons.leftShoulder];
+        [_r1Button setHidden:!visibleButtons.rightShoulder];
+        [_r2Button setHidden:!visibleButtons.rightShoulder];
 
-        [onScreenExtension hideAllHUDButtons];
+        [_leftStickBackground setHidden:!visibleButtons.leftStick];
+        [_leftStick setHidden:!visibleButtons.leftStick];
+
+        [_rightStickBackground setHidden:!visibleButtons.rightStick];
+        [_rightStick setHidden:!visibleButtons.rightStick];
     }
 
     - (void)hideStartSelect
@@ -961,8 +936,7 @@
                     // Find elapsed time and convert to milliseconds
                     // Use (-) modifier to conversion since receiver is earlier than now
                     double l3TouchTime = [l3TouchStart timeIntervalSinceNow] * -1000.0;
-                    // TODO fix this, its nasty -> && (!onScreenExtension)
-                    if((l3TouchTime < STICK_CLICK_RATE) && (!onScreenExtension))
+                    if([onScreenExtension leftStickClickEnabled] && (l3TouchTime < STICK_CLICK_RATE))
                     {
                         [_controllerSupport setButtonFlag:_controller flags:LS_CLK_FLAG];
                         updated = true;
@@ -979,8 +953,7 @@
                     // Find elapsed time and convert to milliseconds
                     // Use (-) modifier to conversion since receiver is earlier than now
                     double r3TouchTime = [r3TouchStart timeIntervalSinceNow] * -1000.0;
-                    // TODO fix this, its nasty -> && (!onScreenExtension)
-                    if((r3TouchTime < STICK_CLICK_RATE) && (!onScreenExtension))
+                    if([onScreenExtension rightStickClickEnabled] && (r3TouchTime < STICK_CLICK_RATE))
                     {
                         [_controllerSupport setButtonFlag:_controller flags:RS_CLK_FLAG];
                         updated = true;

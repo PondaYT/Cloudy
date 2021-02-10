@@ -38,11 +38,7 @@
 
     - (void)cleanup;
 
-    // TODO fix this, its nasty
-    - (void)hideControllerButtons;
-
-    // TODO fix this, its nasty
-    - (void)showControllerButtons;
+    - (void)mixinControllerExtension:(bool)visible;
 
 #if !TARGET_OS_TV
 

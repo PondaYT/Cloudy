@@ -13,6 +13,7 @@
 
 @class ControllerSupport;
 @class Controller;
+@class VisibleButtons;
 @protocol TouchFeedbackGenerator;
 
 @protocol OnScreenControlsExtension
@@ -30,11 +31,13 @@
             controller:(Controller *__nonnull)controller
             controllerSupport:(ControllerSupport *__nonnull)controllerSupport;
 
-    // TODO fix this, its nasty
-    - (void)hideAllHUDButtons;
+    - (BOOL)leftStickClickEnabled;
 
-    // TODO fix this, its nasty
-    - (void)unhideAllHUDButtons;
+    - (BOOL)rightStickClickEnabled;
+
+    /// Mix in the on screen controller extension, and return what should
+    /// be visible from the regular controller
+    - (VisibleButtons *__nullable)mixin:(bool)visible;
 
 @end
 
@@ -59,11 +62,8 @@
 
     - (void)cleanup;
 
-    // TODO fix this, its nasty
-    - (void)hideAndDisableControllerButtons;
+    - (void)mixinControllerExtension:(bool)visible;
 
-    // TODO fix this, its nasty
-    - (void)showAndEnableControllerButtons;
 @end
 
 #endif

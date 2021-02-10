@@ -38,6 +38,7 @@
 		44A4D42E63964FEAD11402C9 /* ControllerId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D355F9FC2B0B0407D925 /* ControllerId.swift */; };
 		44A4D431D614914220F8C92E /* Move Joystick.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A4DC5FC48EB0F8470B3465 /* Move Joystick.png */; };
 		44A4D44641C7C146FE8BC523 /* Alerter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DD3E981844FBC3E9E5A7 /* Alerter.swift */; };
+		44A4D45CF453A1C25C8E4D58 /* VisibleButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DA0D88D1730154B97A8A /* VisibleButtons.swift */; };
 		44A4D462F6B9BB3200645FEF /* TouchFeedbackType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D251D0510B4A29CC74F0 /* TouchFeedbackType.swift */; };
 		44A4D4A27D7B34B271F5C9B0 /* Jump.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A4D15331F3840CF89EE48F /* Jump.png */; };
 		44A4D4CD5F66196CB7AD5CB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D965A769BDED09733089 /* AppDelegate.swift */; };
@@ -161,6 +162,7 @@
 		44A4D9E166563039DB5AB9C0 /* Mic Unmuted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mic Unmuted.png"; sourceTree = "<group>"; };
 		44A4D9EA92142745F717EE9E /* Stair Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stair Selected.png"; sourceTree = "<group>"; };
 		44A4D9F318B9593A6DD6F951 /* ButtonOptionSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonOptionSet.swift; sourceTree = "<group>"; };
+		44A4DA0D88D1730154B97A8A /* VisibleButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisibleButtons.swift; sourceTree = "<group>"; };
 		44A4DA16CCBA1670BDA68EA4 /* Edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Edit.png; sourceTree = "<group>"; };
 		44A4DA3DE452A6F79A12439F /* Edit Crosshair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Edit Crosshair.png"; sourceTree = "<group>"; };
 		44A4DA6DC6F7876B0D6B7A64 /* CloudyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudyController.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				44A4DA6DC6F7876B0D6B7A64 /* CloudyController.swift */,
 				44A4D9AA937FF7595CC480CE /* LaunchArgumentHandler.swift */,
 				44A4D355F9FC2B0B0407D925 /* ControllerId.swift */,
+				44A4DA0D88D1730154B97A8A /* VisibleButtons.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -771,6 +774,7 @@
 				E7646CB625CE04CA00E33E35 /* HapticContext.m in Sources */,
 				44A4D42E63964FEAD11402C9 /* ControllerId.swift in Sources */,
 				44A4DF24B14D4379ED99E351 /* Float.swift in Sources */,
+				44A4D45CF453A1C25C8E4D58 /* VisibleButtons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
