@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Initialize firebase
         #if NON_APPSTORE
-            FirebaseApp.configure()
+            FirebaseConfig.configure()
         #endif
         // Start observing in app purchases
         IAPManager.shared.startObserving()
