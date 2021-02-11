@@ -3,14 +3,14 @@
 import Foundation
 
 /// Abstract assembler for optional on screen controls extensions
-protocol OnScreenControlsExtensionAssembler {
-    func resolve() -> OnScreenControlsExtension?
+protocol OscAssembler {
+    func resolve() -> OscExtension?
 }
 
 /// Extension of the global assembler
-extension OnScreenControlsExtensionAssembler where Self: Assembler {
+extension OscAssembler where Self: Assembler {
 
-    func resolve() -> OnScreenControlsExtension? {
+    func resolve() -> OscExtension? {
         #if REKAIROS
             return nil
         #else

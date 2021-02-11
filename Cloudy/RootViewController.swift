@@ -20,7 +20,7 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
     private var assembler:                 Assembler!
     private var alerter:                   Alerter!
     private var purchaseHelper:            IAPPurchaseHelper!
-    private var onScreenControlsExtension: OnScreenControlsExtension?
+    private var onScreenControlsExtension: OscExtension?
 
     /// Main injection
     func inject(assembler: Assembler) {

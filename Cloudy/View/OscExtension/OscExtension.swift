@@ -4,7 +4,7 @@ import Foundation
 import UIKit
 
 /// The on screen controls extensions
-@objc protocol OnScreenControlsExtension {
+@objc protocol OscExtension {
 
     /// Will be invoked once the on screen controls are drawn
     func drawButtons(in layer: CALayer)

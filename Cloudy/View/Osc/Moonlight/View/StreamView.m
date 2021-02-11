@@ -56,7 +56,7 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
             interactionDelegate:(id <UserInteractionDelegate>)interactionDelegate
             config:(StreamConfiguration *)streamConfig
             hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate
-            extensionDelegate:(id <OnScreenControlsExtension>)extensionDelegate
+            extensionDelegate:(id <OscExtension>)extensionDelegate
     {
         self->interactionDelegate = interactionDelegate;
         self->streamAspectRatio   = (float) streamConfig.width / (float) streamConfig.height;

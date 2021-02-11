@@ -5,7 +5,7 @@ import UIKit
 
 /// Global assembler aggregate which is the point
 /// where its decided which implementations are injected
-protocol Assembler: OnScreenControlsExtensionAssembler,
+protocol Assembler: OscAssembler,
                     AlerterAssembler,
                     IAPAssembler {
     /// Provide config

@@ -82,8 +82,8 @@
         Controller        *_controller;
         NSMutableArray    *_deadTouches;
 
-        id <TouchFeedbackGenerator>    hapticFeedback;
-        id <OnScreenControlsExtension> onScreenExtension;
+        id <TouchFeedbackGenerator> hapticFeedback;
+        id <OscExtension>           onScreenExtension;
     }
 
     static const float EDGE_WIDTH = .05;
@@ -130,7 +130,7 @@
     - (id)initWithView:(UIView *)view
           controllerSup:(ControllerSupport *)controllerSupport
           hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate
-          extensionDelegate:(id <OnScreenControlsExtension>)extensionDelegate;
+          extensionDelegate:(id <OscExtension>)extensionDelegate;
     {
         self               = [self init];
         _view              = view;

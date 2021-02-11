@@ -28,7 +28,7 @@
             interactionDelegate:(id <UserInteractionDelegate>)interactionDelegate
             config:(StreamConfiguration *)streamConfig
             hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate
-            extensionDelegate:(id <OnScreenControlsExtension>)extensionDelegate;
+            extensionDelegate:(id <OscExtension>)extensionDelegate;
 
     - (void)showOnScreenControls;
 

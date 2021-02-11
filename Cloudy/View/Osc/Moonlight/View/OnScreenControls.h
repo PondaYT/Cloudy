@@ -13,14 +13,14 @@
 
 @class ControllerSupport;
 @protocol TouchFeedbackGenerator;
-@protocol OnScreenControlsExtension;
+@protocol OscExtension;
 
 @interface OnScreenControls : NSObject
 
     - (id)initWithView:(UIView *)view
           controllerSup:(ControllerSupport *)controllerSupport
           hapticFeedback:(id <TouchFeedbackGenerator>)hapticFeedbackDelegate
-          extensionDelegate:(id <OnScreenControlsExtension>)extensionDelegate;
+          extensionDelegate:(id <OscExtension>)extensionDelegate;
 
     - (BOOL)handleTouchDownEvent:(NSSet *)touches;
 
