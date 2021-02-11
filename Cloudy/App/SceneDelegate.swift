@@ -9,10 +9,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     /// Factory method
     func createRootViewController(with launchUrl: URL?) -> RootViewController {
-        let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RootViewController") as! RootViewController
-        let configuration     = Configuration(launchUrl: launchUrl)
-        newViewController.assembler = AppAssembler(with: configuration)
-        return newViewController
+        let mainViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RootViewController") as! RootViewController
+        let configuration      = Configuration(launchUrl: launchUrl)
+        let assembler          = AppAssembler(mainViewController: mainViewController,
+                                              config: configuration)
+        mainViewController.inject(assembler: assembler)
+        return mainViewController
     }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

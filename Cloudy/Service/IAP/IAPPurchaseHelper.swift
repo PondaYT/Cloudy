@@ -3,13 +3,13 @@
 import Foundation
 import StoreKit
 
-class PurchaseHelper {
+class IAPPurchaseHelper {
 
     /// Injected dependencies
     private let alerter: Alerter
 
     /// Construction with dependencies
-    init(with alerter: Alerter) {
+    init(alerter: Alerter) {
         self.alerter = alerter
     }
 

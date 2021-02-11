@@ -33,8 +33,8 @@ class Alerter {
     private let viewController: UIViewController
 
     /// Construction with dependencies
-    init(viewController: UIViewController) {
-        self.viewController = viewController
+    init(mainViewController: MainViewController) {
+        viewController = mainViewController.viewController
     }
 
     /// Show alert with available tips

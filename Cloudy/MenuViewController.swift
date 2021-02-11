@@ -65,7 +65,7 @@ class MenuViewController: UIViewController {
     var overlayController:  OverlayController?
     var menuActionsHandler: MenuActionsHandler?
     var alerter:            Alerter?
-    var purchaseHelper:     PurchaseHelper?
+    var purchaseHelper:     IAPPurchaseHelper?
 
     /// Mapping from a alias to a full url
     static let   aliasMapping:           [String: String] = [

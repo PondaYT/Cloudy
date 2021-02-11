@@ -14,10 +14,21 @@ protocol MenuActionsHandler {
 
 /// The main view controller
 /// TODO way too big, refactor asap
-class RootViewController: UIViewController, MenuActionsHandler {
+class RootViewController: UIViewController, MenuActionsHandler, MainViewController {
+
+    /// Dependency injections
+    private var assembler:                 Assembler!
+    private var alerter:                   Alerter!
+    private var purchaseHelper:            IAPPurchaseHelper!
+    private var onScreenControlsExtension: OnScreenControlsExtension?
 
     /// Main injection
-    var           assembler:                     Assembler!
+    func inject(assembler: Assembler) {
+        self.assembler = assembler
+        alerter = assembler.resolve()
+        purchaseHelper = assembler.resolve()
+        onScreenControlsExtension = assembler.resolve()
+    }
 
     /// Containers
     @IBOutlet var containerWebView:              UIView!
@@ -45,6 +56,11 @@ class RootViewController: UIViewController, MenuActionsHandler {
     /// The bridge between controller and web view
     private let webViewControllerBridge          = WebViewControllerBridge()
 
+    /// Access to the main view controller
+    var viewController: UIViewController {
+        self
+    }
+
     #if !APPSTORE
         /// The stream view that holds the on screen controls
         private var streamView: StreamView?
@@ -56,25 +72,10 @@ class RootViewController: UIViewController, MenuActionsHandler {
 
     #endif
 
-    /// The optional reKairos HUD
-    lazy var onScreenControlsExtension: OnScreenControlsExtension? = {
-        assembler.resolve()
-    }()
-
     /// Expose the web controller for navigation
-    var webController: WebController? {
+    var webController:  WebController? {
         webView
     }
-
-    /// The alert helper
-    lazy var alerter: Alerter = {
-        Alerter(viewController: self)
-    }()
-
-    /// The purchase helper
-    lazy var purchaseHelper: PurchaseHelper = {
-        PurchaseHelper(with: alerter)
-    }()
 
     /// By default hide the status bar
     override var prefersStatusBarHidden:                      Bool {
