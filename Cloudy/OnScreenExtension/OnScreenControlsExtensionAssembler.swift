@@ -12,7 +12,7 @@ extension OnScreenControlsExtensionAssembler where Self: Assembler {
 
     func resolve() -> OnScreenControlsExtension? {
         #if REKAIROS
-            return FortniteHUD()
+            return nil
         #else
             return nil
         #endif
