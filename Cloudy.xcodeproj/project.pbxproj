@@ -60,6 +60,7 @@
 		44A4D7DCB15B8C4799D56BCA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D0057BF82C52A8F76A38 /* String.swift */; };
 		44A4D81D6A823FB908BCE224 /* AVFoundationVibratingFeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D01AC2645E64C1EB9CF9 /* AVFoundationVibratingFeedbackGenerator.swift */; };
 		44A4D8885DB5BE5C73C9FB87 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D3A1BA3A8B2AB96CB81B /* UserDefaults.swift */; };
+		44A4D8D09EF9B3C2476C532F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44A4DF9BE4F737D34B56996E /* GoogleService-Info.plist */; };
 		44A4D8E7B41F7F973DB1CDC7 /* Reset.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A4D1BFA4ABC7E6934E771B /* Reset.png */; };
 		44A4D96805A28BC01E33FF4F /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DB5C7725B073FE1AB0E8 /* IAPManager.swift */; };
 		44A4D9B9C9363AC8D381F05F /* LaunchArgumentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D9AA937FF7595CC480CE /* LaunchArgumentHandler.swift */; };
@@ -99,12 +100,9 @@
 		E7646CB825CE04CA00E33E35 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = E7646CAB25CE04C900E33E35 /* Controller.m */; };
 		E7646CB925CE04CA00E33E35 /* KeyboardSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = E7646CAC25CE04CA00E33E35 /* KeyboardSupport.m */; };
 		E7646CBA25CE04CA00E33E35 /* StreamView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7646CB025CE04CA00E33E35 /* StreamView.m */; };
-		E77546FC25D4928200CF54AC /* LaunchScreenReKairos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77546FA25D4928200CF54AC /* LaunchScreenReKairos.storyboard */; };
-		E776E038254AE08E00684328 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E776E037254AE08E00684328 /* GoogleService-Info.plist */; };
 		E7B87E2B25338121004358E3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B87E2A25338121004358E3 /* RootViewController.swift */; };
 		E7B87E2E25338121004358E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7B87E2C25338121004358E3 /* Main.storyboard */; };
 		E7B87E3025338124004358E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7B87E2F25338124004358E3 /* Assets.xcassets */; };
-		E7B87E3325338124004358E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7B87E3125338124004358E3 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -192,6 +190,7 @@
 		44A4DF45C532774D8D1CE1BA /* Shoot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shoot.png; sourceTree = "<group>"; };
 		44A4DF4C0A6D64EBB82E26BF /* Edit Reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Edit Reset.png"; sourceTree = "<group>"; };
 		44A4DF7E38ED8F59E532EBA0 /* Slot 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slot 4.png"; sourceTree = "<group>"; };
+		44A4DF9BE4F737D34B56996E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		44A4DFB90BD884CB5041E57D /* WKUserScript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKUserScript.swift; sourceTree = "<group>"; };
 		5151C17525BE8EFB00EA0E06 /* FortniteHUDCustomization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortniteHUDCustomization.swift; sourceTree = "<group>"; };
 		79B35440DA7901C4949EFDC7 /* Pods-Cloudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.release.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.release.xcconfig"; sourceTree = "<group>"; };
@@ -221,13 +220,10 @@
 		E7646CB025CE04CA00E33E35 /* StreamView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamView.m; sourceTree = "<group>"; };
 		E7646CB125CE04CA00E33E35 /* UserInteractionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInteractionDelegate.h; sourceTree = "<group>"; };
 		E7646CB225CE04CA00E33E35 /* Cloudy-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cloudy-Bridging-Header.h"; sourceTree = "<group>"; };
-		E77546FB25D4928200CF54AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreenReKairos.storyboard; sourceTree = "<group>"; };
-		E776E037254AE08E00684328 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E7B87E2325338121004358E3 /* Cloudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cloudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7B87E2A25338121004358E3 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		E7B87E2D25338121004358E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E7B87E2F25338124004358E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E7B87E3225338124004358E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E7B87E3425338124004358E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F5F1C5404C2A26CEE2BEB564 /* Pods-Cloudy.rekairos release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.rekairos release.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.rekairos release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -268,6 +264,14 @@
 				44A4D600D66AF81438FD332D /* FullScreenWKWebView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		44A4D1987825ED766F25340D /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				44A4D6C42D6A8DCBEEFC6D2E /* Config */,
+			);
+			path = Firebase;
 			sourceTree = "<group>";
 		};
 		44A4D204255B64D65EF3ED9F /* Src */ = {
@@ -381,6 +385,13 @@
 				44A4D20E8882F769E6208730 /* PurchaseHelper.swift */,
 			);
 			path = IAP;
+			sourceTree = "<group>";
+		};
+		44A4D6C42D6A8DCBEEFC6D2E /* Config */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		44A4D7F2A8E1FD4552A92BFE /* Assets */ = {
@@ -519,12 +530,9 @@
 			children = (
 				B68A92C425596BFB00A22D82 /* Cloudy.entitlements */,
 				E712FF9725520978003CF78C /* Images.xcassets */,
-				E776E037254AE08E00684328 /* GoogleService-Info.plist */,
 				E7B87E2A25338121004358E3 /* RootViewController.swift */,
 				E7B87E2C25338121004358E3 /* Main.storyboard */,
 				E7B87E2F25338124004358E3 /* Assets.xcassets */,
-				E77546FA25D4928200CF54AC /* LaunchScreenReKairos.storyboard */,
-				E7B87E3125338124004358E3 /* LaunchScreen.storyboard */,
 				E7B87E3425338124004358E3 /* Info.plist */,
 				44A4D67F8889E455A547CB96 /* WebViewControllerBridge.swift */,
 				5151C11E25BE8D7700EA0E06 /* Fortnite */,
@@ -536,6 +544,8 @@
 				44A4D5C66D1BB23F52E6221F /* Util */,
 				44A4D16D8119944005C73DA3 /* View */,
 				44A4D67586EC1E27EDE5E8AF /* IAP */,
+				44A4D1987825ED766F25340D /* Firebase */,
+				44A4DF9BE4F737D34B56996E /* GoogleService-Info.plist */,
 			);
 			path = Cloudy;
 			sourceTree = "<group>";
@@ -610,9 +620,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7B87E3325338124004358E3 /* LaunchScreen.storyboard in Resources */,
 				E712FF9825520978003CF78C /* Images.xcassets in Resources */,
-				E776E038254AE08E00684328 /* GoogleService-Info.plist in Resources */,
 				E7B87E3025338124004358E3 /* Assets.xcassets in Resources */,
 				E7B87E2E25338121004358E3 /* Main.storyboard in Resources */,
 				44A4D4FCC5E7D0E23359DF84 /* Aim.png in Resources */,
@@ -628,7 +636,6 @@
 				44A4D1138AE40F820DBFBEEE /* Emote Wheel.png in Resources */,
 				44A4D0DC41CC18E23D085B91 /* Exit.png in Resources */,
 				44A4D164446727109AA13F8D /* Floor Selected.png in Resources */,
-				E77546FC25D4928200CF54AC /* LaunchScreenReKairos.storyboard in Resources */,
 				44A4DCC40273F99C6A2E9E9F /* Floor Unselected.png in Resources */,
 				44A4D4D6A3F9F047DFA71BB1 /* Interact.png in Resources */,
 				44A4DE23E95D3FB0D3012B6A /* Slot 1.png in Resources */,
@@ -665,6 +672,7 @@
 				44A4D0C4A95EA85E801ABB0F /* Wall Selected.png in Resources */,
 				44A4DFA75F4D1FF3195D958A /* Wall Unselected.png in Resources */,
 				44A4DFA6F8ABAF57754F99FB /* HUDBackground.jpg in Resources */,
+				44A4D8D09EF9B3C2476C532F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -785,28 +793,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E77546FA25D4928200CF54AC /* LaunchScreenReKairos.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E77546FB25D4928200CF54AC /* Base */,
-			);
-			name = LaunchScreenReKairos.storyboard;
-			sourceTree = "<group>";
-		};
 		E7B87E2C25338121004358E3 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				E7B87E2D25338121004358E3 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		E7B87E3125338124004358E3 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E7B87E3225338124004358E3 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -885,7 +877,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LAUNCH_SCREEN_NAME = LaunchScreenReKairos;
+				LAUNCH_SCREEN_NAME = launch_screen_reKairos;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -982,7 +974,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LAUNCH_SCREEN_NAME = LaunchScreenReKairos;
+				LAUNCH_SCREEN_NAME = launch_screen_reKairos;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1137,7 +1129,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LAUNCH_SCREEN_NAME = LaunchScreen;
+				LAUNCH_SCREEN_NAME = launch_screen;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1172,7 +1164,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LAUNCH_SCREEN_NAME = LaunchScreen;
+				LAUNCH_SCREEN_NAME = launch_screen;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1263,7 +1255,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LAUNCH_SCREEN_NAME = LaunchScreen;
+				LAUNCH_SCREEN_NAME = launch_screen;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

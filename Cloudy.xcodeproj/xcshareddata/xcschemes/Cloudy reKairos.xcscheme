@@ -73,6 +73,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "reKairos Release"
+      customArchiveName = "reKairos"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
