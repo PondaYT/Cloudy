@@ -20,15 +20,16 @@
 		44A4D0C5655A3AAE90D26CC5 /* Alerter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DF967486C5BEC663A336 /* Alerter.swift */; };
 		44A4D0FBB22CC22B053573C3 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D8A659024EF865AEB5D4 /* UIView.swift */; };
 		44A4D12458F1925C8B716EAD /* Limelight.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D42B4BF97B06DF2A6BEA /* Limelight.m */; };
-		44A4D12846DB1CC074EFD371 /* FirebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DA92549E9B2E27CE4091 /* FirebaseConfig.swift */; };
 		44A4D13A82DE5B9006FED3DC /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D58266EE8EF012AEA979 /* Navigator.swift */; };
 		44A4D18C37CB5572B3B2F503 /* Cycle Weapons Down.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A4D030AA3566FA7ECCCB36 /* Cycle Weapons Down.png */; };
 		44A4D1935C398E3B664D9F7E /* Quick Heal.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A4DEC83B22262869707D3A /* Quick Heal.png */; };
 		44A4D1988A71FC4769B69DD9 /* Emote Wheel.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A4D245334C5B65317745A7 /* Emote Wheel.png */; };
 		44A4D1A9A30B84DCDD3F66C7 /* Scripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D24369D3C549C04BC958 /* Scripts.swift */; };
+		44A4D1D59DDAD23076FBC44B /* GoogleService-Info-reKairos.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44A4D1A2C8A3EF9148C0BE76 /* GoogleService-Info-reKairos.plist */; };
 		44A4D1E740F7D7BC482E5BB6 /* Quick Chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A4D8C98723B06C239E953C /* Quick Chat.png */; };
 		44A4D20C0B0DF5819CE21F17 /* CloudyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DA6DC6F7876B0D6B7A64 /* CloudyController.swift */; };
 		44A4D240730D282493AC380E /* StreamConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D47E3D9518C80384D8F4 /* StreamConfiguration.m */; };
+		44A4D2CF12CE366D45C77A41 /* FirebaseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D03A00E966FBE1BAF470 /* FirebaseConfig.swift */; };
 		44A4D308C2D4485EDB0FF21E /* Interact.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A4D66747BE0BAD9517CFEC /* Interact.png */; };
 		44A4D313CD82BF86B7841B19 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DDFB3BA2FE8AEE10DEA9 /* Collection.swift */; };
 		44A4D33D3D8EA79B376D4C77 /* IAPPurchaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DB7F7D4AED8CC81E1C14 /* IAPPurchaseHelper.swift */; };
@@ -41,6 +42,7 @@
 		44A4D462F6B9BB3200645FEF /* TouchFeedbackType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D251D0510B4A29CC74F0 /* TouchFeedbackType.swift */; };
 		44A4D4CD5F66196CB7AD5CB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D965A769BDED09733089 /* AppDelegate.swift */; };
 		44A4D50506E091C14EB33429 /* Open Chest.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A4D3E1ED977CB9236AD925 /* Open Chest.png */; };
+		44A4D538B2EFCF7F087123F8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44A4DE6EB9C1A8F63D2C1E49 /* GoogleService-Info.plist */; };
 		44A4D55413159A9C74D049D6 /* Slot 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A4DB58B2FDD7445FE598A2 /* Slot 1.png */; };
 		44A4D56785DE2ACC82B37F52 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D1A39583BB7F49ABD541 /* Log.swift */; };
 		44A4D5E2808BF0DD2A00A28C /* Switch To Combat.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A4DF89CE0DA4FAB84C46AB /* Switch To Combat.png */; };
@@ -73,7 +75,6 @@
 		44A4DABB18526702BCCB9ADE /* Slot 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A4D2F8AE88D2F69F7DD732 /* Slot 4.png */; };
 		44A4DACEBEBFC0A3241075EF /* Open Door.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A4DC8B45EC5CE9307FC60B /* Open Door.png */; };
 		44A4DB00E933E5B5B747301A /* Confirm.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A4D099638E6789E7142491 /* Confirm.png */; };
-		44A4DB0B1066163FDF665500 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44A4DA5767E4B5B004986B9B /* GoogleService-Info.plist */; };
 		44A4DB3CE4DC331A0F02D7AD /* Stair Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A4DA10C03D6B154918506A /* Stair Selected.png */; };
 		44A4DB5B4F47F3EDC53FD95E /* Edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A4D6AFD16D85702D91170B /* Edit.png */; };
 		44A4DB5EF1F09B9D531A5704 /* WKUserScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DFB90BD884CB5041E57D /* WKUserScript.swift */; };
@@ -98,7 +99,6 @@
 		44A4DFDC8DA1D624378BDB39 /* OnScreenControlsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DA2663F4D5207AABA920 /* OnScreenControlsExtension.swift */; };
 		5CDDBA53FB1B62159C8668EF /* Pods_Cloudy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BF8562B1619F13A7254171F /* Pods_Cloudy.framework */; };
 		E712FF9825520978003CF78C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E712FF9725520978003CF78C /* Images.xcassets */; };
-		E74CE8CF25D5ACC400EF14C2 /* GoogleService-Info-reKairos.plist in Resources */ = {isa = PBXBuildFile; fileRef = E74CE8CE25D5ACC400EF14C2 /* GoogleService-Info-reKairos.plist */; };
 		E74CE8D225D5B0D900EF14C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74CE8D125D5B0D900EF14C2 /* LaunchScreen.storyboard */; };
 		E74CE8D625D5B0F300EF14C2 /* LaunchScreenReKairos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74CE8D525D5B0F200EF14C2 /* LaunchScreenReKairos.storyboard */; };
 		E7646CB325CE04CA00E33E35 /* ControllerSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = E7646CA125CE04C900E33E35 /* ControllerSupport.m */; };
@@ -121,12 +121,14 @@
 		44A4D0155757451CBD81D423 /* Slot 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slot 3.png"; sourceTree = "<group>"; };
 		44A4D01AC2645E64C1EB9CF9 /* AVFoundationVibratingFeedbackGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVFoundationVibratingFeedbackGenerator.swift; sourceTree = "<group>"; };
 		44A4D030AA3566FA7ECCCB36 /* Cycle Weapons Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cycle Weapons Down.png"; sourceTree = "<group>"; };
+		44A4D03A00E966FBE1BAF470 /* FirebaseConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseConfig.swift; sourceTree = "<group>"; };
 		44A4D03B9790CC909EDD4083 /* HUDBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HUDBackground.jpg; sourceTree = "<group>"; };
 		44A4D099638E6789E7142491 /* Confirm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Confirm.png; sourceTree = "<group>"; };
 		44A4D0B55F952BED35B42FC5 /* FortniteHUDCustomization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortniteHUDCustomization.swift; sourceTree = "<group>"; };
 		44A4D0D584E6CA7E7AE109F2 /* Move Outer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Move Outer.png"; sourceTree = "<group>"; };
 		44A4D13B08A891F91EC2DCA4 /* Pyramid Unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pyramid Unselected.png"; sourceTree = "<group>"; };
 		44A4D15FC7FB3F6347B248D4 /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
+		44A4D1A2C8A3EF9148C0BE76 /* GoogleService-Info-reKairos.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = "GoogleService-Info-reKairos.plist"; sourceTree = "<group>"; };
 		44A4D1A39583BB7F49ABD541 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		44A4D205B37B185DCA7E5DBD /* AlerterAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlerterAssembler.swift; sourceTree = "<group>"; };
 		44A4D235C18462FFD0D16000 /* Edit Crosshair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Edit Crosshair.png"; sourceTree = "<group>"; };
@@ -176,9 +178,7 @@
 		44A4DA0D88D1730154B97A8A /* VisibleButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisibleButtons.swift; sourceTree = "<group>"; };
 		44A4DA10C03D6B154918506A /* Stair Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Stair Selected.png"; sourceTree = "<group>"; };
 		44A4DA2663F4D5207AABA920 /* OnScreenControlsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnScreenControlsExtension.swift; sourceTree = "<group>"; };
-		44A4DA5767E4B5B004986B9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		44A4DA6DC6F7876B0D6B7A64 /* CloudyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudyController.swift; sourceTree = "<group>"; };
-		44A4DA92549E9B2E27CE4091 /* FirebaseConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseConfig.swift; sourceTree = "<group>"; };
 		44A4DAB7C8F2A6767E9257B8 /* Exit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Exit.png; sourceTree = "<group>"; };
 		44A4DB0B1C7954A7F3D33879 /* Repair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Repair.png; sourceTree = "<group>"; };
 		44A4DB58B2FDD7445FE598A2 /* Slot 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slot 1.png"; sourceTree = "<group>"; };
@@ -196,6 +196,7 @@
 		44A4DE3DCBB64378E4F544EA /* Crouch Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Crouch Up.png"; sourceTree = "<group>"; };
 		44A4DE65C1BBF228BC129FD6 /* Use.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Use.png; sourceTree = "<group>"; };
 		44A4DE6975B8B6F7DF52474A /* Reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reload.png; sourceTree = "<group>"; };
+		44A4DE6EB9C1A8F63D2C1E49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		44A4DE867B79957EF51F729D /* Edit Reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Edit Reset.png"; sourceTree = "<group>"; };
 		44A4DEAFE04C43372A474AF7 /* StreamConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamConfiguration.h; sourceTree = "<group>"; };
 		44A4DEC1B5D41DF019E12425 /* Autorun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Autorun.png; sourceTree = "<group>"; };
@@ -214,7 +215,6 @@
 		B42B0FEC073AD10E0FCA6CF1 /* Pods-Cloudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.debug.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.debug.xcconfig"; sourceTree = "<group>"; };
 		B68A92C425596BFB00A22D82 /* Cloudy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cloudy.entitlements; sourceTree = "<group>"; };
 		E712FF9725520978003CF78C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		E74CE8CE25D5ACC400EF14C2 /* GoogleService-Info-reKairos.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-reKairos.plist"; sourceTree = "<group>"; };
 		E74CE8D125D5B0D900EF14C2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E74CE8D525D5B0F200EF14C2 /* LaunchScreenReKairos.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreenReKairos.storyboard; sourceTree = "<group>"; };
 		E7646C9E25CE04C900E33E35 /* AbsoluteTouchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbsoluteTouchHandler.h; sourceTree = "<group>"; };
@@ -286,15 +286,6 @@
 				44A4D6CEEE95D16908E52F50 /* Alerter */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		44A4D1987825ED766F25340D /* Firebase */ = {
-			isa = PBXGroup;
-			children = (
-				44A4D6C42D6A8DCBEEFC6D2E /* Config */,
-				44A4DA92549E9B2E27CE4091 /* FirebaseConfig.swift */,
-			);
-			path = Firebase;
 			sourceTree = "<group>";
 		};
 		44A4D204255B64D65EF3ED9F /* Src */ = {
@@ -464,15 +455,6 @@
 			path = Feedback;
 			sourceTree = "<group>";
 		};
-		44A4D6C42D6A8DCBEEFC6D2E /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				E74CE8CE25D5ACC400EF14C2 /* GoogleService-Info-reKairos.plist */,
-				44A4DA5767E4B5B004986B9B /* GoogleService-Info.plist */,
-			);
-			path = Config;
-			sourceTree = "<group>";
-		};
 		44A4D6CEEE95D16908E52F50 /* Alerter */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,6 +474,15 @@
 			path = IAP;
 			sourceTree = "<group>";
 		};
+		44A4D87311BEDF6492E83BD2 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				44A4D1A2C8A3EF9148C0BE76 /* GoogleService-Info-reKairos.plist */,
+				44A4DE6EB9C1A8F63D2C1E49 /* GoogleService-Info.plist */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		44A4D9A6A736F81C6FB2AC3F /* Moonlight */ = {
 			isa = PBXGroup;
 			children = (
@@ -504,6 +495,7 @@
 			isa = PBXGroup;
 			children = (
 				44A4D7A017FF4B1C94083D23 /* IAP */,
+				44A4DFBEBEA679034AEC9F19 /* Firebase */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -543,6 +535,15 @@
 				44A4D6394FDC4FD6B8213E98 /* OnScreenControlsExtensionAssembler.swift */,
 			);
 			path = OnScreenExtension;
+			sourceTree = "<group>";
+		};
+		44A4DFBEBEA679034AEC9F19 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				44A4D87311BEDF6492E83BD2 /* Config */,
+				44A4D03A00E966FBE1BAF470 /* FirebaseConfig.swift */,
+			);
+			path = Firebase;
 			sourceTree = "<group>";
 		};
 		CAC63E443E260BECDB6A0652 /* Pods */ = {
@@ -590,7 +591,6 @@
 				E74CE8D525D5B0F200EF14C2 /* LaunchScreenReKairos.storyboard */,
 				44A4D1438C45504101E3F0F6 /* App */,
 				44A4D35F4287C173F7E152C8 /* Extension */,
-				44A4D1987825ED766F25340D /* Firebase */,
 				44A4D54D8E4FC726157DAB44 /* Model */,
 				44A4DADDA5711D53FB841E0C /* Moonlight */,
 				44A4D5C66D1BB23F52E6221F /* Util */,
@@ -675,9 +675,7 @@
 				E7B87E3025338124004358E3 /* Assets.xcassets in Resources */,
 				E7B87E2E25338121004358E3 /* Main.storyboard in Resources */,
 				E74CE8D625D5B0F300EF14C2 /* LaunchScreenReKairos.storyboard in Resources */,
-				E74CE8CF25D5ACC400EF14C2 /* GoogleService-Info-reKairos.plist in Resources */,
 				E74CE8D225D5B0D900EF14C2 /* LaunchScreen.storyboard in Resources */,
-				44A4DB0B1066163FDF665500 /* GoogleService-Info.plist in Resources */,
 				44A4D7029A6E89389A7481FE /* Aim.png in Resources */,
 				44A4D728D7A92B04BA1794AC /* Autorun.png in Resources */,
 				44A4DB00E933E5B5B747301A /* Confirm.png in Resources */,
@@ -727,6 +725,8 @@
 				44A4DFCFFCC100F211ACE22D /* Wall Selected.png in Resources */,
 				44A4D832C1C8AC2CED514ACE /* Wall Unselected.png in Resources */,
 				44A4DE70EDE1A0906D967911 /* HUDBackground.jpg in Resources */,
+				44A4D1D59DDAD23076FBC44B /* GoogleService-Info-reKairos.plist in Resources */,
+				44A4D538B2EFCF7F087123F8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,7 +836,6 @@
 				44A4D42E63964FEAD11402C9 /* ControllerId.swift in Sources */,
 				44A4DF24B14D4379ED99E351 /* Float.swift in Sources */,
 				44A4D45CF453A1C25C8E4D58 /* VisibleButtons.swift in Sources */,
-				44A4D12846DB1CC074EFD371 /* FirebaseConfig.swift in Sources */,
 				44A4D0A3CE6A87FDF1D65172 /* AppAssembler.swift in Sources */,
 				44A4D6D50E42CD45AD6A322F /* FortniteHUDCustomization.swift in Sources */,
 				44A4D05206023FF7E1C5E436 /* FortniteHUD.swift in Sources */,
@@ -847,6 +846,7 @@
 				44A4DFD94292E1FAA625AFA6 /* IAPManager.swift in Sources */,
 				44A4D33D3D8EA79B376D4C77 /* IAPPurchaseHelper.swift in Sources */,
 				44A4D9D5DEAE1473D30142B0 /* IAPAssembler.swift in Sources */,
+				44A4D2CF12CE366D45C77A41 /* FirebaseConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

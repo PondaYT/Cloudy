@@ -216,7 +216,7 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
 
     /// Create the on screen controls
     private func createOnScreenControls() {
-        #if NON_APPSTORE
+        #if !APPSTORE
             // remove first
             streamView?.cleanup()
             streamView?.removeFromSuperview()
@@ -245,7 +245,9 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
 
     /// Show the fortnite hud overlay
     @IBAction func mixinOnScreenControlsExtension(_ sender: UISwitch) {
-        streamView?.mixinControllerExtension(showOnScreenControlsExtension.isOn)
+        #if !APPSTORE
+            streamView?.mixinControllerExtension(showOnScreenControlsExtension.isOn)
+        #endif
     }
 
 }

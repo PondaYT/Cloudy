@@ -1,6 +1,7 @@
 // Copyright (c) 2021 Nomad5. All rights reserved.
 
 import Foundation
+import UIKit
 
 /// Global assembler aggregate which is the point
 /// where its decided which implementations are injected
