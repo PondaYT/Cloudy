@@ -32,7 +32,7 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Uqq-x0-HgY" userLabel="FortniteHud">
                                         <rect key="frame" x="1053" y="10" width="51" height="31"/>
                                         <connections>
-                                            <action selector="showFortniteHUD:" destination="BYZ-38-t0r" eventType="valueChanged" id="RAO-Fi-T3h"/>
+                                            <action selector="mixinOnScreenControlsExtension:" destination="BYZ-38-t0r" eventType="valueChanged" id="Btr-gN-Q9z"/>
                                         </connections>
                                     </switch>
                                 </subviews>
@@ -86,7 +86,7 @@
                         <outlet property="containerOnScreenController" destination="ZTM-46-gYw" id="uEZ-Nc-rze"/>
                         <outlet property="containerWebView" destination="7dc-iF-7nX" id="SYe-nB-Np8"/>
                         <outlet property="menuButton" destination="5Jf-az-E1Q" id="Jyl-84-cAW"/>
-                        <outlet property="showHUD" destination="Uqq-x0-HgY" id="TAu-jj-ncd"/>
+                        <outlet property="showOnScreenControlsExtension" destination="Uqq-x0-HgY" id="Nlu-aJ-Syd"/>
                         <outletCollection property="webviewConstraints" destination="Fpz-R1-vSM" collectionClass="NSMutableArray" id="ql4-13-dcK"/>
                         <outletCollection property="webviewConstraints" destination="KBi-tX-wqS" collectionClass="NSMutableArray" id="lsZ-Xs-Cug"/>
                         <outletCollection property="webviewConstraints" destination="ra3-S9-tSd" collectionClass="NSMutableArray" id="qOR-ok-p6Q"/>

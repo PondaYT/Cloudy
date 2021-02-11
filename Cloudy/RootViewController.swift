@@ -17,16 +17,16 @@ protocol MenuActionsHandler {
 class RootViewController: UIViewController, MenuActionsHandler {
 
     /// Main injection
-    var           assembler:                   Assembler!
+    var           assembler:                     Assembler!
 
     /// Containers
-    @IBOutlet var containerWebView:            UIView!
-    @IBOutlet var containerHud:                UIView!
-    @IBOutlet var containerOnScreenController: UIView!
+    @IBOutlet var containerWebView:              UIView!
+    @IBOutlet var containerHud:                  UIView!
+    @IBOutlet var containerOnScreenController:   UIView!
 
     /// Interactive views
-    @IBOutlet var menuButton:                  UIButton!
-    @IBOutlet var showHUD:                     UISwitch!
+    @IBOutlet var menuButton:                    UIButton!
+    @IBOutlet var showOnScreenControlsExtension: UISwitch!
 
     @IBOutlet var webviewConstraints: [NSLayoutConstraint]!
 
@@ -121,7 +121,7 @@ class RootViewController: UIViewController, MenuActionsHandler {
             containerHud.removeFromSuperview()
         #endif
         #if !REKAIROS
-            showHUD.removeFromSuperview()
+            showOnScreenControlsExtension.removeFromSuperview()
         #endif
     }
 
@@ -243,10 +243,8 @@ class RootViewController: UIViewController, MenuActionsHandler {
     }
 
     /// Show the fortnite hud overlay
-    @IBAction func showFortniteHUD(_ sender: UISwitch) {
-        #if REKAIROS
-            streamView?.mixinControllerExtension(showHUD.isOn)
-        #endif
+    @IBAction func mixinOnScreenControlsExtension(_ sender: UISwitch) {
+        streamView?.mixinControllerExtension(showOnScreenControlsExtension.isOn)
     }
 
 }
