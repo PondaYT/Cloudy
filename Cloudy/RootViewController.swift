@@ -16,12 +16,8 @@ protocol MenuActionsHandler {
 /// TODO way too big, refactor asap
 class RootViewController: UIViewController, MenuActionsHandler {
 
-    /// Factory method
-    static func create(with launchUrl: URL?) -> RootViewController {
-        let newViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RootViewController") as! RootViewController
-        newViewController.injectedWebsite = launchUrl
-        return newViewController
-    }
+    /// Main injection
+    var           assembler:                   Assembler!
 
     /// Containers
     @IBOutlet var containerWebView:            UIView!
@@ -58,15 +54,12 @@ class RootViewController: UIViewController, MenuActionsHandler {
             AVFoundationVibratingFeedbackGenerator()
         }()
 
-        /// The optional reKairos HUD
-        lazy var additionalHud: FortniteHUD? = {
-            #if REKAIROS
-                return FortniteHUD()
-            #else
-                return nil
-            #endif
-        }()
     #endif
+
+    /// The optional reKairos HUD
+    lazy var onScreenControlsExtension: OnScreenControlsExtension? = {
+        assembler.resolve()
+    }()
 
     /// Expose the web controller for navigation
     var webController: WebController? {
@@ -239,7 +232,7 @@ class RootViewController: UIViewController, MenuActionsHandler {
                                           interactionDelegate: self,
                                           config: streamConfig,
                                           hapticFeedback: touchFeedbackGenerator,
-                                          extensionDelegate: additionalHud)
+                                          extensionDelegate: onScreenControlsExtension)
             newStreamView.showOnScreenControls()
             containerOnScreenController.addSubview(newStreamView)
             newStreamView.fillParent()

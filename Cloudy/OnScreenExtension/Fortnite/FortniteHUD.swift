@@ -417,7 +417,7 @@ import UIKit
             return false
         }
 
-        func mixin(_ visible: Bool) -> VisibleButtons? {
+        func mixin(_ visible: Bool) -> VisibleButtons {
             if visible {
                 unhideHUDButtons(unhideCombat: true, unhideBuild: false, unhideEdit: false)
                 editMode = false
