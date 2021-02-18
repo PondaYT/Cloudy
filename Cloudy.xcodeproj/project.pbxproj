@@ -58,6 +58,7 @@
 		E712FF9825520978003CF78C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E712FF9725520978003CF78C /* Images.xcassets */; };
 		E74CE8D225D5B0D900EF14C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74CE8D125D5B0D900EF14C2 /* LaunchScreen.storyboard */; };
 		E74CE8D625D5B0F300EF14C2 /* LaunchScreenReKairos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74CE8D525D5B0F200EF14C2 /* LaunchScreenReKairos.storyboard */; };
+		E798DD6B25DED38F00AF70AE /* LaunchScreenAppstore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E798DD6A25DED38F00AF70AE /* LaunchScreenAppstore.storyboard */; };
 		E7B87E2B25338121004358E3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B87E2A25338121004358E3 /* RootViewController.swift */; };
 		E7B87E2E25338121004358E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7B87E2C25338121004358E3 /* Main.storyboard */; };
 		E7B87E3025338124004358E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7B87E2F25338124004358E3 /* Assets.xcassets */; };
@@ -135,6 +136,7 @@
 		E712FF9725520978003CF78C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E74CE8D125D5B0D900EF14C2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E74CE8D525D5B0F200EF14C2 /* LaunchScreenReKairos.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreenReKairos.storyboard; sourceTree = "<group>"; };
+		E798DD6A25DED38F00AF70AE /* LaunchScreenAppstore.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreenAppstore.storyboard; sourceTree = "<group>"; };
 		E7B87E2325338121004358E3 /* Cloudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cloudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7B87E2A25338121004358E3 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		E7B87E2D25338121004358E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 				E7B87E2C25338121004358E3 /* Main.storyboard */,
 				E74CE8D125D5B0D900EF14C2 /* LaunchScreen.storyboard */,
 				E74CE8D525D5B0F200EF14C2 /* LaunchScreenReKairos.storyboard */,
+				E798DD6A25DED38F00AF70AE /* LaunchScreenAppstore.storyboard */,
 				44A4D1438C45504101E3F0F6 /* App */,
 				44A4D35F4287C173F7E152C8 /* Extension */,
 				44A4D54D8E4FC726157DAB44 /* Model */,
@@ -493,6 +496,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E712FF9825520978003CF78C /* Images.xcassets in Resources */,
+				E798DD6B25DED38F00AF70AE /* LaunchScreenAppstore.storyboard in Resources */,
 				E7B87E3025338124004358E3 /* Assets.xcassets in Resources */,
 				E7B87E2E25338121004358E3 /* Main.storyboard in Resources */,
 				E74CE8D625D5B0F300EF14C2 /* LaunchScreenReKairos.storyboard in Resources */,
@@ -714,7 +718,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.4.0;
+				MARKETING_VERSION = 2.5.3;
 				OTHER_SWIFT_FLAGS = "-DNON_APPSTORE -DREKAIROS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.liberty.reKairos;
 				PRODUCT_MODULE_NAME = Cloudy;
@@ -812,7 +816,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.4.0;
+				MARKETING_VERSION = 2.5.3;
 				OTHER_SWIFT_FLAGS = "-DNON_APPSTORE -DREKAIROS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.liberty.reKairos;
 				PRODUCT_MODULE_NAME = Cloudy;
@@ -969,7 +973,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.4.0;
+				MARKETING_VERSION = 2.5.3;
 				OTHER_SWIFT_FLAGS = "-DNON_APPSTORE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nomad5.Cloudy;
 				PRODUCT_MODULE_NAME = Cloudy;
@@ -1004,7 +1008,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.4.0;
+				MARKETING_VERSION = 2.5.3;
 				OTHER_SWIFT_FLAGS = "-DNON_APPSTORE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nomad5.Cloudy;
 				PRODUCT_MODULE_NAME = Cloudy;
@@ -1091,12 +1095,12 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LAUNCH_SCREEN_NAME = LaunchScreen;
+				LAUNCH_SCREEN_NAME = LaunchScreenAppstore;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.4.0;
+				MARKETING_VERSION = 2.5.3;
 				OTHER_SWIFT_FLAGS = "-DAPPSTORE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nomad5.Cloudy;
 				PRODUCT_MODULE_NAME = Cloudy;
