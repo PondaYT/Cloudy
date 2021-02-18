@@ -64,30 +64,25 @@ class FortniteHUDCustomization: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        var x_axis: CGFloat = 0.0
-        var y_axis: CGFloat = 50.0
-
-        let defaults  = UserDefaults.standard
+        var x_axis:CGFloat = 0.0
+        var y_axis:CGFloat = 50.0
+        
+        let defaults = UserDefaults.standard
         var buttonTag = 0
-        for buttonImages in listOfCombatHUDButtons {
-            print(buttonImages)
+        var index = 0
+        for buttonImages in combatButtonType.allCases {
             let button = UIView.init()
-            let image  = UIImageView.init()
-            image.image = UIImage(named: "\(buttonImages).png")!
+            let image = UIImageView.init()
+            image.image = UIImage(named: buttonImages.rawValue.appending(".png"))!
             image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-
-            var HUDCombatButtonXSaved      = defaults.array(forKey: "reKairosCombatHUDRectX")
-            var HUDCombatButtonYSaved      = defaults.array(forKey: "reKairosCombatHUDRectY")
-            var HUDCombatButtonWidthSaved  = defaults.array(forKey: "reKairosCombatHUDRectWidth")
-            var HUDCombatButtonHeightSaved = defaults.array(forKey: "reKairosCombatHUDRectHeight")
-            var use                        = true
-
-
-            if HUDCombatButtonXSaved?.isEmpty == false {
-
+            
+            let HUDCombatButtonXSaved = defaults.array(forKey: savedHUDLayoutRects.combatHUDRectX)
+            let HUDCombatButtonYSaved = defaults.array(forKey: savedHUDLayoutRects.combatHUDRectY)
+            let HUDCombatButtonWidthSaved = defaults.array(forKey: savedHUDLayoutRects.combatHUDRectWidth)
+            let HUDCombatButtonHeightSaved = defaults.array(forKey: savedHUDLayoutRects.combatHUDRectHeight)
+            
+            if HUDCombatButtonXSaved?.isEmpty == false  {
                 button.frame = CGRect(x: HUDCombatButtonXSaved![buttonTag] as! CGFloat, y: HUDCombatButtonYSaved![buttonTag] as! CGFloat, width: HUDCombatButtonWidthSaved![buttonTag] as! CGFloat, height: HUDCombatButtonHeightSaved![buttonTag] as! CGFloat)
-
-
             } else {
                 button.frame = CGRect(x: x_axis, y: y_axis, width: 50, height: 50)
             }
@@ -97,51 +92,46 @@ class FortniteHUDCustomization: UIViewController {
                 button.tag = buttonTag
             }
             button.addSubview(image)
-
+            
             image.translatesAutoresizingMaskIntoConstraints = false
-            let topConstraint    = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 0)
+            let topConstraint = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 0)
             let bottomConstraint = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 0)
-            let leftConstraint   = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant: 0)
-            let rightConstraint  = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant: 0)
+            let leftConstraint = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant: 0)
+            let rightConstraint = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant: 0)
             button.addConstraints([topConstraint, bottomConstraint, leftConstraint, rightConstraint])
-
+            
             buttonItems.append(button)
             combatHUDView.addSubview(button)
             x_axis += 50
-
+            
             if x_axis >= UIWindow.init().frame.width - 50 {
                 y_axis += 50
                 x_axis = 0
             }
             buttonTag += 1
+            index += 1
         }
-
+        
         var indexInBuildHUDButton = 0
-
-        print(listOfBuildingHUDButtons.count)
-        for buttonImages in listOfBuildingHUDButtons {
-
+        index = 0
+        for buttonImages in buildButtonType.allCases {
+            
             print(indexInBuildHUDButton)
             let button = UIView.init()
-            let image  = UIImageView.init()
-
+            let image = UIImageView.init()
+            
             let defaults = UserDefaults.standard
-
-            image.image = UIImage(named: "\(buttonImages).png")!
+            
+            image.image = UIImage(named: buttonImages.rawValue.appending(".png"))!
             image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-
-            let HUDBuildingButtonXSaved      = defaults.array(forKey: "reKairosBuildingHUDRectX")
-            let HUDBuildingButtonYSaved      = defaults.array(forKey: "reKairosBuildingHUDRectY")
-            let HUDBuildingButtonWidthSaved  = defaults.array(forKey: "reKairosBuildingHUDRectWidth")
-            let HUDBuildingButtonHeightSaved = defaults.array(forKey: "reKairosBuildingHUDRectHeight")
-
+            
+            let HUDBuildingButtonXSaved = defaults.array(forKey: savedHUDLayoutRects.buildHUDRectX)
+            let HUDBuildingButtonYSaved = defaults.array(forKey: savedHUDLayoutRects.buildHUDRectY)
+            let HUDBuildingButtonWidthSaved = defaults.array(forKey: savedHUDLayoutRects.buildHUDRectWidth)
+            let HUDBuildingButtonHeightSaved = defaults.array(forKey: savedHUDLayoutRects.buildHUDRectHeight)
+            
             if HUDBuildingButtonXSaved?.isEmpty == false {
-                //print(buttonTag - 39)
-
-
                 button.frame = CGRect(x: HUDBuildingButtonXSaved![indexInBuildHUDButton] as! CGFloat, y: HUDBuildingButtonYSaved![indexInBuildHUDButton] as! CGFloat, width: HUDBuildingButtonWidthSaved![indexInBuildHUDButton] as! CGFloat, height: HUDBuildingButtonHeightSaved![indexInBuildHUDButton] as! CGFloat)
-
-
             } else {
                 button.frame = CGRect(x: x_axis, y: y_axis, width: 50, height: 50)
             }
@@ -151,17 +141,18 @@ class FortniteHUDCustomization: UIViewController {
                 button.tag = buttonTag
             }
             button.addSubview(image)
-
+            
             image.translatesAutoresizingMaskIntoConstraints = false
-            let topConstraint    = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 0)
+            let topConstraint = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 0)
             let bottomConstraint = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 0)
-            let leftConstraint   = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant: 0)
-            let rightConstraint  = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant: 0)
+            let leftConstraint = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant: 0)
+            let rightConstraint = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant: 0)
             button.addConstraints([topConstraint, bottomConstraint, leftConstraint, rightConstraint])
-
+            
             buildingButtonItems.append(button)
             buildingHUDView.addSubview(button)
             x_axis += 50
+            index += 1
             buttonTag += 1
             indexInBuildHUDButton += 1
             if x_axis >= UIWindow.init().frame.width - 50 {
@@ -169,23 +160,23 @@ class FortniteHUDCustomization: UIViewController {
                 x_axis = 0
             }
         }
-
-
+        
+        
         var indexInEditHUD = 0
-        for buttonImages in listOfEditHUDButtons {
+        index = 0
+        for buttonImages in editButtonType.allCases {
             let button = UIView.init()
-            let image  = UIImageView.init()
-
+            let image = UIImageView.init()
+            
             let defaults = UserDefaults.standard
-
-            image.image = UIImage(named: "\(buttonImages).png")!
+            image.image = UIImage(named: buttonImages.rawValue.appending(".png"))!
             image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-
-            let HUDEditButtonXSaved      = defaults.array(forKey: "reKairosEditHUDRectX")
-            let HUDEditButtonYSaved      = defaults.array(forKey: "reKairosEditHUDRectY")
-            let HUDEditButtonWidthSaved  = defaults.array(forKey: "reKairosEditHUDRectWidth")
-            let HUDEditButtonHeightSaved = defaults.array(forKey: "reKairosEditHUDRectHeight")
-
+            
+            let HUDEditButtonXSaved = defaults.array(forKey: savedHUDLayoutRects.editHUDRectX)
+            let HUDEditButtonYSaved = defaults.array(forKey: savedHUDLayoutRects.editHUDRectY)
+            let HUDEditButtonWidthSaved = defaults.array(forKey: savedHUDLayoutRects.editHUDRectWidth)
+            let HUDEditButtonHeightSaved = defaults.array(forKey: savedHUDLayoutRects.editHUDRectHeight)
+            
             if HUDEditButtonXSaved?.isEmpty == false {
                 print(buttonTag - 39)
                 button.frame = CGRect(x: HUDEditButtonXSaved![indexInEditHUD] as! CGFloat, y: HUDEditButtonYSaved![indexInEditHUD] as! CGFloat, width: HUDEditButtonWidthSaved![indexInEditHUD] as! CGFloat, height: HUDEditButtonHeightSaved![indexInEditHUD] as! CGFloat)
@@ -198,17 +189,18 @@ class FortniteHUDCustomization: UIViewController {
                 button.tag = buttonTag
             }
             button.addSubview(image)
-
+            
             image.translatesAutoresizingMaskIntoConstraints = false
-            let topConstraint    = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 0)
+            let topConstraint = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 0)
             let bottomConstraint = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 0)
-            let leftConstraint   = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant: 0)
-            let rightConstraint  = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant: 0)
+            let leftConstraint = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant: 0)
+            let rightConstraint = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant: 0)
             button.addConstraints([topConstraint, bottomConstraint, leftConstraint, rightConstraint])
-
+            
             editingButtonItems.append(button)
             editHUDView.addSubview(button)
             x_axis += 50
+            index += 1
             buttonTag += 1
             indexInEditHUD += 1
             if x_axis >= UIWindow.init().frame.width - 50 {
@@ -325,10 +317,6 @@ class FortniteHUDCustomization: UIViewController {
 
     }
 
-    @objc func printSomething() {
-        print("presed")
-    }
-
     @IBAction func saveHUD() {
         HUDCombatButtonX.removeAll()
         HUDCombatButtonY.removeAll()
@@ -368,20 +356,20 @@ class FortniteHUDCustomization: UIViewController {
 
 
         let defaults = UserDefaults.standard
-        defaults.set(HUDCombatButtonX, forKey: "reKairosCombatHUDRectX")
-        defaults.set(HUDCombatButtonY, forKey: "reKairosCombatHUDRectY")
-        defaults.set(HUDCombatButtonWidth, forKey: "reKairosCombatHUDRectWidth")
-        defaults.set(HUDCombatButtonHeight, forKey: "reKairosCombatHUDRectHeight")
-
-        defaults.set(HUDBuildingButtonX, forKey: "reKairosBuildingHUDRectX")
-        defaults.set(HUDBuildingButtonY, forKey: "reKairosBuildingHUDRectY")
-        defaults.set(HUDBuildingButtonWidth, forKey: "reKairosBuildingHUDRectWidth")
-        defaults.set(HUDBuildingButtonHeight, forKey: "reKairosBuildingHUDRectHeight")
-
-        defaults.set(HUDEditButtonX, forKey: "reKairosEditHUDRectX")
-        defaults.set(HUDEditButtonY, forKey: "reKairosEditHUDRectY")
-        defaults.set(HUDEditButtonWidth, forKey: "reKairosEditHUDRectWidth")
-        defaults.set(HUDEditButtonHeight, forKey: "reKairosEditHUDRectHeight")
+        defaults.set(HUDCombatButtonX, forKey: savedHUDLayoutRects.combatHUDRectX)
+        defaults.set(HUDCombatButtonY, forKey: savedHUDLayoutRects.combatHUDRectY)
+        defaults.set(HUDCombatButtonWidth, forKey: savedHUDLayoutRects.combatHUDRectWidth)
+        defaults.set(HUDCombatButtonHeight, forKey: savedHUDLayoutRects.combatHUDRectHeight)
+        
+        defaults.set(HUDBuildingButtonX, forKey: savedHUDLayoutRects.buildHUDRectX)
+        defaults.set(HUDBuildingButtonY, forKey: savedHUDLayoutRects.buildHUDRectY)
+        defaults.set(HUDBuildingButtonWidth, forKey: savedHUDLayoutRects.buildHUDRectWidth)
+        defaults.set(HUDBuildingButtonHeight, forKey: savedHUDLayoutRects.buildHUDRectHeight)
+        
+        defaults.set(HUDEditButtonX, forKey: savedHUDLayoutRects.editHUDRectX)
+        defaults.set(HUDEditButtonY, forKey: savedHUDLayoutRects.editHUDRectY)
+        defaults.set(HUDEditButtonWidth, forKey: savedHUDLayoutRects.editHUDRectWidth)
+        defaults.set(HUDEditButtonHeight, forKey: savedHUDLayoutRects.editHUDRectHeight)
 
 
     }
