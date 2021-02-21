@@ -24,6 +24,15 @@ extension UIView {
         bottomAnchor.constraint(equalTo: superview.bottomAnchor).isActive = true
     }
 
+    func placeOnParent() {
+        guard let superview = superview else { return }
+        leftAnchor.constraint(equalTo: superview.leftAnchor).isActive = true
+        rightAnchor.constraint(equalTo: superview.rightAnchor).isActive = true
+        topAnchor.constraint(equalTo: superview.topAnchor).isActive = true
+        bottomAnchor.constraint(equalTo: superview.bottomAnchor).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+
     func addShadow() {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 1

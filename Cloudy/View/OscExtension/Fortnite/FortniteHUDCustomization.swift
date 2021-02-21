@@ -5,18 +5,18 @@ import UIKit
 class FortniteHUDCustomization: UIViewController {
 
     /// Outlets to storyboard
-    @IBOutlet var slider:                   UISlider!
-    @IBOutlet var switchViewButton:         UIButton!
-    @IBOutlet var combatHUDView:            UIView!
-    @IBOutlet var buildingHUDView:          UIView!
-    @IBOutlet var editHUDView:              UIView!
-    @IBOutlet var editViewLabel:            UILabel!
-    @IBOutlet var saveButton:               UIButton!
-    @IBOutlet var doneButton:               UIButton!
-    @IBOutlet var settingsPanel:            UIView!
-    @IBOutlet var pullDownHUDButton:        UIButton!
-    @IBOutlet var buttonSettingLabel:       UILabel!
-    @IBOutlet var HUDSettingsTopConstraint: NSLayoutConstraint!
+    @IBOutlet var scalingSlider:               UISlider!
+    @IBOutlet var switchModeButton:            UIButton!
+    @IBOutlet var saveButton:                  UIButton!
+    @IBOutlet var doneButton:                  UIButton!
+    @IBOutlet var combatHUDView:               UIView!
+    @IBOutlet var buildingHUDView:             UIView!
+    @IBOutlet var editHUDView:                 UIView!
+    @IBOutlet var currentModeLabel:            UILabel!
+    @IBOutlet var selectedButtonLabel:         UILabel!
+    @IBOutlet var settingsPanel:               UIView!
+    @IBOutlet var pullDownSettingsPanelButton: UIButton!
+    @IBOutlet var hudSettingsTopConstraint:    NSLayoutConstraint!
 
     /// All buttons
     private var combatButtonItems:   [UIView]         = []
@@ -65,29 +65,31 @@ class FortniteHUDCustomization: UIViewController {
     /// TODO, what is this tag for?
     private var tagSelected = 256
 
-    /// View is now visible
-    override func viewDidAppear(_ animated: Bool) {
-        var x_axis: CGFloat = 0.0
-        var y_axis: CGFloat = 50.0
+    func createButtons(parentView: UIView, buttonTag: Int, images: [String], keyX: String, keyY: String, keyWidth: String, keyHeight: String) -> (buttonTag: Int, buttons: [UIView]) {
+        let defaults              = UserDefaults.standard
+        var xAxis:       CGFloat  = 0.0
+        var yAxis:       CGFloat  = 150.0
+        var buttonTag             = buttonTag
+        var buttonArray: [UIView] = []
 
-        let defaults  = UserDefaults.standard
-        var buttonTag = 0
-        var index     = 0
-        for buttonImages in FortniteButtonType.Combat.allCases {
+        let savedX      = defaults.array(forKey: keyX)
+        let savedY      = defaults.array(forKey: keyY)
+        let savedWidth  = defaults.array(forKey: keyWidth)
+        let savedHeight = defaults.array(forKey: keyHeight)
+
+        images.enumerated().forEach { index, imageName in
             let button = UIView()
             let image  = UIImageView()
-            image.image = UIImage(named: buttonImages.rawValue.appending(".png"))!
+            image.image = UIImage(named: imageName.appending(".png"))!
             image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
 
-            let HUDCombatButtonXSaved      = defaults.array(forKey: FortniteHUDPositionKeys.combatHUDRectX)
-            let HUDCombatButtonYSaved      = defaults.array(forKey: FortniteHUDPositionKeys.combatHUDRectY)
-            let HUDCombatButtonWidthSaved  = defaults.array(forKey: FortniteHUDPositionKeys.combatHUDRectWidth)
-            let HUDCombatButtonHeightSaved = defaults.array(forKey: FortniteHUDPositionKeys.combatHUDRectHeight)
-
-            if HUDCombatButtonXSaved?.isEmpty == false {
-                button.frame = CGRect(x: HUDCombatButtonXSaved![buttonTag] as! CGFloat, y: HUDCombatButtonYSaved![buttonTag] as! CGFloat, width: HUDCombatButtonWidthSaved![buttonTag] as! CGFloat, height: HUDCombatButtonHeightSaved![buttonTag] as! CGFloat)
+            if savedX?.isEmpty == false {
+                button.frame = CGRect(x: savedX![index] as! CGFloat,
+                                      y: savedY![index] as! CGFloat,
+                                      width: savedWidth![index] as! CGFloat,
+                                      height: savedHeight![index] as! CGFloat)
             } else {
-                button.frame = CGRect(x: x_axis, y: y_axis, width: 50, height: 50)
+                button.frame = CGRect(x: xAxis, y: yAxis, width: 50, height: 50)
             }
             if buttonTag == 0 {
                 button.tag = 300
@@ -95,134 +97,62 @@ class FortniteHUDCustomization: UIViewController {
                 button.tag = buttonTag
             }
             button.addSubview(image)
+            image.placeOnParent()
 
-            image.translatesAutoresizingMaskIntoConstraints = false
-            let topConstraint    = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 0)
-            let bottomConstraint = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 0)
-            let leftConstraint   = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant: 0)
-            let rightConstraint  = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant: 0)
-            button.addConstraints([topConstraint, bottomConstraint, leftConstraint, rightConstraint])
+            buttonArray.append(button)
+            parentView.addSubview(button)
+            xAxis += 50
 
-            combatButtonItems.append(button)
-            combatHUDView.addSubview(button)
-            x_axis += 50
-
-            if x_axis >= UIWindow.init().frame.width - 50 {
-                y_axis += 50
-                x_axis = 0
+            if xAxis >= UIWindow().frame.width - 50 {
+                yAxis += 50
+                xAxis = 0
             }
             buttonTag += 1
-            index += 1
         }
+        return (buttonTag, buttonArray)
+    }
 
-        var indexInBuildHUDButton = 0
-        index = 0
-        for buttonImages in FortniteButtonType.Build.allCases {
-
-            print(indexInBuildHUDButton)
-            let button = UIView.init()
-            let image  = UIImageView.init()
-
-            let defaults = UserDefaults.standard
-
-            image.image = UIImage(named: buttonImages.rawValue.appending(".png"))!
-            image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-
-            let HUDBuildingButtonXSaved      = defaults.array(forKey: FortniteHUDPositionKeys.buildHUDRectX)
-            let HUDBuildingButtonYSaved      = defaults.array(forKey: FortniteHUDPositionKeys.buildHUDRectY)
-            let HUDBuildingButtonWidthSaved  = defaults.array(forKey: FortniteHUDPositionKeys.buildHUDRectWidth)
-            let HUDBuildingButtonHeightSaved = defaults.array(forKey: FortniteHUDPositionKeys.buildHUDRectHeight)
-
-            if HUDBuildingButtonXSaved?.isEmpty == false {
-                button.frame = CGRect(x: HUDBuildingButtonXSaved![indexInBuildHUDButton] as! CGFloat, y: HUDBuildingButtonYSaved![indexInBuildHUDButton] as! CGFloat, width: HUDBuildingButtonWidthSaved![indexInBuildHUDButton] as! CGFloat, height: HUDBuildingButtonHeightSaved![indexInBuildHUDButton] as! CGFloat)
-            } else {
-                button.frame = CGRect(x: x_axis, y: y_axis, width: 50, height: 50)
-            }
-            if buttonTag == 0 {
-                button.tag = 300
-            } else {
-                button.tag = buttonTag
-            }
-            button.addSubview(image)
-
-            image.translatesAutoresizingMaskIntoConstraints = false
-            let topConstraint    = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 0)
-            let bottomConstraint = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 0)
-            let leftConstraint   = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant: 0)
-            let rightConstraint  = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant: 0)
-            button.addConstraints([topConstraint, bottomConstraint, leftConstraint, rightConstraint])
-
-            buildingButtonItems.append(button)
-            buildingHUDView.addSubview(button)
-            x_axis += 50
-            index += 1
-            buttonTag += 1
-            indexInBuildHUDButton += 1
-            if x_axis >= UIWindow.init().frame.width - 50 {
-                y_axis += 50
-                x_axis = 0
-            }
-        }
-
-
-        var indexInEditHUD = 0
-        index = 0
-        for buttonImages in FortniteButtonType.Edit.allCases {
-            let button = UIView.init()
-            let image  = UIImageView.init()
-
-            let defaults = UserDefaults.standard
-            image.image = UIImage(named: buttonImages.rawValue.appending(".png"))!
-            image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-
-            let HUDEditButtonXSaved      = defaults.array(forKey: FortniteHUDPositionKeys.editHUDRectX)
-            let HUDEditButtonYSaved      = defaults.array(forKey: FortniteHUDPositionKeys.editHUDRectY)
-            let HUDEditButtonWidthSaved  = defaults.array(forKey: FortniteHUDPositionKeys.editHUDRectWidth)
-            let HUDEditButtonHeightSaved = defaults.array(forKey: FortniteHUDPositionKeys.editHUDRectHeight)
-
-            if HUDEditButtonXSaved?.isEmpty == false {
-                print(buttonTag - 39)
-                button.frame = CGRect(x: HUDEditButtonXSaved![indexInEditHUD] as! CGFloat, y: HUDEditButtonYSaved![indexInEditHUD] as! CGFloat, width: HUDEditButtonWidthSaved![indexInEditHUD] as! CGFloat, height: HUDEditButtonHeightSaved![indexInEditHUD] as! CGFloat)
-            } else {
-                button.frame = CGRect(x: x_axis, y: y_axis, width: 50, height: 50)
-            }
-            if buttonTag == 0 {
-                button.tag = 300
-            } else {
-                button.tag = buttonTag
-            }
-            button.addSubview(image)
-
-            image.translatesAutoresizingMaskIntoConstraints = false
-            let topConstraint    = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1, constant: 0)
-            let bottomConstraint = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 0)
-            let leftConstraint   = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant: 0)
-            let rightConstraint  = NSLayoutConstraint(item: image, attribute: NSLayoutConstraint.Attribute.right, relatedBy: NSLayoutConstraint.Relation.equal, toItem: button, attribute: NSLayoutConstraint.Attribute.right, multiplier: 1, constant: 0)
-            button.addConstraints([topConstraint, bottomConstraint, leftConstraint, rightConstraint])
-
-            editingButtonItems.append(button)
-            editHUDView.addSubview(button)
-            x_axis += 50
-            index += 1
-            buttonTag += 1
-            indexInEditHUD += 1
-            if x_axis >= UIWindow.init().frame.width - 50 {
-                y_axis += 50
-                x_axis = 0
-            }
-        }
-
-        self.view.tag = 256
-        slider.tag = 257
+    /// View is now visible
+    override func viewDidAppear(_ animated: Bool) {
+        // combat views
+        let combatViews = createButtons(parentView: combatHUDView,
+                                        buttonTag: 0,
+                                        images: FortniteButtonType.Combat.allCases.map { $0.rawValue },
+                                        keyX: FortniteHUDPositionKeys.combatHUDRectX,
+                                        keyY: FortniteHUDPositionKeys.combatHUDRectY,
+                                        keyWidth: FortniteHUDPositionKeys.combatHUDRectWidth,
+                                        keyHeight: FortniteHUDPositionKeys.combatHUDRectHeight)
+        combatButtonItems = combatViews.buttons
+        // building views
+        let buildingViews = createButtons(parentView: buildingHUDView,
+                                          buttonTag: combatViews.buttonTag,
+                                          images: FortniteButtonType.Build.allCases.map { $0.rawValue },
+                                          keyX: FortniteHUDPositionKeys.buildHUDRectX,
+                                          keyY: FortniteHUDPositionKeys.buildHUDRectY,
+                                          keyWidth: FortniteHUDPositionKeys.buildHUDRectWidth,
+                                          keyHeight: FortniteHUDPositionKeys.buildHUDRectHeight)
+        buildingButtonItems = buildingViews.buttons
+        // edit views
+        let editViews = createButtons(parentView: editHUDView,
+                                      buttonTag: buildingViews.buttonTag,
+                                      images: FortniteButtonType.Edit.allCases.map { $0.rawValue },
+                                      keyX: FortniteHUDPositionKeys.editHUDRectX,
+                                      keyY: FortniteHUDPositionKeys.editHUDRectY,
+                                      keyWidth: FortniteHUDPositionKeys.editHUDRectWidth,
+                                      keyHeight: FortniteHUDPositionKeys.editHUDRectHeight)
+        editingButtonItems = editViews.buttons
+        // some tag voodoo
+        view.tag = 256
+        scalingSlider.tag = 257
         buildingHUDView.tag = 500
         combatHUDView.tag = 600
         editHUDView.tag = 900
-        switchViewButton.tag = 700
+        switchModeButton.tag = 700
         saveButton.tag = 800
         doneButton.tag = 1000
         settingsPanel.tag = 1100
-        pullDownHUDButton.tag = 1200
-        buttonSettingLabel.tag = 1300
+        pullDownSettingsPanelButton.tag = 1200
+        selectedButtonLabel.tag = 1300
 
         buildingHUDView.alpha = 0
         editHUDView.alpha = 0
@@ -241,11 +171,11 @@ class FortniteHUDCustomization: UIViewController {
 
     /// Pull down extra panel
     @IBAction func pullDownHUDSettings() {
-        HUDSettingsTopConstraint.constant = pulledDown ? Constants.PullDownView.topConstraintPulledUp : Constants.PullDownView.topConstraintPulledDown
+        hudSettingsTopConstraint.constant = pulledDown ? Constants.PullDownView.topConstraintPulledUp : Constants.PullDownView.topConstraintPulledDown
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
         })
-        pullDownHUDButton.setImage(pulledDown ? Constants.PullDownView.imagePullDown : Constants.PullDownView.imagePullUp, for: .normal)
+        pullDownSettingsPanelButton.setImage(pulledDown ? Constants.PullDownView.imagePullDown : Constants.PullDownView.imagePullUp, for: .normal)
         pulledDown = !pulledDown
     }
 
@@ -258,7 +188,7 @@ class FortniteHUDCustomization: UIViewController {
         currentMode = nextModeConfig.nextMode
         nextModeConfig.viewsToBringToFront.forEach { view.bringSubviewToFront($0) }
         viewsPerMode.forEach { mode, view in view.alpha = mode == currentMode ? 1 : 0 }
-        editViewLabel.text = nextModeConfig.title
+        currentModeLabel.text = nextModeConfig.title
     }
 
     /// Get values from views and save it to user defaults
@@ -310,7 +240,7 @@ class FortniteHUDCustomization: UIViewController {
                     location = touch.location(in: editHUDView)
             }
             // TODO what is this tag stuff?
-            if (touch.view!.tag <= 117 || touch.view!.tag == 300) && touch.view! != slider {
+            if (touch.view!.tag <= 117 || touch.view!.tag == 300) && touch.view! != scalingSlider {
                 location.x -= touch.view!.frame.width / 2
                 location.y -= touch.view!.frame.height / 2
                 touch.view!.frame = CGRect.init(x: location.x, y: location.y, width: touch.view!.frame.width, height: touch.view!.frame.height)
@@ -334,7 +264,7 @@ class FortniteHUDCustomization: UIViewController {
                     location = touch.location(in: editHUDView)
             }
             // TODO what is this tag stuff?
-            if (touch.view!.tag <= 117 || touch.view!.tag == 300) && touch.view! != slider {
+            if (touch.view!.tag <= 117 || touch.view!.tag == 300) && touch.view! != scalingSlider {
                 location.x -= touch.view!.frame.width / 2
                 location.y -= touch.view!.frame.height / 2
                 touch.view!.frame = CGRect.init(x: location.x, y: location.y, width: touch.view!.frame.width, height: touch.view!.frame.height)
