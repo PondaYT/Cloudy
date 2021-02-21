@@ -17,22 +17,22 @@ import UIKit
         }
 
         /// Relevant layers
-        private let rootLayer:              CALayer                              = CALayer()
-        private var combatButtonLayers:     [FortniteButtonType.Combat: CALayer] = [:]
-        private var buildButtonLayers:      [FortniteButtonType.Build: CALayer]  = [:]
-        private var editButtonLayers:       [FortniteButtonType.Edit: CALayer]   = [:]
+        private let rootLayer:              CALayer                                          = CALayer()
+        private var combatButtonLayers:     [FortniteButtonType.Combat: AlphaTestingCALayer] = [:]
+        private var buildButtonLayers:      [FortniteButtonType.Build: AlphaTestingCALayer]  = [:]
+        private var editButtonLayers:       [FortniteButtonType.Edit: AlphaTestingCALayer]   = [:]
 
         /// Relevant touches
-        private var combatButtonLayerTouch: [FortniteButtonType.Combat: UITouch] = [:]
-        private var buildButtonLayerTouch:  [FortniteButtonType.Build: UITouch]  = [:]
-        private var editButtonLayerTouch:   [FortniteButtonType.Edit: UITouch]   = [:]
+        private var combatButtonLayerTouch: [FortniteButtonType.Combat: UITouch]             = [:]
+        private var buildButtonLayerTouch:  [FortniteButtonType.Build: UITouch]              = [:]
+        private var editButtonLayerTouch:   [FortniteButtonType.Edit: UITouch]               = [:]
 
         /// Predefined regular controller buttons to show when this hud is active / inactive
-        private let onScreenButtonsWhenActive                                    = VisibleButtons(leftStick: true)
-        private let onScreenButtonsWhenInactive                                  = VisibleButtons.all
+        private let onScreenButtonsWhenActive                                                = VisibleButtons(leftStick: true)
+        private let onScreenButtonsWhenInactive                                              = VisibleButtons.all
 
         /// The active hud mode
-        private var currentMode:            Mode?                                = .none
+        private var currentMode:            Mode?                                            = .none
 
         /// Left stick clicking disabled in this extension
         func leftStickClickEnabled() -> Bool {
@@ -47,19 +47,19 @@ import UIKit
         /// Construction
         init() {
             FortniteButtonType.Combat.allCases.forEach { type in
-                combatButtonLayers[type] = CALayer()
+                combatButtonLayers[type] = AlphaTestingCALayer()
                 let image = UIImage(named: type.rawValue.appending(".png"))
                 combatButtonLayers[type]?.contents = image?.cgImage
                 rootLayer.addSublayer(combatButtonLayers[type]!)
             }
             FortniteButtonType.Build.allCases.forEach { type in
-                buildButtonLayers[type] = CALayer()
+                buildButtonLayers[type] = AlphaTestingCALayer()
                 let image = UIImage(named: type.rawValue.appending(".png"))
                 buildButtonLayers[type]?.contents = image?.cgImage
                 rootLayer.addSublayer(buildButtonLayers[type]!)
             }
             FortniteButtonType.Edit.allCases.forEach { type in
-                editButtonLayers[type] = CALayer()
+                editButtonLayers[type] = AlphaTestingCALayer()
                 let image = UIImage(named: type.rawValue.appending(".png"))
                 editButtonLayers[type]?.contents = image?.cgImage
                 rootLayer.addSublayer(editButtonLayers[type]!)

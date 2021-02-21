@@ -34,6 +34,7 @@
 		44A4D56785DE2ACC82B37F52 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D1A39583BB7F49ABD541 /* Log.swift */; };
 		44A4D667E367AB98368C36BC /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D80ED7881A56C23C0BBD /* Bundle.swift */; };
 		44A4D67D7C43E9E24539DAA1 /* Limelight.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DF3D3079ADE1DDD381ED /* Limelight.m */; };
+		44A4D6BF0996C20E4E183AFA /* AlphaTestingCALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DCA1AA422D8737EDD5DC /* AlphaTestingCALayer.swift */; };
 		44A4D78B8F260ECEBBB39B4C /* FullScreenWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D600D66AF81438FD332D /* FullScreenWKWebView.swift */; };
 		44A4D7DCB15B8C4799D56BCA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D0057BF82C52A8F76A38 /* String.swift */; };
 		44A4D81D6A823FB908BCE224 /* AVFoundationVibratingFeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D01AC2645E64C1EB9CF9 /* AVFoundationVibratingFeedbackGenerator.swift */; };
@@ -167,6 +168,7 @@
 		44A4DB7F7D4AED8CC81E1C14 /* IAPPurchaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPPurchaseHelper.swift; sourceTree = "<group>"; };
 		44A4DBCCBA86600B436045E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		44A4DC3B80142D290BBCE80C /* Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
+		44A4DCA1AA422D8737EDD5DC /* AlphaTestingCALayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlphaTestingCALayer.swift; sourceTree = "<group>"; };
 		44A4DD07C98AB403DD907C8D /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
 		44A4DD9C29CE255AE826C5D7 /* OnScreenControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnScreenControls.m; sourceTree = "<group>"; };
 		44A4DDA6CB7D08DFDA35E5D3 /* RelativeTouchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelativeTouchHandler.m; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				44A4D5D992F3D148DDC8A53C /* Feedback */,
 				44A4D402EB59C8CB3D718115 /* Osc */,
 				44A4DFD69A6C3DFEF79D2C47 /* OscExtension */,
+				44A4DCA1AA422D8737EDD5DC /* AlphaTestingCALayer.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -861,6 +864,7 @@
 				E74CE93925D5DD6400EF14C2 /* FortniteHUDCustomization.swift in Sources */,
 				44A4DD866C360012F8F7EB37 /* StreamConfiguration.m in Sources */,
 				44A4D53606BEC6E6AB0E3690 /* FortniteButtonType.swift in Sources */,
+				44A4D6BF0996C20E4E183AFA /* AlphaTestingCALayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
