@@ -8,11 +8,12 @@ import UIKit
     /// Main On Screen Controls extension for the fortnite hud
     class FortniteHUD: OscExtension {
 
+        /// The different modes for the fortnite hud
         enum Mode {
             case combat
             case build
-            case editFromCombat
-            case editFromBuild
+            case editFromCombat // indicates that editing was initiated from combat
+            case editFromBuild  // indicates that editing was initiated from building
         }
 
         /// Relevant layers
