@@ -1,10 +1,4 @@
-//
-//  FortniteHUDCustomization.swift
-//  Cloudy
-//
-//  Created by Joonwoo Kim on 2021-01-25.
 //  Copyright © 2021 Nomad5. All rights reserved.
-//
 
 import UIKit
 
@@ -22,13 +16,6 @@ class FortniteHUDCustomization: UIViewController {
     @IBOutlet var pullDownHUDButton:        UIButton!
     @IBOutlet var buttonSettingLabel:       UILabel!
     @IBOutlet var HUDSettingsTopConstraint: NSLayoutConstraint!
-
-
-    var listOfCombatHUDButtons = ["Aim", "Crouch Down", "Edit Reset", "Emote Wheel", "Floor Selected", "Inventory", "Interact", "Jump", "Ping", "Pyramid Selected", "Shoot Big", "Shoot", "Stair Selected", "Switch To Build", "Use", "Wall Selected", "Reload", "Slot Pickaxe", "Cycle Weapons Down", "Cycle Weapons Up"]
-
-    var listOfBuildingHUDButtons = ["Edit Reset", "Emote Wheel", "Floor Selected", "Jump", "Ping", "Pyramid Selected", "Repair", "Reset", "Rotate", "Shoot Big", "Shoot", "Stair Selected", "Switch To Combat", "Use", "Wall Selected"]
-
-    var listOfEditHUDButtons = ["Confirm", "Edit", "Ping", "Reset", "Rotate", "Shoot Big", "Shoot", "Switch To Combat"]
 
     var HUDCombatButtonX:      [CGFloat] = []
     var HUDCombatButtonY:      [CGFloat] = []
@@ -57,10 +44,8 @@ class FortniteHUDCustomization: UIViewController {
     var buildingView = false
     var pulledDown   = true
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -70,18 +55,18 @@ class FortniteHUDCustomization: UIViewController {
         let defaults = UserDefaults.standard
         var buttonTag = 0
         var index = 0
-        for buttonImages in combatButtonType.allCases {
+        for buttonImages in FortniteButtonType.Combat.allCases {
             let button = UIView.init()
-            let image = UIImageView.init()
+            let image  = UIImageView.init()
             image.image = UIImage(named: buttonImages.rawValue.appending(".png"))!
             image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-            
-            let HUDCombatButtonXSaved = defaults.array(forKey: savedHUDLayoutRects.combatHUDRectX)
-            let HUDCombatButtonYSaved = defaults.array(forKey: savedHUDLayoutRects.combatHUDRectY)
-            let HUDCombatButtonWidthSaved = defaults.array(forKey: savedHUDLayoutRects.combatHUDRectWidth)
-            let HUDCombatButtonHeightSaved = defaults.array(forKey: savedHUDLayoutRects.combatHUDRectHeight)
-            
-            if HUDCombatButtonXSaved?.isEmpty == false  {
+
+            let HUDCombatButtonXSaved      = defaults.array(forKey: FortniteHUDPositionKeys.combatHUDRectX)
+            let HUDCombatButtonYSaved      = defaults.array(forKey: FortniteHUDPositionKeys.combatHUDRectY)
+            let HUDCombatButtonWidthSaved  = defaults.array(forKey: FortniteHUDPositionKeys.combatHUDRectWidth)
+            let HUDCombatButtonHeightSaved = defaults.array(forKey: FortniteHUDPositionKeys.combatHUDRectHeight)
+
+            if HUDCombatButtonXSaved?.isEmpty == false {
                 button.frame = CGRect(x: HUDCombatButtonXSaved![buttonTag] as! CGFloat, y: HUDCombatButtonYSaved![buttonTag] as! CGFloat, width: HUDCombatButtonWidthSaved![buttonTag] as! CGFloat, height: HUDCombatButtonHeightSaved![buttonTag] as! CGFloat)
             } else {
                 button.frame = CGRect(x: x_axis, y: y_axis, width: 50, height: 50)
@@ -114,22 +99,22 @@ class FortniteHUDCustomization: UIViewController {
         
         var indexInBuildHUDButton = 0
         index = 0
-        for buttonImages in buildButtonType.allCases {
-            
+        for buttonImages in FortniteButtonType.Build.allCases {
+
             print(indexInBuildHUDButton)
             let button = UIView.init()
-            let image = UIImageView.init()
-            
+            let image  = UIImageView.init()
+
             let defaults = UserDefaults.standard
-            
+
             image.image = UIImage(named: buttonImages.rawValue.appending(".png"))!
             image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-            
-            let HUDBuildingButtonXSaved = defaults.array(forKey: savedHUDLayoutRects.buildHUDRectX)
-            let HUDBuildingButtonYSaved = defaults.array(forKey: savedHUDLayoutRects.buildHUDRectY)
-            let HUDBuildingButtonWidthSaved = defaults.array(forKey: savedHUDLayoutRects.buildHUDRectWidth)
-            let HUDBuildingButtonHeightSaved = defaults.array(forKey: savedHUDLayoutRects.buildHUDRectHeight)
-            
+
+            let HUDBuildingButtonXSaved      = defaults.array(forKey: FortniteHUDPositionKeys.buildHUDRectX)
+            let HUDBuildingButtonYSaved      = defaults.array(forKey: FortniteHUDPositionKeys.buildHUDRectY)
+            let HUDBuildingButtonWidthSaved  = defaults.array(forKey: FortniteHUDPositionKeys.buildHUDRectWidth)
+            let HUDBuildingButtonHeightSaved = defaults.array(forKey: FortniteHUDPositionKeys.buildHUDRectHeight)
+
             if HUDBuildingButtonXSaved?.isEmpty == false {
                 button.frame = CGRect(x: HUDBuildingButtonXSaved![indexInBuildHUDButton] as! CGFloat, y: HUDBuildingButtonYSaved![indexInBuildHUDButton] as! CGFloat, width: HUDBuildingButtonWidthSaved![indexInBuildHUDButton] as! CGFloat, height: HUDBuildingButtonHeightSaved![indexInBuildHUDButton] as! CGFloat)
             } else {
@@ -164,19 +149,19 @@ class FortniteHUDCustomization: UIViewController {
         
         var indexInEditHUD = 0
         index = 0
-        for buttonImages in editButtonType.allCases {
+        for buttonImages in FortniteButtonType.Edit.allCases {
             let button = UIView.init()
-            let image = UIImageView.init()
-            
+            let image  = UIImageView.init()
+
             let defaults = UserDefaults.standard
             image.image = UIImage(named: buttonImages.rawValue.appending(".png"))!
             image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-            
-            let HUDEditButtonXSaved = defaults.array(forKey: savedHUDLayoutRects.editHUDRectX)
-            let HUDEditButtonYSaved = defaults.array(forKey: savedHUDLayoutRects.editHUDRectY)
-            let HUDEditButtonWidthSaved = defaults.array(forKey: savedHUDLayoutRects.editHUDRectWidth)
-            let HUDEditButtonHeightSaved = defaults.array(forKey: savedHUDLayoutRects.editHUDRectHeight)
-            
+
+            let HUDEditButtonXSaved      = defaults.array(forKey: FortniteHUDPositionKeys.editHUDRectX)
+            let HUDEditButtonYSaved      = defaults.array(forKey: FortniteHUDPositionKeys.editHUDRectY)
+            let HUDEditButtonWidthSaved  = defaults.array(forKey: FortniteHUDPositionKeys.editHUDRectWidth)
+            let HUDEditButtonHeightSaved = defaults.array(forKey: FortniteHUDPositionKeys.editHUDRectHeight)
+
             if HUDEditButtonXSaved?.isEmpty == false {
                 print(buttonTag - 39)
                 button.frame = CGRect(x: HUDEditButtonXSaved![indexInEditHUD] as! CGFloat, y: HUDEditButtonYSaved![indexInEditHUD] as! CGFloat, width: HUDEditButtonWidthSaved![indexInEditHUD] as! CGFloat, height: HUDEditButtonHeightSaved![indexInEditHUD] as! CGFloat)
@@ -356,20 +341,20 @@ class FortniteHUDCustomization: UIViewController {
 
 
         let defaults = UserDefaults.standard
-        defaults.set(HUDCombatButtonX, forKey: savedHUDLayoutRects.combatHUDRectX)
-        defaults.set(HUDCombatButtonY, forKey: savedHUDLayoutRects.combatHUDRectY)
-        defaults.set(HUDCombatButtonWidth, forKey: savedHUDLayoutRects.combatHUDRectWidth)
-        defaults.set(HUDCombatButtonHeight, forKey: savedHUDLayoutRects.combatHUDRectHeight)
-        
-        defaults.set(HUDBuildingButtonX, forKey: savedHUDLayoutRects.buildHUDRectX)
-        defaults.set(HUDBuildingButtonY, forKey: savedHUDLayoutRects.buildHUDRectY)
-        defaults.set(HUDBuildingButtonWidth, forKey: savedHUDLayoutRects.buildHUDRectWidth)
-        defaults.set(HUDBuildingButtonHeight, forKey: savedHUDLayoutRects.buildHUDRectHeight)
-        
-        defaults.set(HUDEditButtonX, forKey: savedHUDLayoutRects.editHUDRectX)
-        defaults.set(HUDEditButtonY, forKey: savedHUDLayoutRects.editHUDRectY)
-        defaults.set(HUDEditButtonWidth, forKey: savedHUDLayoutRects.editHUDRectWidth)
-        defaults.set(HUDEditButtonHeight, forKey: savedHUDLayoutRects.editHUDRectHeight)
+        defaults.set(HUDCombatButtonX, forKey: FortniteHUDPositionKeys.combatHUDRectX)
+        defaults.set(HUDCombatButtonY, forKey: FortniteHUDPositionKeys.combatHUDRectY)
+        defaults.set(HUDCombatButtonWidth, forKey: FortniteHUDPositionKeys.combatHUDRectWidth)
+        defaults.set(HUDCombatButtonHeight, forKey: FortniteHUDPositionKeys.combatHUDRectHeight)
+
+        defaults.set(HUDBuildingButtonX, forKey: FortniteHUDPositionKeys.buildHUDRectX)
+        defaults.set(HUDBuildingButtonY, forKey: FortniteHUDPositionKeys.buildHUDRectY)
+        defaults.set(HUDBuildingButtonWidth, forKey: FortniteHUDPositionKeys.buildHUDRectWidth)
+        defaults.set(HUDBuildingButtonHeight, forKey: FortniteHUDPositionKeys.buildHUDRectHeight)
+
+        defaults.set(HUDEditButtonX, forKey: FortniteHUDPositionKeys.editHUDRectX)
+        defaults.set(HUDEditButtonY, forKey: FortniteHUDPositionKeys.editHUDRectY)
+        defaults.set(HUDEditButtonWidth, forKey: FortniteHUDPositionKeys.editHUDRectWidth)
+        defaults.set(HUDEditButtonHeight, forKey: FortniteHUDPositionKeys.editHUDRectHeight)
 
 
     }

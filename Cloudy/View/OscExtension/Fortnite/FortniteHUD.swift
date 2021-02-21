@@ -5,775 +5,841 @@ import UIKit
 
 #if !APPSTORE
 
+    /// Main On Screen Controls extension for the fortnite hud
     class FortniteHUD: OscExtension {
 
-        private var combatButtonLayers: [combatButtonType: CALayer] = [:]
-        private var buildButtonLayers: [buildButtonType: CALayer] = [:]
-        private var editButtonLayers: [editButtonType: CALayer] = [:]
+        enum Mode {
+            case combat
+            case build
+            case editFromCombat
+            case editFromBuild
+        }
 
-        private var combatButtonLayerTouch: [combatButtonType: UITouch] = [:]
-        private var buildButtonLayerTouch: [buildButtonType: UITouch] = [:]
-        private var editButtonLayerTouch: [editButtonType: UITouch] = [:]
+        /// Relevant layers
+        private let rootLayer:              CALayer                              = CALayer()
+        private var combatButtonLayers:     [FortniteButtonType.Combat: CALayer] = [:]
+        private var buildButtonLayers:      [FortniteButtonType.Build: CALayer]  = [:]
+        private var editButtonLayers:       [FortniteButtonType.Edit: CALayer]   = [:]
 
-        let onScreenButtonsWhenActive   = VisibleButtons(leftStick: true)
-        let onScreenButtonsWhenInactive = VisibleButtons.all
+        /// Relevant touches
+        private var combatButtonLayerTouch: [FortniteButtonType.Combat: UITouch] = [:]
+        private var buildButtonLayerTouch:  [FortniteButtonType.Build: UITouch]  = [:]
+        private var editButtonLayerTouch:   [FortniteButtonType.Edit: UITouch]   = [:]
 
-        var combatMode = true
-        var buildMode  = false
-        var editMode   = false
+        /// Predefined regular controller buttons to show when this hud is active / inactive
+        private let onScreenButtonsWhenActive                                    = VisibleButtons(leftStick: true)
+        private let onScreenButtonsWhenInactive                                  = VisibleButtons.all
 
-        var editFromCombat = true
+        /// The active hud mode
+        private var currentMode:            Mode?                                = .none
 
+        /// Left stick clicking disabled in this extension
         func leftStickClickEnabled() -> Bool {
             false
         }
 
+        /// Right stick clicking disabled in this extension
         func rightStickClickEnabled() -> Bool {
             false
         }
 
-        /// Draw all buttons
-        func drawButtons(in layer: CALayer) {
-            guard let HUDCombatButtonXSaved = UserDefaults.standard.array(forKey: savedHUDLayoutRects.combatHUDRectX) as? [CGFloat],
-                  let HUDCombatButtonYSaved = UserDefaults.standard.array(forKey: savedHUDLayoutRects.combatHUDRectY) as? [CGFloat],
-                  let HUDCombatButtonWidthSaved = UserDefaults.standard.array(forKey: savedHUDLayoutRects.combatHUDRectWidth) as? [CGFloat],
-                  let HUDCombatButtonHeightSaved = UserDefaults.standard.array(forKey: savedHUDLayoutRects.combatHUDRectHeight) as? [CGFloat] else {
-                return
-            }
-            
-            
-            guard let HUDBuildButtonXSaved = UserDefaults.standard.array(forKey: savedHUDLayoutRects.buildHUDRectX) as? [CGFloat],
-                  let HUDBuildButtonYSaved = UserDefaults.standard.array(forKey: savedHUDLayoutRects.buildHUDRectY) as? [CGFloat],
-                  let HUDBuildButtonWidthSaved = UserDefaults.standard.array(forKey: savedHUDLayoutRects.buildHUDRectWidth) as? [CGFloat],
-                  let HUDBuildButtonHeightSaved = UserDefaults.standard.array(forKey: savedHUDLayoutRects.buildHUDRectHeight) as? [CGFloat] else {
-                return
-            }
-            
-            guard let HUDEditButtonXSaved = UserDefaults.standard.array(forKey: savedHUDLayoutRects.editHUDRectX) as? [CGFloat],
-                  let HUDEditButtonYSaved = UserDefaults.standard.array(forKey: savedHUDLayoutRects.editHUDRectY) as? [CGFloat],
-                  let HUDEditButtonWidthSaved = UserDefaults.standard.array(forKey: savedHUDLayoutRects.editHUDRectWidth) as? [CGFloat],
-                  let HUDEditButtonHeightSaved = UserDefaults.standard.array(forKey: savedHUDLayoutRects.editHUDRectHeight) as? [CGFloat] else {
-                return
-            }
-            
-            
-            var index = 0
-            
-            for type in combatButtonType.allCases {
-                combatButtonLayers[type] = CALayer.init()
-                let image = UIImage(named:type.rawValue.appending(".png"))
-                combatButtonLayers[type]?.frame = CGRect.init(x: HUDCombatButtonXSaved[index], y: HUDCombatButtonYSaved[index], width: HUDCombatButtonWidthSaved[index], height: HUDCombatButtonHeightSaved[index])
+        /// Construction
+        init() {
+            FortniteButtonType.Combat.allCases.forEach { type in
+                combatButtonLayers[type] = CALayer()
+                let image = UIImage(named: type.rawValue.appending(".png"))
                 combatButtonLayers[type]?.contents = image?.cgImage
-                layer.addSublayer(combatButtonLayers[type]!)
-                index += 1
+                rootLayer.addSublayer(combatButtonLayers[type]!)
             }
-            
-            index = 0
-            for type in buildButtonType.allCases {
-                buildButtonLayers[type] = CALayer.init()
-                let image = UIImage(named:type.rawValue.appending(".png"))
-                buildButtonLayers[type]?.frame = CGRect.init(x: HUDBuildButtonXSaved[index], y: HUDBuildButtonYSaved[index], width: HUDBuildButtonWidthSaved[index], height: HUDBuildButtonHeightSaved[index])
+            FortniteButtonType.Build.allCases.forEach { type in
+                buildButtonLayers[type] = CALayer()
+                let image = UIImage(named: type.rawValue.appending(".png"))
                 buildButtonLayers[type]?.contents = image?.cgImage
-                layer.addSublayer(buildButtonLayers[type]!)
-                index += 1
+                rootLayer.addSublayer(buildButtonLayers[type]!)
             }
-            
-            index = 0
-            for type in editButtonType.allCases {
-                editButtonLayers[type] = CALayer.init()
-                let image = UIImage(named:type.rawValue.appending(".png"))
-                editButtonLayers[type]?.frame = CGRect.init(x: HUDEditButtonXSaved[index], y: HUDEditButtonYSaved[index], width: HUDEditButtonWidthSaved[index], height: HUDEditButtonHeightSaved[index])
+            FortniteButtonType.Edit.allCases.forEach { type in
+                editButtonLayers[type] = CALayer()
+                let image = UIImage(named: type.rawValue.appending(".png"))
                 editButtonLayers[type]?.contents = image?.cgImage
-                layer.addSublayer(editButtonLayers[type]!)
-                index += 1
+                rootLayer.addSublayer(editButtonLayers[type]!)
             }
-
-            for type in combatButtonType.allCases {
-                combatButtonLayerTouch.updateValue(UITouch.init(), forKey: type)
-            }
-            
-            for type in buildButtonType.allCases {
-                buildButtonLayerTouch.updateValue(UITouch.init(), forKey: type)
-            }
-            
-            for type in editButtonType.allCases {
-                editButtonLayerTouch.updateValue(UITouch.init(), forKey: type)
-            }
-            
-            hideHUDButtons(hideCombat: false, hideBuild: true, hideEdit: true)
         }
 
-        func handleTouchMovedEvent(_ touch: UITouch) -> Bool {
-            if combatMode {
-                for type in combatButtonType.allCases {
-                    if touch == combatButtonLayerTouch[type] {
-                        return true
-                    }
-                }
-            } else if buildMode {
-                for type in buildButtonType.allCases {
-                    if touch == buildButtonLayerTouch[type] {
-                        return true
-                    }
-                }
-            } else if editMode {
-                for type in editButtonType.allCases {
-                    if touch == editButtonLayerTouch[type] {
-                        return true
-                    }
-                }
-            }
-            return false
+        /// Initialize the hud sublayers
+        func initialize(in layer: CALayer) {
+            layer.addSublayer(rootLayer)
+            setMode(.none)
         }
 
+        /// Draw all buttons
+        func drawButtons() {
+            // get saved positions
+            guard let hudCombatButtonXSaved = UserDefaults.standard.array(forKey: FortniteHUDPositionKeys.combatHUDRectX) as? [CGFloat],
+                  let hudCombatButtonYSaved = UserDefaults.standard.array(forKey: FortniteHUDPositionKeys.combatHUDRectY) as? [CGFloat],
+                  let hudCombatButtonWidthSaved = UserDefaults.standard.array(forKey: FortniteHUDPositionKeys.combatHUDRectWidth) as? [CGFloat],
+                  let hudCombatButtonHeightSaved = UserDefaults.standard.array(forKey: FortniteHUDPositionKeys.combatHUDRectHeight) as? [CGFloat] else {
+                return
+            }
+            guard let hudBuildButtonXSaved = UserDefaults.standard.array(forKey: FortniteHUDPositionKeys.buildHUDRectX) as? [CGFloat],
+                  let hudBuildButtonYSaved = UserDefaults.standard.array(forKey: FortniteHUDPositionKeys.buildHUDRectY) as? [CGFloat],
+                  let hudBuildButtonWidthSaved = UserDefaults.standard.array(forKey: FortniteHUDPositionKeys.buildHUDRectWidth) as? [CGFloat],
+                  let hudBuildButtonHeightSaved = UserDefaults.standard.array(forKey: FortniteHUDPositionKeys.buildHUDRectHeight) as? [CGFloat] else {
+                return
+            }
+            guard let hudEditButtonXSaved = UserDefaults.standard.array(forKey: FortniteHUDPositionKeys.editHUDRectX) as? [CGFloat],
+                  let hudEditButtonYSaved = UserDefaults.standard.array(forKey: FortniteHUDPositionKeys.editHUDRectY) as? [CGFloat],
+                  let hudEditButtonWidthSaved = UserDefaults.standard.array(forKey: FortniteHUDPositionKeys.editHUDRectWidth) as? [CGFloat],
+                  let hudEditButtonHeightSaved = UserDefaults.standard.array(forKey: FortniteHUDPositionKeys.editHUDRectHeight) as? [CGFloat] else {
+                return
+            }
+            // update positions
+            FortniteButtonType.Combat.allCases.enumerated().forEach { (index, type) in
+                combatButtonLayers[type]?.frame = CGRect(x: hudCombatButtonXSaved[index],
+                                                         y: hudCombatButtonYSaved[index],
+                                                         width: hudCombatButtonWidthSaved[index],
+                                                         height: hudCombatButtonHeightSaved[index])
+            }
+            FortniteButtonType.Build.allCases.enumerated().forEach { (index, type) in
+                buildButtonLayers[type]?.frame = CGRect(x: hudBuildButtonXSaved[index],
+                                                        y: hudBuildButtonYSaved[index],
+                                                        width: hudBuildButtonWidthSaved[index],
+                                                        height: hudBuildButtonHeightSaved[index])
+            }
+            FortniteButtonType.Edit.allCases.enumerated().forEach { (index, type) in
+                editButtonLayers[type]?.frame = CGRect(x: hudEditButtonXSaved[index],
+                                                       y: hudEditButtonYSaved[index],
+                                                       width: hudEditButtonWidthSaved[index],
+                                                       height: hudEditButtonHeightSaved[index])
+            }
+            // initialize touches
+            for type in FortniteButtonType.Combat.allCases {
+                combatButtonLayerTouch.updateValue(UITouch(), forKey: type)
+            }
+            for type in FortniteButtonType.Build.allCases {
+                buildButtonLayerTouch.updateValue(UITouch(), forKey: type)
+            }
+            for type in FortniteButtonType.Edit.allCases {
+                editButtonLayerTouch.updateValue(UITouch(), forKey: type)
+            }
+        }
+
+        /// Visibility mixin.
         func mixin(_ visible: Bool) -> VisibleButtons {
             if visible {
-                unhideHUDButtons(unhideCombat: true, unhideBuild: false, unhideEdit: false)
-                editMode = false
-                buildMode = false
-                combatMode = true
+                setMode(.combat)
                 return onScreenButtonsWhenActive
             } else {
-                hideHUDButtons(hideCombat: true, hideBuild: true, hideEdit: true)
-                editMode = false
-                buildMode = false
-                combatMode = true
+                setMode(.none)
                 return onScreenButtonsWhenInactive
             }
         }
 
-        func hideHUDButtons(hideCombat: Bool, hideBuild: Bool, hideEdit:Bool) {
-            
-            if hideCombat {
-                for type in combatButtonType.allCases {
-                    combatButtonLayers[type]?.isHidden = true
-                }
-            }
-            
-            if hideBuild {
-                for type in buildButtonType.allCases {
-                    buildButtonLayers[type]?.isHidden = true
-                }
-            }
-            
-            if hideEdit {
-                for type in editButtonType.allCases {
-                    editButtonLayers[type]?.isHidden = true
-                }
-            }
-        }
-
-        func unhideHUDButtons(unhideCombat: Bool, unhideBuild: Bool, unhideEdit:Bool) {
-            
-            if unhideCombat {
-                for type in combatButtonType.allCases {
-                    combatButtonLayers[type]?.isHidden = false
-                }
-            }
-            
-            if unhideBuild {
-                for type in buildButtonType.allCases {
-                    buildButtonLayers[type]?.isHidden = false
-                }
-            }
-            
-            if unhideEdit {
-                for type in editButtonType.allCases {
-                    editButtonLayers[type]?.isHidden = false
-                }
-            }
-        }
-
-
-        func handleTouchUpEvent(_ touch: UITouch, controller: Controller, controllerSupport: ControllerSupport) -> Bool {
-            
-            if combatMode {
-                if (touch == combatButtonLayerTouch[combatButtonType.aim]) {
-                    controllerSupport.updateLeftTrigger(controller, left: 0);
-                    combatButtonLayerTouch[combatButtonType.aim] = nil
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.jump]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.A_FLAG.rawValue);
-                    combatButtonLayerTouch[combatButtonType.jump] = nil
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.shoot]) {
-                    controllerSupport.updateRightTrigger(controller, right: 0)
-                    combatButtonLayerTouch[combatButtonType.shoot] = nil
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.shootBig]) {
-                    controllerSupport.updateRightTrigger(controller, right: 0)
-                    
-                    combatButtonLayerTouch[combatButtonType.shootBig] = nil
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.switchToBuild]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
-                    
-                    combatButtonLayerTouch[combatButtonType.switchToBuild] = nil
-                    hideHUDButtons(hideCombat: true, hideBuild: false, hideEdit: false)
-                    unhideHUDButtons(unhideCombat: false, unhideBuild: true, unhideEdit: false)
-                    buildMode = true
-                    combatMode = false
-                    editFromCombat = false
-                    
-                    cleanCombatTouches(controller: controller, controllerSupport: controllerSupport)
-                    
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.inventory]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
-                    
-                    combatButtonLayerTouch[combatButtonType.inventory] = nil
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.ping]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RS_CLK_FLAG.rawValue);
-                    
-                    combatButtonLayerTouch[combatButtonType.ping] = nil
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.emoteWheel]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
-                    combatButtonLayerTouch[combatButtonType.emoteWheel] = nil
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.crouchDown]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LS_CLK_FLAG.rawValue);
-                    combatButtonLayerTouch[combatButtonType.crouchDown] = nil
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.slotPickaxe]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.Y_FLAG.rawValue);
-                    combatButtonLayerTouch[combatButtonType.slotPickaxe] = nil
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.editReset]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
-                    combatButtonLayerTouch[combatButtonType.editReset] = nil
-                    hideHUDButtons(hideCombat: true, hideBuild: false, hideEdit: false)
-                    unhideHUDButtons(unhideCombat: false, unhideBuild: false, unhideEdit: true)
-                    buildMode = false
-                    editMode = true
-                    combatMode = false
-                    editFromCombat = true
-                    cleanCombatTouches(controller: controller, controllerSupport: controllerSupport)
-                    
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.reload]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue);
-                    combatButtonLayerTouch[combatButtonType.reload] = nil
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.interact]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue);
-                    combatButtonLayerTouch[combatButtonType.interact] = nil
-                    return true
-                    
-                } else if (touch == combatButtonLayerTouch[combatButtonType.pyramidSelected]) {
-                    combatButtonLayerTouch[combatButtonType.pyramidSelected] = nil
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.wallSelected]) {
-                    
-                    combatButtonLayerTouch[combatButtonType.wallSelected] = nil
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.floorSelected]) {
-                    
-                    combatButtonLayerTouch[combatButtonType.floorSelected] = nil
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.stairSelected]) {
-                    
-                    combatButtonLayerTouch[combatButtonType.stairSelected] = nil
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.cycleWeaponsDown]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
-                    combatButtonLayerTouch[combatButtonType.cycleWeaponsDown] = nil
-                    return true
-                } else if (touch == combatButtonLayerTouch[combatButtonType.cycleWeaponsUp]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
-                    combatButtonLayerTouch[combatButtonType.cycleWeaponsUp] = nil
-                    return true
-                }
-                
-            } else if buildMode {
-                if (touch == buildButtonLayerTouch[buildButtonType.switchToCombat]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
-                    buildButtonLayerTouch[buildButtonType.switchToCombat] = nil
-                    hideHUDButtons(hideCombat: false, hideBuild: true, hideEdit: false)
-                    unhideHUDButtons(unhideCombat: true, unhideBuild: false, unhideEdit: false)
-                    buildMode = false
-                    combatMode = true
-                    editFromCombat = true
-                    cleanBuildTouches(controller: controller, controllerSupport: controllerSupport)
-                    return true
-                } else if (touch == buildButtonLayerTouch[buildButtonType.pyramidSelected]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LB_FLAG.rawValue);
-                    buildButtonLayerTouch[buildButtonType.pyramidSelected] = nil
-                    return true
-                } else if (touch == buildButtonLayerTouch[buildButtonType.wallSelected]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
-                    buildButtonLayerTouch[buildButtonType.wallSelected] = nil
-                    return true
-                } else if (touch == buildButtonLayerTouch[buildButtonType.floorSelected]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
-                    buildButtonLayerTouch[buildButtonType.floorSelected] = nil
-                    return true
-                } else if (touch == buildButtonLayerTouch[buildButtonType.stairSelected]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
-                    buildButtonLayerTouch[buildButtonType.stairSelected] = nil
-                    return true
-                } else if (touch == buildButtonLayerTouch[buildButtonType.editReset]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
-                    hideHUDButtons(hideCombat: false, hideBuild: true, hideEdit: false)
-                    unhideHUDButtons(unhideCombat: false, unhideBuild: false, unhideEdit: true)
-                    editMode = true
-                    buildMode = false
-                    combatMode = false
-                    buildButtonLayerTouch[buildButtonType.editReset] = nil
-                    return true
-                } else if (touch == buildButtonLayerTouch[buildButtonType.jump]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.A_FLAG.rawValue);
-                    buildButtonLayerTouch[buildButtonType.jump] = nil
-                    return true
-                } else if (touch == buildButtonLayerTouch[buildButtonType.shoot]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
-                    buildButtonLayerTouch[buildButtonType.shoot] = nil
-                    return true
-                } else if (touch == buildButtonLayerTouch[buildButtonType.shootBig]) {
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
-                    buildButtonLayerTouch[buildButtonType.shootBig] = nil
-                    return true
-                }
-            } else if editMode {
-                if (touch == editButtonLayerTouch[editButtonType.confirm]) {
-                    editButtonLayerTouch[editButtonType.confirm] = nil
-                    controllerSupport.updateLeftTrigger(controller, left: 0)
-                    
-                    if !editFromCombat {
-                        hideHUDButtons(hideCombat: false, hideBuild: false, hideEdit: true)
-                        unhideHUDButtons(unhideCombat: false, unhideBuild: true, unhideEdit: false)
-                        editMode = false
-                        buildMode = true
-                        combatMode = false
-                    } else {
-                        hideHUDButtons(hideCombat: false, hideBuild: false, hideEdit: true)
-                        unhideHUDButtons(unhideCombat: true, unhideBuild: false, unhideEdit: false)
-                        editMode = false
-                        buildMode = false
-                        combatMode = true
-                    }
-                    
-                    cleanEditTouches(controller: controller, controllerSupport: controllerSupport)
-                    return true
-                } else if (touch == editButtonLayerTouch[editButtonType.edit]) {
-                    editButtonLayerTouch[editButtonType.edit] = nil
-                    controllerSupport.updateRightTrigger(controller, right: 0)
-                    return true
-                } else if (touch == editButtonLayerTouch[editButtonType.ping]) {
-                    editButtonLayerTouch[editButtonType.ping] = nil
-                    return true
-                } else if (touch == editButtonLayerTouch[editButtonType.reset]) {
-                    editButtonLayerTouch[editButtonType.reset] = nil
-                    controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
-                    return true
-                } else if (touch == editButtonLayerTouch[editButtonType.rotate]) {
-                    editButtonLayerTouch[editButtonType.rotate] = nil
-                    return true
-                } else if (touch == editButtonLayerTouch[editButtonType.shootBig]) {
-                    editButtonLayerTouch[editButtonType.shootBig] = nil
-                    return true
-                } else if (touch == editButtonLayerTouch[editButtonType.shoot]) {
-                    editButtonLayerTouch[editButtonType.shoot] = nil
-                    return true
-                } else if (touch == editButtonLayerTouch[editButtonType.switchToCombat]) {
-                    editButtonLayerTouch[editButtonType.switchToCombat] = nil
-                    return true
-                }
+        /// Handle touch moving
+        /// return true if this touch was already saved somewhere
+        func handleTouchMovedEvent(_ touch: UITouch) -> Bool {
+            if combatButtonLayerTouch.first(where: { $1 == touch }) != nil ||
+               buildButtonLayerTouch.first(where: { $1 == touch }) != nil ||
+               editButtonLayerTouch.first(where: { $1 == touch }) != nil {
+                return true
             }
             return false
         }
 
+        /// Handle touch down events
         func handleTouchDownEvent(_ touch: UITouch, touchLocation: CGPoint, controller: Controller, controllerSupport: ControllerSupport) -> Bool {
-            
-            if combatMode {
-                if (combatButtonLayers[combatButtonType.aim]?.presentation()?.hitTest(touchLocation) != nil) {
-                    controllerSupport.updateLeftTrigger(controller, left: 0xFF)
-                    combatButtonLayerTouch[combatButtonType.aim] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.jump]?.presentation()?.hitTest(touchLocation) != nil) {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.A_FLAG.rawValue);
-                    combatButtonLayerTouch[combatButtonType.jump] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.shoot]?.presentation()?.hitTest(touchLocation) != nil) {
-                    controllerSupport.updateRightTrigger(controller, right: 0xFF)
-                    combatButtonLayerTouch[combatButtonType.shoot] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.shootBig]?.presentation()?.hitTest(touchLocation) != nil) {
-                    controllerSupport.updateRightTrigger(controller, right: 0xFF)
-                    combatButtonLayerTouch[combatButtonType.shootBig] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.switchToBuild]?.presentation()?.hitTest(touchLocation) != nil) {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
-                    combatButtonLayerTouch[combatButtonType.switchToBuild] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.inventory]?.presentation()?.hitTest(touchLocation) != nil) {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
-                    combatButtonLayerTouch[combatButtonType.inventory] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.ping]?.presentation()?.hitTest(touchLocation) != nil) {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RS_CLK_FLAG.rawValue)
-                    combatButtonLayerTouch[combatButtonType.ping] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.emoteWheel]?.presentation()?.hitTest(touchLocation) != nil) {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
-                    combatButtonLayerTouch[combatButtonType.emoteWheel] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.crouchDown]?.presentation()?.hitTest(touchLocation) != nil) {
-                    //[_controllerSupport setButtonFlag:_controller flags:LS_CLK_FLAG];
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LS_CLK_FLAG.rawValue)
-                    combatButtonLayerTouch[combatButtonType.crouchDown] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.slotPickaxe]?.presentation()?.hitTest(touchLocation) != nil) {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.Y_FLAG.rawValue)
-                    combatButtonLayerTouch[combatButtonType.slotPickaxe] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.reload]?.presentation()?.hitTest(touchLocation) != nil) {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue)
-                    combatButtonLayerTouch[combatButtonType.reload] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.interact]?.presentation()?.hitTest(touchLocation) != nil) {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue)
-                    combatButtonLayerTouch[combatButtonType.interact] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.editReset]?.presentation()?.hitTest(touchLocation) != nil) {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue)
-                    combatButtonLayerTouch[combatButtonType.editReset] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.pyramidSelected]?.presentation()?.hitTest(touchLocation)) != nil {
-                    
-                    /*
-                    let c1 = CloudyController()
-                    c1.buttons[0] = .digital(true)
-                    let c2 = CloudyController()
-                    c2.buttons[0] = .digital(false)
-                    controllerSupport.controllerDataReceiver.enqueue(controllerData: [c1,  c2], for: .onScreen)
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                        let c3 = CloudyController()
-                        c3.buttons[1] = .digital(true)
-                        let c4 = CloudyController()
-                        c4.buttons[1] = .digital(false)
-                        controllerSupport.controllerDataReceiver.enqueue(controllerData: [c3,  c4], for: .onScreen)
+            switch currentMode {
+                case .combat:
+                    if (combatButtonLayers[FortniteButtonType.Combat.aim]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.updateLeftTrigger(controller, left: 0xFF)
+                        combatButtonLayerTouch[FortniteButtonType.Combat.aim] = touch
+                        return true
                     }
-                    */
-                    combatButtonLayerTouch[combatButtonType.pyramidSelected] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.wallSelected]?.presentation()?.hitTest(touchLocation)) != nil {
-                    /*
-                    let c1 = CloudyController()
-                    c1.buttons[0] = .digital(true)
-                    let c2 = CloudyController()
-                    c2.buttons[0] = .digital(false)
-                    controllerSupport.controllerDataReceiver.enqueue(controllerData: [c1,  c2], for: .onScreen)
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                        let c3 = CloudyController()
-                        c3.buttons[1] = .digital(true)
-                        let c4 = CloudyController()
-                        c4.buttons[1] = .digital(false)
-                        controllerSupport.controllerDataReceiver.enqueue(controllerData: [c3,  c4], for: .onScreen)
-                    }
-                    */
-                    combatButtonLayerTouch[combatButtonType.wallSelected] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.floorSelected]?.presentation()?.hitTest(touchLocation)) != nil {
-                    /*
-                    let c1 = CloudyController()
-                    c1.buttons[0] = .digital(true)
-                    let c2 = CloudyController()
-                    c2.buttons[0] = .digital(false)
-                    controllerSupport.controllerDataReceiver.enqueue(controllerData: [c1,  c2], for: .onScreen)
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                        let c3 = CloudyController()
-                        c3.buttons[1] = .digital(true)
-                        let c4 = CloudyController()
-                        c4.buttons[1] = .digital(false)
-                        controllerSupport.controllerDataReceiver.enqueue(controllerData: [c3,  c4], for: .onScreen)
-                    }
-                    */
-                    combatButtonLayerTouch[combatButtonType.floorSelected] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.stairSelected]?.presentation()?.hitTest(touchLocation)) != nil {
-                    /*
-                    let c1 = CloudyController()
-                    c1.buttons[0] = .digital(true)
-                    let c2 = CloudyController()
-                    c2.buttons[0] = .digital(false)
-                    controllerSupport.controllerDataReceiver.enqueue(controllerData: [c1,  c2], for: .onScreen)
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                        let c3 = CloudyController()
-                        c3.buttons[1] = .digital(true)
-                        let c4 = CloudyController()
-                        c4.buttons[1] = .digital(false)
-                        controllerSupport.controllerDataReceiver.enqueue(controllerData: [c3,  c4], for: .onScreen)
-                    }
-                    */
-                    combatButtonLayerTouch[combatButtonType.stairSelected] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.cycleWeaponsDown]?.presentation()?.hitTest(touchLocation) != nil) {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue)
-                    combatButtonLayerTouch[combatButtonType.cycleWeaponsDown] = touch
-                    return true
-                } else if (combatButtonLayers[combatButtonType.cycleWeaponsUp]?.presentation()?.hitTest(touchLocation) != nil) {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue)
-                    combatButtonLayerTouch[combatButtonType.cycleWeaponsUp] = touch
-                    return true
-                }
-                
-            } else if buildMode {
-                
-                if (buildButtonLayers[buildButtonType.switchToCombat]?.presentation()?.hitTest(touchLocation)) != nil {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
-                        print("FLAG HERE")
-                    buildButtonLayerTouch[buildButtonType.switchToCombat] = touch
 
-                    return true
-                } else if (buildButtonLayers[buildButtonType.pyramidSelected]?.presentation()?.hitTest(touchLocation)) != nil {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LB_FLAG.rawValue);
-                    buildButtonLayerTouch[buildButtonType.pyramidSelected] = touch
-                    return true
-                } else if (buildButtonLayers[buildButtonType.wallSelected]?.presentation()?.hitTest(touchLocation)) != nil {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
-                    buildButtonLayerTouch[buildButtonType.wallSelected] = touch
-                    return true
-                } else if (buildButtonLayers[buildButtonType.floorSelected]?.presentation()?.hitTest(touchLocation)) != nil {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
-                    buildButtonLayerTouch[buildButtonType.floorSelected] = touch
-                    return true
-                } else if (buildButtonLayers[buildButtonType.stairSelected]?.presentation()?.hitTest(touchLocation)) != nil {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
-                    buildButtonLayerTouch[buildButtonType.stairSelected] = touch
-                    return true
-                } else if (buildButtonLayers[buildButtonType.jump]?.presentation()?.hitTest(touchLocation)) != nil {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.A_FLAG.rawValue);
-                    buildButtonLayerTouch[buildButtonType.jump] = touch
-                    return true
-                } else if (buildButtonLayers[buildButtonType.editReset]?.presentation()?.hitTest(touchLocation)) != nil {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
-                    buildButtonLayerTouch[buildButtonType.editReset] = touch
-                    return true
-                } else if (buildButtonLayers[buildButtonType.shoot]?.presentation()?.hitTest(touchLocation) != nil) {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
-                    buildButtonLayerTouch[buildButtonType.shoot] = touch
-                    return true
-                } else if (buildButtonLayers[buildButtonType.shootBig]?.presentation()?.hitTest(touchLocation) != nil) {
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
-                    buildButtonLayerTouch[buildButtonType.shootBig] = touch
-                    return true
-                }
-                
-                
-            } else if editMode {
-                if (editButtonLayers[editButtonType.confirm]?.presentation()?.hitTest(touchLocation)) != nil {
-                    editButtonLayerTouch[editButtonType.confirm] = touch
-                    controllerSupport.updateLeftTrigger(controller, left: 0xFF)
-                    return true
-                } else if (editButtonLayers[editButtonType.edit]?.presentation()?.hitTest(touchLocation)) != nil {
-                    editButtonLayerTouch[editButtonType.edit] = touch
-                    controllerSupport.updateRightTrigger(controller, right: 0xFF)
-                    return true
-                } else if (editButtonLayers[editButtonType.ping]?.presentation()?.hitTest(touchLocation)) != nil {
-                    editButtonLayerTouch[editButtonType.ping] = touch
-                    return true
-                } else if (editButtonLayers[editButtonType.reset]?.presentation()?.hitTest(touchLocation)) != nil {
-                    editButtonLayerTouch[editButtonType.reset] = touch
-                    controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
-                    return true
-                } else if (editButtonLayers[editButtonType.rotate]?.presentation()?.hitTest(touchLocation)) != nil {
-                    editButtonLayerTouch[editButtonType.rotate] = touch
-                    return true
-                } else if (editButtonLayers[editButtonType.shootBig]?.presentation()?.hitTest(touchLocation)) != nil {
-                    editButtonLayerTouch[editButtonType.shootBig] = touch
-                    return true
-                } else if (editButtonLayers[editButtonType.shoot]?.presentation()?.hitTest(touchLocation)) != nil {
-                    editButtonLayerTouch[editButtonType.shoot] = touch
-                    return true
-                } else if (editButtonLayers[editButtonType.switchToCombat]?.presentation()?.hitTest(touchLocation)) != nil {
-                    editButtonLayerTouch[editButtonType.switchToCombat] = touch
-                    return true
-                }
+                    if (combatButtonLayers[FortniteButtonType.Combat.jump]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.A_FLAG.rawValue);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.jump] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.shoot]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.updateRightTrigger(controller, right: 0xFF)
+                        combatButtonLayerTouch[FortniteButtonType.Combat.shoot] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.shootBig]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.updateRightTrigger(controller, right: 0xFF)
+                        combatButtonLayerTouch[FortniteButtonType.Combat.shootBig] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.switchToBuild]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.switchToBuild] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.inventory]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.inventory] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.ping]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RS_CLK_FLAG.rawValue)
+                        combatButtonLayerTouch[FortniteButtonType.Combat.ping] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.emoteWheel]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.emoteWheel] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.crouchDown]?.presentation()?.hitTest(touchLocation) != nil) {
+                        //[_controllerSupport setButtonFlag:_controller flags:LS_CLK_FLAG];
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LS_CLK_FLAG.rawValue)
+                        combatButtonLayerTouch[FortniteButtonType.Combat.crouchDown] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.slotPickaxe]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.Y_FLAG.rawValue)
+                        combatButtonLayerTouch[FortniteButtonType.Combat.slotPickaxe] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.reload]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue)
+                        combatButtonLayerTouch[FortniteButtonType.Combat.reload] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.interact]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue)
+                        combatButtonLayerTouch[FortniteButtonType.Combat.interact] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.editReset]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue)
+                        combatButtonLayerTouch[FortniteButtonType.Combat.editReset] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.pyramidSelected]?.presentation()?.hitTest(touchLocation)) != nil {
+                        /*
+                        let c1 = CloudyController()
+                        c1.buttons[0] = .digital(true)
+                        let c2 = CloudyController()
+                        c2.buttons[0] = .digital(false)
+                        controllerSupport.controllerDataReceiver.enqueue(controllerData: [c1,  c2], for: .onScreen)
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                            let c3 = CloudyController()
+                            c3.buttons[1] = .digital(true)
+                            let c4 = CloudyController()
+                            c4.buttons[1] = .digital(false)
+                            controllerSupport.controllerDataReceiver.enqueue(controllerData: [c3,  c4], for: .onScreen)
+                        }
+                        */
+                        combatButtonLayerTouch[FortniteButtonType.Combat.pyramidSelected] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.wallSelected]?.presentation()?.hitTest(touchLocation)) != nil {
+                        /*
+                        let c1 = CloudyController()
+                        c1.buttons[0] = .digital(true)
+                        let c2 = CloudyController()
+                        c2.buttons[0] = .digital(false)
+                        controllerSupport.controllerDataReceiver.enqueue(controllerData: [c1,  c2], for: .onScreen)
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                            let c3 = CloudyController()
+                            c3.buttons[1] = .digital(true)
+                            let c4 = CloudyController()
+                            c4.buttons[1] = .digital(false)
+                            controllerSupport.controllerDataReceiver.enqueue(controllerData: [c3,  c4], for: .onScreen)
+                        }
+                        */
+                        combatButtonLayerTouch[FortniteButtonType.Combat.wallSelected] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.floorSelected]?.presentation()?.hitTest(touchLocation)) != nil {
+                        /*
+                        let c1 = CloudyController()
+                        c1.buttons[0] = .digital(true)
+                        let c2 = CloudyController()
+                        c2.buttons[0] = .digital(false)
+                        controllerSupport.controllerDataReceiver.enqueue(controllerData: [c1,  c2], for: .onScreen)
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                            let c3 = CloudyController()
+                            c3.buttons[1] = .digital(true)
+                            let c4 = CloudyController()
+                            c4.buttons[1] = .digital(false)
+                            controllerSupport.controllerDataReceiver.enqueue(controllerData: [c3,  c4], for: .onScreen)
+                        }
+                        */
+                        combatButtonLayerTouch[FortniteButtonType.Combat.floorSelected] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.stairSelected]?.presentation()?.hitTest(touchLocation)) != nil {
+                        /*
+                        let c1 = CloudyController()
+                        c1.buttons[0] = .digital(true)
+                        let c2 = CloudyController()
+                        c2.buttons[0] = .digital(false)
+                        controllerSupport.controllerDataReceiver.enqueue(controllerData: [c1,  c2], for: .onScreen)
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                            let c3 = CloudyController()
+                            c3.buttons[1] = .digital(true)
+                            let c4 = CloudyController()
+                            c4.buttons[1] = .digital(false)
+                            controllerSupport.controllerDataReceiver.enqueue(controllerData: [c3,  c4], for: .onScreen)
+                        }
+                        */
+                        combatButtonLayerTouch[FortniteButtonType.Combat.stairSelected] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.cycleWeaponsDown]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue)
+                        combatButtonLayerTouch[FortniteButtonType.Combat.cycleWeaponsDown] = touch
+                        return true
+                    }
+
+                    if (combatButtonLayers[FortniteButtonType.Combat.cycleWeaponsUp]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue)
+                        combatButtonLayerTouch[FortniteButtonType.Combat.cycleWeaponsUp] = touch
+                        return true
+                    }
+
+                case .build:
+                    if (buildButtonLayers[FortniteButtonType.Build.switchToCombat]?.presentation()?.hitTest(touchLocation)) != nil {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
+                        print("FLAG HERE")
+                        buildButtonLayerTouch[FortniteButtonType.Build.switchToCombat] = touch
+                        return true
+                    }
+
+                    if (buildButtonLayers[FortniteButtonType.Build.pyramidSelected]?.presentation()?.hitTest(touchLocation)) != nil {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LB_FLAG.rawValue);
+                        buildButtonLayerTouch[FortniteButtonType.Build.pyramidSelected] = touch
+                        return true
+                    }
+
+                    if (buildButtonLayers[FortniteButtonType.Build.wallSelected]?.presentation()?.hitTest(touchLocation)) != nil {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
+                        buildButtonLayerTouch[FortniteButtonType.Build.wallSelected] = touch
+                        return true
+                    }
+
+                    if (buildButtonLayers[FortniteButtonType.Build.floorSelected]?.presentation()?.hitTest(touchLocation)) != nil {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
+                        buildButtonLayerTouch[FortniteButtonType.Build.floorSelected] = touch
+                        return true
+                    }
+
+                    if (buildButtonLayers[FortniteButtonType.Build.stairSelected]?.presentation()?.hitTest(touchLocation)) != nil {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
+                        buildButtonLayerTouch[FortniteButtonType.Build.stairSelected] = touch
+                        return true
+                    }
+
+                    if (buildButtonLayers[FortniteButtonType.Build.jump]?.presentation()?.hitTest(touchLocation)) != nil {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.A_FLAG.rawValue);
+                        buildButtonLayerTouch[FortniteButtonType.Build.jump] = touch
+                        return true
+                    }
+
+                    if (buildButtonLayers[FortniteButtonType.Build.editReset]?.presentation()?.hitTest(touchLocation)) != nil {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
+                        buildButtonLayerTouch[FortniteButtonType.Build.editReset] = touch
+                        return true
+                    }
+
+                    if (buildButtonLayers[FortniteButtonType.Build.shoot]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
+                        buildButtonLayerTouch[FortniteButtonType.Build.shoot] = touch
+                        return true
+                    }
+
+                    if (buildButtonLayers[FortniteButtonType.Build.shootBig]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
+                        buildButtonLayerTouch[FortniteButtonType.Build.shootBig] = touch
+                        return true
+                    }
+
+                case .editFromCombat, .editFromBuild:
+                    if (editButtonLayers[FortniteButtonType.Edit.confirm]?.presentation()?.hitTest(touchLocation)) != nil {
+                        editButtonLayerTouch[FortniteButtonType.Edit.confirm] = touch
+                        controllerSupport.updateLeftTrigger(controller, left: 0xFF)
+                        return true
+                    }
+
+                    if (editButtonLayers[FortniteButtonType.Edit.edit]?.presentation()?.hitTest(touchLocation)) != nil {
+                        editButtonLayerTouch[FortniteButtonType.Edit.edit] = touch
+                        controllerSupport.updateRightTrigger(controller, right: 0xFF)
+                        return true
+                    }
+
+                    if (editButtonLayers[FortniteButtonType.Edit.ping]?.presentation()?.hitTest(touchLocation)) != nil {
+                        editButtonLayerTouch[FortniteButtonType.Edit.ping] = touch
+                        return true
+                    }
+
+                    if (editButtonLayers[FortniteButtonType.Edit.reset]?.presentation()?.hitTest(touchLocation)) != nil {
+                        editButtonLayerTouch[FortniteButtonType.Edit.reset] = touch
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
+                        return true
+                    }
+
+                    if (editButtonLayers[FortniteButtonType.Edit.rotate]?.presentation()?.hitTest(touchLocation)) != nil {
+                        editButtonLayerTouch[FortniteButtonType.Edit.rotate] = touch
+                        return true
+                    }
+
+                    if (editButtonLayers[FortniteButtonType.Edit.shootBig]?.presentation()?.hitTest(touchLocation)) != nil {
+                        editButtonLayerTouch[FortniteButtonType.Edit.shootBig] = touch
+                        return true
+                    }
+
+                    if (editButtonLayers[FortniteButtonType.Edit.shoot]?.presentation()?.hitTest(touchLocation)) != nil {
+                        editButtonLayerTouch[FortniteButtonType.Edit.shoot] = touch
+                        return true
+                    }
+
+                    if (editButtonLayers[FortniteButtonType.Edit.switchToCombat]?.presentation()?.hitTest(touchLocation)) != nil {
+                        editButtonLayerTouch[FortniteButtonType.Edit.switchToCombat] = touch
+                        return true
+                    }
+                default:
+                    break
             }
             return false
         }
 
-        func cleanCombatTouches(controller:Controller, controllerSupport: ControllerSupport) {
-            if (combatButtonLayerTouch[combatButtonType.aim] != nil) {
+        /// Handle touch up events
+        func handleTouchUpEvent(_ touch: UITouch, controller: Controller, controllerSupport: ControllerSupport) -> Bool {
+            switch currentMode {
+                case .combat:
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.aim]) {
+                        controllerSupport.updateLeftTrigger(controller, left: 0);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.aim] = nil
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.jump]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.A_FLAG.rawValue);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.jump] = nil
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.shoot]) {
+                        controllerSupport.updateRightTrigger(controller, right: 0)
+                        combatButtonLayerTouch[FortniteButtonType.Combat.shoot] = nil
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.shootBig]) {
+                        controllerSupport.updateRightTrigger(controller, right: 0)
+                        combatButtonLayerTouch[FortniteButtonType.Combat.shootBig] = nil
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.switchToBuild]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.switchToBuild] = nil
+                        setMode(.build)
+                        cleanCombatTouches(controller: controller, controllerSupport: controllerSupport)
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.inventory]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.inventory] = nil
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.ping]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RS_CLK_FLAG.rawValue);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.ping] = nil
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.emoteWheel]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.emoteWheel] = nil
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.crouchDown]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LS_CLK_FLAG.rawValue);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.crouchDown] = nil
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.slotPickaxe]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.Y_FLAG.rawValue);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.slotPickaxe] = nil
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.editReset]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.editReset] = nil
+                        setMode(.editFromCombat)
+                        cleanCombatTouches(controller: controller, controllerSupport: controllerSupport)
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.reload]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.reload] = nil
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.interact]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.interact] = nil
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.pyramidSelected]) {
+                        combatButtonLayerTouch[FortniteButtonType.Combat.pyramidSelected] = nil
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.wallSelected]) {
+                        combatButtonLayerTouch[FortniteButtonType.Combat.wallSelected] = nil
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.floorSelected]) {
+                        combatButtonLayerTouch[FortniteButtonType.Combat.floorSelected] = nil
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.stairSelected]) {
+                        combatButtonLayerTouch[FortniteButtonType.Combat.stairSelected] = nil
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.cycleWeaponsDown]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.cycleWeaponsDown] = nil
+                        return true
+                    }
+
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.cycleWeaponsUp]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
+                        combatButtonLayerTouch[FortniteButtonType.Combat.cycleWeaponsUp] = nil
+                        return true
+                    }
+
+                case .build:
+                    if (touch == buildButtonLayerTouch[FortniteButtonType.Build.switchToCombat]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
+                        buildButtonLayerTouch[FortniteButtonType.Build.switchToCombat] = nil
+                        setMode(.combat)
+                        cleanBuildTouches(controller: controller, controllerSupport: controllerSupport)
+                        return true
+                    }
+
+                    if (touch == buildButtonLayerTouch[FortniteButtonType.Build.pyramidSelected]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LB_FLAG.rawValue);
+                        buildButtonLayerTouch[FortniteButtonType.Build.pyramidSelected] = nil
+                        return true
+                    }
+
+                    if (touch == buildButtonLayerTouch[FortniteButtonType.Build.wallSelected]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
+                        buildButtonLayerTouch[FortniteButtonType.Build.wallSelected] = nil
+                        return true
+                    }
+
+                    if (touch == buildButtonLayerTouch[FortniteButtonType.Build.floorSelected]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
+                        buildButtonLayerTouch[FortniteButtonType.Build.floorSelected] = nil
+                        return true
+                    }
+
+                    if (touch == buildButtonLayerTouch[FortniteButtonType.Build.stairSelected]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
+                        buildButtonLayerTouch[FortniteButtonType.Build.stairSelected] = nil
+                        return true
+                    }
+
+                    if (touch == buildButtonLayerTouch[FortniteButtonType.Build.editReset]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
+                        setMode(.editFromBuild)
+                        buildButtonLayerTouch[FortniteButtonType.Build.editReset] = nil
+                        return true
+                    }
+
+                    if (touch == buildButtonLayerTouch[FortniteButtonType.Build.jump]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.A_FLAG.rawValue);
+                        buildButtonLayerTouch[FortniteButtonType.Build.jump] = nil
+                        return true
+                    }
+
+                    if (touch == buildButtonLayerTouch[FortniteButtonType.Build.shoot]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
+                        buildButtonLayerTouch[FortniteButtonType.Build.shoot] = nil
+                        return true
+                    }
+
+                    if (touch == buildButtonLayerTouch[FortniteButtonType.Build.shootBig]) {
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
+                        buildButtonLayerTouch[FortniteButtonType.Build.shootBig] = nil
+                        return true
+                    }
+
+                case .editFromCombat, .editFromBuild:
+                    if (touch == editButtonLayerTouch[FortniteButtonType.Edit.confirm]) {
+                        editButtonLayerTouch[FortniteButtonType.Edit.confirm] = nil
+                        controllerSupport.updateLeftTrigger(controller, left: 0)
+                        if currentMode == .editFromBuild {
+                            setMode(.build)
+                        } else {
+                            setMode(.combat)
+                        }
+                        cleanEditTouches(controller: controller, controllerSupport: controllerSupport)
+                        return true
+                    }
+
+                    if (touch == editButtonLayerTouch[FortniteButtonType.Edit.edit]) {
+                        editButtonLayerTouch[FortniteButtonType.Edit.edit] = nil
+                        controllerSupport.updateRightTrigger(controller, right: 0)
+                        return true
+                    }
+
+                    if (touch == editButtonLayerTouch[FortniteButtonType.Edit.ping]) {
+                        editButtonLayerTouch[FortniteButtonType.Edit.ping] = nil
+                        return true
+                    }
+
+                    if (touch == editButtonLayerTouch[FortniteButtonType.Edit.reset]) {
+                        editButtonLayerTouch[FortniteButtonType.Edit.reset] = nil
+                        controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
+                        return true
+                    }
+
+                    if (touch == editButtonLayerTouch[FortniteButtonType.Edit.rotate]) {
+                        editButtonLayerTouch[FortniteButtonType.Edit.rotate] = nil
+                        return true
+                    }
+
+                    if (touch == editButtonLayerTouch[FortniteButtonType.Edit.shootBig]) {
+                        editButtonLayerTouch[FortniteButtonType.Edit.shootBig] = nil
+                        return true
+                    }
+
+                    if (touch == editButtonLayerTouch[FortniteButtonType.Edit.shoot]) {
+                        editButtonLayerTouch[FortniteButtonType.Edit.shoot] = nil
+                        return true
+                    }
+
+                    if (touch == editButtonLayerTouch[FortniteButtonType.Edit.switchToCombat]) {
+                        editButtonLayerTouch[FortniteButtonType.Edit.switchToCombat] = nil
+                        return true
+                    }
+                default:
+                    break
+            }
+            return false
+        }
+
+        /// Clean touch events for combat mode and react correspondingly
+        private func cleanCombatTouches(controller: Controller, controllerSupport: ControllerSupport) {
+            if (combatButtonLayerTouch[FortniteButtonType.Combat.aim] != nil) {
                 controllerSupport.updateLeftTrigger(controller, left: 0);
-                combatButtonLayerTouch[combatButtonType.aim] = nil
-                
-            } else if (combatButtonLayerTouch[combatButtonType.jump] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.aim] = nil
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.jump] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.A_FLAG.rawValue);
-                combatButtonLayerTouch[combatButtonType.jump] = nil
-                
-            } else if (combatButtonLayerTouch[combatButtonType.shoot] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.jump] = nil
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.shoot] != nil) {
                 controllerSupport.updateRightTrigger(controller, right: 0)
-                combatButtonLayerTouch[combatButtonType.shoot] = nil
-                
-            } else if (combatButtonLayerTouch[combatButtonType.shootBig] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.shoot] = nil
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.shootBig] != nil) {
                 controllerSupport.updateRightTrigger(controller, right: 0)
-                
-                combatButtonLayerTouch[combatButtonType.shootBig] = nil
-                
-            } else if (combatButtonLayerTouch[combatButtonType.switchToBuild] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.shootBig] = nil
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.switchToBuild] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
-                
-                combatButtonLayerTouch[combatButtonType.switchToBuild] = nil
-                hideHUDButtons(hideCombat: true, hideBuild: false, hideEdit: false)
-                unhideHUDButtons(unhideCombat: false, unhideBuild: true, unhideEdit: false)
-                buildMode = true
-                combatMode = false
-                editFromCombat = false
-                
-                print("BUILD")
-                
-                
-            } else if (combatButtonLayerTouch[combatButtonType.inventory] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.switchToBuild] = nil
+                setMode(.build)
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.inventory] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
-                
-                combatButtonLayerTouch[combatButtonType.inventory] = nil
-                
-            } else if (combatButtonLayerTouch[combatButtonType.ping] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.inventory] = nil
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.ping] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RS_CLK_FLAG.rawValue);
-                
-                combatButtonLayerTouch[combatButtonType.ping] = nil
-                
-            } else if (combatButtonLayerTouch[combatButtonType.emoteWheel] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.ping] = nil
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.emoteWheel] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
-                combatButtonLayerTouch[combatButtonType.emoteWheel] = nil
-                
-            } else if (combatButtonLayerTouch[combatButtonType.crouchDown] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.emoteWheel] = nil
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.crouchDown] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LS_CLK_FLAG.rawValue);
-                combatButtonLayerTouch[combatButtonType.crouchDown] = nil
-                
-            } else if (combatButtonLayerTouch[combatButtonType.slotPickaxe] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.crouchDown] = nil
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.slotPickaxe] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.Y_FLAG.rawValue);
-                combatButtonLayerTouch[combatButtonType.slotPickaxe] = nil
-                
-            } else if (combatButtonLayerTouch[combatButtonType.editReset] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.slotPickaxe] = nil
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.editReset] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
-                combatButtonLayerTouch[combatButtonType.editReset] = nil
-                hideHUDButtons(hideCombat: true, hideBuild: false, hideEdit: false)
-                unhideHUDButtons(unhideCombat: false, unhideBuild: false, unhideEdit: true)
-                buildMode = false
-                editMode = true
-                combatMode = false
-                editFromCombat = true
-                
-                
-            } else if (combatButtonLayerTouch[combatButtonType.reload] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.editReset] = nil
+                setMode(.editFromCombat)
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.reload] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue);
-                combatButtonLayerTouch[combatButtonType.reload] = nil
-                
-            } else if (combatButtonLayerTouch[combatButtonType.interact] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.reload] = nil
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.interact] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.X_FLAG.rawValue);
-                combatButtonLayerTouch[combatButtonType.interact] = nil
-                
-                
-            } else if (combatButtonLayerTouch[combatButtonType.pyramidSelected] != nil) {
-                combatButtonLayerTouch[combatButtonType.pyramidSelected] = nil
-                
-            } else if (combatButtonLayerTouch[combatButtonType.wallSelected] != nil) {
-                
-                combatButtonLayerTouch[combatButtonType.wallSelected] = nil
-                
-            } else if (combatButtonLayerTouch[combatButtonType.floorSelected] != nil) {
-                
-                combatButtonLayerTouch[combatButtonType.floorSelected] = nil
-                
-            } else if (combatButtonLayerTouch[combatButtonType.stairSelected] != nil) {
-                
-                combatButtonLayerTouch[combatButtonType.stairSelected] = nil
-                
-            } else if (combatButtonLayerTouch[combatButtonType.cycleWeaponsDown] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.interact] = nil
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.pyramidSelected] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.pyramidSelected] = nil
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.wallSelected] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.wallSelected] = nil
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.floorSelected] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.floorSelected] = nil
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.stairSelected] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.stairSelected] = nil
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.cycleWeaponsDown] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
-                combatButtonLayerTouch[combatButtonType.cycleWeaponsDown] = nil
-                
-            } else if (combatButtonLayerTouch[combatButtonType.cycleWeaponsUp] != nil) {
+                combatButtonLayerTouch[FortniteButtonType.Combat.cycleWeaponsDown] = nil
+
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.cycleWeaponsUp] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
-                combatButtonLayerTouch[combatButtonType.cycleWeaponsUp] = nil
+                combatButtonLayerTouch[FortniteButtonType.Combat.cycleWeaponsUp] = nil
             }
         }
 
-
-        func cleanBuildTouches(controller: Controller, controllerSupport: ControllerSupport) {
-            
-            if (buildButtonLayerTouch[buildButtonType.switchToCombat] != nil) {
+        /// Clean touch events for build mode and react correspondingly
+        private func cleanBuildTouches(controller: Controller, controllerSupport: ControllerSupport) {
+            if (buildButtonLayerTouch[FortniteButtonType.Build.switchToCombat] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
-                buildButtonLayerTouch[buildButtonType.switchToCombat] = nil
-            } else if (buildButtonLayerTouch[buildButtonType.pyramidSelected] != nil) {
+                buildButtonLayerTouch[FortniteButtonType.Build.switchToCombat] = nil
+
+            } else if (buildButtonLayerTouch[FortniteButtonType.Build.pyramidSelected] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LB_FLAG.rawValue);
-                buildButtonLayerTouch[buildButtonType.pyramidSelected] = nil
-                
-            } else if (buildButtonLayerTouch[buildButtonType.wallSelected] != nil) {
+                buildButtonLayerTouch[FortniteButtonType.Build.pyramidSelected] = nil
+
+            } else if (buildButtonLayerTouch[FortniteButtonType.Build.wallSelected] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
-                buildButtonLayerTouch[buildButtonType.wallSelected] = nil
-                
-            } else if (buildButtonLayerTouch[buildButtonType.floorSelected] != nil) {
+                buildButtonLayerTouch[FortniteButtonType.Build.wallSelected] = nil
+
+            } else if (buildButtonLayerTouch[FortniteButtonType.Build.floorSelected] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
-                buildButtonLayerTouch[buildButtonType.floorSelected] = nil
-                
-            } else if (buildButtonLayerTouch[buildButtonType.stairSelected] != nil) {
+                buildButtonLayerTouch[FortniteButtonType.Build.floorSelected] = nil
+
+            } else if (buildButtonLayerTouch[FortniteButtonType.Build.stairSelected] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
-                buildButtonLayerTouch[buildButtonType.stairSelected] = nil
-                
-            } else if (buildButtonLayerTouch[buildButtonType.editReset] != nil) {
+                buildButtonLayerTouch[FortniteButtonType.Build.stairSelected] = nil
+
+            } else if (buildButtonLayerTouch[FortniteButtonType.Build.editReset] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
-                buildButtonLayerTouch[buildButtonType.editReset] = nil
-                
-            } else if (buildButtonLayerTouch[buildButtonType.jump] != nil) {
+                buildButtonLayerTouch[FortniteButtonType.Build.editReset] = nil
+
+            } else if (buildButtonLayerTouch[FortniteButtonType.Build.jump] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.A_FLAG.rawValue);
-                buildButtonLayerTouch[buildButtonType.jump] = nil
-                
-            } else if (buildButtonLayerTouch[buildButtonType.shoot] != nil) {
+                buildButtonLayerTouch[FortniteButtonType.Build.jump] = nil
+
+            } else if (buildButtonLayerTouch[FortniteButtonType.Build.shoot] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
-                buildButtonLayerTouch[buildButtonType.shoot] = nil
-                
-            } else if (buildButtonLayerTouch[buildButtonType.shootBig] != nil) {
+                buildButtonLayerTouch[FortniteButtonType.Build.shoot] = nil
+
+            } else if (buildButtonLayerTouch[FortniteButtonType.Build.shootBig] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RIGHT_FLAG.rawValue);
-                buildButtonLayerTouch[buildButtonType.shootBig] = nil
+                buildButtonLayerTouch[FortniteButtonType.Build.shootBig] = nil
             }
         }
 
-        func cleanEditTouches(controller: Controller, controllerSupport: ControllerSupport) {
-            
-            if (editButtonLayerTouch[editButtonType.confirm] != nil) {
-                editButtonLayerTouch[editButtonType.confirm] = nil
+        /// Clean touch events for edit mode and react correspondingly
+        private func cleanEditTouches(controller: Controller, controllerSupport: ControllerSupport) {
+            if (editButtonLayerTouch[FortniteButtonType.Edit.confirm] != nil) {
+                editButtonLayerTouch[FortniteButtonType.Edit.confirm] = nil
                 controllerSupport.updateLeftTrigger(controller, left: 0)
-                
-                if !editFromCombat {
-                    hideHUDButtons(hideCombat: false, hideBuild: false, hideEdit: true)
-                    unhideHUDButtons(unhideCombat: false, unhideBuild: true, unhideEdit: false)
-                    editMode = false
-                    buildMode = true
-                    combatMode = false
-                } else {
-                    hideHUDButtons(hideCombat: false, hideBuild: false, hideEdit: true)
-                    unhideHUDButtons(unhideCombat: true, unhideBuild: false, unhideEdit: false)
-                    editMode = false
-                    buildMode = false
-                    combatMode = true
+                switch currentMode {
+                    case .editFromBuild:
+                        setMode(.build)
+                    case .editFromCombat:
+                        setMode(.combat)
+                    default:
+                        break
                 }
-            } else if (editButtonLayerTouch[editButtonType.edit] != nil) {
-                editButtonLayerTouch[editButtonType.edit] = nil
+
+            } else if (editButtonLayerTouch[FortniteButtonType.Edit.edit] != nil) {
+                editButtonLayerTouch[FortniteButtonType.Edit.edit] = nil
                 controllerSupport.updateRightTrigger(controller, right: 0)
-            } else if (editButtonLayerTouch[editButtonType.ping] != nil) {
-                editButtonLayerTouch[editButtonType.ping] = nil
-            } else if (editButtonLayerTouch[editButtonType.reset] != nil) {
-                editButtonLayerTouch[editButtonType.reset] = nil
+
+            } else if (editButtonLayerTouch[FortniteButtonType.Edit.ping] != nil) {
+                editButtonLayerTouch[FortniteButtonType.Edit.ping] = nil
+
+            } else if (editButtonLayerTouch[FortniteButtonType.Edit.reset] != nil) {
+                editButtonLayerTouch[FortniteButtonType.Edit.reset] = nil
+
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.RB_FLAG.rawValue);
-            } else if (editButtonLayerTouch[editButtonType.rotate] != nil) {
-                editButtonLayerTouch[editButtonType.rotate] = nil
-            } else if (editButtonLayerTouch[editButtonType.shootBig] != nil) {
-                editButtonLayerTouch[editButtonType.shootBig] = nil
-            } else if (editButtonLayerTouch[editButtonType.shoot] != nil) {
-                editButtonLayerTouch[editButtonType.shoot] = nil
-            } else if (editButtonLayerTouch[editButtonType.switchToCombat] != nil) {
-                editButtonLayerTouch[editButtonType.switchToCombat] = nil
+            } else if (editButtonLayerTouch[FortniteButtonType.Edit.rotate] != nil) {
+                editButtonLayerTouch[FortniteButtonType.Edit.rotate] = nil
+
+            } else if (editButtonLayerTouch[FortniteButtonType.Edit.shootBig] != nil) {
+                editButtonLayerTouch[FortniteButtonType.Edit.shootBig] = nil
+
+            } else if (editButtonLayerTouch[FortniteButtonType.Edit.shoot] != nil) {
+                editButtonLayerTouch[FortniteButtonType.Edit.shoot] = nil
+
+            } else if (editButtonLayerTouch[FortniteButtonType.Edit.switchToCombat] != nil) {
+                editButtonLayerTouch[FortniteButtonType.Edit.switchToCombat] = nil
             }
         }
+
+        /// Show specified buttons
+        private func setMode(_ mode: Mode?) {
+            var layerToHide: [CALayer] = []
+            var layerToShow: [CALayer] = []
+            let combatLayer            = Array(combatButtonLayers.values)
+            let buildLayer             = Array(buildButtonLayers.values)
+            let editLayer              = Array(editButtonLayers.values)
+            if let mode = mode {
+                switch mode {
+                    case .combat:
+                        layerToHide = buildLayer + editLayer
+                        layerToShow = combatLayer
+                    case .build:
+                        layerToHide = combatLayer + editLayer
+                        layerToShow = buildLayer
+                    case .editFromBuild, .editFromCombat:
+                        layerToHide = combatLayer + buildLayer
+                        layerToShow = editLayer
+                }
+            } else {
+                layerToHide = combatLayer + buildLayer + editLayer
+            }
+            layerToHide.forEach { $0.isHidden = true }
+            layerToShow.forEach { $0.isHidden = false }
+            currentMode = mode
+        }
+
     }
 
 #endif

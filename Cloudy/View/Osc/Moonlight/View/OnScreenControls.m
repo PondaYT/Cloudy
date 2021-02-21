@@ -86,46 +86,46 @@
         id <OscExtension>           onScreenExtension;
     }
 
-    static const float EDGE_WIDTH = .05;
+    static const CGFloat EDGE_WIDTH = .05;
 
     //static const float BUTTON_SIZE = 50;
-    static const float BUTTON_DIST = 20;
-    static float       BUTTON_CENTER_X;
-    static float       BUTTON_CENTER_Y;
+    static const CGFloat BUTTON_DIST = 20;
+    static CGFloat       BUTTON_CENTER_X;
+    static CGFloat       BUTTON_CENTER_Y;
 
-    static const float D_PAD_DIST = 10;
-    static float       D_PAD_CENTER_X;
-    static float       D_PAD_CENTER_Y;
+    static const CGFloat D_PAD_DIST = 10;
+    static CGFloat       D_PAD_CENTER_X;
+    static CGFloat       D_PAD_CENTER_Y;
 
     static const float DEAD_ZONE_PADDING = 15;
 
     static const double STICK_CLICK_RATE = 100;
     static const float  STICK_DEAD_ZONE  = .1;
-    static float        STICK_INNER_SIZE;
-    static float        STICK_OUTER_SIZE;
-    static float        LS_CENTER_X;
-    static float        LS_CENTER_Y;
-    static float        RS_CENTER_X;
-    static float        RS_CENTER_Y;
+    static CGFloat      STICK_INNER_SIZE;
+    static CGFloat      STICK_OUTER_SIZE;
+    static CGFloat      LS_CENTER_X;
+    static CGFloat      LS_CENTER_Y;
+    static CGFloat      RS_CENTER_X;
+    static CGFloat      RS_CENTER_Y;
 
-    static float START_X;
-    static float START_Y;
+    static CGFloat START_X;
+    static CGFloat START_Y;
 
-    static float SELECT_X;
-    static float SELECT_Y;
+    static CGFloat SELECT_X;
+    static CGFloat SELECT_Y;
 
-    static float R1_X;
-    static float R1_Y;
-    static float R2_X;
-    static float R2_Y;
-    static float R3_X;
-    static float R3_Y;
-    static float L1_X;
-    static float L1_Y;
-    static float L2_X;
-    static float L2_Y;
-    static float L3_X;
-    static float L3_Y;
+    static CGFloat R1_X;
+    static CGFloat R1_Y;
+    static CGFloat R2_X;
+    static CGFloat R2_Y;
+    static CGFloat R3_X;
+    static CGFloat R3_Y;
+    static CGFloat L1_X;
+    static CGFloat L1_Y;
+    static CGFloat L2_X;
+    static CGFloat L2_Y;
+    static CGFloat L3_X;
+    static CGFloat L3_Y;
 
     - (id)initWithView:(UIView *)view
           controllerSup:(ControllerSupport *)controllerSupport
@@ -174,7 +174,10 @@
         _rightStickBackground = [CALayer layer];
         _leftStick            = [CALayer layer];
         _rightStick           = [CALayer layer];
-
+        if(onScreenExtension)
+        {
+            [onScreenExtension initializeIn:_view.layer];
+        }
         return self;
     }
 
@@ -277,7 +280,7 @@
                 [self hideL3R3]; // Full controls don't need these they have the sticks
                 if(onScreenExtension)
                 {
-                    [onScreenExtension drawButtonsIn:_view.layer];
+                    [onScreenExtension drawButtons];
                 }
                 break;
             default:
@@ -1224,7 +1227,7 @@
                         endY:_view.frame.origin.y + _view.frame.size.height];
     }
 
-    - (BOOL)isDeadZone:(UITouch *)touch startX:(float)deadZoneStartX startY:(float)deadZoneStartY endX:(float)deadZoneEndX endY:(float)deadZoneEndY
+    - (BOOL)isDeadZone:(UITouch *)touch startX:(CGFloat)deadZoneStartX startY:(CGFloat)deadZoneStartY endX:(CGFloat)deadZoneEndX endY:(CGFloat)deadZoneEndY
     {
         deadZoneStartX -= DEAD_ZONE_PADDING;
         deadZoneStartY -= DEAD_ZONE_PADDING;

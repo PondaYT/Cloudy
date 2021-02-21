@@ -29,6 +29,7 @@
 		44A4D462F6B9BB3200645FEF /* TouchFeedbackType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D251D0510B4A29CC74F0 /* TouchFeedbackType.swift */; };
 		44A4D4CD5F66196CB7AD5CB0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D965A769BDED09733089 /* AppDelegate.swift */; };
 		44A4D4F6D78AD1E97436E1BF /* X1Kit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D8ADC2F1AF9D8EE953E2 /* X1Kit.swift */; };
+		44A4D53606BEC6E6AB0E3690 /* FortniteButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D222C2946D5D98EEA012 /* FortniteButtonType.swift */; };
 		44A4D538B2EFCF7F087123F8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44A4DE6EB9C1A8F63D2C1E49 /* GoogleService-Info.plist */; };
 		44A4D56785DE2ACC82B37F52 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D1A39583BB7F49ABD541 /* Log.swift */; };
 		44A4D667E367AB98368C36BC /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D80ED7881A56C23C0BBD /* Bundle.swift */; };
@@ -54,12 +55,9 @@
 		44A4DED2C6C4D9C412848C50 /* KeyboardSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D79906D5F591C2BF5F8D /* KeyboardSupport.m */; };
 		44A4DF24B14D4379ED99E351 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DC3B80142D290BBCE80C /* Float.swift */; };
 		44A4DFD94292E1FAA625AFA6 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D15FC7FB3F6347B248D4 /* IAPManager.swift */; };
-		5101A41125DE54BB00FC9E26 /* FortniteEditButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5101A40D25DE54BB00FC9E26 /* FortniteEditButtonType.swift */; };
-		5101A41225DE54BB00FC9E26 /* FortniteBuildButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5101A40E25DE54BB00FC9E26 /* FortniteBuildButtonType.swift */; };
-		5101A41325DE54BB00FC9E26 /* FortniteCombatButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5101A40F25DE54BB00FC9E26 /* FortniteCombatButtonType.swift */; };
-		5101A41425DE54BB00FC9E26 /* FortniteSavedHUDLayoutRects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5101A41025DE54BB00FC9E26 /* FortniteSavedHUDLayoutRects.swift */; };
 		5CDDBA53FB1B62159C8668EF /* Pods_Cloudy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BF8562B1619F13A7254171F /* Pods_Cloudy.framework */; };
 		E712FF9825520978003CF78C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E712FF9725520978003CF78C /* Images.xcassets */; };
+		E71AF2EB25E2DF1900F76E5B /* FortniteHUDPositionKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71AF2EA25E2DF1900F76E5B /* FortniteHUDPositionKeys.swift */; };
 		E74CE8D225D5B0D900EF14C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74CE8D125D5B0D900EF14C2 /* LaunchScreen.storyboard */; };
 		E74CE8D625D5B0F300EF14C2 /* LaunchScreenReKairos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74CE8D525D5B0F200EF14C2 /* LaunchScreenReKairos.storyboard */; };
 		E74CE93825D5DD6400EF14C2 /* FortniteHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74CE90225D5DD6300EF14C2 /* FortniteHUD.swift */; };
@@ -132,6 +130,7 @@
 		44A4D1A2C8A3EF9148C0BE76 /* GoogleService-Info-reKairos.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = "GoogleService-Info-reKairos.plist"; sourceTree = "<group>"; };
 		44A4D1A39583BB7F49ABD541 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		44A4D205B37B185DCA7E5DBD /* AlerterAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlerterAssembler.swift; sourceTree = "<group>"; };
+		44A4D222C2946D5D98EEA012 /* FortniteButtonType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortniteButtonType.swift; sourceTree = "<group>"; };
 		44A4D24369D3C549C04BC958 /* Scripts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scripts.swift; sourceTree = "<group>"; };
 		44A4D251D0510B4A29CC74F0 /* TouchFeedbackType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchFeedbackType.swift; sourceTree = "<group>"; };
 		44A4D355F9FC2B0B0407D925 /* ControllerId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControllerId.swift; sourceTree = "<group>"; };
@@ -182,16 +181,13 @@
 		44A4DF967486C5BEC663A336 /* Alerter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alerter.swift; sourceTree = "<group>"; };
 		44A4DFB90BD884CB5041E57D /* WKUserScript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKUserScript.swift; sourceTree = "<group>"; };
 		44A4DFE6F4FDD51E58D517B4 /* OscAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OscAssembler.swift; sourceTree = "<group>"; };
-		5101A40D25DE54BB00FC9E26 /* FortniteEditButtonType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortniteEditButtonType.swift; sourceTree = "<group>"; };
-		5101A40E25DE54BB00FC9E26 /* FortniteBuildButtonType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortniteBuildButtonType.swift; sourceTree = "<group>"; };
-		5101A40F25DE54BB00FC9E26 /* FortniteCombatButtonType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortniteCombatButtonType.swift; sourceTree = "<group>"; };
-		5101A41025DE54BB00FC9E26 /* FortniteSavedHUDLayoutRects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortniteSavedHUDLayoutRects.swift; sourceTree = "<group>"; };
 		79B35440DA7901C4949EFDC7 /* Pods-Cloudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.release.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.release.xcconfig"; sourceTree = "<group>"; };
 		79E113C5587D0E3EF509C81C /* Pods-Cloudy.rekairos debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.rekairos debug.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.rekairos debug.xcconfig"; sourceTree = "<group>"; };
 		8C777E5DB6AA0540BAAEE53E /* Pods-Cloudy.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.appstore.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.appstore.xcconfig"; sourceTree = "<group>"; };
 		B42B0FEC073AD10E0FCA6CF1 /* Pods-Cloudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.debug.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.debug.xcconfig"; sourceTree = "<group>"; };
 		B68A92C425596BFB00A22D82 /* Cloudy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cloudy.entitlements; sourceTree = "<group>"; };
 		E712FF9725520978003CF78C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		E71AF2EA25E2DF1900F76E5B /* FortniteHUDPositionKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortniteHUDPositionKeys.swift; sourceTree = "<group>"; };
 		E74CE8D125D5B0D900EF14C2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E74CE8D525D5B0F200EF14C2 /* LaunchScreenReKairos.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreenReKairos.storyboard; sourceTree = "<group>"; };
 		E74CE90225D5DD6300EF14C2 /* FortniteHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortniteHUD.swift; sourceTree = "<group>"; };
@@ -494,13 +490,11 @@
 		E74CE90125D5DD6300EF14C2 /* Fortnite */ = {
 			isa = PBXGroup;
 			children = (
+				E71AF2EA25E2DF1900F76E5B /* FortniteHUDPositionKeys.swift */,
 				E74CE90225D5DD6300EF14C2 /* FortniteHUD.swift */,
 				E74CE90325D5DD6300EF14C2 /* FortniteHUDCustomization.swift */,
-				5101A40E25DE54BB00FC9E26 /* FortniteBuildButtonType.swift */,
-				5101A40F25DE54BB00FC9E26 /* FortniteCombatButtonType.swift */,
-				5101A40D25DE54BB00FC9E26 /* FortniteEditButtonType.swift */,
-				5101A41025DE54BB00FC9E26 /* FortniteSavedHUDLayoutRects.swift */,
 				E74CE90425D5DD6300EF14C2 /* Assets */,
+				44A4D222C2946D5D98EEA012 /* FortniteButtonType.swift */,
 			);
 			path = Fortnite;
 			sourceTree = "<group>";
@@ -818,7 +812,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7B87E2B25338121004358E3 /* RootViewController.swift in Sources */,
-				5101A41325DE54BB00FC9E26 /* FortniteCombatButtonType.swift in Sources */,
 				44A4D07E127721BBFE3C3EA5 /* WebViewControllerBridge.swift in Sources */,
 				44A4D0FBB22CC22B053573C3 /* UIView.swift in Sources */,
 				44A4DB830BC41F131E122F7C /* GameController.swift in Sources */,
@@ -831,7 +824,6 @@
 				44A4D3B8AE0372A4C71E32EC /* TemporarySettings.swift in Sources */,
 				44A4D56785DE2ACC82B37F52 /* Log.swift in Sources */,
 				44A4DCA503A87B314B8CB75A /* ButtonOptionSet.swift in Sources */,
-				5101A41225DE54BB00FC9E26 /* FortniteBuildButtonType.swift in Sources */,
 				44A4D81D6A823FB908BCE224 /* AVFoundationVibratingFeedbackGenerator.swift in Sources */,
 				E74CE93825D5DD6400EF14C2 /* FortniteHUD.swift in Sources */,
 				44A4D1A9A30B84DCDD3F66C7 /* Scripts.swift in Sources */,
@@ -846,8 +838,8 @@
 				44A4D42E63964FEAD11402C9 /* ControllerId.swift in Sources */,
 				44A4DF24B14D4379ED99E351 /* Float.swift in Sources */,
 				44A4D45CF453A1C25C8E4D58 /* VisibleButtons.swift in Sources */,
-				5101A41125DE54BB00FC9E26 /* FortniteEditButtonType.swift in Sources */,
 				44A4D0A3CE6A87FDF1D65172 /* AppAssembler.swift in Sources */,
+				E71AF2EB25E2DF1900F76E5B /* FortniteHUDPositionKeys.swift in Sources */,
 				44A4D0C5655A3AAE90D26CC5 /* Alerter.swift in Sources */,
 				44A4D41AB05B2D2C0F2291BF /* AlerterAssembler.swift in Sources */,
 				44A4DFD94292E1FAA625AFA6 /* IAPManager.swift in Sources */,
@@ -855,7 +847,6 @@
 				44A4D9D5DEAE1473D30142B0 /* IAPAssembler.swift in Sources */,
 				44A4D2CF12CE366D45C77A41 /* FirebaseConfig.swift in Sources */,
 				44A4D20D7053909BC6C118C5 /* OscExtension.swift in Sources */,
-				5101A41425DE54BB00FC9E26 /* FortniteSavedHUDLayoutRects.swift in Sources */,
 				44A4DAC8968032FDEFCB17F4 /* OscAssembler.swift in Sources */,
 				44A4DAB1661E942AC658F439 /* AbsoluteTouchHandler.m in Sources */,
 				44A4DA475572FF7971B7720C /* Controller.m in Sources */,
@@ -869,6 +860,7 @@
 				44A4D67D7C43E9E24539DAA1 /* Limelight.m in Sources */,
 				E74CE93925D5DD6400EF14C2 /* FortniteHUDCustomization.swift in Sources */,
 				44A4DD866C360012F8F7EB37 /* StreamConfiguration.m in Sources */,
+				44A4D53606BEC6E6AB0E3690 /* FortniteButtonType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -956,7 +948,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 5Y286T46P4;
+				DEVELOPMENT_TEAM = E4H6XCERNK;
 				FIREBASE_CONFIG = "GoogleService-Info-reKairos";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
@@ -1054,7 +1046,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 5Y286T46P4;
+				DEVELOPMENT_TEAM = E4H6XCERNK;
 				FIREBASE_CONFIG = "GoogleService-Info-reKairos";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
@@ -1211,7 +1203,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 5Y286T46P4;
+				DEVELOPMENT_TEAM = E4H6XCERNK;
 				FIREBASE_CONFIG = "GoogleService-Info";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
@@ -1246,7 +1238,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 5Y286T46P4;
+				DEVELOPMENT_TEAM = E4H6XCERNK;
 				FIREBASE_CONFIG = "GoogleService-Info";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
@@ -1338,7 +1330,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 5Y286T46P4;
+				DEVELOPMENT_TEAM = E4H6XCERNK;
 				FIREBASE_CONFIG = "GoogleService-Info";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
