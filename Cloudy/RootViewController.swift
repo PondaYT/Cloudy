@@ -130,7 +130,11 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIApplication.shared.isIdleTimerDisabled = true
-        initializeViews()
+        // NASTY HACK, if we are coming back from overlaying view controller,
+        // it will not appear animated anymore
+        if animated {
+            initializeViews()
+        }
         checkDonationReminder()
     }
 
