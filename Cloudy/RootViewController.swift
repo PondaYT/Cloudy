@@ -134,6 +134,8 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
         // it will not appear animated anymore
         if animated {
             initializeViews()
+        } else {
+            createOnScreenControls()
         }
         checkDonationReminder()
     }
