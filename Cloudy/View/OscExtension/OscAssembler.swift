@@ -12,7 +12,7 @@ extension OscAssembler where Self: Assembler {
 
     func resolve() -> OscExtension? {
         #if REKAIROS
-            return nil
+            return FortniteHUD()
         #else
             return nil
         #endif

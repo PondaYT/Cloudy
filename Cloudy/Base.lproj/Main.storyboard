@@ -1134,18 +1134,18 @@
                     </view>
                     <navigationItem key="navigationItem" id="vGo-dQ-1Kn"/>
                     <connections>
-                        <outlet property="HUDSettingsTopConstraint" destination="jPa-lO-hiU" id="501-b6-XgR"/>
-                        <outlet property="HUDSettingsView" destination="1lv-4c-n9x" id="me5-o7-FGc"/>
                         <outlet property="buildingHUDView" destination="mA5-Wl-YSh" id="mfV-48-Hcl"/>
-                        <outlet property="buttonSettingLabel" destination="B6p-uq-H9F" id="ffc-bK-UO6"/>
                         <outlet property="combatHUDView" destination="RF1-9H-brL" id="H3M-td-QbX"/>
+                        <outlet property="currentModeLabel" destination="Dd6-zD-Zhj" id="fsl-EL-eA5"/>
                         <outlet property="doneButton" destination="zQc-67-VAd" id="CDB-KT-aXL"/>
                         <outlet property="editHUDView" destination="6cD-ka-tIu" id="xDx-0g-TYx"/>
-                        <outlet property="editViewLabel" destination="Dd6-zD-Zhj" id="fsl-EL-eA5"/>
-                        <outlet property="pullDownHUDButton" destination="PuM-rr-T7l" id="cHy-xy-YNr"/>
+                        <outlet property="hudSettingsTopConstraint" destination="jPa-lO-hiU" id="501-b6-XgR"/>
+                        <outlet property="pullDownSettingsPanelButton" destination="PuM-rr-T7l" id="cHy-xy-YNr"/>
                         <outlet property="saveButton" destination="mdE-cU-bfS" id="pS4-1K-rtF"/>
-                        <outlet property="slider" destination="NTE-MR-8Xe" id="8Bf-zy-xHX"/>
-                        <outlet property="switchViewButton" destination="y20-Xh-FRc" id="hXG-IK-VNO"/>
+                        <outlet property="scalingSlider" destination="NTE-MR-8Xe" id="8Bf-zy-xHX"/>
+                        <outlet property="selectedButtonLabel" destination="B6p-uq-H9F" id="ffc-bK-UO6"/>
+                        <outlet property="settingsPanel" destination="1lv-4c-n9x" id="me5-o7-FGc"/>
+                        <outlet property="switchModeButton" destination="y20-Xh-FRc" id="hXG-IK-VNO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PTG-xv-5Um" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
