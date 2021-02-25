@@ -61,6 +61,7 @@
 		E71AF2EB25E2DF1900F76E5B /* FortniteHUDPositionKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71AF2EA25E2DF1900F76E5B /* FortniteHUDPositionKeys.swift */; };
 		E74CE8D225D5B0D900EF14C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74CE8D125D5B0D900EF14C2 /* LaunchScreen.storyboard */; };
 		E74CE8D625D5B0F300EF14C2 /* LaunchScreenReKairos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74CE8D525D5B0F200EF14C2 /* LaunchScreenReKairos.storyboard */; };
+		E798DD6B25DED38F00AF70AE /* LaunchScreenAppstore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E798DD6A25DED38F00AF70AE /* LaunchScreenAppstore.storyboard */; };
 		E74CE93825D5DD6400EF14C2 /* FortniteHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74CE90225D5DD6300EF14C2 /* FortniteHUD.swift */; };
 		E74CE93925D5DD6400EF14C2 /* FortniteHUDCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74CE90325D5DD6300EF14C2 /* FortniteHUDCustomization.swift */; };
 		E74CE93A25D5DD6400EF14C2 /* HUDBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E74CE90625D5DD6300EF14C2 /* HUDBackground.jpg */; };
@@ -243,6 +244,7 @@
 		E74CE93525D5DD6300EF14C2 /* Reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reload.png; sourceTree = "<group>"; };
 		E74CE93625D5DD6300EF14C2 /* Repair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Repair.png; sourceTree = "<group>"; };
 		E74CE93725D5DD6300EF14C2 /* Cycle Weapons Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cycle Weapons Up.png"; sourceTree = "<group>"; };
+		E798DD6A25DED38F00AF70AE /* LaunchScreenAppstore.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreenAppstore.storyboard; sourceTree = "<group>"; };
 		E7B87E2325338121004358E3 /* Cloudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cloudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7B87E2A25338121004358E3 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		E7B87E2D25338121004358E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -605,6 +607,7 @@
 				E7B87E2C25338121004358E3 /* Main.storyboard */,
 				E74CE8D125D5B0D900EF14C2 /* LaunchScreen.storyboard */,
 				E74CE8D525D5B0F200EF14C2 /* LaunchScreenReKairos.storyboard */,
+				E798DD6A25DED38F00AF70AE /* LaunchScreenAppstore.storyboard */,
 				44A4D1438C45504101E3F0F6 /* App */,
 				44A4D35F4287C173F7E152C8 /* Extension */,
 				44A4D54D8E4FC726157DAB44 /* Model */,
@@ -706,6 +709,7 @@
 				E74CE95B25D5DD6400EF14C2 /* Slot 1.png in Resources */,
 				E74CE93A25D5DD6400EF14C2 /* HUDBackground.jpg in Resources */,
 				E74CE94A25D5DD6400EF14C2 /* Pyramid Selected.png in Resources */,
+				E798DD6B25DED38F00AF70AE /* LaunchScreenAppstore.storyboard in Resources */,
 				E7B87E3025338124004358E3 /* Assets.xcassets in Resources */,
 				E74CE95D25D5DD6400EF14C2 /* Autorun.png in Resources */,
 				E74CE95E25D5DD6400EF14C2 /* Edit.png in Resources */,
@@ -1339,7 +1343,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LAUNCH_SCREEN_NAME = LaunchScreen;
+				LAUNCH_SCREEN_NAME = LaunchScreenAppstore;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

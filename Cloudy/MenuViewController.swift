@@ -31,6 +31,7 @@ class MenuViewController: UIViewController {
         UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
     }
 
+
     /// View references
     @IBOutlet var shadowViews:                 [UIView]!
     @IBOutlet var viewsToRemoveForAppstore:    [UIView]!
@@ -50,6 +51,8 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var buttonPatreon:              UIImageView!
     @IBOutlet weak var buttonDiscord:              UIImageView!
     @IBOutlet weak var buttonTipJar:               UIImageView!
+    @IBOutlet weak var buttonGoogle:               UIImageView!
+    @IBOutlet weak var buttonAddBookmark:          UIImageView!
     @IBOutlet weak var allowInlineFeedback:        UISwitch!
     @IBOutlet weak var standaloneSwitch:           UISwitch!
     @IBOutlet weak var controllerHackSwitch:       UISwitch!
@@ -111,6 +114,12 @@ class MenuViewController: UIViewController {
         // tap for discord button
         let tapDiscord = UITapGestureRecognizer(target: self, action: #selector(onDiscordButtonPressed))
         buttonDiscord.addGestureRecognizer(tapDiscord)
+        // tap for google button
+        let tapGoogle = UITapGestureRecognizer(target: self, action: #selector(onGoogleButtonPressed))
+        buttonGoogle.addGestureRecognizer(tapGoogle)
+        // tap for add bookmark
+        let tapAddBookmark = UITapGestureRecognizer(target: self, action: #selector(onAddBookmarkPressed))
+        buttonAddBookmark.addGestureRecognizer(tapAddBookmark)
         // init
         userAgentTextField.text = UserDefaults.standard.manualUserAgent
         manualUserAgent.isOn = UserDefaults.standard.useManualUserAgent
@@ -296,6 +305,19 @@ extension MenuViewController {
         overlayController?.showOverlay(for: Navigator.Config.Url.patreon.absoluteString)
         hideMenu()
     }
+
+    /// Handle google shortcut
+    @IBAction func onGoogleButtonPressed(_ sender: Any) {
+        webController?.navigateTo(address: Navigator.Config.Url.google.absoluteString)
+        hideMenu()
+    }
+
+    /// Handle add bookmark
+    @IBAction func onAddBookmarkPressed(_ sender: Any) {
+        alerter?.showAlert(for: .comingSoonAddBookmark)
+        hideMenu()
+    }
+
 
     /// Handle tip jar button
     @objc func onTipJarPressed(_ sender: Any) {

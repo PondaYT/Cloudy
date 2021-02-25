@@ -12,6 +12,7 @@ class Alerter {
         case cannotMakePayments
         case somethingWentWrong
         case purchaseSuccess
+        case comingSoonAddBookmark
     }
 
     /// Actions for alerts
@@ -26,7 +27,8 @@ class Alerter {
         .tipChoice: ("Wooohaaa! <3", "Thank you for your consideration to support our development. Select the size of your tip!"),
         .cannotMakePayments: ("Too sad", "It seems you are not allowed to make any payments!"),
         .somethingWentWrong: ("Strange", "Something went wrong. Please try again later"),
-        .purchaseSuccess: ("You are the best!", "Huge thanks for supporting the development <3")
+        .purchaseSuccess: ("You are the best!", "Huge thanks for supporting the development <3"),
+        .comingSoonAddBookmark: ("Coming soon!", "Adding bookmarks will be added soon")
     ]
 
     /// The view controller it acts on

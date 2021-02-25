@@ -38,13 +38,13 @@ class Navigator {
 
     /// Get the initial navigation
     var initialWebsite: URL {
-        if let lastVisitedUrl = UserDefaults.standard.lastVisitedUrl {
-            return lastVisitedUrl
-        }
-        #if NON_APPSTORE
-            return Config.Url.googleStadia
-        #else
+        #if APPSTORE
             return Config.Url.google
+        #else
+            if let lastVisitedUrl = UserDefaults.standard.lastVisitedUrl {
+                return lastVisitedUrl
+            }
+            return Config.Url.googleStadia
         #endif
 
     }
