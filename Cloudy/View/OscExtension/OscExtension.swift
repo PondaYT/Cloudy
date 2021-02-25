@@ -6,8 +6,10 @@ import UIKit
 /// The on screen controls extensions
 @objc protocol OscExtension {
 
+    /// Initialize extension in given layer
+    func initialize(in layer: CALayer)
     /// Will be invoked once the on screen controls are drawn
-    func drawButtons(in layer: CALayer)
+    func drawButtons()
 
     #if !APPSTORE
         /// Handle touch down event
