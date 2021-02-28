@@ -836,8 +836,11 @@ import UIKit
             } else {
                 layerToHide = combatLayer + buildLayer + editLayer
             }
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
             layerToHide.forEach { $0.isHidden = true }
             layerToShow.forEach { $0.isHidden = false }
+            CATransaction.commit()
             currentMode = mode
         }
 
