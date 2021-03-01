@@ -206,11 +206,10 @@ class FortniteHUDCustomization: UIViewController {
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
                     view.alpha = mode == self.currentMode ? 1 : 0
                     view.transform = CGAffineTransform.init(scaleX: mode == self.currentMode ? 1 : 1.2, y: mode == self.currentMode ? 1 : 1.2)
-                })
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                }, completion: { _ in
                     self.switchModeButton.isUserInteractionEnabled = true
                     view.transform = CGAffineTransform.init(scaleX: mode == self.currentMode ? 1 : 0.75, y: mode == self.currentMode ? 1 : 0.75)
-                }
+                })
             }
             currentModeLabel.text = nextModeConfig.title
         }
@@ -247,7 +246,6 @@ class FortniteHUDCustomization: UIViewController {
 
         /// Close editing view
         @IBAction func dismissHUDController() {
-            
             if buttonLayoutChanged {
                 let alert = UIAlertController(title: "HUD Changed", message: "Do you want to save HUD Layout before exiting HUD Layout Tool?", preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { _ in
@@ -263,7 +261,7 @@ class FortniteHUDCustomization: UIViewController {
             }
         }
     
-        func closeHUDLayoutTool() {
+        private func closeHUDLayoutTool() {
             self.settingsPanel.alpha = 0
             self.dismiss(animated: true, completion: nil)
         }
