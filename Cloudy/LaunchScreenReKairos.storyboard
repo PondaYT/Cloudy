@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_screen_rekairos" translatesAutoresizingMaskIntoConstraints="NO" id="Nay-cj-m2B">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_screen_reKairos" translatesAutoresizingMaskIntoConstraints="NO" id="Nay-cj-m2B">
                                 <rect key="frame" x="342" y="214" width="340" height="340"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="340" id="WGD-hL-0LS"/>
@@ -37,6 +37,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch_screen_rekairos" width="1024" height="1024"/>
+        <image name="launch_screen_reKairos" width="512" height="512"/>
     </resources>
 </document>
