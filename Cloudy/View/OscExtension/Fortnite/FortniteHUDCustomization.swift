@@ -44,7 +44,7 @@ class FortniteHUDCustomization: UIViewController {
         struct Constants {
             struct PullDownView {
                 static let topConstraintPulledUp   = CGFloat(-242.0)
-                static let topConstraintPulledDown = CGFloat(-40.0)
+                static let topConstraintPulledDown = CGFloat(-20.0)
                 static let imagePullUp             = UIImage(systemName: "chevron.compact.up", withConfiguration: UIImage.SymbolConfiguration(pointSize: 50, weight: .regular, scale: .default))
                 static let imagePullDown           = UIImage(systemName: "chevron.compact.down", withConfiguration: UIImage.SymbolConfiguration(pointSize: 50, weight: .regular, scale: .default))
             }
