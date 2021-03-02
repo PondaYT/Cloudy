@@ -8,5 +8,6 @@ target 'Cloudy' do
   # Pods for Cloudy
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
+  pod 'Google-Mobile-Ads-SDK'
 
 end
