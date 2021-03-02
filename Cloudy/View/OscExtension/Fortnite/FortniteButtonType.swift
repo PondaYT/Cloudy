@@ -5,7 +5,7 @@ import Foundation
 struct FortniteButtonType {
 
     enum Build: String, CaseIterable {
-        case editReset       = "Edit Reset"
+        case edit            = "Edit"
         case emoteWheel      = "Emote Wheel"
         case floorSelected   = "Floor Selected"
         case jump            = "Jump"
@@ -13,7 +13,7 @@ struct FortniteButtonType {
         case pyramidSelected = "Pyramid Selected"
         case repair          = "Repair"
         case reset           = "Reset"
-        case rotate          = "Rotate"
+        case changeMaterials = "Change Materials"
         case shootBig        = "Shoot Big"
         case shoot           = "Shoot"
         case stairSelected   = "Stair Selected"
@@ -25,7 +25,7 @@ struct FortniteButtonType {
     enum Combat: String, CaseIterable {
         case aim              = "Aim"
         case crouchDown       = "Crouch Down"
-        case editReset        = "Edit Reset"
+        case edit             = "Edit"
         case emoteWheel       = "Emote Wheel"
         case floorSelected    = "Floor Selected"
         case inventory        = "Inventory"

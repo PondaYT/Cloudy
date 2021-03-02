@@ -223,9 +223,9 @@ import UIKit
                         return true
                     }
 
-                    if (combatButtonLayers[FortniteButtonType.Combat.editReset]?.presentation()?.hitTest(touchLocation) != nil) {
+                    if (combatButtonLayers[FortniteButtonType.Combat.edit]?.presentation()?.hitTest(touchLocation) != nil) {
                         controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue)
-                        combatButtonLayerTouch[FortniteButtonType.Combat.editReset] = touch
+                        combatButtonLayerTouch[FortniteButtonType.Combat.edit] = touch
                         return true
                     }
 
@@ -334,6 +334,12 @@ import UIKit
                         buildButtonLayerTouch[FortniteButtonType.Build.pyramidSelected] = touch
                         return true
                     }
+                    
+                    if (buildButtonLayers[FortniteButtonType.Build.changeMaterials]?.presentation()?.hitTest(touchLocation)) != nil {
+                        controllerSupport.updateRightTrigger(controller, right: 0xFF)
+                        buildButtonLayerTouch[FortniteButtonType.Build.changeMaterials] = touch
+                        return true
+                    }
 
                     if (buildButtonLayers[FortniteButtonType.Build.wallSelected]?.presentation()?.hitTest(touchLocation)) != nil {
                         controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
@@ -359,9 +365,9 @@ import UIKit
                         return true
                     }
 
-                    if (buildButtonLayers[FortniteButtonType.Build.editReset]?.presentation()?.hitTest(touchLocation)) != nil {
+                    if (buildButtonLayers[FortniteButtonType.Build.edit]?.presentation()?.hitTest(touchLocation)) != nil {
                         controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
-                        buildButtonLayerTouch[FortniteButtonType.Build.editReset] = touch
+                        buildButtonLayerTouch[FortniteButtonType.Build.edit] = touch
                         return true
                     }
 
@@ -492,9 +498,9 @@ import UIKit
                         return true
                     }
 
-                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.editReset]) {
+                    if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.edit]) {
                         controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
-                        combatButtonLayerTouch[FortniteButtonType.Combat.editReset] = nil
+                        combatButtonLayerTouch[FortniteButtonType.Combat.edit] = nil
                         setMode(.editFromCombat)
                         cleanCombatTouches(controller: controller, controllerSupport: controllerSupport)
                         return true
@@ -558,6 +564,12 @@ import UIKit
                         buildButtonLayerTouch[FortniteButtonType.Build.pyramidSelected] = nil
                         return true
                     }
+                    
+                    if (touch == buildButtonLayerTouch[FortniteButtonType.Build.changeMaterials]) {
+                        controllerSupport.updateRightTrigger(controller, right: 0)
+                        buildButtonLayerTouch[FortniteButtonType.Build.changeMaterials] = nil
+                        return true
+                    }
 
                     if (touch == buildButtonLayerTouch[FortniteButtonType.Build.wallSelected]) {
                         controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.UP_FLAG.rawValue);
@@ -577,10 +589,10 @@ import UIKit
                         return true
                     }
 
-                    if (touch == buildButtonLayerTouch[FortniteButtonType.Build.editReset]) {
+                    if (touch == buildButtonLayerTouch[FortniteButtonType.Build.edit]) {
                         controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
                         setMode(.editFromBuild)
-                        buildButtonLayerTouch[FortniteButtonType.Build.editReset] = nil
+                        buildButtonLayerTouch[FortniteButtonType.Build.edit] = nil
                         return true
                     }
 
@@ -700,9 +712,9 @@ import UIKit
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.Y_FLAG.rawValue);
                 combatButtonLayerTouch[FortniteButtonType.Combat.slotPickaxe] = nil
 
-            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.editReset] != nil) {
+            } else if (combatButtonLayerTouch[FortniteButtonType.Combat.edit] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
-                combatButtonLayerTouch[FortniteButtonType.Combat.editReset] = nil
+                combatButtonLayerTouch[FortniteButtonType.Combat.edit] = nil
                 setMode(.editFromCombat)
 
             } else if (combatButtonLayerTouch[FortniteButtonType.Combat.reload] != nil) {
@@ -757,9 +769,9 @@ import UIKit
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.DOWN_FLAG.rawValue);
                 buildButtonLayerTouch[FortniteButtonType.Build.stairSelected] = nil
 
-            } else if (buildButtonLayerTouch[FortniteButtonType.Build.editReset] != nil) {
+            } else if (buildButtonLayerTouch[FortniteButtonType.Build.edit] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.LEFT_FLAG.rawValue);
-                buildButtonLayerTouch[FortniteButtonType.Build.editReset] = nil
+                buildButtonLayerTouch[FortniteButtonType.Build.edit] = nil
 
             } else if (buildButtonLayerTouch[FortniteButtonType.Build.jump] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.A_FLAG.rawValue);
@@ -836,8 +848,11 @@ import UIKit
             } else {
                 layerToHide = combatLayer + buildLayer + editLayer
             }
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
             layerToHide.forEach { $0.isHidden = true }
             layerToShow.forEach { $0.isHidden = false }
+            CATransaction.commit()
             currentMode = mode
         }
 

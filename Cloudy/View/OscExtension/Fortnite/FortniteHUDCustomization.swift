@@ -27,6 +27,12 @@ class FortniteHUDCustomization: UIViewController {
         /// Current mode
         private var currentMode:         FortniteHUD.Mode = .combat
 
+        /// Previous button selected
+        private var previousView:        UIView?
+
+        /// Did user change button layout?
+        private var buttonLayoutChanged = false
+
         /// Views per mode
         private lazy var viewsPerMode: [FortniteHUD.Mode: UIView] = [.combat: combatHUDView,
                                                                      .build: buildingHUDView,
@@ -36,7 +42,7 @@ class FortniteHUDCustomization: UIViewController {
         struct Constants {
             struct PullDownView {
                 static let topConstraintPulledUp   = CGFloat(-242.0)
-                static let topConstraintPulledDown = CGFloat(-40.0)
+                static let topConstraintPulledDown = CGFloat(-20.0)
                 static let imagePullUp             = UIImage(systemName: "chevron.compact.up", withConfiguration: UIImage.SymbolConfiguration(pointSize: 50, weight: .regular, scale: .default))
                 static let imagePullDown           = UIImage(systemName: "chevron.compact.down", withConfiguration: UIImage.SymbolConfiguration(pointSize: 50, weight: .regular, scale: .default))
             }
@@ -49,6 +55,7 @@ class FortniteHUDCustomization: UIViewController {
             let nextMode:            FortniteHUD.Mode
         }
 
+        /// Info about transitioning from one mode to the other
         private lazy var modeTransitionConfig: [FortniteHUD.Mode: ModeConfig] = [
             .editFromCombat: ModeConfig(viewsToBringToFront: [combatHUDView, settingsPanel],
                                         title: "Combat HUD",
@@ -66,6 +73,7 @@ class FortniteHUDCustomization: UIViewController {
         /// TODO, what is this tag for?
         private var tagSelected = 256
 
+        /// Button creation helper
         func createButtons(parentView: UIView, buttonTag: Int, images: [String], keyX: String, keyY: String, keyWidth: String, keyHeight: String) -> (buttonTag: Int, buttons: [UIView]) {
             let defaults              = UserDefaults.standard
             var xAxis:       CGFloat  = 0.0
@@ -81,6 +89,7 @@ class FortniteHUDCustomization: UIViewController {
             images.enumerated().forEach { index, imageName in
                 let button = UIView()
                 let image  = UIImageView()
+                print(imageName)
                 image.image = UIImage(named: imageName.appending(".png"))!
                 image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
 
@@ -155,9 +164,12 @@ class FortniteHUDCustomization: UIViewController {
             pullDownSettingsPanelButton.tag = 1200
             selectedButtonLabel.tag = 1300
 
+            buildingHUDView.transform = CGAffineTransform.init(scaleX: 0.75, y: 0.75)
             buildingHUDView.alpha = 0
+            editHUDView.transform = CGAffineTransform.init(scaleX: 0.75, y: 0.75)
             editHUDView.alpha = 0
             combatHUDView.alpha = 0
+            scalingSlider.alpha = 0
 
             settingsPanel.layer.cornerRadius = 10.0
             settingsPanel.clipsToBounds = true
@@ -168,6 +180,11 @@ class FortniteHUDCustomization: UIViewController {
                 }
             }
 
+        }
+
+        /// Hide status bar
+        override var prefersStatusBarHidden: Bool {
+            return true
         }
 
         /// Pull down extra panel
@@ -186,9 +203,20 @@ class FortniteHUDCustomization: UIViewController {
                 Log.e("Error parsing next mode")
                 return
             }
+            selectedButtonLabel.text = "No Button Selected"
+            scalingSlider.alpha = 0
+            switchModeButton.isUserInteractionEnabled = false
             currentMode = nextModeConfig.nextMode
             nextModeConfig.viewsToBringToFront.forEach { view.bringSubviewToFront($0) }
-            viewsPerMode.forEach { mode, view in view.alpha = mode == currentMode ? 1 : 0 }
+            viewsPerMode.forEach { mode, view in
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+                    view.alpha = mode == self.currentMode ? 1 : 0
+                    view.transform = CGAffineTransform.init(scaleX: mode == self.currentMode ? 1 : 1.2, y: mode == self.currentMode ? 1 : 1.2)
+                }, completion: { _ in
+                    self.switchModeButton.isUserInteractionEnabled = true
+                    view.transform = CGAffineTransform.init(scaleX: mode == self.currentMode ? 1 : 0.75, y: mode == self.currentMode ? 1 : 0.75)
+                })
+            }
             currentModeLabel.text = nextModeConfig.title
         }
 
@@ -209,12 +237,13 @@ class FortniteHUDCustomization: UIViewController {
             defaults.set(editingButtonItems.map { $0.frame.minY }, forKey: FortniteHUDPositionKeys.editHUDRectY)
             defaults.set(editingButtonItems.map { $0.frame.width }, forKey: FortniteHUDPositionKeys.editHUDRectWidth)
             defaults.set(editingButtonItems.map { $0.frame.height }, forKey: FortniteHUDPositionKeys.editHUDRectHeight)
+
+            buttonLayoutChanged = false
         }
 
         /// Scaling slider changed
         @IBAction func sliderValueChanged(sender: UISlider) {
             if tagSelected <= 117 || tagSelected == 300 {
-                print("passed")
                 let viewPassed = self.view.viewWithTag(self.tagSelected)
                 viewPassed?.frame.size.height = (50 * CGFloat(sender.value + 1.0))
                 viewPassed?.frame.size.width = (50 * CGFloat(sender.value + 1.0))
@@ -223,7 +252,23 @@ class FortniteHUDCustomization: UIViewController {
 
         /// Close editing view
         @IBAction func dismissHUDController() {
-            settingsPanel.alpha = 0
+            if buttonLayoutChanged {
+                let alert = UIAlertController(title: "HUD Changed", message: "Do you want to save HUD Layout before exiting HUD Layout Tool?", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { _ in
+                    self.saveHUD()
+                    self.closeHUDLayoutTool()
+                }))
+                alert.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.cancel, handler: { _ in
+                    self.closeHUDLayoutTool()
+                }))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                self.closeHUDLayoutTool()
+            }
+        }
+
+        private func closeHUDLayoutTool() {
+            self.settingsPanel.alpha = 0
             self.dismiss(animated: true, completion: nil)
         }
 
@@ -232,19 +277,36 @@ class FortniteHUDCustomization: UIViewController {
             if let touch = touches.first {
                 // get location
                 var location: CGPoint = .zero
-                switch currentMode {
-                    case .combat:
-                        location = touch.location(in: combatHUDView)
-                    case .build:
-                        location = touch.location(in: buildingHUDView)
-                    case .editFromCombat, .editFromBuild:
-                        location = touch.location(in: editHUDView)
-                }
+                var buttonNameIndex   = 0
+
                 // TODO what is this tag stuff?
                 if (touch.view!.tag <= 117 || touch.view!.tag == 300) && touch.view! != scalingSlider {
+                    switch currentMode {
+                        case .combat:
+                            location = touch.location(in: combatHUDView)
+                            buttonNameIndex = combatButtonItems.firstIndex(of: touch.view!)!
+                            selectedButtonLabel.text = FortniteButtonType.Combat.allCases[buttonNameIndex].rawValue.appending(" Button Setting")
+                        case .build:
+                            location = touch.location(in: buildingHUDView)
+                            buttonNameIndex = buildingButtonItems.firstIndex(of: touch.view!)!
+                            selectedButtonLabel.text = FortniteButtonType.Build.allCases[buttonNameIndex].rawValue.appending(" Button Setting")
+                        case .editFromCombat, .editFromBuild:
+                            location = touch.location(in: editHUDView)
+                            buttonNameIndex = editingButtonItems.firstIndex(of: touch.view!)!
+                            selectedButtonLabel.text = FortniteButtonType.Edit.allCases[buttonNameIndex].rawValue.appending(" Button Setting")
+                    }
+                    scalingSlider.alpha = 1
                     location.x -= touch.view!.frame.width / 2
                     location.y -= touch.view!.frame.height / 2
                     touch.view!.frame = CGRect.init(x: location.x, y: location.y, width: touch.view!.frame.width, height: touch.view!.frame.height)
+                    scalingSlider.value = Float(touch.view!.frame.size.height / 50) - 1
+                    if previousView != nil {
+                        previousView?.layer.borderWidth = 0
+                    }
+                    touch.view!.layer.borderWidth = 2
+                    touch.view!.layer.borderColor = UIColor.white.cgColor
+                    previousView = touch.view!
+                    tagSelected = touch.view!.tag
                 } else {
                     return
                 }
@@ -266,6 +328,7 @@ class FortniteHUDCustomization: UIViewController {
                 }
                 // TODO what is this tag stuff?
                 if (touch.view!.tag <= 117 || touch.view!.tag == 300) && touch.view! != scalingSlider {
+                    buttonLayoutChanged = true
                     location.x -= touch.view!.frame.width / 2
                     location.y -= touch.view!.frame.height / 2
                     touch.view!.frame = CGRect.init(x: location.x, y: location.y, width: touch.view!.frame.width, height: touch.view!.frame.height)

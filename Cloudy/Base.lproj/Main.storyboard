@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18121" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad10_5" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18092"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -985,10 +985,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1lv-4c-n9x">
-                                <rect key="frame" x="241" y="-242" width="630" height="300"/>
+                                <rect key="frame" x="256" y="-242" width="600" height="300"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="NTE-MR-8Xe">
-                                        <rect key="frame" x="25" y="189" width="580" height="31"/>
+                                        <rect key="frame" x="25" y="189" width="550" height="31"/>
                                         <connections>
                                             <action selector="sliderValueChangedWithSender:" destination="pd4-tx-jp8" eventType="valueChanged" id="jrE-lz-81q"/>
                                         </connections>
@@ -1004,7 +1004,7 @@
                                         <state key="normal" title=" Switch Mode" image="switch.2" catalog="system">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
-                                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                             </preferredSymbolConfiguration>
                                         </state>
                                         <connections>
@@ -1018,16 +1018,17 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQc-67-VAd">
-                                        <rect key="frame" x="533" y="242" width="70" height="50"/>
+                                        <rect key="frame" x="478" y="242" width="95" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="aKc-Bl-w7u"/>
-                                            <constraint firstAttribute="width" constant="70" id="mCc-B8-vLf"/>
+                                            <constraint firstAttribute="width" constant="95" id="mCc-B8-vLf"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="checkmark.circle.fill" catalog="system">
+                                        <state key="normal" title=" Done" image="checkmark.circle.fill" catalog="system">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
-                                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                             </preferredSymbolConfiguration>
                                         </state>
                                         <connections>
@@ -1035,16 +1036,17 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdE-cU-bfS">
-                                        <rect key="frame" x="445" y="242" width="80" height="50"/>
+                                        <rect key="frame" x="380" y="242" width="90" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="ArE-2H-nrZ"/>
-                                            <constraint firstAttribute="width" constant="80" id="oHX-xy-bxt"/>
+                                            <constraint firstAttribute="width" constant="90" id="oHX-xy-bxt"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="doc.fill" catalog="system">
+                                        <state key="normal" title=" Save" image="doc.fill" catalog="system">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
-                                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                             </preferredSymbolConfiguration>
                                         </state>
                                         <connections>
@@ -1052,7 +1054,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PuM-rr-T7l">
-                                        <rect key="frame" x="245" y="242" width="140" height="50"/>
+                                        <rect key="frame" x="230" y="242" width="140" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="140" id="0EA-tB-GeB"/>
                                             <constraint firstAttribute="height" constant="50" id="Mzc-kE-9df"/>
@@ -1092,7 +1094,7 @@
                                     <constraint firstItem="zQc-67-VAd" firstAttribute="leading" secondItem="mdE-cU-bfS" secondAttribute="trailing" constant="8" id="6Uk-oD-RKH"/>
                                     <constraint firstAttribute="bottom" secondItem="y20-Xh-FRc" secondAttribute="bottom" constant="8" id="AYi-ZT-acl"/>
                                     <constraint firstItem="Dd6-zD-Zhj" firstAttribute="top" secondItem="1lv-4c-n9x" secondAttribute="top" constant="32" id="Gnw-Mi-sry"/>
-                                    <constraint firstAttribute="width" constant="630" id="NY1-jJ-foe"/>
+                                    <constraint firstAttribute="width" constant="600" id="NY1-jJ-foe"/>
                                     <constraint firstItem="y20-Xh-FRc" firstAttribute="leading" secondItem="1lv-4c-n9x" secondAttribute="leading" constant="27" id="Now-lA-fCs"/>
                                     <constraint firstAttribute="height" constant="300" id="RbC-du-tzP"/>
                                     <constraint firstItem="B6p-uq-H9F" firstAttribute="leading" secondItem="1lv-4c-n9x" secondAttribute="leading" constant="27" id="Y05-5S-Q3m"/>

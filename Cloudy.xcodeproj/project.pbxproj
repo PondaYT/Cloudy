@@ -56,18 +56,17 @@
 		44A4DED2C6C4D9C412848C50 /* KeyboardSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D79906D5F591C2BF5F8D /* KeyboardSupport.m */; };
 		44A4DF24B14D4379ED99E351 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DC3B80142D290BBCE80C /* Float.swift */; };
 		44A4DFD94292E1FAA625AFA6 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D15FC7FB3F6347B248D4 /* IAPManager.swift */; };
+		51894F6925EE1A2F0054EAD8 /* Rotate.png in Resources */ = {isa = PBXBuildFile; fileRef = 51894F6825EE1A2E0054EAD8 /* Rotate.png */; };
 		5CDDBA53FB1B62159C8668EF /* Pods_Cloudy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BF8562B1619F13A7254171F /* Pods_Cloudy.framework */; };
 		E712FF9825520978003CF78C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E712FF9725520978003CF78C /* Images.xcassets */; };
 		E71AF2EB25E2DF1900F76E5B /* FortniteHUDPositionKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71AF2EA25E2DF1900F76E5B /* FortniteHUDPositionKeys.swift */; };
 		E74CE8D225D5B0D900EF14C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74CE8D125D5B0D900EF14C2 /* LaunchScreen.storyboard */; };
 		E74CE8D625D5B0F300EF14C2 /* LaunchScreenReKairos.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E74CE8D525D5B0F200EF14C2 /* LaunchScreenReKairos.storyboard */; };
-		E798DD6B25DED38F00AF70AE /* LaunchScreenAppstore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E798DD6A25DED38F00AF70AE /* LaunchScreenAppstore.storyboard */; };
 		E74CE93825D5DD6400EF14C2 /* FortniteHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74CE90225D5DD6300EF14C2 /* FortniteHUD.swift */; };
 		E74CE93925D5DD6400EF14C2 /* FortniteHUDCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74CE90325D5DD6300EF14C2 /* FortniteHUDCustomization.swift */; };
 		E74CE93A25D5DD6400EF14C2 /* HUDBackground.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E74CE90625D5DD6300EF14C2 /* HUDBackground.jpg */; };
 		E74CE93B25D5DD6400EF14C2 /* Floor Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE90825D5DD6300EF14C2 /* Floor Selected.png */; };
 		E74CE93C25D5DD6400EF14C2 /* Quick Heal.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE90925D5DD6300EF14C2 /* Quick Heal.png */; };
-		E74CE93D25D5DD6400EF14C2 /* Open Door.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE90A25D5DD6300EF14C2 /* Open Door.png */; };
 		E74CE93E25D5DD6400EF14C2 /* Mic Unmuted.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE90B25D5DD6300EF14C2 /* Mic Unmuted.png */; };
 		E74CE93F25D5DD6400EF14C2 /* Wall Selected.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE90C25D5DD6300EF14C2 /* Wall Selected.png */; };
 		E74CE94025D5DD6400EF14C2 /* Jump.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE90D25D5DD6300EF14C2 /* Jump.png */; };
@@ -76,7 +75,7 @@
 		E74CE94325D5DD6400EF14C2 /* Inventory.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE91025D5DD6300EF14C2 /* Inventory.png */; };
 		E74CE94425D5DD6400EF14C2 /* Edit Reset.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE91125D5DD6300EF14C2 /* Edit Reset.png */; };
 		E74CE94525D5DD6400EF14C2 /* Switch To Build.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE91225D5DD6300EF14C2 /* Switch To Build.png */; };
-		E74CE94625D5DD6400EF14C2 /* Rotate.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE91325D5DD6300EF14C2 /* Rotate.png */; };
+		E74CE94625D5DD6400EF14C2 /* Change Materials.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE91325D5DD6300EF14C2 /* Change Materials.png */; };
 		E74CE94725D5DD6400EF14C2 /* Move Joystick.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE91425D5DD6300EF14C2 /* Move Joystick.png */; };
 		E74CE94825D5DD6400EF14C2 /* Wall Unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE91525D5DD6300EF14C2 /* Wall Unselected.png */; };
 		E74CE94925D5DD6400EF14C2 /* Throw.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE91625D5DD6300EF14C2 /* Throw.png */; };
@@ -87,7 +86,6 @@
 		E74CE94E25D5DD6400EF14C2 /* Reset.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE91B25D5DD6300EF14C2 /* Reset.png */; };
 		E74CE94F25D5DD6400EF14C2 /* Emote Wheel.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE91C25D5DD6300EF14C2 /* Emote Wheel.png */; };
 		E74CE95025D5DD6400EF14C2 /* Use.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE91D25D5DD6300EF14C2 /* Use.png */; };
-		E74CE95125D5DD6400EF14C2 /* Slot 5.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE91E25D5DD6300EF14C2 /* Slot 5.png */; };
 		E74CE95225D5DD6400EF14C2 /* Crouch Down.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE91F25D5DD6300EF14C2 /* Crouch Down.png */; };
 		E74CE95325D5DD6400EF14C2 /* Switch To Combat.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE92025D5DD6300EF14C2 /* Switch To Combat.png */; };
 		E74CE95425D5DD6400EF14C2 /* Quick Chat.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE92125D5DD6300EF14C2 /* Quick Chat.png */; };
@@ -113,6 +111,7 @@
 		E74CE96825D5DD6400EF14C2 /* Reload.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE93525D5DD6300EF14C2 /* Reload.png */; };
 		E74CE96925D5DD6400EF14C2 /* Repair.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE93625D5DD6300EF14C2 /* Repair.png */; };
 		E74CE96A25D5DD6400EF14C2 /* Cycle Weapons Up.png in Resources */ = {isa = PBXBuildFile; fileRef = E74CE93725D5DD6300EF14C2 /* Cycle Weapons Up.png */; };
+		E798DD6B25DED38F00AF70AE /* LaunchScreenAppstore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E798DD6A25DED38F00AF70AE /* LaunchScreenAppstore.storyboard */; };
 		E7B87E2B25338121004358E3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B87E2A25338121004358E3 /* RootViewController.swift */; };
 		E7B87E2E25338121004358E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7B87E2C25338121004358E3 /* Main.storyboard */; };
 		E7B87E3025338124004358E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7B87E2F25338124004358E3 /* Assets.xcassets */; };
@@ -184,6 +183,7 @@
 		44A4DF967486C5BEC663A336 /* Alerter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alerter.swift; sourceTree = "<group>"; };
 		44A4DFB90BD884CB5041E57D /* WKUserScript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKUserScript.swift; sourceTree = "<group>"; };
 		44A4DFE6F4FDD51E58D517B4 /* OscAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OscAssembler.swift; sourceTree = "<group>"; };
+		51894F6825EE1A2E0054EAD8 /* Rotate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rotate.png; sourceTree = "<group>"; };
 		79B35440DA7901C4949EFDC7 /* Pods-Cloudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.release.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.release.xcconfig"; sourceTree = "<group>"; };
 		79E113C5587D0E3EF509C81C /* Pods-Cloudy.rekairos debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.rekairos debug.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.rekairos debug.xcconfig"; sourceTree = "<group>"; };
 		8C777E5DB6AA0540BAAEE53E /* Pods-Cloudy.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.appstore.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.appstore.xcconfig"; sourceTree = "<group>"; };
@@ -198,7 +198,6 @@
 		E74CE90625D5DD6300EF14C2 /* HUDBackground.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HUDBackground.jpg; sourceTree = "<group>"; };
 		E74CE90825D5DD6300EF14C2 /* Floor Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Floor Selected.png"; sourceTree = "<group>"; };
 		E74CE90925D5DD6300EF14C2 /* Quick Heal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Quick Heal.png"; sourceTree = "<group>"; };
-		E74CE90A25D5DD6300EF14C2 /* Open Door.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Open Door.png"; sourceTree = "<group>"; };
 		E74CE90B25D5DD6300EF14C2 /* Mic Unmuted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mic Unmuted.png"; sourceTree = "<group>"; };
 		E74CE90C25D5DD6300EF14C2 /* Wall Selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Wall Selected.png"; sourceTree = "<group>"; };
 		E74CE90D25D5DD6300EF14C2 /* Jump.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Jump.png; sourceTree = "<group>"; };
@@ -207,7 +206,7 @@
 		E74CE91025D5DD6300EF14C2 /* Inventory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Inventory.png; sourceTree = "<group>"; };
 		E74CE91125D5DD6300EF14C2 /* Edit Reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Edit Reset.png"; sourceTree = "<group>"; };
 		E74CE91225D5DD6300EF14C2 /* Switch To Build.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Switch To Build.png"; sourceTree = "<group>"; };
-		E74CE91325D5DD6300EF14C2 /* Rotate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rotate.png; sourceTree = "<group>"; };
+		E74CE91325D5DD6300EF14C2 /* Change Materials.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Change Materials.png"; sourceTree = "<group>"; };
 		E74CE91425D5DD6300EF14C2 /* Move Joystick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Move Joystick.png"; sourceTree = "<group>"; };
 		E74CE91525D5DD6300EF14C2 /* Wall Unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Wall Unselected.png"; sourceTree = "<group>"; };
 		E74CE91625D5DD6300EF14C2 /* Throw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Throw.png; sourceTree = "<group>"; };
@@ -218,7 +217,6 @@
 		E74CE91B25D5DD6300EF14C2 /* Reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reset.png; sourceTree = "<group>"; };
 		E74CE91C25D5DD6300EF14C2 /* Emote Wheel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Emote Wheel.png"; sourceTree = "<group>"; };
 		E74CE91D25D5DD6300EF14C2 /* Use.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Use.png; sourceTree = "<group>"; };
-		E74CE91E25D5DD6300EF14C2 /* Slot 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Slot 5.png"; sourceTree = "<group>"; };
 		E74CE91F25D5DD6300EF14C2 /* Crouch Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Crouch Down.png"; sourceTree = "<group>"; };
 		E74CE92025D5DD6300EF14C2 /* Switch To Combat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Switch To Combat.png"; sourceTree = "<group>"; };
 		E74CE92125D5DD6300EF14C2 /* Quick Chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Quick Chat.png"; sourceTree = "<group>"; };
@@ -526,7 +524,6 @@
 			children = (
 				E74CE90825D5DD6300EF14C2 /* Floor Selected.png */,
 				E74CE90925D5DD6300EF14C2 /* Quick Heal.png */,
-				E74CE90A25D5DD6300EF14C2 /* Open Door.png */,
 				E74CE90B25D5DD6300EF14C2 /* Mic Unmuted.png */,
 				E74CE90C25D5DD6300EF14C2 /* Wall Selected.png */,
 				E74CE90D25D5DD6300EF14C2 /* Jump.png */,
@@ -535,7 +532,7 @@
 				E74CE91025D5DD6300EF14C2 /* Inventory.png */,
 				E74CE91125D5DD6300EF14C2 /* Edit Reset.png */,
 				E74CE91225D5DD6300EF14C2 /* Switch To Build.png */,
-				E74CE91325D5DD6300EF14C2 /* Rotate.png */,
+				E74CE91325D5DD6300EF14C2 /* Change Materials.png */,
 				E74CE91425D5DD6300EF14C2 /* Move Joystick.png */,
 				E74CE91525D5DD6300EF14C2 /* Wall Unselected.png */,
 				E74CE91625D5DD6300EF14C2 /* Throw.png */,
@@ -546,7 +543,6 @@
 				E74CE91B25D5DD6300EF14C2 /* Reset.png */,
 				E74CE91C25D5DD6300EF14C2 /* Emote Wheel.png */,
 				E74CE91D25D5DD6300EF14C2 /* Use.png */,
-				E74CE91E25D5DD6300EF14C2 /* Slot 5.png */,
 				E74CE91F25D5DD6300EF14C2 /* Crouch Down.png */,
 				E74CE92025D5DD6300EF14C2 /* Switch To Combat.png */,
 				E74CE92125D5DD6300EF14C2 /* Quick Chat.png */,
@@ -559,6 +555,7 @@
 				E74CE92825D5DD6300EF14C2 /* Slot 1.png */,
 				E74CE92925D5DD6300EF14C2 /* Exit.png */,
 				E74CE92A25D5DD6300EF14C2 /* Autorun.png */,
+				51894F6825EE1A2E0054EAD8 /* Rotate.png */,
 				E74CE92B25D5DD6300EF14C2 /* Edit.png */,
 				E74CE92C25D5DD6300EF14C2 /* Shoot Big.png */,
 				E74CE92D25D5DD6300EF14C2 /* Interact.png */,
@@ -704,7 +701,7 @@
 				E74CE93E25D5DD6400EF14C2 /* Mic Unmuted.png in Resources */,
 				E74CE95425D5DD6400EF14C2 /* Quick Chat.png in Resources */,
 				E74CE95C25D5DD6400EF14C2 /* Exit.png in Resources */,
-				E74CE94625D5DD6400EF14C2 /* Rotate.png in Resources */,
+				E74CE94625D5DD6400EF14C2 /* Change Materials.png in Resources */,
 				E74CE95A25D5DD6400EF14C2 /* Open Chest.png in Resources */,
 				E74CE95B25D5DD6400EF14C2 /* Slot 1.png in Resources */,
 				E74CE93A25D5DD6400EF14C2 /* HUDBackground.jpg in Resources */,
@@ -728,10 +725,10 @@
 				E74CE95525D5DD6400EF14C2 /* Slot 4.png in Resources */,
 				E74CE96725D5DD6400EF14C2 /* Pyramid Unselected.png in Resources */,
 				E74CE96225D5DD6400EF14C2 /* Aim.png in Resources */,
-				E74CE93D25D5DD6400EF14C2 /* Open Door.png in Resources */,
 				E74CE93F25D5DD6400EF14C2 /* Wall Selected.png in Resources */,
 				E74CE96325D5DD6400EF14C2 /* Slot Pickaxe.png in Resources */,
 				E74CE93C25D5DD6400EF14C2 /* Quick Heal.png in Resources */,
+				51894F6925EE1A2F0054EAD8 /* Rotate.png in Resources */,
 				E74CE96025D5DD6400EF14C2 /* Interact.png in Resources */,
 				E74CE96425D5DD6400EF14C2 /* Shoot.png in Resources */,
 				E74CE8D225D5B0D900EF14C2 /* LaunchScreen.storyboard in Resources */,
@@ -740,7 +737,6 @@
 				E74CE95625D5DD6400EF14C2 /* Confirm.png in Resources */,
 				E74CE96925D5DD6400EF14C2 /* Repair.png in Resources */,
 				E74CE94325D5DD6400EF14C2 /* Inventory.png in Resources */,
-				E74CE95125D5DD6400EF14C2 /* Slot 5.png in Resources */,
 				E74CE94925D5DD6400EF14C2 /* Throw.png in Resources */,
 				44A4D1D59DDAD23076FBC44B /* GoogleService-Info-reKairos.plist in Resources */,
 				44A4D538B2EFCF7F087123F8 /* GoogleService-Info.plist in Resources */,
