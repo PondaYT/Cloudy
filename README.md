@@ -1,118 +1,243 @@
 # Cloudy [![Build Status](https://app.bitrise.io/app/49fce2359d6d6a84/status.svg?token=TBrG_oLSXY9A8UfySh1Y9w&branch=develop)](https://app.bitrise.io/app/49fce2359d6d6a84)
 
-[![Cloudy Server](https://img.shields.io/discord/770202968758419467.svg?label=Discord&logo=Discord&colorB=7289da&style=for-the-badge)](https://discord.gg/9sgTxFx)
+[![Cloudy Server](https://img.shields.io/discord/591914197219016707.svg?label=Discord&logo=Discord&colorB=7289da&style=for-the-badge)](https://discord.gg/9sgTxFx)
 
-A cloud-gaming ready browser for iOS.
+A cloud gaming ready browser for iOS 
+and iPadOS.
+
 
 ![](Media/cloudy.gif)
 
-# Features
 
-## Supported Features
+Table of contents
+================
+<!--ts-->
+- [Table of contents](#table-of-contents)
+- [What is Cloudy?](#what-is-cloudy)
+- [Support the development](#support-the-development)
+	- [Trello development board](#trello-development-board)
+- [Features](#features)
+	- [Supported](#supported)
+	- [In development](#in-development)
+	- [Planned for the future](#planned-for-the-future)
+- [Ways to get the Cloudy App on your iDevice](#ways-to-get-the-cloudy-app-on-your-idevice)
+	- [1. Build it your own](#1-build-it-your-own)
+		- [Prerequisites](#prerequisites)
+	- [2. Sideload an unsigned .IPA](#2-sideload-an-unsigned-ipa)
+		- [Windows](#windows)
+		- [Mac](#mac)
+- [Video Guides](#video-guides)
 
-- Right now it opens the Stadia website automatically on first startup
-- Supports Bluetooth® gaming controllers (and keyboards in some titles)
-- Supports Fullscreen Mode
-- Shortcuts in the address bar (just type in the following alias in order to get to the desired platform)
-  - `stadia` -> launch Stadia
-  - `gfn` -> launch GeForce NOW
-  - `boost` -> launch Boosteroid
-- If you want to go _crazy_, you can specify your custom user agent
-- Ability to reset all cookies and caches
-- For 3rd-party devs: you can launch this app via url-scheme. Examples:
-- To launch to a specific website `"cloudybrowser://site?url=https://stadia.google.com"`
-- To launch to a service (`stadia`, `luna`, `geforceNowBeta` and `geforceNow` are supported): `"cloudybrowser://site?service=geforce"`
+- [(FAQ) Frequently asked questions](#faq-frequently-asked-questions)
 
-## Features in development
 
-- Fixing broken axis controls on GeForce NOW
-- Touch controls to imitate the mouse
-- Keyboard input and control in games
-- Virtual controller input
+<!--te-->
 
-## Further development planned
+# What is Cloudy?
 
-- Proper dependency injection
-- Unit test!
-- Better abstraction of modules
+Cloudy is a gaming ready and feature-rich browser for iOS and iPadOS. You can access your supported cloud gaming service(s) directly from the App.
 
-## Trello development board
-
-Feel free to discuss features, bugs and other improvement requests on the public Trello board.
-> https://trello.com/b/A2Z965Sf
+Unlike other browsers, Cloudy is built and designed with cloud gaming in mind and focuses on a minimalistic and seemless full-screen browsing experience.
 
 # Support the development
 
- Patreon             |  Paypal
+Cloudy is **for free** and developed by a small team of volunteers.
+We appreciate **any** support towards the project in order have more time and resources for the development. <3
+
+Patreon |  Paypal
 :-------------------------:|:-------------------------:
-[![patreon](Media/becomePatreon.png)](https://www.patreon.com/cloudyApp)  |  [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://paypal.me/pools/c/8tPw2veZIm)
+[![patreon](Media/patreon.png)](https://www.patreon.com/cloudyApp) | [![paypal](Media/paypal.png)](https://paypal.me/pools/c/8tKK9M8XUi)
+
+## Trello development board
+ 
+To check the current state of feature development, you can visit our public
+Trello development board:
+
+[https://trello.com/b/A2Z965Sf](url)
+
+# Features
+
+## Supported
+
+> **Note**
+> :--:
+> Currently, only devices with **iOS 14**+ and **iPadOS** 14+ are supported due to *WebKit* restrictions.
+
+- Quick-launching last the used website on startup (e.g. Stadia or GeForce Now)
+
+- Supports Bluetooth® gaming controllers (depending on your OS version) and keyboards in some titles
+
+- Distraction-free fullscreen experience without the status bar
+
+- Soft-locked screen borders for better focus on the content
+
+- Pre-defined **shortcuts**:
+
+	(Type in one of the following strings into the URL-bar to get get to the desired website or use the static bookmarks instead): `stadia` `gfn` `boost`
+
+- If you want to go _crazy_, you can manually specify your **Custom User Agent** to access platform specific web-features
+
+- Reset all cookies and caches (e.g. for troubleshooting)
+
+- Optional inline media playback to access **PiP-Mode** features (picture in picture)
+
+- Custom scaling to remove potential black bars while browsing
+
+- For 3rd-party developers: you can launch this app via **url-scheme**. 
+
+	Example to launch to a specific website:
+	> `cloudybrowser://site?url=https://stadia.google.com`
+
+	Example to launch to a service:
+	> `cloudybrowser://site?service=geforce`
+
+	Supported services:
+	> `stadia`, `luna`, `geforceNow` and `geforceNowBeta`
+
+## In development
+
+- Fixing broken **axis-controls** on GeForce Now
+
+- Proper **touch controls** to imitate the mouse
+
+- Seemless **keyboard input** for games
+
+
+## Planned for the future
+
+- Borderless **AirPlay 2** integration
+
+- Microphone support
+
+- Integrated iOS/iPadOS Broadcast/Screen Recording feature
+
+- Proper dependency injection
+
+
+- Better abstraction of modules
+
+- Unit test!
 
 # Ways to get the Cloudy App on your iDevice
 
-## 1. Build it on your own
+## 1. Build it your own
 
-Here is a quick guide on how to build the App on your own:
+Here is a quick guide on how to build the App on your own.
 
 ### Prerequisites
-An Intel-based Mac running macOS Catalina 10.15.4 or later & Version 12.1 (12A7403) (no other version yet supported)
 
-1. Install [XCode](https://apps.apple.com/de/app/xcode/id497799835?mt=12)
+> An **Intel-based** Mac running macOS Catalina 10.15.4 or later &
+> Version 12.1 (12A7403) (no other version yet supported)
+
+  
+
+1. Install [Xcode](https://apps.apple.com/de/app/xcode/id497799835?mt=12)
+
 2. Install [Cocoapods](https://cocoapods.org/)
-3. Download (or clone) the Cloudy [source code repostiory](https://github.com/mlostekk/Cloudy)
-└ look for a green `Code` button, hit it and select `Download ZIP` and Unzip the archive
-4. Install pods via `pod install`
-5. Doubleclick `Cloudy.xcworkspace`, XCode 12.1 should open
-6. Connect the iOS/iPadOS device to your Mac, give it some time to be recognized
-7. Select your device in XCode [`1`]
-8. Go to `Cloudy` [`2`], select `Signing & Capabilities` [`3`]
-9. Select your name inside `Team` [`4`] and change the `Bundle Identifier`[`4`] to something / whatever you like `com.your.favorite.villian`
-10. Press run [`5`] and wait until it pops up on your device
-11. Have a lot of fun streaming games on iOS/iPadOS
+
+3. Download (or clone) the Cloudy [source code](https://github.com/mlostekk/Cloudy) (look for a green `Code` button, click it and select **Download ZIP**)
+
+4. Unzip the archive file
+
+5. Install pods via `pod install`
+
+6. Doubleclick the **Cloudy.xcworkspace** file, Xcode 12.1 should now launch
+
+7. Connect you iDevice to your Mac (give it some time to be recognized by Finder)
+
+8. Select your iDevice in Xcode [`1`]
+
+9. Go to **Cloudy** [`2`], select **Signing & Capabilities** [`3`]
+
+10. Select your name inside **Team** [`4`] and change the **Bundle Identifier** [`4`] to something you like, e.g.: `com.your.favorite.villian`
+
+11. Press **run** [`5`] and wait until you get a popup message on your device
+
+12. You're all set. Have a lot of fun streaming games with the App!
 
 ![](Media/xcode.png)
 
-## 2. Sideload an unsigned IPA
+
+## 2. Sideload an unsigned .IPA
+
+Recommended read: [Official AltStore guide for Windows and macOS](https://altstore.io/faq/)
 
 ### Windows
 
-1. Make sure you have the downloadable binary version of iTunes and iCloud installed on your PC. Do __NOT__ install the version of iTunes or iCloud from the Microsoft Store.
-2. Download AltServer (requires Windows 10) from here: https://altstore.io/
-3. After installing AltServer, connect your iPhone/iPad with your PC by USB connection. 
-4. Open AltServer, and it will open in the hidden icon tray located on the right side of your taskbar (the dropdown button that looks like an up arrow, beside the volume speaker.) and click the AltServer icon (looks like a diamond).
-![](Media/statusbar_win.png)
-5. Making sure your phone is plugged in, install AltStore to your phone through this menu. You will be prompted to login to your iCloud account.
-6. Once you login to your iCloud account and click through any remaining dialog boxes, AltStore will be installed on your phone.
-**LEAVE ALTSERVER RUNNING ON YOUR PC!**
-AltServer signs Apps remotely, and will do it whenever it sees your iDevice on the same network, so make sure that it stays running so you can continue to use your Apps without issue.
-7. Download the latest **.ipa** file as provided from our [Discord](https://discord.gg/9sgTxFx) server
-**(Tip: Download it directly on your device and save it in the Files App. Then click and launch it directly in AltStore)**
+1. Make sure you have the downloadable binary version of [iTunes](https://www.apple.com/de/itunes/) and [iCloud](https://support.apple.com/de-de/HT204283) installed on your PC.
+
+> **Do NOT** install the version of iTunes from the Windows 10 App Store, because it is **not compatible** with **AltServer**.
+
+2. Download **AltServer** for Windows 10 from here: https://altstore.io/
+
+3. After installing **AltServer**, connect your device with the PC and move the `.IPA` file onto your device using iTunes to save it somewhere you can navigate to in the Files App.
+
+> Alternatively, you can directly download the [_latest release_](https://github.com/mlostekk/Cloudy/releases) from our GitHub on your device via Safari and save it in the Files App.
 ![](Media/filesapp.png)
-8. Open AltStore on your device, and navigate to the “My Apps” tab.
-(In order to launch the AltStore App, make sure that you have trusted the profile in Settings)
+
+4. Open **AltServer**, and it will open in the hidden icon tray located on the right side of your taskbar (the button that looks like an upside arrow, somewhere beside the volume speaker.) and click the **AltServer** icon (it looks like a prism or diamond ◇).
+![](Media/statusbar_win.png)
+
+5. Making sure that your iDevice is plugged in, install **AltStore** to through this menu. You will be prompted to login to your (or any other working) iTunes account.
+
+6. Once you login to your iTunes account and click through any remaining dialog boxes, **AltStore** will be installed on your iPhone/iPad.
+
+> **Important**
+> :--:
+> Leave **AltServer** running in the background or even in the autostart! **AltServer** signs the apps remotely, and will do it whenever it recognizes your iDevice on the network, so make sure that it keeps running so you can continue to use your apps without issue.
+>
+> To use this feature, you need open iTunes and enable **iTunes Wi-Fi Sync** for your device.
+
+> In order to be able to launch the **AltStore** App, you might have to trust the Signature/Profile in Settings > General > Device Management
+
+7. Open **AltStore** on your device, and navigate to the “My Apps” tab.
 ![](Media/altstore.png)
-9. Press the “+” button in the top left corner of the screen.
-10. Navigate to the downloaded **.ipa** file in the Files App through and select it.
-11. Now you can leave AltStore and find the Cloudy App on your Home Screen/App Library.
+
+8. Press the “`+`” button in the top left corner of the screen.
+
+9. Navigate to the `.IPA` file you dragged into the Files through iTunes, and click on it to install it.
+
+  
 
 ### Mac
 
-1. Download AltServer (for Mac macOS 10.14.4+) here: https://altstore.io/
-2. After installing AltServer to your Mac, plug your iPhone/iPad into your Mac. Once your phone is connected, you can click the AltServer on your status bar ◇ (diamond shaped icon) -> `Install AltStore` -> `choose your device` -> enter your iCloud account info (to assign AltSotre). 
-![](Media/statusbar_mac.png)
-3. After installing AltStore, the App will show up in your iPad/iPhone. You will need to “activate” the App by going to `System settings` -> `General` -> `Device Management` -> to allow the App with iCloud account you put in the previous step (3).
-4. Download the latest **.ipa** file as provided from our [Discord](https://discord.gg/9sgTxFx) server and unzip it.
-**(Tip: Download it directly on your iPhone/iPad and save it in the Files App. Then click and select to open it directly in AltStore)**
+1. Download **AltServer** for Mac (macOS 10.14.4+) from here: https://altstore.io/
+
+2. After installing **AltServer**, connect your device with the Mac and move the `.IPA` file onto your device using iTunes to save it somewhere you can navigate to in the Files App.
 ![](Media/filesapp.png)
-5. Open AltStore on your device, and navigate to the `My Apps` tab.
-(In order to launch the AltStore App, make sure that you have trusted the profile in Settings)
+
+> Alternatively, you can directly download the [_latest release_](https://github.com/mlostekk/Cloudy/releases) from our GitHub Repository directly on your device (via Safari) and save it in the Files App.
+
+3. Open **AltServer**, and it will open in the hidden icon tray located on the right side of your taskbar (the button that looks like an upside arrow, somewhere beside the volume speaker.) and click the **AltServer** icon (it looks like a prism or diamond ◇).
+![](Media/statusbar_mac.png)
+
+4. Making sure that your iDevice is plugged in, install **AltStore** to through this menu. You will be prompted to login to your (or any other working) iTunes account.
+
+5. Once you login to your iTunes account and click through any remaining dialog boxes, **AltStore** will be installed on your iPhone/iPad.
+
+> **Important**
+> :--:
+> Leave **AltServer** running in the background or even in the autostart! **AltServer** signs the apps remotely, and will do it whenever it recognizes your iDevice on the network, so make sure that it keeps running so you can continue to use your apps without issue.
+>
+> To use this feature, you need open iTunes and enable **iTunes Wi-Fi Sync** for your device.
+
+> In order to be able to launch the **AltStore** App, you might have to trust the Signature/Profile in Settings > General > Device Management
+
+6. Open **AltStore** on your device, and navigate to the “My Apps” tab.
 ![](Media/altstore.png)
-6. Press the “+” button in the top left corner of the screen.
-7. Navigate to the downloaded **.ipa** file in the Files App through and select it.
-8. Now you can leave AltStore and find the Cloudy App on your Home Screen/App Library
-9. Leave ALTSERVER RUNNING (on your Mac) to sideload any App or re-sign them before expiration!
-10. If you are tired of connecting your iDevice to a Mac every time, you can do this remotely by checking “Sync this iPhone/iPad over Wi-Fi” in iTunes. Then install the mail-plugin on your Mac by clicking AltServer icon -> install mail plugin. Make sure that your Mac and the iDevice are connected to the same Wi-Fi network.
-11. AltServer signs the Apps remotely, and will do it whenever it sees your device on the network, so make sure that AltServer running when you re-sign your Apps.
 
-### Mac video guide
+7. Press the “`+`” button in the top left corner of the screen.
 
+8. Navigate to the `.IPA` file you dragged into the Files through iTunes, and click on it to install it.
+
+# Video Guides
+### Sideloading on macOS
 [![](https://img.youtube.com/vi/IcerGfOW0iE/0.jpg)](https://www.youtube.com/watch?v=IcerGfOW0iE)
+
+### Introducing Fortnite Mobile with Cloudy
+[![](https://img.youtube.com/vi/mNtJXP0Oa7o/0.jpg)](https://www.youtube.com/watch?v=mNtJXP0Oa7o)
+
+# (FAQ) Frequently asked questions
+
+### Q: Wen eta?
+**A:** s0n.
