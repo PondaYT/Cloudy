@@ -26,10 +26,10 @@ class FortniteHUDCustomization: UIViewController {
 
         /// Current mode
         private var currentMode:         FortniteHUD.Mode = .combat
-    
+
         /// Previous button selected
         private var previousView:        UIView?
-    
+
         /// Did user change button layout?
         private var buttonLayoutChanged = false
 
@@ -37,8 +37,6 @@ class FortniteHUDCustomization: UIViewController {
         private lazy var viewsPerMode: [FortniteHUD.Mode: UIView] = [.combat: combatHUDView,
                                                                      .build: buildingHUDView,
                                                                      .editFromCombat: editHUDView]
-    
-        
 
         /// Some constants
         struct Constants {
@@ -57,6 +55,7 @@ class FortniteHUDCustomization: UIViewController {
             let nextMode:            FortniteHUD.Mode
         }
 
+        /// Info about transitioning from one mode to the other
         private lazy var modeTransitionConfig: [FortniteHUD.Mode: ModeConfig] = [
             .editFromCombat: ModeConfig(viewsToBringToFront: [combatHUDView, settingsPanel],
                                         title: "Combat HUD",
@@ -74,6 +73,7 @@ class FortniteHUDCustomization: UIViewController {
         /// TODO, what is this tag for?
         private var tagSelected = 256
 
+        /// Button creation helper
         func createButtons(parentView: UIView, buttonTag: Int, images: [String], keyX: String, keyY: String, keyWidth: String, keyHeight: String) -> (buttonTag: Int, buttons: [UIView]) {
             let defaults              = UserDefaults.standard
             var xAxis:       CGFloat  = 0.0
@@ -181,10 +181,9 @@ class FortniteHUDCustomization: UIViewController {
             }
 
         }
-    
-    
+
         /// Hide status bar
-        override var prefersStatusBarHidden: Bool{
+        override var prefersStatusBarHidden: Bool {
             return true
         }
 
@@ -238,7 +237,7 @@ class FortniteHUDCustomization: UIViewController {
             defaults.set(editingButtonItems.map { $0.frame.minY }, forKey: FortniteHUDPositionKeys.editHUDRectY)
             defaults.set(editingButtonItems.map { $0.frame.width }, forKey: FortniteHUDPositionKeys.editHUDRectWidth)
             defaults.set(editingButtonItems.map { $0.frame.height }, forKey: FortniteHUDPositionKeys.editHUDRectHeight)
-            
+
             buttonLayoutChanged = false
         }
 
@@ -267,7 +266,7 @@ class FortniteHUDCustomization: UIViewController {
                 self.closeHUDLayoutTool()
             }
         }
-    
+
         private func closeHUDLayoutTool() {
             self.settingsPanel.alpha = 0
             self.dismiss(animated: true, completion: nil)
@@ -278,23 +277,23 @@ class FortniteHUDCustomization: UIViewController {
             if let touch = touches.first {
                 // get location
                 var location: CGPoint = .zero
-                var buttonNameIndex = 0
-                
+                var buttonNameIndex   = 0
+
                 // TODO what is this tag stuff?
                 if (touch.view!.tag <= 117 || touch.view!.tag == 300) && touch.view! != scalingSlider {
                     switch currentMode {
-                    case .combat:
-                        location = touch.location(in: combatHUDView)
-                        buttonNameIndex = combatButtonItems.firstIndex(of: touch.view!)!
-                        selectedButtonLabel.text = FortniteButtonType.Combat.allCases[buttonNameIndex].rawValue.appending(" Button Setting")
-                    case .build:
-                        location = touch.location(in: buildingHUDView)
-                        buttonNameIndex = buildingButtonItems.firstIndex(of: touch.view!)!
-                        selectedButtonLabel.text = FortniteButtonType.Build.allCases[buttonNameIndex].rawValue.appending(" Button Setting")
-                    case .editFromCombat, .editFromBuild:
-                        location = touch.location(in: editHUDView)
-                        buttonNameIndex = editingButtonItems.firstIndex(of: touch.view!)!
-                        selectedButtonLabel.text = FortniteButtonType.Edit.allCases[buttonNameIndex].rawValue.appending(" Button Setting")
+                        case .combat:
+                            location = touch.location(in: combatHUDView)
+                            buttonNameIndex = combatButtonItems.firstIndex(of: touch.view!)!
+                            selectedButtonLabel.text = FortniteButtonType.Combat.allCases[buttonNameIndex].rawValue.appending(" Button Setting")
+                        case .build:
+                            location = touch.location(in: buildingHUDView)
+                            buttonNameIndex = buildingButtonItems.firstIndex(of: touch.view!)!
+                            selectedButtonLabel.text = FortniteButtonType.Build.allCases[buttonNameIndex].rawValue.appending(" Button Setting")
+                        case .editFromCombat, .editFromBuild:
+                            location = touch.location(in: editHUDView)
+                            buttonNameIndex = editingButtonItems.firstIndex(of: touch.view!)!
+                            selectedButtonLabel.text = FortniteButtonType.Edit.allCases[buttonNameIndex].rawValue.appending(" Button Setting")
                     }
                     scalingSlider.alpha = 1
                     location.x -= touch.view!.frame.width / 2
