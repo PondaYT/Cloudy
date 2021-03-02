@@ -46,7 +46,7 @@ We appreciate **any** support towards the project in order have more time and re
 
 Patreon |  Paypal
 :-------------------------:|:-------------------------:
-[![patreon](Media/patreon.png)](https://www.patreon.com/cloudyApp) | [![paypal](Media/paypal.png)](https://paypal.me/pools/c/8tKK9M8XUi)
+[![patreon](Media/patreon.png)](https://www.patreon.com/cloudyApp) | [![paypal](Media/paypal.png)](https://paypal.me/pools/c/8tPw2veZIm)
 
 ## Trello development board
  
