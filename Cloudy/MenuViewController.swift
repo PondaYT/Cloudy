@@ -157,10 +157,10 @@ class MenuViewController: UIViewController {
             versionLabel.text = "invalid"
             return
         }
-        #if NON_APPSTORE
-            versionLabel.text = "Cloudy v\(versionNumber)(\(buildNumber))"
-        #elseif REKAIROS
+        #if REKAIROS
             versionLabel.text = "reKairos v\(versionNumber)(\(buildNumber))"
+        #elseif NON_APPSTORE
+            versionLabel.text = "Cloudy v\(versionNumber)(\(buildNumber))"
         #else
             versionLabel.text = "Cloudy v\(versionNumber)(\(buildNumber)) | Appstore"
         #endif
