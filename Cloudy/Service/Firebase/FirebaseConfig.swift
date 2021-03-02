@@ -12,7 +12,7 @@ class FirebaseConfig: NSObject {
             guard let path = Bundle.main.path(forResource: "Info", ofType: "plist") else { return nil }
             guard let dic = NSDictionary(contentsOfFile: path) else { return nil }
             guard let file = dic["FIREBASE_CONFIG"] as? String else { return nil }
-            guard let optionsFile = Bundle.main.path(forResource: file, ofType: "plist") else { return nil }
+            guard let optionsFile = Bundle.main.path(forResource: file, ofType: "plist", inDirectory: "Sensitive/Firebase") else { return nil }
             guard let options = FirebaseOptions(contentsOfFile: optionsFile) else { return nil }
             return options
         }
