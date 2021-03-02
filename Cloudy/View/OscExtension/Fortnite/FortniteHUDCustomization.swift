@@ -89,6 +89,7 @@ class FortniteHUDCustomization: UIViewController {
             images.enumerated().forEach { index, imageName in
                 let button = UIView()
                 let image  = UIImageView()
+                print(imageName)
                 image.image = UIImage(named: imageName.appending(".png"))!
                 image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
 
@@ -179,6 +180,12 @@ class FortniteHUDCustomization: UIViewController {
                 }
             }
 
+        }
+    
+    
+        /// Hide status bar
+        override var prefersStatusBarHidden: Bool{
+            return true
         }
 
         /// Pull down extra panel
