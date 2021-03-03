@@ -37,6 +37,7 @@ class MenuViewController: UIViewController {
     @IBOutlet var viewsToRemoveForAppstore:    [UIView]!
     @IBOutlet var viewsToRemoveForNonAppstore: [UIView]!
     @IBOutlet var viewsToRemoveForNonReKairos: [UIView]!
+    @IBOutlet var adViews:                     [UIView]!
     @IBOutlet weak var userAgentTextField:         UITextField!
     @IBOutlet weak var manualUserAgent:            UISwitch!
     @IBOutlet weak var addressBar:                 UITextField!
@@ -67,6 +68,7 @@ class MenuViewController: UIViewController {
     var webController:      WebController?
     var overlayController:  OverlayController?
     var menuActionsHandler: MenuActionsHandler?
+    var adService:          AdService?
     var alerter:            Alerter?
     var purchaseHelper:     IAPPurchaseHelper?
 
@@ -149,6 +151,14 @@ class MenuViewController: UIViewController {
         updateVersionLabel()
     }
 
+    /// View is rendered
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if animated {
+            showAd(type: .menu)
+        }
+    }
+
     /// Set version to label
     private func updateVersionLabel() {
         guard let versionNumber = Bundle.main.releaseVersionNumber,
@@ -163,6 +173,20 @@ class MenuViewController: UIViewController {
             versionLabel.text = "Cloudy v\(versionNumber)(\(buildNumber))"
         #else
             versionLabel.text = "Cloudy v\(versionNumber)(\(buildNumber)) | Appstore"
+        #endif
+    }
+
+    /// Update ads
+    private func showAd(type: AdType) {
+        #if REKAIROS
+            switch type {
+                case .menu:
+                    adViews.enumerated().forEach { (index, view) in
+                        adService?.showAd(in: view, at: index)
+                    }
+                case .fullscreen:
+                    adService?.showFullscreenAd()
+            }
         #endif
     }
 }
@@ -190,6 +214,8 @@ extension MenuViewController {
     func hideMenu() {
         view.fadeOut()
         addressBar.resignFirstResponder()
+        showAd(type: .fullscreen)
+        showAd(type: .menu)
     }
 
     /// Forward

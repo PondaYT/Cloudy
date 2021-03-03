@@ -211,6 +211,7 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
         menuViewController.webController = webView
         menuViewController.overlayController = self
         menuViewController.menuActionsHandler = self
+        menuViewController.adService = assembler.resolve()
         menuViewController.purchaseHelper = purchaseHelper
         menuViewController.alerter = alerter
         menuViewController.view.frame = view.bounds

@@ -10,10 +10,10 @@ extension UIView {
         }
     }
 
-    func fadeOut() {
-        UIView.animate(withDuration: 0.2) {
-            self.alpha = 0
-        }
+    func fadeOut(with completion: (() -> Void)? = nil) {
+        UIView.animate(withDuration: 0.2,
+                       animations: { self.alpha = 0 },
+                       completion: { _ in completion?() })
     }
 
     func fillParent() {
