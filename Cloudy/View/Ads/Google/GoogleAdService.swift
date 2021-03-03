@@ -49,6 +49,8 @@ class GoogleAdService: NSObject, AdService {
 
     /// Create new ad info
     private func createNewAdInfo(for parentView: UIView) -> AdInfo {
+        let multipleAdsOptions = GADMultipleAdsAdLoaderOptions()
+        multipleAdsOptions.numberOfAds = 2
         let newInfo = AdInfo(adLoader: GADAdLoader(adUnitID: sensitives.AdUnitIdNative,
                                                    rootViewController: viewController,
                                                    adTypes: [.native],
@@ -88,7 +90,6 @@ class GoogleAdService: NSObject, AdService {
             self.adInfos[index] = newAd
             // 3. trigger loading
             newAd.adLoader.load(GADRequest())
-
         }
     }
 }
