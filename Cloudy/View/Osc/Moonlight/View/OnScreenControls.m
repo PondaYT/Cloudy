@@ -655,11 +655,15 @@
             CGFloat xLoc          = touchLocation.x;
             CGFloat yLoc          = touchLocation.y;
 
-            if(onScreenExtension && [onScreenExtension handleTouchMovedEvent:touch])
+            TouchResult *touchResult = onScreenExtension ? [onScreenExtension handleTouchMovedEvent:touch] : nil;
+            if(touchResult && touchResult.handled)
             {
                 buttonTouch = true;
             }
-            else if(touch == _lsTouch)
+            bool processLeftStick = !updated && (touchResult == nil ||
+                                                 !touchResult.handled ||
+                                                 (touchResult.handled && touchResult.addMovement == AxisStickLeft));
+            if(touch == _lsTouch && processLeftStick)
             {
                 CGFloat deltaX = xLoc - _lsTouchStart.x;
                 CGFloat deltaY = yLoc - _lsTouchStart.y;
@@ -685,7 +689,10 @@
 
                 updated = true;
             }
-            else if(touch == _rsTouch)
+            bool processRightStick = !updated && (touchResult == nil ||
+                                                  !touchResult.handled ||
+                                                  touchResult.handled && touchResult.addMovement == AxisStickRight);
+            if(touch == _rsTouch && processRightStick)
             {
                 CGFloat deltaX = xLoc - _rsTouchStart.x;
                 CGFloat deltaY = yLoc - _rsTouchStart.y;
@@ -711,82 +718,86 @@
 
                 updated = true;
             }
-            else if(touch == _dpadTouch)
-            {
-                [_controllerSupport clearButtonFlag:_controller
-                                    flags:UP_FLAG | DOWN_FLAG | LEFT_FLAG | RIGHT_FLAG];
 
-                // Allow the user to slide their finger to another d-pad button
-                if([_upButton.presentationLayer hitTest:touchLocation])
+            if(!updated)
+            {
+                if(touch == _dpadTouch)
                 {
-                    [_controllerSupport setButtonFlag:_controller flags:UP_FLAG];
-                    updated = true;
-                }
-                else if([_downButton.presentationLayer hitTest:touchLocation])
-                {
-                    [_controllerSupport setButtonFlag:_controller flags:DOWN_FLAG];
-                    updated = true;
-                }
-                else if([_leftButton.presentationLayer hitTest:touchLocation])
-                {
-                    [_controllerSupport setButtonFlag:_controller flags:LEFT_FLAG];
-                    updated = true;
-                }
-                else if([_rightButton.presentationLayer hitTest:touchLocation])
-                {
-                    [_controllerSupport setButtonFlag:_controller flags:RIGHT_FLAG];
-                    updated = true;
-                }
+                    [_controllerSupport clearButtonFlag:_controller
+                                        flags:UP_FLAG | DOWN_FLAG | LEFT_FLAG | RIGHT_FLAG];
 
-                buttonTouch = true;
-            }
-            else if(touch == _aTouch)
-            {
-                buttonTouch = true;
-            }
-            else if(touch == _bTouch)
-            {
-                buttonTouch = true;
-            }
-            else if(touch == _xTouch)
-            {
-                buttonTouch = true;
-            }
-            else if(touch == _yTouch)
-            {
-                buttonTouch = true;
-            }
-            else if(touch == _startTouch)
-            {
-                buttonTouch = true;
-            }
-            else if(touch == _selectTouch)
-            {
-                buttonTouch = true;
-            }
-            else if(touch == _l1Touch)
-            {
-                buttonTouch = true;
-            }
-            else if(touch == _r1Touch)
-            {
-                buttonTouch = true;
-            }
-            else if(touch == _l2Touch)
-            {
-                buttonTouch = true;
-            }
-            else if(touch == _r2Touch)
-            {
-                buttonTouch = true;
-            }
-            else if(touch == _l3Touch)
-            {
-                buttonTouch = true;
-            }
-            else if(touch == _r3Touch)
-            {
-                buttonTouch = true;
+                    // Allow the user to slide their finger to another d-pad button
+                    if([_upButton.presentationLayer hitTest:touchLocation])
+                    {
+                        [_controllerSupport setButtonFlag:_controller flags:UP_FLAG];
+                        updated = true;
+                    }
+                    else if([_downButton.presentationLayer hitTest:touchLocation])
+                    {
+                        [_controllerSupport setButtonFlag:_controller flags:DOWN_FLAG];
+                        updated = true;
+                    }
+                    else if([_leftButton.presentationLayer hitTest:touchLocation])
+                    {
+                        [_controllerSupport setButtonFlag:_controller flags:LEFT_FLAG];
+                        updated = true;
+                    }
+                    else if([_rightButton.presentationLayer hitTest:touchLocation])
+                    {
+                        [_controllerSupport setButtonFlag:_controller flags:RIGHT_FLAG];
+                        updated = true;
+                    }
+
+                    buttonTouch = true;
+                }
+                else if(touch == _aTouch)
+                {
+                    buttonTouch = true;
+                }
+                else if(touch == _bTouch)
+                {
+                    buttonTouch = true;
+                }
+                else if(touch == _xTouch)
+                {
+                    buttonTouch = true;
+                }
+                else if(touch == _yTouch)
+                {
+                    buttonTouch = true;
+                }
+                else if(touch == _startTouch)
+                {
+                    buttonTouch = true;
+                }
+                else if(touch == _selectTouch)
+                {
+                    buttonTouch = true;
+                }
+                else if(touch == _l1Touch)
+                {
+                    buttonTouch = true;
+                }
+                else if(touch == _r1Touch)
+                {
+                    buttonTouch = true;
+                }
+                else if(touch == _l2Touch)
+                {
+                    buttonTouch = true;
+                }
+                else if(touch == _r2Touch)
+                {
+                    buttonTouch = true;
+                }
+                else if(touch == _l3Touch)
+                {
+                    buttonTouch = true;
+                }
+                else if(touch == _r3Touch)
+                {
+                    buttonTouch = true;
+                }
             }
             if([_deadTouches containsObject:touch])
             {
@@ -808,11 +819,13 @@
         {
             CGPoint touchLocation = [touch locationInView:_view];
 
-            if(onScreenExtension &&
-               [onScreenExtension handleTouchDownEvent:touch
-                                  touchLocation:touchLocation
-                                  controller:_controller
-                                  controllerSupport:_controllerSupport])
+            TouchResult *touchResult = onScreenExtension ? [onScreenExtension handleTouchDownEvent:touch
+                                                                              touchLocation:touchLocation
+                                                                              controller:_controller
+                                                                              controllerSupport:_controllerSupport] : nil;
+            bool forceRightStick     = touchResult && touchResult.addMovement == AxisStickRight;
+            bool forceLeftStick      = touchResult && touchResult.addMovement == AxisStickLeft;
+            if(touchResult && touchResult.handled)
             {
                 updated = true;
             }
@@ -932,7 +945,8 @@
                 _r3Touch = touch;
                 updated  = true;
             }
-            else if(touchLocation.x <= _view.bounds.size.width / 2.0 && touchLocation.y > 50)
+            // only if it should add movement
+            if(forceLeftStick || (!updated && touchLocation.x <= _view.bounds.size.width / 2.0 && touchLocation.y > 50))
             {
                 if(l3TouchStart != nil)
                 {
@@ -949,7 +963,7 @@
                 _lsTouchStart = touchLocation;
                 stickTouch    = true;
             }
-            else if(touchLocation.x > _view.bounds.size.width / 2.0 && touchLocation.y > 50)
+            if(forceRightStick || (!updated && touchLocation.x > _view.bounds.size.width / 2.0 && touchLocation.y > 50))
             {
                 if(r3TouchStart != nil)
                 {
@@ -966,6 +980,7 @@
                 _rsTouchStart = touchLocation;
                 stickTouch    = true;
             }
+
             if(!updated && !stickTouch && [self isInDeadZone:touch])
             {
                 [_deadTouches addObject:touch];
@@ -986,11 +1001,12 @@
         BOOL        touched = false;
         for(UITouch *touch in touches)
         {
-
-            if(onScreenExtension &&
-               [onScreenExtension handleTouchUpEvent:touch
-                                  controller:_controller
-                                  controllerSupport:_controllerSupport])
+            TouchResult *touchResult = onScreenExtension ? [onScreenExtension handleTouchUpEvent:touch
+                                                                              controller:_controller
+                                                                              controllerSupport:_controllerSupport] : nil;
+            bool processLeftStick    = touchResult && touchResult.addMovement == AxisStickLeft;
+            bool processRightStick   = touchResult && touchResult.addMovement == AxisStickRight;
+            if(touchResult && touchResult.handled)
             {
                 updated = true;
             }
@@ -1061,24 +1077,6 @@
                 _r2Touch = nil;
                 updated  = true;
             }
-            else if(touch == _lsTouch)
-            {
-                _leftStick.frame = CGRectMake(LS_CENTER_X - STICK_INNER_SIZE / 2, LS_CENTER_Y - STICK_INNER_SIZE / 2, STICK_INNER_SIZE, STICK_INNER_SIZE);
-                [_controllerSupport updateLeftStick:_controller x:0 y:0];
-                [_controllerSupport clearButtonFlag:_controller flags:LS_CLK_FLAG];
-                l3TouchStart = [NSDate date];
-                _lsTouch     = nil;
-                updated      = true;
-            }
-            else if(touch == _rsTouch)
-            {
-                _rightStick.frame = CGRectMake(RS_CENTER_X - STICK_INNER_SIZE / 2, RS_CENTER_Y - STICK_INNER_SIZE / 2, STICK_INNER_SIZE, STICK_INNER_SIZE);
-                [_controllerSupport updateRightStick:_controller x:0 y:0];
-                [_controllerSupport clearButtonFlag:_controller flags:RS_CLK_FLAG];
-                r3TouchStart = [NSDate date];
-                _rsTouch     = nil;
-                updated      = true;
-            }
             else if(touch == _l3Touch)
             {
                 _l3Touch = nil;
@@ -1088,6 +1086,24 @@
             {
                 _r3Touch = nil;
                 touched  = true;
+            }
+            if(processLeftStick || (!updated && !touched && touch == _lsTouch))
+            {
+                _leftStick.frame = CGRectMake(LS_CENTER_X - STICK_INNER_SIZE / 2, LS_CENTER_Y - STICK_INNER_SIZE / 2, STICK_INNER_SIZE, STICK_INNER_SIZE);
+                [_controllerSupport updateLeftStick:_controller x:0 y:0];
+                [_controllerSupport clearButtonFlag:_controller flags:LS_CLK_FLAG];
+                l3TouchStart = [NSDate date];
+                _lsTouch     = nil;
+                updated      = true;
+            }
+            if(processRightStick || (!updated && !touched && touch == _rsTouch))
+            {
+                _rightStick.frame = CGRectMake(RS_CENTER_X - STICK_INNER_SIZE / 2, RS_CENTER_Y - STICK_INNER_SIZE / 2, STICK_INNER_SIZE, STICK_INNER_SIZE);
+                [_controllerSupport updateRightStick:_controller x:0 y:0];
+                [_controllerSupport clearButtonFlag:_controller flags:RS_CLK_FLAG];
+                r3TouchStart = [NSDate date];
+                _rsTouch     = nil;
+                updated      = true;
             }
             if([_deadTouches containsObject:touch])
             {
@@ -1227,7 +1243,11 @@
                         endY:_view.frame.origin.y + _view.frame.size.height];
     }
 
-    - (BOOL)isDeadZone:(UITouch *)touch startX:(CGFloat)deadZoneStartX startY:(CGFloat)deadZoneStartY endX:(CGFloat)deadZoneEndX endY:(CGFloat)deadZoneEndY
+    - (BOOL)isDeadZone:(UITouch *)touch
+            startX:(CGFloat)deadZoneStartX
+            startY:(CGFloat)deadZoneStartY
+            endX:(CGFloat)deadZoneEndX
+            endY:(CGFloat)deadZoneEndY
     {
         deadZoneStartX -= DEAD_ZONE_PADDING;
         deadZoneStartY -= DEAD_ZONE_PADDING;
