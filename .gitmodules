@@ -1,0 +1,3 @@
+[submodule "Cloudy/Submodule/CloudySensitives"]
+	path = Cloudy/Submodule/CloudySensitives
+	url = git@github.com:mlostekk/CloudySensitives.git
