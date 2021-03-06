@@ -27,10 +27,18 @@
                                             <constraint firstAttribute="width" secondItem="cEb-Eh-0uV" secondAttribute="height" multiplier="1:1" id="WDu-uD-7Co"/>
                                         </constraints>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="reKairos Casual Player Beta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57k-LV-KFK">
+                                        <rect key="frame" x="571.5" y="768" width="223.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="57k-LV-KFK" firstAttribute="top" secondItem="cEb-Eh-0uV" secondAttribute="bottom" id="Aa6-as-1fe"/>
                                     <constraint firstItem="cEb-Eh-0uV" firstAttribute="centerX" secondItem="aIe-ht-eXk" secondAttribute="centerX" id="QEK-wH-Hyw"/>
+                                    <constraint firstItem="57k-LV-KFK" firstAttribute="centerX" secondItem="aIe-ht-eXk" secondAttribute="centerX" id="gqT-p2-iAv"/>
                                     <constraint firstItem="cEb-Eh-0uV" firstAttribute="height" secondItem="aIe-ht-eXk" secondAttribute="height" multiplier="0.5" id="vrQ-GJ-Qmv"/>
                                     <constraint firstItem="cEb-Eh-0uV" firstAttribute="centerY" secondItem="aIe-ht-eXk" secondAttribute="centerY" id="wU7-mS-8gb"/>
                                 </constraints>

@@ -250,6 +250,10 @@ class FortniteHUDCustomization: UIViewController {
             defaults.set(editingButtonItems.map { $0.frame.height }, forKey: FortniteHUDPositionKeys.editHUDRectHeight)
 
             buttonLayoutChanged = false
+            
+            let alert = UIAlertController(title: "HUD Saved", message: "Changes in HUD has been saved.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
 
         /// Scaling slider changed
