@@ -40,13 +40,16 @@ class Navigator {
     var initialWebsite: URL {
         #if APPSTORE
             return Config.Url.google
+        #endif
+        
+        #if REKAIROS
+            return Config.Url.geforceNowOld
         #else
             if let lastVisitedUrl = UserDefaults.standard.lastVisitedUrl {
                 return lastVisitedUrl
             }
             return Config.Url.googleStadia
         #endif
-
     }
 
     /// Map navigation address
