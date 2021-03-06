@@ -33,6 +33,8 @@ import UIKit
 
         /// The active hud mode
         private var currentMode:            Mode?                                            = .none
+        
+        private var editOnRelease                                                            = false
 
         /// Left stick clicking disabled in this extension
         func leftStickClickEnabled() -> Bool {
@@ -63,6 +65,15 @@ import UIKit
                 let image = UIImage(named: type.rawValue.appending(".png"))
                 editButtonLayers[type]?.contents = image?.cgImage
                 rootLayer.addSublayer(editButtonLayers[type]!)
+            }
+            
+            
+            let defaults              = UserDefaults.standard
+            
+            if (defaults.object(forKey: FortniteHUDPositionKeys.editOnRelease) == nil) {
+                editOnRelease = false
+            } else {
+                editOnRelease = defaults.bool(forKey: FortniteHUDPositionKeys.editOnRelease)
             }
         }
 
@@ -675,6 +686,16 @@ import UIKit
                     if (touch == editButtonLayerTouch[FortniteButtonType.Edit.edit]) {
                         editButtonLayerTouch[FortniteButtonType.Edit.edit] = nil
                         controllerSupport.updateRightTrigger(controller, right: 0)
+                        
+                        if editOnRelease {
+                            if currentMode == .editFromBuild {
+                                setMode(.build)
+                            } else {
+                                setMode(.combat)
+                            }
+                        }
+                        
+                        cleanEditTouches(controller: controller, controllerSupport: controllerSupport)
                         return .handledNoMovement
                     }
 

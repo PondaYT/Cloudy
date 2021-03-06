@@ -1162,8 +1162,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1lv-4c-n9x">
-                                <rect key="frame" x="383" y="-242" width="600" height="300"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1lv-4c-n9x">
+                                <rect key="frame" x="383" y="0.0" width="600" height="300"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="NTE-MR-8Xe">
                                         <rect key="frame" x="25" y="189" width="550" height="31"/>
@@ -1264,10 +1264,26 @@
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <switch opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ca7-C1-H3y">
+                                        <rect key="frame" x="522" y="98" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="enableEditOnReleaseChangedWithSender:" destination="pd4-tx-jp8" eventType="valueChanged" id="jAT-di-HaE"/>
+                                        </connections>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit on Release" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4LY-KW-yU8">
+                                        <rect key="frame" x="352" y="93" width="150" height="39"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="39" id="ISi-5j-gp4"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.29408482142857145" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="zQc-67-VAd" secondAttribute="bottom" constant="8" id="3Ut-eT-bTd"/>
+                                    <constraint firstItem="4LY-KW-yU8" firstAttribute="top" secondItem="Dd6-zD-Zhj" secondAttribute="bottom" constant="8" id="5PG-3b-gIq"/>
                                     <constraint firstItem="PuM-rr-T7l" firstAttribute="centerX" secondItem="1lv-4c-n9x" secondAttribute="centerX" id="5dX-fL-p4F"/>
                                     <constraint firstItem="zQc-67-VAd" firstAttribute="leading" secondItem="mdE-cU-bfS" secondAttribute="trailing" constant="8" id="6Uk-oD-RKH"/>
                                     <constraint firstAttribute="bottom" secondItem="y20-Xh-FRc" secondAttribute="bottom" constant="8" id="AYi-ZT-acl"/>
@@ -1275,12 +1291,15 @@
                                     <constraint firstAttribute="width" constant="600" id="NY1-jJ-foe"/>
                                     <constraint firstItem="y20-Xh-FRc" firstAttribute="leading" secondItem="1lv-4c-n9x" secondAttribute="leading" constant="27" id="Now-lA-fCs"/>
                                     <constraint firstAttribute="height" constant="300" id="RbC-du-tzP"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ca7-C1-H3y" secondAttribute="trailing" constant="29" id="RmH-xN-n0H"/>
+                                    <constraint firstItem="NTE-MR-8Xe" firstAttribute="top" secondItem="Ca7-C1-H3y" secondAttribute="bottom" constant="60" id="TEM-3s-0OQ"/>
                                     <constraint firstItem="B6p-uq-H9F" firstAttribute="leading" secondItem="1lv-4c-n9x" secondAttribute="leading" constant="27" id="Y05-5S-Q3m"/>
                                     <constraint firstItem="B6p-uq-H9F" firstAttribute="top" secondItem="Dd6-zD-Zhj" secondAttribute="bottom" constant="8" symbolic="YES" id="YBp-tD-rty"/>
                                     <constraint firstItem="NTE-MR-8Xe" firstAttribute="leading" secondItem="1lv-4c-n9x" secondAttribute="leading" constant="27" id="ay9-mD-hMp"/>
                                     <constraint firstItem="eXS-CI-3X4" firstAttribute="leading" secondItem="1lv-4c-n9x" secondAttribute="leading" constant="27" id="bD7-NL-E7L"/>
                                     <constraint firstItem="eXS-CI-3X4" firstAttribute="top" secondItem="B6p-uq-H9F" secondAttribute="bottom" constant="8" symbolic="YES" id="c88-Z1-Yef"/>
                                     <constraint firstAttribute="bottom" secondItem="PuM-rr-T7l" secondAttribute="bottom" constant="8" id="dkz-bD-DIo"/>
+                                    <constraint firstItem="Ca7-C1-H3y" firstAttribute="leading" secondItem="4LY-KW-yU8" secondAttribute="trailing" constant="20" id="hYn-mz-d8b"/>
                                     <constraint firstItem="NTE-MR-8Xe" firstAttribute="top" secondItem="eXS-CI-3X4" secondAttribute="bottom" constant="8" symbolic="YES" id="l97-WW-foH"/>
                                     <constraint firstAttribute="trailing" secondItem="zQc-67-VAd" secondAttribute="trailing" constant="27" id="vJg-HX-ywT"/>
                                     <constraint firstItem="Dd6-zD-Zhj" firstAttribute="leading" secondItem="1lv-4c-n9x" secondAttribute="leading" constant="27" id="vUF-fh-r4e"/>
@@ -1324,6 +1343,8 @@
                         <outlet property="currentModeLabel" destination="Dd6-zD-Zhj" id="fsl-EL-eA5"/>
                         <outlet property="doneButton" destination="zQc-67-VAd" id="CDB-KT-aXL"/>
                         <outlet property="editHUDView" destination="6cD-ka-tIu" id="xDx-0g-TYx"/>
+                        <outlet property="enableEditOnRelease" destination="Ca7-C1-H3y" id="0G3-7l-Oce"/>
+                        <outlet property="enableEditOnReleaseLabel" destination="4LY-KW-yU8" id="hol-5f-WbR"/>
                         <outlet property="hudSettingsTopConstraint" destination="jPa-lO-hiU" id="501-b6-XgR"/>
                         <outlet property="launchAnimationView" destination="PQ2-JU-BTA" id="UCu-XI-exV"/>
                         <outlet property="pullDownSettingsPanelButton" destination="PuM-rr-T7l" id="cHy-xy-YNr"/>
@@ -1336,7 +1357,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PTG-xv-5Um" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="802.87769784172667" y="-588.48920863309354"/>
+            <point key="canvasLocation" x="802.48901903367494" y="-588.8671875"/>
         </scene>
         <!--Fortnitei Pad Tutorial-->
         <scene sceneID="ZwH-V2-TGe">
