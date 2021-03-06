@@ -1338,10 +1338,10 @@
             </objects>
             <point key="canvasLocation" x="802.87769784172667" y="-588.48920863309354"/>
         </scene>
-        <!--View Controller-->
+        <!--Fortnitei Pad Tutorial-->
         <scene sceneID="ZwH-V2-TGe">
             <objects>
-                <viewController storyboardIdentifier="iPadFortniteTutorialView" id="RO2-ou-kmD" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="iPadFortniteTutorialView" id="RO2-ou-kmD" customClass="FortniteiPadTutorial" customModule="Cloudy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="odk-r7-5X2">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1428,10 +1428,10 @@
             </objects>
             <point key="canvasLocation" x="802" y="137"/>
         </scene>
-        <!--View Controller-->
+        <!--Fortnitei Phone Tutorial-->
         <scene sceneID="rM0-PY-am9">
             <objects>
-                <viewController storyboardIdentifier="iPhoneFortniteTutorialView" id="I1h-34-7cc" customClass="ViewController" customModule="scrollviewtest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="iPhoneFortniteTutorialView" id="I1h-34-7cc" customClass="FortniteiPhoneTutorial" customModule="Cloudy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WLz-6E-vt4">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
