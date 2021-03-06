@@ -20,6 +20,7 @@ struct FortniteButtonType {
         case switchToCombat  = "Switch To Combat"
         case use             = "Use"
         case wallSelected    = "Wall Selected"
+        case trapSelected    = "Trap"
         
     }
 

@@ -344,6 +344,13 @@ import UIKit
                     }
 
                 case .build:
+                    
+                    if (buildButtonLayers[FortniteButtonType.Build.trapSelected]?.presentation()?.hitTest(touchLocation) != nil) {
+                        controllerSupport.updateLeftTrigger(controller, left: 0xFF)
+                        buildButtonLayerTouch[FortniteButtonType.Build.trapSelected] = touch
+                        return .handledNoMovement
+                    }
+                    
                     if (buildButtonLayers[FortniteButtonType.Build.switchToCombat]?.presentation()?.hitTest(touchLocation)) != nil {
                         controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
                         print("FLAG HERE")
@@ -582,6 +589,13 @@ import UIKit
                     }
 
                 case .build:
+                    
+                    if (touch == buildButtonLayerTouch[FortniteButtonType.Build.trapSelected]) {
+                        controllerSupport.updateLeftTrigger(controller, left: 0);
+                        buildButtonLayerTouch[FortniteButtonType.Build.trapSelected] = nil
+                        return .handledNoMovement
+                    }
+                    
                     if (touch == buildButtonLayerTouch[FortniteButtonType.Build.switchToCombat]) {
                         controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
                         buildButtonLayerTouch[FortniteButtonType.Build.switchToCombat] = nil
@@ -787,6 +801,12 @@ import UIKit
 
         /// Clean touch events for build mode and react correspondingly
         private func cleanBuildTouches(controller: Controller, controllerSupport: ControllerSupport) {
+            
+            if (buildButtonLayerTouch[FortniteButtonType.Build.trapSelected] != nil) {
+                controllerSupport.updateLeftTrigger(controller, left: 0);
+                buildButtonLayerTouch[FortniteButtonType.Build.trapSelected] = nil
+            }
+            
             if (buildButtonLayerTouch[FortniteButtonType.Build.switchToCombat] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.B_FLAG.rawValue);
                 buildButtonLayerTouch[FortniteButtonType.Build.switchToCombat] = nil
