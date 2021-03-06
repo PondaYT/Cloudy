@@ -1397,6 +1397,9 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                     </preferredSymbolConfiguration>
                                 </state>
+                                <connections>
+                                    <action selector="dismissTutorial" destination="RO2-ou-kmD" eventType="touchUpInside" id="QlR-1Y-uwd"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ixM-eg-E80"/>
@@ -1423,6 +1426,13 @@
                             <constraint firstItem="ixM-eg-E80" firstAttribute="trailing" secondItem="AKx-VX-P5D" secondAttribute="trailing" constant="20" id="yrm-Pg-cLk"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="nextTutorialDataButton" destination="Y53-Kf-oTj" id="zC0-dA-rzp"/>
+                        <outlet property="previousTutorialDataButton" destination="Ule-Lk-axR" id="mrx-FO-c9J"/>
+                        <outlet property="tutorialDescription" destination="59X-ER-ed1" id="eRl-rY-Whu"/>
+                        <outlet property="tutorialImageView" destination="IbK-pB-zlR" id="GcV-gV-vim"/>
+                        <outlet property="tutorialTitle" destination="AKx-VX-P5D" id="Gwo-2P-S8r"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xzd-pU-QUd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1439,7 +1449,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wbS-EC-3tc">
                                 <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HUDBackground.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Wyl-MO-PcS">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HUDBackground.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Wyl-MO-PcS">
                                         <rect key="frame" x="0.0" y="0.0" width="683" height="1024"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kWF-Yw-J7m">
@@ -1484,12 +1494,16 @@
                                             <constraint firstAttribute="width" constant="67" id="CQW-bO-EJ5"/>
                                             <constraint firstAttribute="height" constant="67" id="gc6-8M-c8f"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="xmark.circle.fill" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                             </preferredSymbolConfiguration>
                                         </state>
+                                        <connections>
+                                            <action selector="dismissTutorial" destination="I1h-34-7cc" eventType="touchUpInside" id="eSx-0k-O5v"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1525,6 +1539,13 @@
                             <constraint firstItem="wbS-EC-3tc" firstAttribute="top" secondItem="OXB-fV-V2l" secondAttribute="top" id="yU0-2e-JP6"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="nextTutorialDataButton" destination="kWF-Yw-J7m" id="cx1-bd-OJ9"/>
+                        <outlet property="previousTutorialDataButton" destination="Ofc-Ed-KhD" id="T0c-TT-sjl"/>
+                        <outlet property="tutorialDescription" destination="bhQ-fH-rEE" id="m9g-yW-YoW"/>
+                        <outlet property="tutorialImageView" destination="Wyl-MO-PcS" id="eoq-ez-1j6"/>
+                        <outlet property="tutorialTitle" destination="gzm-el-HaB" id="2bs-L4-PK8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vTO-5E-pZu" sceneMemberID="firstResponder"/>
             </objects>
