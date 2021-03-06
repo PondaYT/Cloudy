@@ -34,12 +34,20 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
     @IBOutlet var containerWebView:              UIView!
     @IBOutlet var containerHud:                  UIView!
     @IBOutlet var containerOnScreenController:   UIView!
+    @IBOutlet var launchAnimation:               UIView!
+    @IBOutlet var gameBar:                       UIView!
 
     /// Interactive views
     @IBOutlet var menuButton:                    UIButton!
     @IBOutlet var showOnScreenControlsExtension: UISwitch!
+    @IBOutlet var fortniteHUDVisibilityButton:   UIButton!
+    @IBOutlet var visibilitySwitchButton:        UIButton!
+    @IBOutlet var tutorialSwitchButton:          UIButton!
 
     @IBOutlet var webviewConstraints: [NSLayoutConstraint]!
+    
+    /// Game bar pull out / push away constraint
+    @IBOutlet var gameBarArrangement: NSLayoutConstraint!
 
     /// The hacked webView
     private var webView:         FullScreenWKWebView?
@@ -55,6 +63,15 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
 
     /// The bridge between controller and web view
     private let webViewControllerBridge          = WebViewControllerBridge()
+    
+    /// Determines if the app is already launched and should animate or not.
+    private var launched                         = false
+    
+    /// Determines if fortnite HUD is visible or not
+    private var fortniteHUDIsVisible             = true
+    
+    /// Determines if Game Bar is expanded or not
+    private var expanded             = true
 
     /// Access to the main view controller
     var viewController: UIViewController {
@@ -120,9 +137,26 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
         super.viewWillAppear(animated)
         #if APPSTORE
             containerHud.removeFromSuperview()
+            
         #endif
         #if !REKAIROS
             showOnScreenControlsExtension.removeFromSuperview()
+            launchAnimation.alpha = 0
+            gameBar.alpha = 0
+        #endif
+        #if REKAIROS
+            if !launched {
+                containerWebView.transform = CGAffineTransform.init(scaleX: 0.5, y: 0.5)
+            }
+            self.view.bringSubviewToFront(launchAnimation)
+            gameBar.layer.cornerRadius = 30
+            fortniteHUDVisibilityButton.layer.cornerRadius = 55/2
+            visibilitySwitchButton.layer.cornerRadius = 55/2
+            tutorialSwitchButton.layer.cornerRadius = 55/2
+        
+            fortniteHUDVisibilityButton.clipsToBounds = true
+            visibilitySwitchButton.clipsToBounds = true
+            tutorialSwitchButton.clipsToBounds = true
         #endif
     }
 
@@ -138,6 +172,17 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
             createOnScreenControls()
         }
         checkDonationReminder()
+        
+        #if REKAIROS
+        if !launched {
+            UIView.animate(withDuration: 2, delay: 1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+                    self.containerWebView.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+                    self.launchAnimation.transform = CGAffineTransform.init(scaleX: 1.5, y: 1.5)
+                    self.launchAnimation.alpha = 0
+            })
+            launched = true
+        }
+        #endif
     }
 
     /// Initialize all the required views (webview, onscreen controls and menu)
@@ -171,6 +216,31 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
     /// Handle code injection
     func injectCustom(code: String) {
         webView?.inject(scripts: [code])
+    }
+    
+    func expandGameBar() {
+        gameBarArrangement.constant = 8
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func shrinkGameBar() {
+        gameBarArrangement.constant = -180
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    
+    @IBAction func changeGameBarVisibility() {
+        if expanded {
+            shrinkGameBar()
+            expanded = false
+        } else {
+            expandGameBar()
+            expanded = true
+        }
     }
 
     /// Tapped on the menu item
@@ -251,9 +321,20 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
     }
 
     /// Show the fortnite hud overlay
+    /*
     @IBAction func mixinOnScreenControlsExtension(_ sender: UISwitch) {
         #if !APPSTORE
             streamView?.mixinControllerExtension(showOnScreenControlsExtension.isOn)
+        #endif
+    }*/
+    
+    @IBAction func mixinOnScreenControlsExtension() {
+        #if !APPSTORE
+        let controllerImage = UIImage(systemName: "gamecontroller.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .default))
+        let HUDImage = UIImage(systemName: "circle.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 31, weight: .regular, scale: .default))
+        fortniteHUDVisibilityButton.setImage(fortniteHUDIsVisible ? controllerImage : HUDImage, for: .normal)
+        streamView?.mixinControllerExtension(fortniteHUDIsVisible)
+        fortniteHUDIsVisible = !fortniteHUDIsVisible
         #endif
     }
 

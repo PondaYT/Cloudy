@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18092"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,19 +16,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_screen_reKairos" translatesAutoresizingMaskIntoConstraints="NO" id="Nay-cj-m2B">
-                                <rect key="frame" x="342" y="214" width="340" height="340"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_screen_rekairos" translatesAutoresizingMaskIntoConstraints="NO" id="Nay-cj-m2B">
+                                <rect key="frame" x="320" y="192" width="384" height="384"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="340" id="WGD-hL-0LS"/>
-                                    <constraint firstAttribute="height" constant="340" id="gOQ-Ya-7bu"/>
+                                    <constraint firstAttribute="width" secondItem="Nay-cj-m2B" secondAttribute="height" multiplier="1:1" id="u8f-oh-16G"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Nay-cj-m2B" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Azb-M2-2H6"/>
-                            <constraint firstItem="Nay-cj-m2B" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ChR-Lb-oS6"/>
+                            <constraint firstItem="Nay-cj-m2B" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="WDP-dX-1qG"/>
+                            <constraint firstItem="Nay-cj-m2B" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="osR-c2-fF4"/>
+                            <constraint firstItem="Nay-cj-m2B" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.5" id="ybP-8q-NTz"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -37,6 +38,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch_screen_reKairos" width="512" height="512"/>
+        <image name="launch_screen_rekairos" width="512" height="512"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

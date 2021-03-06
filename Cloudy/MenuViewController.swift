@@ -63,6 +63,7 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var customJsInjection:          UITextField!
     @IBOutlet weak var scalingFactorTextField:     UITextField!
     @IBOutlet weak var versionLabel:               UILabel!
+    @IBOutlet weak var fortniteLayoutToolView:     UIView!
 
     /// Some injections
     var webController:      WebController?
@@ -140,13 +141,20 @@ class MenuViewController: UIViewController {
                 buttonTipJar.addGlowAnimation(withColor: .yellow)
             }
             viewsToRemoveForAppstore.forEach { $0.removeFromSuperview() }
+            self.fortniteLayoutToolView.alpha = 0
         #endif
         #if NON_APPSTORE
             viewsToRemoveForNonAppstore.forEach { $0.removeFromSuperview() }
+            self.fortniteLayoutToolView.alpha = 0
         #endif
         #if !REKAIROS
             viewsToRemoveForNonReKairos.forEach { $0.removeFromSuperview() }
         #endif
+        #if REKAIROS
+            self.fortniteLayoutToolView.alpha = 0
+            self.fortniteLayoutToolView.transform = CGAffineTransform.init(scaleX: 0.75, y: 0.75)
+        #endif
+        
         // update stuff
         updateVersionLabel()
     }
@@ -218,6 +226,24 @@ extension MenuViewController {
         showAd(type: .menu)
     }
 
+    
+    @IBAction func showFortniteHUDLayoutTool(_ sender: Any) {
+        self.view.bringSubviewToFront(fortniteLayoutToolView)
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+            self.fortniteLayoutToolView.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+            self.fortniteLayoutToolView.alpha = 1
+        }, completion: { _ in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let fortniteLayoutToolViewController = storyboard.instantiateViewController(withIdentifier: "HUDLayoutTool")
+            fortniteLayoutToolViewController.modalTransitionStyle = .crossDissolve
+            fortniteLayoutToolViewController.modalPresentationStyle = .fullScreen
+            self.present(fortniteLayoutToolViewController, animated: true, completion: {
+                self.fortniteLayoutToolView.alpha = 0
+                self.fortniteLayoutToolView.transform = CGAffineTransform.init(scaleX: 0.75, y: 0.75)
+            })
+        })
+    }
+    
     /// Forward
     @IBAction func onForwardPressed(_ sender: Any) {
         webController?.executeNavigation(action: .forward)

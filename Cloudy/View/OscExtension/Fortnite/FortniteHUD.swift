@@ -155,6 +155,15 @@ import UIKit
         func handleTouchDownEvent(_ touch: UITouch, touchLocation: CGPoint, controller: Controller, controllerSupport: ControllerSupport) -> TouchResult {
             switch currentMode {
                 case .combat:
+                    
+                    /*
+                     if (combatButtonLayers[FortniteButtonType.Combat.map]?.presentation()?.hitTest(touchLocation) != nil) {
+                     controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.BACK_FLAG.rawValue);
+                         combatButtonLayerTouch[FortniteButtonType.Combat.map] = touch
+                         return .handledNoMovement
+                     }
+                     */
+                    
                     if (combatButtonLayers[FortniteButtonType.Combat.aim]?.presentation()?.hitTest(touchLocation) != nil) {
                         controllerSupport.updateLeftTrigger(controller, left: 0xFF)
                         combatButtonLayerTouch[FortniteButtonType.Combat.aim] = touch
@@ -441,6 +450,15 @@ import UIKit
         func handleTouchUpEvent(_ touch: UITouch, controller: Controller, controllerSupport: ControllerSupport) -> TouchResult {
             switch currentMode {
                 case .combat:
+                    
+                    /*
+                     if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.map]) {
+                         controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.BACK_FLAG.rawValue);
+                         combatButtonLayerTouch[FortniteButtonType.Combat.map] = nil
+                         return .handledNoMovement
+                     }
+                     */
+                    
                     if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.aim]) {
                         controllerSupport.updateLeftTrigger(controller, left: 0);
                         combatButtonLayerTouch[FortniteButtonType.Combat.aim] = nil
@@ -676,6 +694,13 @@ import UIKit
 
         /// Clean touch events for combat mode and react correspondingly
         private func cleanCombatTouches(controller: Controller, controllerSupport: ControllerSupport) {
+            
+            /*
+            if (combatButtonLayerTouch[FortniteButtonType.Combat.aim] != nil) {
+                controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.BACK_FLAG.rawValue);
+                combatButtonLayerTouch[FortniteButtonType.Combat.map] = nil
+            }*/
+            
             if (combatButtonLayerTouch[FortniteButtonType.Combat.aim] != nil) {
                 controllerSupport.updateLeftTrigger(controller, left: 0);
                 combatButtonLayerTouch[FortniteButtonType.Combat.aim] = nil

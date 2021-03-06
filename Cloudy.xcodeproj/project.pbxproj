@@ -1019,7 +1019,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = E4H6XCERNK;
+				DEVELOPMENT_TEAM = 5Y286T46P4;
 				FIREBASE_CONFIG = "GoogleService-Info-reKairos";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
@@ -1118,7 +1118,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = E4H6XCERNK;
+				DEVELOPMENT_TEAM = 5Y286T46P4;
 				FIREBASE_CONFIG = "GoogleService-Info-reKairos";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
@@ -1277,7 +1277,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = E4H6XCERNK;
+				DEVELOPMENT_TEAM = 5Y286T46P4;
 				FIREBASE_CONFIG = "GoogleService-Info";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
@@ -1311,7 +1311,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = E4H6XCERNK;
+				DEVELOPMENT_TEAM = 5Y286T46P4;
 				FIREBASE_CONFIG = "GoogleService-Info";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;
@@ -1403,7 +1403,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = E4H6XCERNK;
+				DEVELOPMENT_TEAM = 5Y286T46P4;
 				FIREBASE_CONFIG = "GoogleService-Info";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Cloudy/Info.plist;

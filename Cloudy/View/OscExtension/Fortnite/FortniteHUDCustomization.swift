@@ -6,6 +6,7 @@ class FortniteHUDCustomization: UIViewController {
 
     #if REKAIROS
         /// Outlets to storyboard
+        @IBOutlet var backgroundImageView:         UIImageView!
         @IBOutlet var scalingSlider:               UISlider!
         @IBOutlet var switchModeButton:            UIButton!
         @IBOutlet var saveButton:                  UIButton!
@@ -13,6 +14,7 @@ class FortniteHUDCustomization: UIViewController {
         @IBOutlet var combatHUDView:               UIView!
         @IBOutlet var buildingHUDView:             UIView!
         @IBOutlet var editHUDView:                 UIView!
+        @IBOutlet var launchAnimationView:         UIView!
         @IBOutlet var currentModeLabel:            UILabel!
         @IBOutlet var selectedButtonLabel:         UILabel!
         @IBOutlet var settingsPanel:               UIView!
@@ -79,6 +81,7 @@ class FortniteHUDCustomization: UIViewController {
             var xAxis:       CGFloat  = 0.0
             var yAxis:       CGFloat  = 150.0
             var buttonTag             = buttonTag
+            var index                 = 0
             var buttonArray: [UIView] = []
 
             let savedX      = defaults.array(forKey: keyX)
@@ -93,7 +96,7 @@ class FortniteHUDCustomization: UIViewController {
                 image.image = UIImage(named: imageName.appending(".png"))!
                 image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
 
-                if savedX?.isEmpty == false {
+                if (savedX?.isEmpty == false && index <= images.count) {
                     button.frame = CGRect(x: savedX![index] as! CGFloat,
                                           y: savedY![index] as! CGFloat,
                                           width: savedWidth![index] as! CGFloat,
@@ -118,8 +121,15 @@ class FortniteHUDCustomization: UIViewController {
                     xAxis = 0
                 }
                 buttonTag += 1
+                
             }
+            index += 1
             return (buttonTag, buttonArray)
+        }
+    
+        override func viewWillAppear(_ animated: Bool) {
+            launchAnimationView.alpha = 0
+            launchAnimationView.transform = CGAffineTransform.init(scaleX: 1.5, y: 1.5)
         }
 
         /// View is now visible
@@ -163,6 +173,8 @@ class FortniteHUDCustomization: UIViewController {
             settingsPanel.tag = 1100
             pullDownSettingsPanelButton.tag = 1200
             selectedButtonLabel.tag = 1300
+            launchAnimationView.tag = 1400
+            backgroundImageView.tag = 1500
 
             buildingHUDView.transform = CGAffineTransform.init(scaleX: 0.75, y: 0.75)
             buildingHUDView.alpha = 0
@@ -171,12 +183,14 @@ class FortniteHUDCustomization: UIViewController {
             combatHUDView.alpha = 0
             scalingSlider.alpha = 0
 
+
             settingsPanel.layer.cornerRadius = 10.0
             settingsPanel.clipsToBounds = true
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 UIView.animate(withDuration: 0.5) {
                     self.combatHUDView.alpha = 1
+                    
                 }
             }
 
@@ -268,8 +282,23 @@ class FortniteHUDCustomization: UIViewController {
         }
 
         private func closeHUDLayoutTool() {
-            self.settingsPanel.alpha = 0
-            self.dismiss(animated: true, completion: nil)
+            
+            self.view.bringSubviewToFront(launchAnimationView)
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+                self.launchAnimationView.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+                self.launchAnimationView.alpha = 1
+                self.backgroundImageView.transform = CGAffineTransform.init(scaleX: 0.75, y: 0.75)
+                self.backgroundImageView.alpha = 0
+                self.combatHUDView.transform = CGAffineTransform.init(scaleX: 0.75, y: 0.75)
+                self.combatHUDView.alpha = 0
+                self.buildingHUDView.transform = CGAffineTransform.init(scaleX: 0.75, y: 0.75)
+                self.buildingHUDView.alpha = 0
+                self.editHUDView.transform = CGAffineTransform.init(scaleX: 0.75, y: 0.75)
+                self.editHUDView.alpha = 0
+            }, completion: { _ in
+                self.settingsPanel.alpha = 0
+                self.dismiss(animated: true, completion: nil)
+            })
         }
 
         /// Handle touch start
