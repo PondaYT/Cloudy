@@ -187,13 +187,10 @@ class FortniteHUDCustomization: UIViewController {
             settingsPanel.layer.cornerRadius = 10.0
             settingsPanel.clipsToBounds = true
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                UIView.animate(withDuration: 0.5) {
-                    self.combatHUDView.alpha = 1
+            UIView.animate(withDuration: 0.5) {
+                self.combatHUDView.alpha = 1
                     
-                }
             }
-
         }
 
         /// Hide status bar
