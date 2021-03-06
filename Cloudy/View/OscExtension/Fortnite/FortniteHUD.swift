@@ -95,22 +95,31 @@ import UIKit
             }
             // update positions
             FortniteButtonType.Combat.allCases.enumerated().forEach { (index, type) in
-                combatButtonLayers[type]?.frame = CGRect(x: hudCombatButtonXSaved[index],
-                                                         y: hudCombatButtonYSaved[index],
-                                                         width: hudCombatButtonWidthSaved[index],
-                                                         height: hudCombatButtonHeightSaved[index])
+                if (index < hudCombatButtonXSaved.count) {
+                    print(type.rawValue)
+                    combatButtonLayers[type]?.frame = CGRect(x: hudCombatButtonXSaved[index],
+                                                             y: hudCombatButtonYSaved[index],
+                                                             width: hudCombatButtonWidthSaved[index],
+                                                             height: hudCombatButtonHeightSaved[index])
+                }
             }
             FortniteButtonType.Build.allCases.enumerated().forEach { (index, type) in
-                buildButtonLayers[type]?.frame = CGRect(x: hudBuildButtonXSaved[index],
-                                                        y: hudBuildButtonYSaved[index],
-                                                        width: hudBuildButtonWidthSaved[index],
-                                                        height: hudBuildButtonHeightSaved[index])
+                if (index < hudBuildButtonXSaved.count) {
+                    print(type.rawValue)
+                    buildButtonLayers[type]?.frame = CGRect(x: hudBuildButtonXSaved[index],
+                                                            y: hudBuildButtonYSaved[index],
+                                                            width: hudBuildButtonWidthSaved[index],
+                                                            height: hudBuildButtonHeightSaved[index])
+                }
             }
             FortniteButtonType.Edit.allCases.enumerated().forEach { (index, type) in
-                editButtonLayers[type]?.frame = CGRect(x: hudEditButtonXSaved[index],
-                                                       y: hudEditButtonYSaved[index],
-                                                       width: hudEditButtonWidthSaved[index],
-                                                       height: hudEditButtonHeightSaved[index])
+                if (index < hudEditButtonXSaved.count) {
+                    print(type.rawValue)
+                    editButtonLayers[type]?.frame = CGRect(x: hudEditButtonXSaved[index],
+                                                           y: hudEditButtonYSaved[index],
+                                                           width: hudEditButtonWidthSaved[index],
+                                                           height: hudEditButtonHeightSaved[index])
+                }
             }
             // initialize touches
             for type in FortniteButtonType.Combat.allCases {
@@ -156,14 +165,13 @@ import UIKit
             switch currentMode {
                 case .combat:
                     
-                    /*
+                    
                      if (combatButtonLayers[FortniteButtonType.Combat.map]?.presentation()?.hitTest(touchLocation) != nil) {
-                     controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.BACK_FLAG.rawValue);
+                        controllerSupport.setButtonFlag(controller, flags: ButtonOptionSet.BACK_FLAG.rawValue);
                          combatButtonLayerTouch[FortniteButtonType.Combat.map] = touch
                          return .handledNoMovement
                      }
-                     */
-                    
+                     
                     if (combatButtonLayers[FortniteButtonType.Combat.aim]?.presentation()?.hitTest(touchLocation) != nil) {
                         controllerSupport.updateLeftTrigger(controller, left: 0xFF)
                         combatButtonLayerTouch[FortniteButtonType.Combat.aim] = touch
@@ -451,13 +459,13 @@ import UIKit
             switch currentMode {
                 case .combat:
                     
-                    /*
+                    
                      if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.map]) {
                          controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.BACK_FLAG.rawValue);
                          combatButtonLayerTouch[FortniteButtonType.Combat.map] = nil
                          return .handledNoMovement
                      }
-                     */
+                     
                     
                     if (touch == combatButtonLayerTouch[FortniteButtonType.Combat.aim]) {
                         controllerSupport.updateLeftTrigger(controller, left: 0);
@@ -695,11 +703,11 @@ import UIKit
         /// Clean touch events for combat mode and react correspondingly
         private func cleanCombatTouches(controller: Controller, controllerSupport: ControllerSupport) {
             
-            /*
+            
             if (combatButtonLayerTouch[FortniteButtonType.Combat.aim] != nil) {
                 controllerSupport.clearButtonFlag(controller, flags: ButtonOptionSet.BACK_FLAG.rawValue);
                 combatButtonLayerTouch[FortniteButtonType.Combat.map] = nil
-            }*/
+            }
             
             if (combatButtonLayerTouch[FortniteButtonType.Combat.aim] != nil) {
                 controllerSupport.updateLeftTrigger(controller, left: 0);

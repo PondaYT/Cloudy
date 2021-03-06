@@ -96,7 +96,7 @@ class FortniteHUDCustomization: UIViewController {
                 image.image = UIImage(named: imageName.appending(".png"))!
                 image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
 
-                if (savedX?.isEmpty == false && index <= images.count) {
+                if (savedX?.isEmpty == false && index < savedX!.count) {
                     button.frame = CGRect(x: savedX![index] as! CGFloat,
                                           y: savedY![index] as! CGFloat,
                                           width: savedWidth![index] as! CGFloat,
@@ -258,7 +258,7 @@ class FortniteHUDCustomization: UIViewController {
 
         /// Scaling slider changed
         @IBAction func sliderValueChanged(sender: UISlider) {
-            if tagSelected <= 117 || tagSelected == 300 {
+            if tagSelected <= 118 || tagSelected == 300 {
                 let viewPassed = self.view.viewWithTag(self.tagSelected)
                 viewPassed?.frame.size.height = (50 * CGFloat(sender.value + 1.0))
                 viewPassed?.frame.size.width = (50 * CGFloat(sender.value + 1.0))
@@ -310,7 +310,7 @@ class FortniteHUDCustomization: UIViewController {
                 var buttonNameIndex   = 0
 
                 // TODO what is this tag stuff?
-                if (touch.view!.tag <= 117 || touch.view!.tag == 300) && touch.view! != scalingSlider {
+                if (touch.view!.tag <= 118 || touch.view!.tag == 300) && touch.view! != scalingSlider {
                     switch currentMode {
                         case .combat:
                             location = touch.location(in: combatHUDView)
@@ -357,7 +357,7 @@ class FortniteHUDCustomization: UIViewController {
                         location = touch.location(in: editHUDView)
                 }
                 // TODO what is this tag stuff?
-                if (touch.view!.tag <= 117 || touch.view!.tag == 300) && touch.view! != scalingSlider {
+                if (touch.view!.tag <= 118 || touch.view!.tag == 300) && touch.view! != scalingSlider {
                     buttonLayoutChanged = true
                     location.x -= touch.view!.frame.width / 2
                     location.y -= touch.view!.frame.height / 2

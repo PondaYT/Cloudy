@@ -60,6 +60,7 @@
 		44A4DF24B14D4379ED99E351 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DC3B80142D290BBCE80C /* Float.swift */; };
 		44A4DFD94292E1FAA625AFA6 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D15FC7FB3F6347B248D4 /* IAPManager.swift */; };
 		51894F6925EE1A2F0054EAD8 /* Rotate.png in Resources */ = {isa = PBXBuildFile; fileRef = 51894F6825EE1A2E0054EAD8 /* Rotate.png */; };
+		51A56C7825F3F7F100A32597 /* Map.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A56C7725F3F7F000A32597 /* Map.png */; };
 		5CDDBA53FB1B62159C8668EF /* Pods_Cloudy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BF8562B1619F13A7254171F /* Pods_Cloudy.framework */; };
 		E712FF9825520978003CF78C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E712FF9725520978003CF78C /* Images.xcassets */; };
 		E71AF2EB25E2DF1900F76E5B /* FortniteHUDPositionKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71AF2EA25E2DF1900F76E5B /* FortniteHUDPositionKeys.swift */; };
@@ -192,6 +193,7 @@
 		44A4DFB90BD884CB5041E57D /* WKUserScript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKUserScript.swift; sourceTree = "<group>"; };
 		44A4DFE6F4FDD51E58D517B4 /* OscAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OscAssembler.swift; sourceTree = "<group>"; };
 		51894F6825EE1A2E0054EAD8 /* Rotate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rotate.png; sourceTree = "<group>"; };
+		51A56C7725F3F7F000A32597 /* Map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Map.png; sourceTree = "<group>"; };
 		79B35440DA7901C4949EFDC7 /* Pods-Cloudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.release.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.release.xcconfig"; sourceTree = "<group>"; };
 		79E113C5587D0E3EF509C81C /* Pods-Cloudy.rekairos debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.rekairos debug.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.rekairos debug.xcconfig"; sourceTree = "<group>"; };
 		8C777E5DB6AA0540BAAEE53E /* Pods-Cloudy.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.appstore.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.appstore.xcconfig"; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 			isa = PBXGroup;
 			children = (
 				E74CE90825D5DD6300EF14C2 /* Floor Selected.png */,
+				51A56C7725F3F7F000A32597 /* Map.png */,
 				E74CE90925D5DD6300EF14C2 /* Quick Heal.png */,
 				E74CE90B25D5DD6300EF14C2 /* Mic Unmuted.png */,
 				E74CE90C25D5DD6300EF14C2 /* Wall Selected.png */,
@@ -741,6 +744,7 @@
 				E74CE94025D5DD6400EF14C2 /* Jump.png in Resources */,
 				E74CE94D25D5DD6400EF14C2 /* Move Outer.png in Resources */,
 				E7B87E2E25338121004358E3 /* Main.storyboard in Resources */,
+				51A56C7825F3F7F100A32597 /* Map.png in Resources */,
 				E74CE95925D5DD6400EF14C2 /* Slot 2.png in Resources */,
 				E74CE95025D5DD6400EF14C2 /* Use.png in Resources */,
 				E74CE95725D5DD6400EF14C2 /* Slot 3.png in Resources */,
