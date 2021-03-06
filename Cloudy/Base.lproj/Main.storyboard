@@ -1373,6 +1373,9 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                     </preferredSymbolConfiguration>
                                 </state>
+                                <connections>
+                                    <action selector="nextTutorialData" destination="RO2-ou-kmD" eventType="touchUpInside" id="ZKe-F1-ysK"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ule-Lk-axR">
                                 <rect key="frame" x="0.0" y="964" width="683" height="60"/>
@@ -1384,6 +1387,9 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                     </preferredSymbolConfiguration>
                                 </state>
+                                <connections>
+                                    <action selector="previousTutorialData" destination="RO2-ou-kmD" eventType="touchUpInside" id="qnc-Rl-k0g"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFL-IR-7cf">
                                 <rect key="frame" x="1299" y="0.0" width="67" height="67"/>
@@ -1462,6 +1468,9 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                             </preferredSymbolConfiguration>
                                         </state>
+                                        <connections>
+                                            <action selector="nextTutorialData" destination="I1h-34-7cc" eventType="touchUpInside" id="FQb-6m-8IU"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ofc-Ed-KhD">
                                         <rect key="frame" x="683" y="974" width="341.5" height="50"/>
@@ -1473,6 +1482,9 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                             </preferredSymbolConfiguration>
                                         </state>
+                                        <connections>
+                                            <action selector="previousTutorialData" destination="I1h-34-7cc" eventType="touchUpInside" id="i9T-gv-Elv"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Controller Binds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzm-el-HaB">
                                         <rect key="frame" x="691" y="8" width="667" height="23"/>
