@@ -354,15 +354,19 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
 
 extension RootViewController: UserInteractionDelegate {
     open func userInteractionBegan() {
-        UIView.animate(withDuration: 0.4) { [weak self] in
-            self?.containerOnScreenController.alpha = 1.0
-        }
+        #if !REKAIROS
+            UIView.animate(withDuration: 0.4) { [weak self] in
+                self?.containerOnScreenController.alpha = 1.0
+            }
+        #endif
     }
 
     open func userInteractionEnded() {
-        UIView.animate(withDuration: 0.4) { [weak self] in
-            self?.containerOnScreenController.alpha = 0.2
-        }
+        #if !REKAIROS
+            UIView.animate(withDuration: 0.4) { [weak self] in
+                self?.containerOnScreenController.alpha = 0.2
+            }
+        #endif
     }
 }
 
