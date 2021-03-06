@@ -242,6 +242,18 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
             expanded = true
         }
     }
+    
+    @IBAction func presentTutorialView() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let fortniteLayoutToolViewController = storyboard.instantiateViewController(withIdentifier: "iPadFortniteTutorialView")
+            self.present(fortniteLayoutToolViewController, animated: true, completion:nil)
+        } else {
+            let fortniteLayoutToolViewController = storyboard.instantiateViewController(withIdentifier: "iPhoneFortniteTutorialView")
+            self.present(fortniteLayoutToolViewController, animated: true, completion:nil)
+            
+        }
+    }
 
     /// Tapped on the menu item
     @IBAction func onMenuButtonPressed(_ sender: Any) {
