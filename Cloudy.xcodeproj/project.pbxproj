@@ -34,10 +34,12 @@
 		44A4D53606BEC6E6AB0E3690 /* FortniteButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D222C2946D5D98EEA012 /* FortniteButtonType.swift */; };
 		44A4D56785DE2ACC82B37F52 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D1A39583BB7F49ABD541 /* Log.swift */; };
 		44A4D5766D7E1C7D24DE5B3E /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D1BDADE57435126317A7 /* DonationViewController.swift */; };
+		44A4D587579DCDC2A9782235 /* NoopAdServiceAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DCEC00E5BBC8A66CBF99 /* NoopAdServiceAssembler.swift */; };
 		44A4D616034E524457423166 /* AdServiceAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D357A6CBC67A8BCC8833 /* AdServiceAssembler.swift */; };
 		44A4D667E367AB98368C36BC /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D80ED7881A56C23C0BBD /* Bundle.swift */; };
 		44A4D67D7C43E9E24539DAA1 /* Limelight.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DF3D3079ADE1DDD381ED /* Limelight.m */; };
 		44A4D6BF0996C20E4E183AFA /* AlphaTestingCALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DCA1AA422D8737EDD5DC /* AlphaTestingCALayer.swift */; };
+		44A4D6DA1EAB43BA5BD41D64 /* NoopAdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D71B8B7A3B98B9831D6E /* NoopAdService.swift */; };
 		44A4D78B8F260ECEBBB39B4C /* FullScreenWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D600D66AF81438FD332D /* FullScreenWKWebView.swift */; };
 		44A4D7DCB15B8C4799D56BCA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D0057BF82C52A8F76A38 /* String.swift */; };
 		44A4D81D6A823FB908BCE224 /* AVFoundationVibratingFeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D01AC2645E64C1EB9CF9 /* AVFoundationVibratingFeedbackGenerator.swift */; };
@@ -157,6 +159,7 @@
 		44A4D67F8889E455A547CB96 /* WebViewControllerBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewControllerBridge.swift; sourceTree = "<group>"; };
 		44A4D6F8B5E3D963ACC77795 /* StreamConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamConfiguration.h; sourceTree = "<group>"; };
 		44A4D70959F6ED8C73DCA4B6 /* GoogleAdSensitives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAdSensitives.swift; sourceTree = "<group>"; };
+		44A4D71B8B7A3B98B9831D6E /* NoopAdService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoopAdService.swift; sourceTree = "<group>"; };
 		44A4D73AE358DE68EA5B6076 /* AppAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAssembler.swift; sourceTree = "<group>"; };
 		44A4D789D77BE6B77BC1DBDD /* KeyboardSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardSupport.h; sourceTree = "<group>"; };
 		44A4D79906D5F591C2BF5F8D /* KeyboardSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardSupport.m; sourceTree = "<group>"; };
@@ -183,6 +186,7 @@
 		44A4DBCCBA86600B436045E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		44A4DC3B80142D290BBCE80C /* Float.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Float.swift; sourceTree = "<group>"; };
 		44A4DCA1AA422D8737EDD5DC /* AlphaTestingCALayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlphaTestingCALayer.swift; sourceTree = "<group>"; };
+		44A4DCEC00E5BBC8A66CBF99 /* NoopAdServiceAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoopAdServiceAssembler.swift; sourceTree = "<group>"; };
 		44A4DD07C98AB403DD907C8D /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
 		44A4DD9C29CE255AE826C5D7 /* OnScreenControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnScreenControls.m; sourceTree = "<group>"; };
 		44A4DDA6CB7D08DFDA35E5D3 /* RelativeTouchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelativeTouchHandler.m; sourceTree = "<group>"; };
@@ -283,6 +287,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		44A4D00AFF8732F747DA0320 /* Noop */ = {
+			isa = PBXGroup;
+			children = (
+				44A4DCEC00E5BBC8A66CBF99 /* NoopAdServiceAssembler.swift */,
+				44A4D71B8B7A3B98B9831D6E /* NoopAdService.swift */,
+			);
+			path = Noop;
+			sourceTree = "<group>";
+		};
 		44A4D1438C45504101E3F0F6 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +327,7 @@
 				44A4DFE273461191A56FD1A9 /* Google */,
 				44A4D0176F872EB359E93B12 /* AdService.swift */,
 				44A4D357A6CBC67A8BCC8833 /* AdServiceAssembler.swift */,
+				44A4D00AFF8732F747DA0320 /* Noop */,
 			);
 			path = Ads;
 			sourceTree = "<group>";
@@ -959,6 +973,8 @@
 				44A4D4FF95491D18427EFC1D /* GoogleAdServiceAssembler.swift in Sources */,
 				44A4D362D15F01D37C5CA98D /* GoogleAdSensitives.swift in Sources */,
 				44A4D5766D7E1C7D24DE5B3E /* DonationViewController.swift in Sources */,
+				44A4D587579DCDC2A9782235 /* NoopAdServiceAssembler.swift in Sources */,
+				44A4D6DA1EAB43BA5BD41D64 /* NoopAdService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

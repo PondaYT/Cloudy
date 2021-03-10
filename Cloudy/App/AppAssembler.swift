@@ -7,7 +7,8 @@ import UIKit
 /// where its decided which implementations are injected
 protocol Assembler: OscAssembler,
                     AlerterAssembler,
-                    GoogleAdServiceAssembler,
+                    // GoogleAdServiceAssembler,
+                    NoopAdServiceAssembler,
                     IAPAssembler {
     /// Provide config
     var config: Configuration { get }
