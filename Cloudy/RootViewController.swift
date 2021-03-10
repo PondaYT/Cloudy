@@ -35,6 +35,7 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
     @IBOutlet var containerHud:                  UIView!
     @IBOutlet var containerOnScreenController:   UIView!
     @IBOutlet var launchAnimation:               UIView!
+    @IBOutlet var containerBlur:                 UIVisualEffectView!
 
     /// Interactive views
     @IBOutlet var menuButton:                    UIButton!
@@ -163,6 +164,7 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
             executeLaunchAnimation()
             introAnimationExecuted = true
         }
+        containerBlur.fadeOut()
     }
 
     /// Initialize all the required views (webview, onscreen controls and menu)
@@ -170,6 +172,15 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
         createWebview()
         createOnScreenControls()
         createMenu()
+    }
+
+    /// Show donation view controller
+    private func showDonationViewController() {
+        containerBlur.fadeIn()
+        let vc = DonationViewController.create { [weak self] in
+            self?.containerBlur.fadeOut()
+        }
+        present(vc, animated: true)
     }
 
     /// Execute launch animation
@@ -437,24 +448,26 @@ extension RootViewController: WKNavigationDelegate, WKUIDelegate {
 /// Donation reminding logic
 extension RootViewController {
     private func checkDonationReminder() {
+        // has donated already
+        if UserDefaults.standard.didDonateAlready {
+            return
+        }
+        // not enough starts
+        if UserDefaults.standard.appOpenCount < 5 {
+            UserDefaults.standard.appOpenCount = UserDefaults.standard.appOpenCount + 1
+            return
+        }
+        // app open count is due to a reminding alert
+        UserDefaults.standard.appOpenCount = 0
         #if APPSTORE
-            // has donated already
-            if UserDefaults.standard.didDonateAlready {
-                return
-            }
-            // not enough starts
-            if UserDefaults.standard.appOpenCount < 5 {
-                UserDefaults.standard.appOpenCount = UserDefaults.standard.appOpenCount + 1
-                return
-            }
-            // app open count is due to a reminding alert
-            UserDefaults.standard.appOpenCount = 0
             alerter.showAlert(for: .remindToDonate,
                               positiveAction: Alerter.Action(text: "Sure") { [weak self] in
                                   self?.purchaseHelper.showProducts()
                               },
                               negativeAction: Alerter.Action(text: "Nope") {
                               })
+        #elseif REKAIROS
+            showDonationViewController()
         #endif
     }
 }

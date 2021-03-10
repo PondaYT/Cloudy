@@ -19,6 +19,7 @@ class Navigator {
             static let amazonLuna            = URL(string: "https://amazon.com/luna")!
             static let gamepadTester         = URL(string: "https://gamepad-tester.com")!
             static let patreon               = URL(string: "https://www.patreon.com/cloudyApp")!
+            static let patreonReKairos       = URL(string: "https://www.patreon.com/reKairos")!
             static let paypal                = URL(string: "https://paypal.me/pools/c/8tPw2veZIm")!
             static let discord               = URL(string: "https://discord.gg/9sgTxFx")!
         }

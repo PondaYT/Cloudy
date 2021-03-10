@@ -33,6 +33,7 @@
 		44A4D4FF95491D18427EFC1D /* GoogleAdServiceAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D950AB2716A3862797E5 /* GoogleAdServiceAssembler.swift */; };
 		44A4D53606BEC6E6AB0E3690 /* FortniteButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D222C2946D5D98EEA012 /* FortniteButtonType.swift */; };
 		44A4D56785DE2ACC82B37F52 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D1A39583BB7F49ABD541 /* Log.swift */; };
+		44A4D5766D7E1C7D24DE5B3E /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D1BDADE57435126317A7 /* DonationViewController.swift */; };
 		44A4D616034E524457423166 /* AdServiceAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D357A6CBC67A8BCC8833 /* AdServiceAssembler.swift */; };
 		44A4D667E367AB98368C36BC /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D80ED7881A56C23C0BBD /* Bundle.swift */; };
 		44A4D67D7C43E9E24539DAA1 /* Limelight.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DF3D3079ADE1DDD381ED /* Limelight.m */; };
@@ -139,6 +140,7 @@
 		44A4D1707DE0EDF880EF6C19 /* UserInteractionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInteractionDelegate.h; sourceTree = "<group>"; };
 		44A4D1944225013401F2BF98 /* OnScreenControlsLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnScreenControlsLevel.h; sourceTree = "<group>"; };
 		44A4D1A39583BB7F49ABD541 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		44A4D1BDADE57435126317A7 /* DonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
 		44A4D205B37B185DCA7E5DBD /* AlerterAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlerterAssembler.swift; sourceTree = "<group>"; };
 		44A4D222C2946D5D98EEA012 /* FortniteButtonType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortniteButtonType.swift; sourceTree = "<group>"; };
 		44A4D24369D3C549C04BC958 /* Scripts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scripts.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				44A4DFD69A6C3DFEF79D2C47 /* OscExtension */,
 				44A4DCA1AA422D8737EDD5DC /* AlphaTestingCALayer.swift */,
 				44A4D17D9CC801F15D0CE69F /* Ads */,
+				44A4DFB6CC0142310CE6269C /* Donate */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -477,6 +480,14 @@
 				44A4DF3D3079ADE1DDD381ED /* Limelight.m */,
 			);
 			path = Src;
+			sourceTree = "<group>";
+		};
+		44A4DFB6CC0142310CE6269C /* Donate */ = {
+			isa = PBXGroup;
+			children = (
+				44A4D1BDADE57435126317A7 /* DonationViewController.swift */,
+			);
+			path = Donate;
 			sourceTree = "<group>";
 		};
 		44A4DFBEBEA679034AEC9F19 /* Firebase */ = {
@@ -947,6 +958,7 @@
 				44A4D493B464E124F5E12FC9 /* GoogleAdService.swift in Sources */,
 				44A4D4FF95491D18427EFC1D /* GoogleAdServiceAssembler.swift in Sources */,
 				44A4D362D15F01D37C5CA98D /* GoogleAdSensitives.swift in Sources */,
+				44A4D5766D7E1C7D24DE5B3E /* DonationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
