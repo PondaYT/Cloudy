@@ -144,6 +144,11 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
             launchAnimation.removeFromSuperview()
             fortniteButtonBar.removeFromSuperview()
         #endif
+        #if REKAIROS
+            if !introAnimationExecuted {
+                containerWebView.transform = CGAffineTransform.init(scaleX: 0.5, y: 0.5)
+            }
+        #endif
     }
 
     /// View layout already done
@@ -186,9 +191,10 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
     /// Execute launch animation
     private func executeLaunchAnimation() {
         #if REKAIROS
-            UIView.animate(withDuration: 2, delay: 1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut) {
-                self.launchAnimation.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-                self.launchAnimation.alpha = 0
+            UIView.animate(withDuration: 2, delay: 1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut) { [weak self] in
+                self?.containerWebView.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+                self?.launchAnimation.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                self?.launchAnimation.alpha = 0
             }
         #endif
     }
