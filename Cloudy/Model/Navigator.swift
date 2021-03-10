@@ -8,18 +8,19 @@ class Navigator {
     /// Some global constants
     struct Config {
         struct Url {
-            static let google         = URL(string: "https://www.google.com")!
-            static let googleStadia   = URL(string: "https://stadia.google.com")!
-            static let googleAccounts = URL(string: "https://accounts.google.com")!
-            static let geforceNowOld  = URL(string: "https://play.geforcenow.com")!
-            static let geforceNowBeta = URL(string: "https://beta.play.geforcenow.com")!
-            static let boosteroid     = URL(string: "https://cloud.boosteroid.com")!
-            static let nvidiaRoot     = URL(string: "https://www.nvidia.com")!
-            static let amazonLuna     = URL(string: "https://amazon.com/luna")!
-            static let gamepadTester  = URL(string: "https://gamepad-tester.com")!
-            static let patreon        = URL(string: "https://www.patreon.com/cloudyApp")!
-            static let paypal         = URL(string: "https://paypal.me/pools/c/8tPw2veZIm")!
-            static let discord        = URL(string: "https://discord.gg/9sgTxFx")!
+            static let google                = URL(string: "https://www.google.com")!
+            static let googleStadia          = URL(string: "https://stadia.google.com")!
+            static let googleAccounts        = URL(string: "https://accounts.google.com")!
+            static let geforceNowOld         = URL(string: "https://play.geforcenow.com")!
+            static let geforceNowOldFortnite = URL(string: "https://play.geforcenow.com/mall/#/deeplink?game-id=46bfab06-d864-465d-9e56-2d9e45cdee0a")!
+            static let geforceNowBeta        = URL(string: "https://beta.play.geforcenow.com")!
+            static let boosteroid            = URL(string: "https://cloud.boosteroid.com")!
+            static let nvidiaRoot            = URL(string: "https://www.nvidia.com")!
+            static let amazonLuna            = URL(string: "https://amazon.com/luna")!
+            static let gamepadTester         = URL(string: "https://gamepad-tester.com")!
+            static let patreon               = URL(string: "https://www.patreon.com/cloudyApp")!
+            static let paypal                = URL(string: "https://paypal.me/pools/c/8tPw2veZIm")!
+            static let discord               = URL(string: "https://discord.gg/9sgTxFx")!
         }
 
         struct UserAgent {
@@ -40,13 +41,14 @@ class Navigator {
     var initialWebsite: URL {
         #if APPSTORE
             return Config.Url.google
+        #elseif REKAIROS
+            return Config.Url.geforceNowOldFortnite
         #else
             if let lastVisitedUrl = UserDefaults.standard.lastVisitedUrl {
                 return lastVisitedUrl
             }
             return Config.Url.googleStadia
         #endif
-
     }
 
     /// Map navigation address

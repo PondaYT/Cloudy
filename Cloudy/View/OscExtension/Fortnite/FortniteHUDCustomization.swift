@@ -5,7 +5,16 @@ import UIKit
 class FortniteHUDCustomization: UIViewController {
 
     #if REKAIROS
+        /// Factory method
+        static func create() -> FortniteHUDCustomization {
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FortniteHUDCustomization") as! FortniteHUDCustomization
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .fullScreen
+            return vc
+        }
+
         /// Outlets to storyboard
+        @IBOutlet var backgroundImageView:         UIImageView!
         @IBOutlet var scalingSlider:               UISlider!
         @IBOutlet var switchModeButton:            UIButton!
         @IBOutlet var saveButton:                  UIButton!
@@ -13,11 +22,14 @@ class FortniteHUDCustomization: UIViewController {
         @IBOutlet var combatHUDView:               UIView!
         @IBOutlet var buildingHUDView:             UIView!
         @IBOutlet var editHUDView:                 UIView!
+        @IBOutlet var launchAnimationView:         UIView!
         @IBOutlet var currentModeLabel:            UILabel!
         @IBOutlet var selectedButtonLabel:         UILabel!
+        @IBOutlet var enableEditOnReleaseLabel:    UILabel!
         @IBOutlet var settingsPanel:               UIView!
         @IBOutlet var pullDownSettingsPanelButton: UIButton!
         @IBOutlet var hudSettingsTopConstraint:    NSLayoutConstraint!
+        @IBOutlet var enableEditOnRelease:         UISwitch!
 
         /// All buttons
         private var combatButtonItems:   [UIView]         = []
@@ -31,7 +43,7 @@ class FortniteHUDCustomization: UIViewController {
         private var previousView:        UIView?
 
         /// Did user change button layout?
-        private var buttonLayoutChanged = false
+        private var buttonLayoutChanged                   = false
 
         /// Views per mode
         private lazy var viewsPerMode: [FortniteHUD.Mode: UIView] = [.combat: combatHUDView,
@@ -74,17 +86,25 @@ class FortniteHUDCustomization: UIViewController {
         private var tagSelected = 256
 
         /// Button creation helper
-        func createButtons(parentView: UIView, buttonTag: Int, images: [String], keyX: String, keyY: String, keyWidth: String, keyHeight: String) -> (buttonTag: Int, buttons: [UIView]) {
+        private func createButtons(parentView: UIView, buttonTag: Int, images: [String], keyX: String, keyY: String, keyWidth: String, keyHeight: String) -> (buttonTag: Int, buttons: [UIView]) {
             let defaults              = UserDefaults.standard
             var xAxis:       CGFloat  = 0.0
             var yAxis:       CGFloat  = 150.0
             var buttonTag             = buttonTag
+            var index                 = 0
             var buttonArray: [UIView] = []
 
             let savedX      = defaults.array(forKey: keyX)
             let savedY      = defaults.array(forKey: keyY)
             let savedWidth  = defaults.array(forKey: keyWidth)
             let savedHeight = defaults.array(forKey: keyHeight)
+
+            if (defaults.object(forKey: FortniteHUDPositionKeys.editOnRelease) == nil) {
+                enableEditOnRelease.isOn = false
+                defaults.set(enableEditOnRelease.isOn, forKey: FortniteHUDPositionKeys.editOnRelease)
+            } else {
+                enableEditOnRelease.isOn = defaults.bool(forKey: FortniteHUDPositionKeys.editOnRelease)
+            }
 
             images.enumerated().forEach { index, imageName in
                 let button = UIView()
@@ -93,7 +113,7 @@ class FortniteHUDCustomization: UIViewController {
                 image.image = UIImage(named: imageName.appending(".png"))!
                 image.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
 
-                if savedX?.isEmpty == false {
+                if (savedX?.isEmpty == false && index < savedX!.count) {
                     button.frame = CGRect(x: savedX![index] as! CGFloat,
                                           y: savedY![index] as! CGFloat,
                                           width: savedWidth![index] as! CGFloat,
@@ -119,7 +139,14 @@ class FortniteHUDCustomization: UIViewController {
                 }
                 buttonTag += 1
             }
+            index += 1
             return (buttonTag, buttonArray)
+        }
+
+        /// View is ready to appear
+        override func viewWillAppear(_ animated: Bool) {
+            launchAnimationView.alpha = 0
+            launchAnimationView.transform = CGAffineTransform.init(scaleX: 1.5, y: 1.5)
         }
 
         /// View is now visible
@@ -163,6 +190,10 @@ class FortniteHUDCustomization: UIViewController {
             settingsPanel.tag = 1100
             pullDownSettingsPanelButton.tag = 1200
             selectedButtonLabel.tag = 1300
+            launchAnimationView.tag = 1400
+            backgroundImageView.tag = 1500
+            enableEditOnReleaseLabel.tag = 1600
+            enableEditOnRelease.tag = 1700
 
             buildingHUDView.transform = CGAffineTransform.init(scaleX: 0.75, y: 0.75)
             buildingHUDView.alpha = 0
@@ -174,12 +205,9 @@ class FortniteHUDCustomization: UIViewController {
             settingsPanel.layer.cornerRadius = 10.0
             settingsPanel.clipsToBounds = true
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                UIView.animate(withDuration: 0.5) {
-                    self.combatHUDView.alpha = 1
-                }
+            UIView.animate(withDuration: 0.5) {
+                self.combatHUDView.alpha = 1
             }
-
         }
 
         /// Hide status bar
@@ -238,16 +266,26 @@ class FortniteHUDCustomization: UIViewController {
             defaults.set(editingButtonItems.map { $0.frame.width }, forKey: FortniteHUDPositionKeys.editHUDRectWidth)
             defaults.set(editingButtonItems.map { $0.frame.height }, forKey: FortniteHUDPositionKeys.editHUDRectHeight)
 
+            defaults.set(enableEditOnRelease.isOn, forKey: FortniteHUDPositionKeys.editOnRelease)
+
             buttonLayoutChanged = false
+
+            let alert = UIAlertController(title: "HUD Saved", message: "Changes in HUD has been saved.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            present(alert, animated: true, completion: nil)
         }
 
         /// Scaling slider changed
         @IBAction func sliderValueChanged(sender: UISlider) {
-            if tagSelected <= 117 || tagSelected == 300 {
+            if tagSelected <= 119 || tagSelected == 300 {
                 let viewPassed = self.view.viewWithTag(self.tagSelected)
                 viewPassed?.frame.size.height = (50 * CGFloat(sender.value + 1.0))
                 viewPassed?.frame.size.width = (50 * CGFloat(sender.value + 1.0))
             }
+        }
+
+        @IBAction func enableEditOnReleaseChanged(sender: UISwitch) {
+            buttonLayoutChanged = true
         }
 
         /// Close editing view
@@ -268,8 +306,22 @@ class FortniteHUDCustomization: UIViewController {
         }
 
         private func closeHUDLayoutTool() {
-            self.settingsPanel.alpha = 0
-            self.dismiss(animated: true, completion: nil)
+            self.view.bringSubviewToFront(launchAnimationView)
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
+                self.launchAnimationView.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+                self.launchAnimationView.alpha = 1
+                self.backgroundImageView.transform = CGAffineTransform.init(scaleX: 0.75, y: 0.75)
+                self.backgroundImageView.alpha = 0
+                self.combatHUDView.transform = CGAffineTransform.init(scaleX: 0.75, y: 0.75)
+                self.combatHUDView.alpha = 0
+                self.buildingHUDView.transform = CGAffineTransform.init(scaleX: 0.75, y: 0.75)
+                self.buildingHUDView.alpha = 0
+                self.editHUDView.transform = CGAffineTransform.init(scaleX: 0.75, y: 0.75)
+                self.editHUDView.alpha = 0
+            }, completion: { _ in
+                self.settingsPanel.alpha = 0
+                self.dismiss(animated: true, completion: nil)
+            })
         }
 
         /// Handle touch start
@@ -280,7 +332,7 @@ class FortniteHUDCustomization: UIViewController {
                 var buttonNameIndex   = 0
 
                 // TODO what is this tag stuff?
-                if (touch.view!.tag <= 117 || touch.view!.tag == 300) && touch.view! != scalingSlider {
+                if (touch.view!.tag <= 119 || touch.view!.tag == 300) && touch.view! != scalingSlider {
                     switch currentMode {
                         case .combat:
                             location = touch.location(in: combatHUDView)
@@ -300,9 +352,18 @@ class FortniteHUDCustomization: UIViewController {
                     location.y -= touch.view!.frame.height / 2
                     touch.view!.frame = CGRect.init(x: location.x, y: location.y, width: touch.view!.frame.width, height: touch.view!.frame.height)
                     scalingSlider.value = Float(touch.view!.frame.size.height / 50) - 1
-                    if previousView != nil {
+                    if previousView != nil && previousView != touch.view! {
                         previousView?.layer.borderWidth = 0
                     }
+
+                    if touch.view!.tag == 38 {
+                        self.enableEditOnRelease.alpha = 1
+                        self.enableEditOnReleaseLabel.alpha = 1
+                    } else {
+                        self.enableEditOnRelease.alpha = 0
+                        self.enableEditOnReleaseLabel.alpha = 0
+                    }
+
                     touch.view!.layer.borderWidth = 2
                     touch.view!.layer.borderColor = UIColor.white.cgColor
                     previousView = touch.view!
@@ -327,7 +388,7 @@ class FortniteHUDCustomization: UIViewController {
                         location = touch.location(in: editHUDView)
                 }
                 // TODO what is this tag stuff?
-                if (touch.view!.tag <= 117 || touch.view!.tag == 300) && touch.view! != scalingSlider {
+                if (touch.view!.tag <= 119 || touch.view!.tag == 300) && touch.view! != scalingSlider {
                     buttonLayoutChanged = true
                     location.x -= touch.view!.frame.width / 2
                     location.y -= touch.view!.frame.height / 2

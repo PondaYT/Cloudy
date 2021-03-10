@@ -60,6 +60,10 @@
 		44A4DF24B14D4379ED99E351 /* Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4DC3B80142D290BBCE80C /* Float.swift */; };
 		44A4DFD94292E1FAA625AFA6 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A4D15FC7FB3F6347B248D4 /* IAPManager.swift */; };
 		51894F6925EE1A2F0054EAD8 /* Rotate.png in Resources */ = {isa = PBXBuildFile; fileRef = 51894F6825EE1A2E0054EAD8 /* Rotate.png */; };
+		51A56C7825F3F7F100A32597 /* Map.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A56C7725F3F7F000A32597 /* Map.png */; };
+		51A56C7A25F4000800A32597 /* Trap.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A56C7925F4000800A32597 /* Trap.png */; };
+		51A56C7C25F403DD00A32597 /* FortniteiPhoneTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A56C7B25F403DD00A32597 /* FortniteiPhoneTutorial.swift */; };
+		51A56C7E25F403F400A32597 /* FortniteiPadTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A56C7D25F403F400A32597 /* FortniteiPadTutorial.swift */; };
 		5CDDBA53FB1B62159C8668EF /* Pods_Cloudy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BF8562B1619F13A7254171F /* Pods_Cloudy.framework */; };
 		E712FF9825520978003CF78C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E712FF9725520978003CF78C /* Images.xcassets */; };
 		E71AF2EB25E2DF1900F76E5B /* FortniteHUDPositionKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71AF2EA25E2DF1900F76E5B /* FortniteHUDPositionKeys.swift */; };
@@ -192,6 +196,10 @@
 		44A4DFB90BD884CB5041E57D /* WKUserScript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKUserScript.swift; sourceTree = "<group>"; };
 		44A4DFE6F4FDD51E58D517B4 /* OscAssembler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OscAssembler.swift; sourceTree = "<group>"; };
 		51894F6825EE1A2E0054EAD8 /* Rotate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rotate.png; sourceTree = "<group>"; };
+		51A56C7725F3F7F000A32597 /* Map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Map.png; sourceTree = "<group>"; };
+		51A56C7925F4000800A32597 /* Trap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Trap.png; sourceTree = "<group>"; };
+		51A56C7B25F403DD00A32597 /* FortniteiPhoneTutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortniteiPhoneTutorial.swift; sourceTree = "<group>"; };
+		51A56C7D25F403F400A32597 /* FortniteiPadTutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortniteiPadTutorial.swift; sourceTree = "<group>"; };
 		79B35440DA7901C4949EFDC7 /* Pods-Cloudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.release.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.release.xcconfig"; sourceTree = "<group>"; };
 		79E113C5587D0E3EF509C81C /* Pods-Cloudy.rekairos debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.rekairos debug.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.rekairos debug.xcconfig"; sourceTree = "<group>"; };
 		8C777E5DB6AA0540BAAEE53E /* Pods-Cloudy.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cloudy.appstore.xcconfig"; path = "Target Support Files/Pods-Cloudy/Pods-Cloudy.appstore.xcconfig"; sourceTree = "<group>"; };
@@ -515,11 +523,13 @@
 		E74CE90125D5DD6300EF14C2 /* Fortnite */ = {
 			isa = PBXGroup;
 			children = (
+				E74CE90425D5DD6300EF14C2 /* Assets */,
 				E71AF2EA25E2DF1900F76E5B /* FortniteHUDPositionKeys.swift */,
 				E74CE90225D5DD6300EF14C2 /* FortniteHUD.swift */,
 				E74CE90325D5DD6300EF14C2 /* FortniteHUDCustomization.swift */,
-				E74CE90425D5DD6300EF14C2 /* Assets */,
 				44A4D222C2946D5D98EEA012 /* FortniteButtonType.swift */,
+				51A56C7B25F403DD00A32597 /* FortniteiPhoneTutorial.swift */,
+				51A56C7D25F403F400A32597 /* FortniteiPadTutorial.swift */,
 			);
 			path = Fortnite;
 			sourceTree = "<group>";
@@ -545,7 +555,9 @@
 			isa = PBXGroup;
 			children = (
 				E74CE90825D5DD6300EF14C2 /* Floor Selected.png */,
+				51A56C7725F3F7F000A32597 /* Map.png */,
 				E74CE90925D5DD6300EF14C2 /* Quick Heal.png */,
+				51A56C7925F4000800A32597 /* Trap.png */,
 				E74CE90B25D5DD6300EF14C2 /* Mic Unmuted.png */,
 				E74CE90C25D5DD6300EF14C2 /* Wall Selected.png */,
 				E74CE90D25D5DD6300EF14C2 /* Jump.png */,
@@ -741,6 +753,7 @@
 				E74CE94025D5DD6400EF14C2 /* Jump.png in Resources */,
 				E74CE94D25D5DD6400EF14C2 /* Move Outer.png in Resources */,
 				E7B87E2E25338121004358E3 /* Main.storyboard in Resources */,
+				51A56C7825F3F7F100A32597 /* Map.png in Resources */,
 				E74CE95925D5DD6400EF14C2 /* Slot 2.png in Resources */,
 				E74CE95025D5DD6400EF14C2 /* Use.png in Resources */,
 				E74CE95725D5DD6400EF14C2 /* Slot 3.png in Resources */,
@@ -766,6 +779,7 @@
 				E74CE94325D5DD6400EF14C2 /* Inventory.png in Resources */,
 				E74CE94925D5DD6400EF14C2 /* Throw.png in Resources */,
 				E74CE95225D5DD6400EF14C2 /* Crouch Down.png in Resources */,
+				51A56C7A25F4000800A32597 /* Trap.png in Resources */,
 				E74CE94725D5DD6400EF14C2 /* Move Joystick.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -881,6 +895,7 @@
 				44A4DB830BC41F131E122F7C /* GameController.swift in Sources */,
 				44A4D8885DB5BE5C73C9FB87 /* UserDefaults.swift in Sources */,
 				44A4DD2F10965A88D83F5C0D /* SceneDelegate.swift in Sources */,
+				51A56C7C25F403DD00A32597 /* FortniteiPhoneTutorial.swift in Sources */,
 				44A4D4CD5F66196CB7AD5CB0 /* AppDelegate.swift in Sources */,
 				44A4D7DCB15B8C4799D56BCA /* String.swift in Sources */,
 				44A4D13A82DE5B9006FED3DC /* Navigator.swift in Sources */,
@@ -888,6 +903,7 @@
 				44A4D3B8AE0372A4C71E32EC /* TemporarySettings.swift in Sources */,
 				44A4D56785DE2ACC82B37F52 /* Log.swift in Sources */,
 				44A4DCA503A87B314B8CB75A /* ButtonOptionSet.swift in Sources */,
+				51A56C7E25F403F400A32597 /* FortniteiPadTutorial.swift in Sources */,
 				44A4D81D6A823FB908BCE224 /* AVFoundationVibratingFeedbackGenerator.swift in Sources */,
 				E74CE93825D5DD6400EF14C2 /* FortniteHUD.swift in Sources */,
 				44A4D1A9A30B84DCDD3F66C7 /* Scripts.swift in Sources */,

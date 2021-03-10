@@ -18,4 +18,6 @@ struct FortniteHUDPositionKeys {
     static let editHUDRectWidth:  String = "reKairosEditHUDRectWidth"
     static let editHUDRectHeight: String = "reKairosEditHUDRectHeight"
 
+    static let editOnRelease: String = "reKairosEditOnRelease"
+
 }

@@ -20,6 +20,7 @@ struct FortniteButtonType {
         case switchToCombat  = "Switch To Combat"
         case use             = "Use"
         case wallSelected    = "Wall Selected"
+        case trapSelected    = "Trap"
     }
 
     enum Combat: String, CaseIterable {
@@ -43,6 +44,7 @@ struct FortniteButtonType {
         case slotPickaxe      = "Slot Pickaxe"
         case cycleWeaponsDown = "Cycle Weapons Down"
         case cycleWeaponsUp   = "Cycle Weapons Up"
+        case map              = "Map"
     }
 
     enum Edit: String, CaseIterable {

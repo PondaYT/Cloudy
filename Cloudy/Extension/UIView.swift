@@ -58,6 +58,20 @@ extension UIView {
         glowAnimation.autoreverses = true
         layer.add(glowAnimation, forKey: "shadowGlowingAnimation")
     }
+
+    func animate(in visible: Bool, completion: (() -> Void)? = nil) {
+        UIView.animate(withDuration: 1,
+                       delay: 0,
+                       usingSpringWithDamping: 1,
+                       initialSpringVelocity: 1,
+                       options: .curveEaseInOut,
+                       animations: { [weak self] in
+                           self?.transform = CGAffineTransform(scaleX: visible ? 1 : 0.75,
+                                                               y: visible ? 1 : 0.75)
+                           self?.alpha = visible ? 1 : 0
+                       },
+                       completion: { _ in completion?() })
+    }
 }
 
 

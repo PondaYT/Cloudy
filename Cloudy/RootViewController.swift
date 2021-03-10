@@ -34,10 +34,18 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
     @IBOutlet var containerWebView:              UIView!
     @IBOutlet var containerHud:                  UIView!
     @IBOutlet var containerOnScreenController:   UIView!
+    @IBOutlet var launchAnimation:               UIView!
 
     /// Interactive views
     @IBOutlet var menuButton:                    UIButton!
     @IBOutlet var showOnScreenControlsExtension: UISwitch!
+
+    /// Fortnite buttons
+    @IBOutlet var fortniteButtonBar:             UIView!
+    @IBOutlet var fortniteHUDButton:             UIButton!
+    @IBOutlet var fortniteVisibilityButton:      UIButton!
+    @IBOutlet var fortniteTutorialButton:        UIButton!
+    @IBOutlet var fortniteBarConstraint:         NSLayoutConstraint!
 
     @IBOutlet var webviewConstraints: [NSLayoutConstraint]!
 
@@ -55,6 +63,15 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
 
     /// The bridge between controller and web view
     private let webViewControllerBridge          = WebViewControllerBridge()
+
+    /// Determines if the app is already launched and should animate or not.
+    private var introAnimationExecuted           = false
+
+    /// Determines if fortnite HUD is visible or not
+    private var fortniteHUDIsVisible             = true
+
+    /// Determines if Game Bar is expanded or not
+    private var fortniteHUDBarExpanded           = true
 
     /// Access to the main view controller
     var viewController: UIViewController {
@@ -123,10 +140,14 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
         #endif
         #if !REKAIROS
             showOnScreenControlsExtension.removeFromSuperview()
+            launchAnimation.removeFromSuperview()
+            fortniteButtonBar.removeFromSuperview()
         #endif
     }
 
     /// View layout already done
+    /// Animated is only true when first entering that view controller,
+    /// when coming back to it its always false
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIApplication.shared.isIdleTimerDisabled = true
@@ -138,6 +159,10 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
             createOnScreenControls()
         }
         checkDonationReminder()
+        if !introAnimationExecuted {
+            executeLaunchAnimation()
+            introAnimationExecuted = true
+        }
     }
 
     /// Initialize all the required views (webview, onscreen controls and menu)
@@ -145,6 +170,16 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
         createWebview()
         createOnScreenControls()
         createMenu()
+    }
+
+    /// Execute launch animation
+    private func executeLaunchAnimation() {
+        #if REKAIROS
+            UIView.animate(withDuration: 2, delay: 1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut) {
+                self.launchAnimation.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                self.launchAnimation.alpha = 0
+            }
+        #endif
     }
 
     /// Update visibility of onscreen controller
@@ -173,6 +208,26 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
         webView?.inject(scripts: [code])
     }
 
+    /// Show / hide fortnite bar
+    @IBAction func changeGameBarVisibility() {
+        fortniteHUDBarExpanded = !fortniteHUDBarExpanded
+        fortniteBarConstraint.constant = fortniteHUDBarExpanded ? 8 : -180
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: { [weak self] in
+            self?.view.layoutIfNeeded()
+        })
+    }
+
+    @IBAction func presentTutorialView() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let fortniteLayoutToolViewController = storyboard.instantiateViewController(withIdentifier: "iPadFortniteTutorialView")
+            present(fortniteLayoutToolViewController, animated: true, completion: nil)
+        } else {
+            let fortniteLayoutToolViewController = storyboard.instantiateViewController(withIdentifier: "iPhoneFortniteTutorialView")
+            present(fortniteLayoutToolViewController, animated: true, completion: nil)
+        }
+    }
+
     /// Tapped on the menu item
     @IBAction func onMenuButtonPressed(_ sender: Any) {
         menu?.show()
@@ -196,6 +251,7 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
         newWebView.navigateTo(url: injectedWebsite ?? navigator.initialWebsite)
         webView = newWebView
     }
+
 
     /// Create the menu view controller
     private func createMenu() {
@@ -248,28 +304,44 @@ class RootViewController: UIViewController, MenuActionsHandler, MainViewControll
             updateOnScreenController(with: UserDefaults.standard.onScreenControlsLevel)
             updateScalingFactor(with: UserDefaults.standard.webViewScale)
         #endif
-    }
-
-    /// Show the fortnite hud overlay
-    @IBAction func mixinOnScreenControlsExtension(_ sender: UISwitch) {
-        #if !APPSTORE
-            streamView?.mixinControllerExtension(showOnScreenControlsExtension.isOn)
+        #if REKAIROS
+            fortniteVisibilityButton.setImage(UserDefaults.standard.onScreenControlsLevel == .full ? FortniteHUD.ButtonImage.hudVisible : FortniteHUD.ButtonImage.hudInvisible, for: .normal)
         #endif
     }
 
+    /// Show the fortnite hud overlay
+    @IBAction func mixinOnScreenControlsExtension() {
+        #if !APPSTORE
+            streamView?.mixinControllerExtension(fortniteHUDIsVisible)
+            #if REKAIROS
+                fortniteHUDButton.setImage(fortniteHUDIsVisible ? FortniteHUD.ButtonImage.hudImage : FortniteHUD.ButtonImage.controllerImage, for: .normal)
+                fortniteHUDIsVisible = !fortniteHUDIsVisible
+            #endif
+        #endif
+    }
+
+    /// Show hide the on screen controller
+    @IBAction func onOnScreenControllerVisibilityButtonPressed(_ sender: Any) {
+        menu?.setOnScreenController(to: UserDefaults.standard.onScreenControlsLevel == .off ? .full : .off)
+        fortniteVisibilityButton.setImage(UserDefaults.standard.onScreenControlsLevel == .full ? FortniteHUD.ButtonImage.hudVisible : FortniteHUD.ButtonImage.hudInvisible, for: .normal)
+    }
 }
 
 extension RootViewController: UserInteractionDelegate {
     open func userInteractionBegan() {
-        UIView.animate(withDuration: 0.4) { [weak self] in
-            self?.containerOnScreenController.alpha = 1.0
-        }
+        #if !REKAIROS
+            UIView.animate(withDuration: 0.4) { [weak self] in
+                self?.containerOnScreenController.alpha = 1.0
+            }
+        #endif
     }
 
     open func userInteractionEnded() {
-        UIView.animate(withDuration: 0.4) { [weak self] in
-            self?.containerOnScreenController.alpha = 0.2
-        }
+        #if !REKAIROS
+            UIView.animate(withDuration: 0.4) { [weak self] in
+                self?.containerOnScreenController.alpha = 0.2
+            }
+        #endif
     }
 }
 

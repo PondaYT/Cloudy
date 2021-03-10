@@ -15,6 +15,7 @@ struct AddressBarInfo {
 protocol MenuController {
     func updateAddressBar(with info: AddressBarInfo)
     func show()
+    func setOnScreenController(to level: OnScreenControlsLevel)
 }
 
 /// Overlay controller
@@ -30,7 +31,6 @@ class MenuViewController: UIViewController {
     static func create() -> MenuViewController {
         UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
     }
-
 
     /// View references
     @IBOutlet var shadowViews:                 [UIView]!
@@ -63,6 +63,7 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var customJsInjection:          UITextField!
     @IBOutlet weak var scalingFactorTextField:     UITextField!
     @IBOutlet weak var versionLabel:               UILabel!
+    @IBOutlet weak var fortniteAnimationView:      UIView!
 
     /// Some injections
     var webController:      WebController?
@@ -147,6 +148,10 @@ class MenuViewController: UIViewController {
         #if !REKAIROS
             viewsToRemoveForNonReKairos.forEach { $0.removeFromSuperview() }
         #endif
+        #if REKAIROS
+            fortniteAnimationView.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+        #endif
+
         // update stuff
         updateVersionLabel()
     }
@@ -205,6 +210,13 @@ extension MenuViewController: MenuController {
     func show() {
         view.fadeIn()
     }
+
+    /// Set on screen controls to specific level
+    func setOnScreenController(to level: OnScreenControlsLevel) {
+        UserDefaults.standard.onScreenControlsLevel = level
+        menuActionsHandler?.updateOnScreenController(with: level)
+        onScreenControllerSelector.selectedSegmentIndex = level.rawValue
+    }
 }
 
 /// UI handling extension
@@ -216,6 +228,16 @@ extension MenuViewController {
         addressBar.resignFirstResponder()
         showAd(type: .fullscreen)
         showAd(type: .menu)
+    }
+
+    /// Show fortnite hud
+    @IBAction func showFortniteHUDLayoutTool(_ sender: Any) {
+        let viewController = FortniteHUDCustomization.create()
+        fortniteAnimationView.animate(in: true) { [weak self] in
+            self?.present(viewController, animated: true) { [weak self] in
+                self?.fortniteAnimationView.animate(in: false)
+            }
+        }
     }
 
     /// Forward
@@ -375,8 +397,7 @@ extension MenuViewController {
             Log.e("Something went wrong parsing the selected on screen controls level: \(onScreenControllerSelector.selectedSegmentIndex)")
             return
         }
-        UserDefaults.standard.onScreenControlsLevel = newLevel
-        menuActionsHandler?.updateOnScreenController(with: newLevel)
+        setOnScreenController(to: newLevel)
     }
 
     /// Touch feedback selector changed
