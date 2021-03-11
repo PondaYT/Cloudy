@@ -20,7 +20,8 @@ class Navigator {
             static let gamepadTester         = URL(string: "https://gamepad-tester.com")!
             static let patreon               = URL(string: "https://www.patreon.com/cloudyApp")!
             static let patreonReKairos       = URL(string: "https://www.patreon.com/reKairos")!
-            static let paypal                = URL(string: "https://paypal.me/pools/c/8tPw2veZIm")!
+            static let paypal                = URL(string: "https://www.paypal.me/pools/c/8tPw2veZIm")!
+            static let paypalReKairos        = URL(string: "https://www.paypal.com/pools/c/8xD5TnEOZK")!
             static let discord               = URL(string: "https://discord.gg/9sgTxFx")!
         }
 

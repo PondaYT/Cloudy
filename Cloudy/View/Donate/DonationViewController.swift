@@ -33,7 +33,7 @@ class DonationViewController: UIViewController {
 
     /// Paypal pressed
     @IBAction func onPayPalPressed(_ sender: Any) {
-        UIApplication.shared.open(Navigator.Config.Url.paypal)
+        UIApplication.shared.open(Navigator.Config.Url.paypalReKairos)
         UserDefaults.standard.didDonateAlready = true
     }
 
